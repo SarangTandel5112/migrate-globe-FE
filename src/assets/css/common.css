@@ -1,0 +1,109 @@
+:root {
+  /* Primary Colors */
+  --Primary-0: #0D0317;
+  --Primary-100: #1E0737;
+  --Primary-200: #3D0D6D;
+  --Primary-300: #5B14A4;
+  --Primary-400: #6D18C4;
+  --Primary: #811FE4;
+  --Primary-600: #A864EC;
+  --Primary-700: #C496F2;
+  --Primary-800: #E0C8F8;
+  --Primary-900: #F7F1FD;
+  --Primary-993: #EDE0FB;
+  --Primary-997: #F7F1FD;
+  
+  /* Neutral Colors */
+  --neutral-0: #0A0A0B;
+  --neutral-100: #1F1D20;
+  --neutral-200: #363239;
+  --neutral-300: #4D4851;
+  --neutral-400: #66606C;
+  --neutral: #7D7584;
+  --neutral-600: #9E98A4;
+  --neutral-700: #BDB9C1;
+  --neutral-800: #DBD9DD;
+  --neutral-900: #FAFAFA;
+
+  /* Secondary Colors */
+  --secondary-600: #54FC56;
+  --secondary: #83FD84;
+  --secondary-800: #C3FEC3;
+  --secondary-900: #F0FFF0;
+
+  /* Tertiary Colors */
+  --tertiary-500: #B8FE0C;
+  --tertiary: #CEFE58;
+  --tertiary-700: #DDFE8A;
+  --tertiary-800: #EDFFC2;
+  --tertiary-900: #FBFFF0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Primary Colors */
+    --Primary-0: #0D0317;
+    --Primary-100: #1E0737;
+    --Primary-200: #3D0D6D;
+    --Primary-300: #5B14A4;
+    --Primary-400: #6D18C4;
+    --Primary: #811FE4;
+    --Primary-600: #A864EC;
+    --Primary-700: #C496F2;
+    --Primary-800: #E0C8F8;
+    --Primary-900: #F7F1FD;
+
+    /* Neutral Colors */
+    --neutral-0: #0A0A0B;
+    --neutral-100: #1F1D20;
+    --neutral-200: #363239;
+    --neutral-300: #4D4851;
+    --neutral-400: #66606C;
+    --neutral: #7D7584;
+    --neutral-600: #9E98A4;
+    --neutral-700: #BDB9C1;
+    --neutral-800: #DBD9DD;
+    --neutral-900: #FAFAFA;
+
+    /* Secondary Colors */
+    --secondary-600: #54FC56;
+    --secondary: #83FD84;
+    --secondary-800: #C3FEC3;
+    --secondary-900: #F0FFF0;
+
+    /* Tertiary Colors */
+    --tertiary-500: #B8FE0C;
+    --tertiary: #CEFE58;
+    --tertiary-700: #DDFE8A;
+    --tertiary-800: #EDFFC2;
+    --tertiary-900: #FBFFF0;
+  }
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+* {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+button{cursor: pointer;outline: none;}
+
+html,
+body {
+  touch-action: manipulation; /* Prevent zooming gestures */
+  -ms-touch-action: manipulation; /* For older Edge/IE */
+}
+
+@media (pointer: coarse) {
+  html,
+  body {
+    overscroll-behavior: none; /* Prevent accidental zooming */
+  }
+}
+
