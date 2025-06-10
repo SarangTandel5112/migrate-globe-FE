@@ -79,6 +79,7 @@ module.exports = {
     },
   },
   plugins: [
+    require('@tailwindcss/line-clamp'),
     plugin(function ({ addUtilities, addComponents }) {
 
       addComponents({
@@ -93,6 +94,19 @@ module.exports = {
           },
           '@screen lg': {
             fontSize: '24px',
+          },
+        },
+        '.text-heading2': {
+          fontSize: '16px', // Default (mobile)
+          // lineHeight: '120%',
+          fontWeight: '600',
+          // letterSpacing: '-0.02em',
+          // fontFamily: theme('fontFamily.space-grotesk').join(', '),
+          '@screen md': {
+            fontSize: '18px',
+          },
+          '@screen lg': {
+            fontSize: '20px',
           },
         },
         '.text-description1': {
