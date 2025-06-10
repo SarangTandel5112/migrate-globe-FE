@@ -26,7 +26,6 @@ function Navbar() {
                         alt="Migrate Globe Logo"
                     />
                 </Link>
-
                 {/* Desktop Navigation */}
                 <div className="hidden lg:flex gap-8 items-center self-stretch my-auto text-base font-medium whitespace-nowrap min-w-60 text-stone-500">
                     {navigationItems.map((item) => (
@@ -43,7 +42,6 @@ function Navbar() {
                         </Link>
                     ))}
                 </div>
-
                 {/* Desktop Action Buttons */}
                 <div className="hidden lg:flex gap-6 items-center self-stretch my-auto min-w-60">
                     <button className="gap-2.5 self-stretch px-6 py-2 my-auto text-sm font-medium text-center text-white bg-navy-blue rounded-md">
@@ -60,7 +58,6 @@ function Navbar() {
                         Login
                     </button>
                 </div>
-
                 {/* Mobile Hamburger Menu */}
                 <button
                     className="flex lg:hidden flex-col gap-1 p-2"
