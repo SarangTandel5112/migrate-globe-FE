@@ -1,50 +1,35 @@
 /* @import "tailwindcss"; */
 @import "./common.css";
+/* styles.css - Urbanist-only version */
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --Mint-Green-500: #8bd7bc;
-  --Neutrals-300: #c0c0c0;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-}
-
-@font-face {
-  font-family: "Urbanist";
-  src: url("../font/Urbanist-Bold.eot");
-  src:
-    url("../font/Urbanist-Bold.eot?# ") format("embedded-opentype"),
-    url("../font/Urbanist-Bold.woff2") format("woff2"),
-    url("../font/Urbanist-Bold.woff") format("woff"),
-    url("../font/Urbanist-Bold.ttf") format("truetype");
-  /* url('Urbanist-Bold.svg#Urbanist-Bold') format('svg'); */
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
-
-.font-urbanist {
-  font-family: "Urbanist";
-  font-style: normal;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ffffff;
+    --foreground: #171717;
+    --Mint-Green-500: #8bd7bc;
+    --Neutrals-300: #c0c0c0;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: #0a0a0a;
+      --foreground: #ededed;
+    }
+  }
+
+  body {
+    @apply bg-background text-foreground font-urbanist;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  /* font-family: Arial, Helvetica, sans-serif; */
+/* Configure Urbanist as Tailwind utility */
+@layer utilities {
+  .font-urbanist {
+    font-family: 'Urbanist', sans-serif;
+  }
 }

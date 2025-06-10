@@ -1,82 +1,80 @@
 :root {
-  /* Primary Colors */
-  --Primary-0: #0D0317;
-  --Primary-100: #1E0737;
-  --Primary-200: #3D0D6D;
-  --Primary-300: #5B14A4;
-  --Primary-400: #6D18C4;
-  --Primary: #811FE4;
-  --Primary-600: #A864EC;
-  --Primary-700: #C496F2;
-  --Primary-800: #E0C8F8;
-  --Primary-900: #F7F1FD;
-  --Primary-993: #EDE0FB;
-  --Primary-997: #F7F1FD;
-  
-  /* Neutral Colors */
-  --neutral-0: #0A0A0B;
-  --neutral-100: #1F1D20;
-  --neutral-200: #363239;
-  --neutral-300: #4D4851;
-  --neutral-400: #66606C;
-  --neutral: #7D7584;
-  --neutral-600: #9E98A4;
-  --neutral-700: #BDB9C1;
-  --neutral-800: #DBD9DD;
-  --neutral-900: #FAFAFA;
 
-  /* Secondary Colors */
-  --secondary-600: #54FC56;
-  --secondary: #83FD84;
-  --secondary-800: #C3FEC3;
-  --secondary-900: #F0FFF0;
+  --primary-blue: #2851E3;
+  --red: #ED1D24;
+  --background-1: #F7F8FD;
+  --neutrals-00: #FFFFFF;
+  --neutrals-100: #EDEDED;
+  --neutrals-200: #D3D3D3;
+  --neutrals-300: #C0C0C0;
+  --neutrals-400: #808080;
+  --neutrals-500: #696969;
+  --neutrals-600: #494949;
+  --neutrals-700: #333333;
+  --neutrals-800: #212121;
 
-  /* Tertiary Colors */
-  --tertiary-500: #B8FE0C;
-  --tertiary: #CEFE58;
-  --tertiary-700: #DDFE8A;
-  --tertiary-800: #EDFFC2;
-  --tertiary-900: #FBFFF0;
+
+  --mint-green-50: #DCF3EB;
+  --mint-green-100: #D1EFE4;
+  --mint-green-200: #C5EBDE;
+  --mint-green-300: #B9E7D7;
+  --mint-green-400: #A2DFC9;
+  --mint-green-500: #8BD7BC;
+  --mint-green-600: #6FAC96;
+  --mint-green-700: #538171;
+  --mint-green-800: #456C5E;
+  --mint-green-900: #38564B;
+
+  --navy-blue-50: #BEC3D5;
+  --navy-blue-100: #A8AFC7;
+  --navy-blue-200: #929BB9;
+  --navy-blue-300: #7D87AB;
+  --navy-blue-400: #515F8F;
+  --navy-blue-500: #263773;
+  --navy-blue-600: #1E2C5C;
+  --navy-blue-700: #172145;
+  --navy-blue-800: #131B39;
+  --navy-blue-900: #0F162E;
+
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* Primary Colors */
-    --Primary-0: #0D0317;
-    --Primary-100: #1E0737;
-    --Primary-200: #3D0D6D;
-    --Primary-300: #5B14A4;
-    --Primary-400: #6D18C4;
-    --Primary: #811FE4;
-    --Primary-600: #A864EC;
-    --Primary-700: #C496F2;
-    --Primary-800: #E0C8F8;
-    --Primary-900: #F7F1FD;
+    --primary-blue: #2851E3;
+    --red: #ED1D24;
+    --background-1: #F7F8FD;
+    --neutrals-00: #FFFFFF;
+    --neutrals-100: #EDEDED;
+    --neutrals-200: #D3D3D3;
+    --neutrals-300: #C0C0C0;
+    --neutrals-400: #808080;
+    --neutrals-500: #696969;
+    --neutrals-600: #494949;
+    --neutrals-700: #333333;
+    --neutrals-800: #212121;
 
-    /* Neutral Colors */
-    --neutral-0: #0A0A0B;
-    --neutral-100: #1F1D20;
-    --neutral-200: #363239;
-    --neutral-300: #4D4851;
-    --neutral-400: #66606C;
-    --neutral: #7D7584;
-    --neutral-600: #9E98A4;
-    --neutral-700: #BDB9C1;
-    --neutral-800: #DBD9DD;
-    --neutral-900: #FAFAFA;
 
-    /* Secondary Colors */
-    --secondary-600: #54FC56;
-    --secondary: #83FD84;
-    --secondary-800: #C3FEC3;
-    --secondary-900: #F0FFF0;
+    --mint-green-50: #DCF3EB;
+    --mint-green-100: #D1EFE4;
+    --mint-green-200: #C5EBDE;
+    --mint-green-300: #B9E7D7;
+    --mint-green-400: #A2DFC9;
+    --mint-green-500: #8BD7BC;
+    --mint-green-600: #6FAC96;
+    --mint-green-700: #538171;
+    --mint-green-800: #456C5E;
+    --mint-green-900: #38564B;
 
-    /* Tertiary Colors */
-    --tertiary-500: #B8FE0C;
-    --tertiary: #CEFE58;
-    --tertiary-700: #DDFE8A;
-    --tertiary-800: #EDFFC2;
-    --tertiary-900: #FBFFF0;
+    --navy-blue-50: #BEC3D5;
+    --navy-blue-100: #A8AFC7;
+    --navy-blue-200: #929BB9;
+    --navy-blue-300: #7D87AB;
+    --navy-blue-400: #515F8F;
+    --navy-blue-500: #263773;
+    --navy-blue-600: #1E2C5C;
+    --navy-blue-700: #172145;
+    --navy-blue-800: #131B39;
+    --navy-blue-900: #0F162E;
   }
 }
 
@@ -92,18 +90,25 @@
   scrollbar-width: none;
   /* Firefox */
 }
-button{cursor: pointer;outline: none;}
+
+button {
+  cursor: pointer;
+  outline: none;
+}
 
 html,
 body {
-  touch-action: manipulation; /* Prevent zooming gestures */
-  -ms-touch-action: manipulation; /* For older Edge/IE */
+  touch-action: manipulation;
+  /* Prevent zooming gestures */
+  -ms-touch-action: manipulation;
+  /* For older Edge/IE */
 }
 
 @media (pointer: coarse) {
+
   html,
   body {
-    overscroll-behavior: none; /* Prevent accidental zooming */
+    overscroll-behavior: none;
+    /* Prevent accidental zooming */
   }
 }
-
