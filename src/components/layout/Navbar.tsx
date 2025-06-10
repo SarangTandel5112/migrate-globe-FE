@@ -14,7 +14,7 @@ function Navbar() {
 
     return (
         <div className="bg-white">
-            <div className="flex gap-10 container-1200 justify-between items-center p-5 md:p-6 lg:p-8 md:gap-0">
+            <div className="flex gap-10 container-1200 justify-between items-center p-5 md:p-6 lg:p-8 md:gap-0 xl:px-0">
                 {/* Logo Section */}
                 <Link
                     href="/"
