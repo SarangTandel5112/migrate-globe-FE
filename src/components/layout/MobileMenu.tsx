@@ -62,7 +62,7 @@ function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 onClick={onClose}
                 className={`pb-2 ${
                   item.isActive
-                    ? "border-b-2 border-solid border-b-[color:var(--Mint-Green-500,#8BD7BC)] text-zinc-800"
+                    ? "border-b-2 border-solid border-b-[color:var(--Mint-Green,#8BD7BC)] text-zinc-800"
                     : "text-stone-500 border-b border-gray-100 hover:text-zinc-800 transition-colors"
                 }`}
               >
