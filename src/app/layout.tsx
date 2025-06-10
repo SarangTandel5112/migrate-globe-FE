@@ -23,7 +23,9 @@ export default function RootLayout({
         <html lang="en">
             <body className={`${urbanist.variable} antialiased`}>
                 <Navbar />
-                {children}
+                  <div className="container-1200 py-8 md:py-12 lg:py-16">
+                    {children}
+                  </div>
             </body>
         </html>
     );
