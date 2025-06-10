@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Urbanist } from "next/font/google";
 import "@assets/css/globals.css";
+import Navbar from "@/components/layout/Navbar";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -19,7 +20,8 @@ const urbanist = Urbanist({
 
 export const metadata: Metadata = {
   title: "Migrate Globe",
-  description: "From visas to universities, job options to eligibility get instant, expert answers.",
+  description:
+    "From visas to universities, job options to eligibility get instant, expert answers.",
 };
 
 export default function RootLayout({
@@ -29,9 +31,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${urbanist.variable} antialiased`}
-      >
+      <body className={`${urbanist.variable} antialiased`}>
+        <Navbar />
         {children}
       </body>
     </html>

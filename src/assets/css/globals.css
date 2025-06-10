@@ -1,5 +1,5 @@
 /* @import "tailwindcss"; */
-@import './common.css';
+@import "./common.css";
 
 @tailwind base;
 @tailwind components;
@@ -8,8 +8,9 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --Mint-Green-500: #8bd7bc;
+  --Neutrals-300: #c0c0c0;
 }
-
 
 @theme inline {
   --color-background: var(--background);
@@ -17,19 +18,23 @@
 }
 
 @font-face {
-    font-family: 'Urbanist';
-    src: url('../font/Urbanist-Bold.eot');
-    src: url('../font/Urbanist-Bold.eot?# ') format('embedded-opentype'),
-        url('../font/Urbanist-Bold.woff2') format('woff2'),
-        url('../font/Urbanist-Bold.woff') format('woff'),
-        url('../font/Urbanist-Bold.ttf') format('truetype');
-        /* url('Urbanist-Bold.svg#Urbanist-Bold') format('svg'); */
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Urbanist";
+  src: url("../font/Urbanist-Bold.eot");
+  src:
+    url("../font/Urbanist-Bold.eot?# ") format("embedded-opentype"),
+    url("../font/Urbanist-Bold.woff2") format("woff2"),
+    url("../font/Urbanist-Bold.woff") format("woff"),
+    url("../font/Urbanist-Bold.ttf") format("truetype");
+  /* url('Urbanist-Bold.svg#Urbanist-Bold') format('svg'); */
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
 
-.font-urbanist{font-family: 'Urbanist'; font-style: normal;}
+.font-urbanist {
+  font-family: "Urbanist";
+  font-style: normal;
+}
 
 @media (prefers-color-scheme: dark) {
   :root {
