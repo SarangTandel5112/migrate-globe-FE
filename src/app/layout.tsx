@@ -3,38 +3,28 @@ import { Urbanist } from "next/font/google";
 import "@assets/css/globals.css";
 import Navbar from "@/components/layout/Navbar";
 
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
-
 const urbanist = Urbanist({
-  variable: "--font-urbanist",
-  subsets: ["latin"],
+    variable: "--font-urbanist",
+    subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Migrate Globe",
-  description:
-    "From visas to universities, job options to eligibility get instant, expert answers.",
+    title: "Migrate Globe",
+    description:
+        "From visas to universities, job options to eligibility get instant, expert answers.",
 };
 
 export default function RootLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode;
+    children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body className={`${urbanist.variable} antialiased`}>
-        <Navbar />
-        {children}
-      </body>
-    </html>
-  );
+    return (
+        <html lang="en">
+            <body className={`${urbanist.variable} antialiased`}>
+                <Navbar />
+                {children}
+            </body>
+        </html>
+    );
 }

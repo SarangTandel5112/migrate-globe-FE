@@ -8,17 +8,17 @@ export default function HeroSection() {
     return (
         <section className="py-16 relative">
             <div className="container mx-auto px-4 text-center">
-                <h1 className="text-6xl text-navy-blue-500 font-normal">
+                <h1 className="text-navy-blue-500 font-normal text-3xl md:text-4xl lg:text-6xl">
                     Planning To Move To
                     <span className="font-bold"> Australia?</span>
                 </h1>
-                <p className="text-gray-500 text-lg mt-4">
+                <p className="text-navy-blue-400 text-base md:text-lg mt-4 font-medium lg:text-2xl">
                     From Visas To Universities, Job Options To Eligibility Get
                     Instant, Expert Answers.
                 </p>
 
                 {/* Form Section */}
-                <div className="bg-[#1E2A78] p-4 rounded-lg shadow-lg mt-10 max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-3 items-center">
+                <div className="bg-navy-blue-500 p-8 rounded-lg shadow-lg mt-10 max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-3 items-center">
                     <div className="flex flex-col text-left">
                         <label
                             htmlFor="country"

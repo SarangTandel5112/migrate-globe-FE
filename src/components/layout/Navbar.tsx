@@ -13,8 +13,8 @@ function Navbar() {
     };
 
     return (
-        <>
-            <div className="flex gap-10 justify-between items-center px-32 py-8 bg-white shadow-xl md:px-5 md:gap-0">
+        <div className="bg-white">
+            <div className="flex gap-10 container-1200 justify-between items-center p-5 md:p-6 lg:p-8 md:gap-0">
                 {/* Logo Section */}
                 <Link
                     href="/"
@@ -28,15 +28,15 @@ function Navbar() {
                 </Link>
 
                 {/* Desktop Navigation */}
-                <div className="hidden lg:flex gap-9 items-center self-stretch my-auto text-base font-medium whitespace-nowrap min-w-60 text-stone-500">
+                <div className="hidden lg:flex gap-8 items-center self-stretch my-auto text-base font-medium whitespace-nowrap min-w-60 text-stone-500">
                     {navigationItems.map((item) => (
                         <Link
                             key={item.name}
                             href={item.href}
                             className={`gap-2.5 self-stretch pb-1 my-auto ${
                                 item.isActive
-                                    ? "border-b-2 border-solid border-b-[color:var(--Mint-Green-500,#8BD7BC)] text-zinc-800"
-                                    : "text-stone-500 hover:text-zinc-800 transition-colors"
+                                    ? "border-b-2 border-solid border-b-mint-green-500 text-neutrals-700"
+                                    : "text-neutrals-500 hover:text-neutrals-700 transition-colors"
                             }`}
                         >
                             {item.name}
@@ -46,19 +46,19 @@ function Navbar() {
 
                 {/* Desktop Action Buttons */}
                 <div className="hidden lg:flex gap-6 items-center self-stretch my-auto min-w-60">
-                    <div className="gap-2.5 self-stretch px-6 py-2 my-auto text-sm font-medium text-center text-white bg-navy-blue-500 rounded-md">
+                    <button className="gap-2.5 self-stretch px-6 py-2 my-auto text-sm font-medium text-center text-white bg-navy-blue-500 rounded-md">
                         Book a Consultation
-                    </div>
-                    <div className="flex gap-2 items-center self-stretch my-auto w-6">
+                    </button>
+                    <button className="flex gap-2 items-center self-stretch my-auto w-6">
                         <img
                             src="/window.svg"
                             className="object-contain self-stretch my-auto w-6 aspect-square"
                             alt="Profile"
                         />
-                    </div>
-                    <div className="gap-2.5 self-stretch px-6 py-2 my-auto text-sm font-medium text-center whitespace-nowrap rounded-md border border-solid border-[color:var(--Neutrals-300,#C0C0C0)] text-zinc-800">
+                    </button>
+                    <button className="gap-2.5 self-stretch px-6 py-2 my-auto text-sm font-medium text-center whitespace-nowrap rounded-md border border-solid border-neutrals-300 text-neutrals-700">
                         Login
-                    </div>
+                    </button>
                 </div>
 
                 {/* Mobile Hamburger Menu */}
@@ -92,7 +92,7 @@ function Navbar() {
                 isOpen={isMobileMenuOpen}
                 onClose={() => setIsMobileMenuOpen(false)}
             />
-        </>
+        </div>
     );
 }
 

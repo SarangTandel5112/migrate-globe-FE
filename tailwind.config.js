@@ -1,3 +1,5 @@
+import plugin from "tailwindcss/plugin";
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -78,6 +80,19 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        '.container-1200': {
+          maxWidth: '1200px',
+          margin: 'auto'
+        },
+        '.container-1440': {
+          maxWidth: '1440px',
+          margin: 'auto'
+        },
+      })
+    }),
+  ],
 }
 
