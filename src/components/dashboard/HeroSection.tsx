@@ -8,7 +8,7 @@ export default function HeroSection() {
     return (
         <section className="py-16 relative">
             <div className="container mx-auto px-4 text-center">
-                <h1 className="text-navy-blue-500 font-normal text-3xl md:text-4xl lg:text-6xl">
+                <h1 className="text-navy-blue font-normal text-3xl md:text-4xl lg:text-6xl">
                     Planning To Move To
                     <span className="font-bold"> Australia?</span>
                 </h1>
@@ -18,7 +18,7 @@ export default function HeroSection() {
                 </p>
 
                 {/* Form Section */}
-                <div className="bg-navy-blue-500 p-8 rounded-lg shadow-lg mt-10 max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-3 items-center">
+                <div className="bg-navy-blue p-8 rounded-lg shadow-lg mt-10 max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-3 items-center">
                     <div className="flex flex-col text-left">
                         <label
                             htmlFor="country"
@@ -68,7 +68,7 @@ export default function HeroSection() {
                         </select>
                     </div>
 
-                    <button className="bg-green-500 hover:bg-green-600 text-white font-medium rounded px-6 py-2 mt-2 md:mt-6">
+                    <button className="bg-mint-green hover:bg-green-600 text-white font-medium rounded px-6 py-2 mt-2 md:mt-6">
                         Get Started
                     </button>
                 </div>
