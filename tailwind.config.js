@@ -61,6 +61,9 @@ module.exports = {
           navigation: '0 4px 8px 0 rgb(0 0 0 / 24%)'
         }
       },
+       boxShadow: {
+        'header-bottom-navy': '0 -4px 8px -2px rgba(38, 55, 115, 0.2), 0 4px 8px -2px rgba(38, 55, 115, 0.2)',
+      },
       fontSize: {
         xs: '0.75rem',   // 12px
         sm: '0.875rem',  // 14px

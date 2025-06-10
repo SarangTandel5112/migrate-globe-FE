@@ -13,8 +13,8 @@ function Navbar() {
     };
 
     return (
-        <div className="bg-white">
-            <div className="flex gap-10 container-1200 justify-between items-center py-5 md:py-6 lg:py-8 md:gap-0">
+        <div className="bg-white px-5 md:px-6 lg:px-8 container-1200">
+            <div className="flex gap-10 justify-between items-center py-5 md:py-6 lg:py-8 md:gap-0">
                 {/* Logo Section */}
                 <Link
                     href="/"

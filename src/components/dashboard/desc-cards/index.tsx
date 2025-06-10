@@ -66,7 +66,7 @@ export default function FeatureGrid() {
         //         ))}
         //     </div>
         // </div>
-        <div className="bg-blue-100 py-10 px-4">
+        <div className="bg-[#6E85DC] py-10 px-4">
       <div className="max-w-7xl mx-auto grid grid-cols-4 grid-rows-2 gap-4 auto-rows-fr">
         {features.map((item, i) => (
           <div
@@ -74,8 +74,8 @@ export default function FeatureGrid() {
             className={`bg-white p-5 rounded-xl shadow-md flex flex-col gap-2 ${item.span}`}
           >
             <div className="text-2xl">{item.icon}</div>
-            <h3 className="font-semibold">{item.title}</h3>
-            <p className="text-sm text-gray-600">{item.description}</p>
+            <h3 className="font-semibold text-neutrals-700">{item.title}</h3>
+            <p className="text-sm text-neutrals">{item.description}</p>
           </div>
         ))}
       </div>

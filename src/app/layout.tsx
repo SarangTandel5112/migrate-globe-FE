@@ -22,11 +22,20 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body
-                className={`${urbanist.variable} antialiased px-5 md:px-6 lg:px-8`}
+                // className={`${urbanist.variable} antialiased px-5 md:px-6 lg:px-8`}
+                className={`${urbanist.variable} antialiased`}
             >
                 <Navbar />
-                <div className="container-1200 py-4 md:py-8 lg:py-12">
-                    {children}
+
+                <div className="relative">
+                    {/* Subtle shadow separator */}
+                    {/* <div className="w-full container-1200 h-5 bg-navy-blue-200 blur-2xl z-10" /> */}
+
+                    {/* Main container */}
+                    {/* <div className="container-1200 xl:px-8"> */}
+                    <div className="container-1200 pb-4 md:pb-8 lg:pb-12 xl:px-8 bg-background-1">
+                        {children}
+                    </div>
                 </div>
             </body>
         </html>
