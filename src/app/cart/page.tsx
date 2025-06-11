@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import DeleteIcon from "@/components/icons/DeleteIcon";
+import CouponIcon from "@/components/icons/CouponIcon";
 
 interface CartItem {
     id: string;
@@ -232,49 +233,14 @@ export default function Cart() {
 
                                 {/* Coupon Code */}
                                 <div className="flex items-center gap-4 py-2 px-4 border border-neutrals-200 bg-neutrals-100 rounded-md">
-                                    <svg
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            d="M1 5C1.79565 5 2.55871 5.31607 3.12132 5.87868C3.68393 6.44129 4 7.20435 4 8C4 8.79565 3.68393 9.55871 3.12132 10.1213C2.55871 10.6839 1.79565 11 1 11V13C1 13.5304 1.21071 14.0391 1.58579 14.4142C1.96086 14.7893 2.46957 15 3 15H19C19.5304 15 20.0391 14.7893 20.4142 14.4142C20.7893 14.0391 21 13.5304 21 13V11C20.2044 11 19.4413 10.6839 18.8787 10.1213C18.3161 9.55871 18 8.79565 18 8C18 7.20435 18.3161 6.44129 18.8787 5.87868C19.4413 5.31607 20.2044 5 21 5V3C21 2.46957 20.7893 1.96086 20.4142 1.58579C20.0391 1.21071 19.5304 1 19 1H3C2.46957 1 1.96086 1.21071 1.58579 1.58579C1.21071 1.96086 1 2.46957 1 3V5Z"
-                                            stroke="#808080"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                        <path
-                                            d="M1 1H1.01"
-                                            stroke="#808080"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                        <path
-                                            d="M7 1L1 7"
-                                            stroke="#808080"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                        <path
-                                            d="M1 1H1.01"
-                                            stroke="#808080"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                    </svg>
-                                    <span className="text-sm text-[#808080] tracking-[0.46px]">
+                                    <CouponIcon />
+                                    <span className="text-sm text-neutrals-400 tracking-[0.46px]">
                                         Add coupon code
                                     </span>
                                 </div>
 
                                 {/* Make Payment Button */}
-                                <button className="w-full py-2 px-6 bg-[#263773] text-white rounded-md text-sm tracking-[0.46px] hover:bg-[#263773]/90 transition-colors">
+                                <button className="w-full py-2 px-6 bg-navy-blue text-white rounded-md text-sm tracking-[0.46px] hover:bg-navy-blue/90 transition-colors">
                                     Make Payment
                                 </button>
                             </div>
