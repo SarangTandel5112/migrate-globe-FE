@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import BackIcon from "@/components/icons/BackIcon";
 
 const OccupationTrackingPage: React.FC = () => {
     const router = useRouter();
@@ -144,28 +145,7 @@ const OccupationTrackingPage: React.FC = () => {
                         onClick={handleBack}
                         className="flex items-center gap-2 w-fit text-navy-blue hover:text-navy-blue-600 transition-colors"
                     >
-                        <svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 16 17"
-                            fill="none"
-                            className="w-4 h-4"
-                        >
-                            <path
-                                d="M7.99992 13.1667L3.33325 8.5L7.99992 3.83334"
-                                stroke="currentColor"
-                                strokeWidth="1.33333"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                            <path
-                                d="M12.6666 8.5H3.33325"
-                                stroke="currentColor"
-                                strokeWidth="1.33333"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                        </svg>
+                        <BackIcon />
                         <span className="text-base font-semibold tracking-[0.2px] capitalize">
                             Back
                         </span>
