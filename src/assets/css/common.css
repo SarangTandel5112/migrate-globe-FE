@@ -2,6 +2,7 @@
 
   --primary-blue: #2851E3;
   --red: #ED1D24;
+  --background: #F7F8FD;
   --background-1: #F7F8FD;
   --neutrals-00: #FFFFFF;
   --neutrals-100: #EDEDED;
@@ -42,6 +43,7 @@
   :root {
     --primary-blue: #2851E3;
     --red: #ED1D24;
+    --background: #F7F8FD;
     --background-1: #F7F8FD;
     --neutrals-00: #FFFFFF;
     --neutrals-100: #EDEDED;

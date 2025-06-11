@@ -9,7 +9,7 @@
 
 @layer base {
   :root {
-    --background: #ffffff;
+    --background: #F7F8FD;
     --foreground: #171717;
     --Mint-Green-500: #8bd7bc;
     --Neutrals-300: #c0c0c0;
@@ -17,7 +17,7 @@
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --background: #ffffff;
+      --background: #F7F8FD;
       --foreground: #ededed;
     }
   }

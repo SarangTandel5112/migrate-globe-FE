@@ -41,7 +41,7 @@ function page() {
     ];
 
     return (
-        <div>
+        <div className="container-1200">
             <h1 className="text-heading1 text-navy-blue">
                 Explore the Right Visa for Your Journey
             </h1>
