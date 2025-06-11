@@ -17,6 +17,7 @@ module.exports = {
         foreground: 'var(--foreground)',
         'primary-blue': 'var(--primary-blue)',
         'red': 'var(--red)',
+        'background': 'var(--background)',
         'background-1': 'var(--background-1)',
         // Neutrals
         neutrals: {
@@ -61,7 +62,7 @@ module.exports = {
           navigation: '0 4px 8px 0 rgb(0 0 0 / 24%)'
         }
       },
-       boxShadow: {
+      boxShadow: {
         'header-bottom-navy': '0 -4px 8px -2px rgba(38, 55, 115, 0.2), 0 4px 8px -2px rgba(38, 55, 115, 0.2)',
       },
       fontSize: {
@@ -135,6 +136,18 @@ module.exports = {
         '.container-1440': {
           maxWidth: '1440px',
           margin: 'auto'
+        },
+        '.container-padding': {
+          paddingLeft: '1.25rem',  // px-5
+          paddingRight: '1.25rem',
+          '@screen md': {
+            paddingLeft: '1.5rem',  // px-6
+            paddingRight: '1.5rem',
+          },
+          '@screen lg': {
+            paddingLeft: '2rem',  // px-8
+            paddingRight: '2rem',
+          },
         },
       })
     }),
