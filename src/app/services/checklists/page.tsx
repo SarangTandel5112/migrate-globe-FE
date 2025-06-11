@@ -8,6 +8,7 @@ import BreifCaseIcon from "@/components/icons/BreifCaseIcon";
 import ApplicationTypeButton from "@/components/checklist/ApplicationTypeButton";
 import VisaOption from "@/components/checklist/VisaOption";
 import ArrowDownIcon from "@/components/icons/ArrowDown";
+import TitleDescription from "@/components/common/TitleDescription";
 
 const ENQUIRY_OPTIONS = [
     {
@@ -66,15 +67,10 @@ const DocumentsChecklistsPage: React.FC = () => {
                     </span>
                 </button>
 
-                <div className="flex flex-col gap-2">
-                    <h1 className="text-heading1 text-navy-blue font-semibold tracking-[0.608px]">
-                        Buy Documents Checklists
-                    </h1>
-                    <p className="text-navy-blue-400 text-description1 leading-6 tracking-[0.2px] capitalize">
-                        Lorem ipsum dolor sit amet consectetur. Urna ullamcorper
-                        orci tortor sed morbi enim.
-                    </p>
-                </div>
+                <TitleDescription
+                    title="Buy Documents Checklists"
+                    description="Lorem ipsum dolor sit amet consectetur. Urna ullamcorper orci tortor sed morbi enim."
+                />
 
                 <div className="bg-white rounded-2xl p-4 md:p-6 flex flex-col gap-6 md:gap-10">
                     <div className="flex flex-col gap-2">

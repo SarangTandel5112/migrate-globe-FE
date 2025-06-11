@@ -3,17 +3,6 @@ import React from "react";
 function ChecklistDetails() {
     return (
         <>
-            {/* Page Header */}
-            <div className="space-y-2">
-                <h1 className="text-heading1 font-bold text-navy-blue tracking-[0.608px]">
-                    Buy Documents Checklists
-                </h1>
-                <p className="text-description1 text-navy-blue-400 leading-6 tracking-[0.2px] capitalize max-w-2xl">
-                    Lorem ipsum dolor sit amet consectetur. Urna ullamcorper
-                    orci tortor sed morbi enim.
-                </p>
-            </div>
-
             {/* Image Section */}
             <div className="w-full h-40 bg-gradient-to-r from-navy-blue to-[#515F8F] rounded-lg flex items-center justify-center relative overflow-hidden">
                 {/* Visa document graphic representation */}
