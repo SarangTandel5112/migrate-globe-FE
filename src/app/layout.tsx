@@ -24,11 +24,11 @@ export default function RootLayout({
         <html lang="en">
             <body
                 // className={`${urbanist.variable} antialiased px-5 md:px-6 lg:px-8`}
-                className={`${urbanist.variable} antialiased`}
+                className={`${urbanist.variable} antialiased bg-gradient-top10`}
             >
                 <Navbar />
 
-                <div className="relative container-1440 container-padding py-12 bg-gradient-top10">
+                <div className="relative container-1440 container-padding py-12">
                     {/* Subtle shadow separator */}
                     {/* <div className="w-full container-1200 h-5 bg-navy-blue-200 blur-2xl z-10" /> */}
 
