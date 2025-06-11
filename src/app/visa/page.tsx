@@ -1,3 +1,4 @@
+import TitleDescription from "@/components/common/TitleDescription";
 import VisaCard from "@/components/layout/VisaCard";
 import React from "react";
 
@@ -42,14 +43,14 @@ function page() {
 
     return (
         <div className="container-1200">
-            <h1 className="text-heading1 text-navy-blue">
-                Explore the Right Visa for Your Journey
-            </h1>
-            <p className="text-description1 text-navy-blue-400 mt-2">
-                Find detailed information about different visa categories based
+            <div className="mb-6 sm:mb-10">
+                <TitleDescription
+                    title="Explore the Right Visa for Your Journey"
+                    description="Find detailed information about different visa categories based
                 on your purpose — whether you’re studying, working, reuniting
-                with family, or exploring new destinations.
-            </p>
+                with family, or exploring new destinations."
+                />
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
                 {visaTypes.map((visa, index) => (
                     <VisaCard visa={visa} key={index} />
