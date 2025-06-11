@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import MobileMenu from "./MobileMenu";
 import { navigationItems } from "@/constants/navigation";
+import CartIcon from "../icons/CartIcon";
 
 function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -13,7 +14,7 @@ function Navbar() {
     };
 
     return (
-        <div className="bg-white container-padding">
+        <div className="bg-white container-padding shadow-custom-combined">
             <div className="container-1200">
                 <div className="flex gap-10 justify-between items-center py-5 md:py-6 lg:py-8 md:gap-0">
                     {/* Logo Section */}
@@ -49,11 +50,7 @@ function Navbar() {
                             Book a Consultation
                         </button>
                         <button className="flex gap-2 items-center self-stretch my-auto w-6">
-                            <img
-                                src="/window.svg"
-                                className="object-contain self-stretch my-auto w-6 aspect-square"
-                                alt="Profile"
-                            />
+                            <CartIcon />
                         </button>
                         <button className="gap-2.5 self-stretch px-6 py-2 my-auto text-sm font-medium text-center whitespace-nowrap rounded-md border border-solid border-neutrals-300 text-neutrals-700">
                             Login

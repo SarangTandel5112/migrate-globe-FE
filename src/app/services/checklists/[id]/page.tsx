@@ -2,6 +2,7 @@
 
 import ChecklistDetails from "@/components/checklist/ChecklistDetails";
 import PricingSidebar from "@/components/checklist/PricingSidebar";
+import TitleDescription from "@/components/common/TitleDescription";
 import BackIcon from "@/components/icons/BackIcon";
 import { useRouter } from "next/navigation";
 
@@ -24,6 +25,10 @@ export default function BuyDocumentsChecklists() {
                                 Back
                             </span>
                         </button>
+                        <TitleDescription
+                            title="Buy Documents Checklists"
+                            description="Lorem ipsum dolor sit amet consectetur. Urna ullamcorper orci tortor sed morbi enim."
+                        />
 
                         <ChecklistDetails />
                     </div>

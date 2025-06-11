@@ -1,5 +1,5 @@
-import CommonCard from "@/components/layout/CommonCard";
 import TitleDescription from "@/components/common/TitleDescription";
+import VisaCard from "@/components/layout/VisaCard";
 import React from "react";
 
 function page() {
@@ -45,24 +45,13 @@ function page() {
         <div className="container-1200">
             <div className="mb-6 sm:mb-10">
                 <TitleDescription
-                    title="Explore the Right Visa for Your Journey"
-                    description="Find detailed information about different visa categories based
-                on your purpose — whether you’re studying, working, reuniting
-                with family, or exploring new destinations."
+                    title="Insights & Updates"
+                    description="Stay informed with the latest news, reforms, and expert tips on Australian visas and migration."
                 />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
                 {visaTypes.map((visa, index) => (
-                    // <VisaCard visa={visa} key={index} />
-                    <CommonCard
-                        image={{ src: "/india.png", alt: visa.title }}
-                        title={visa.title}
-                        key={index}
-                        description={visa.description}
-                        // wrapperClassName="hover:scale-105"
-                        wrapperClassName="shadow-sm border-gray-200 hover:shadow-md"
-                        link={{ href: "#", label: "Get Details" }}
-                    />
+                    <VisaCard visa={visa} key={index} />
                 ))}
             </div>
         </div>
