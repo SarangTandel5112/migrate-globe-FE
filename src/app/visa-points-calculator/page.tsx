@@ -3,6 +3,11 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import BackIcon from "@/components/icons/BackIcon";
+import FillRadioIcon from "@/components/icons/FillRadioIcon";
+import RadioButtonIcon from "@/components/icons/RadioButtonIcon";
+import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
+import CheckFillIcon from "@/components/icons/CheckFillIcon";
+import CheckRoundIcon from "@/components/icons/CheckRoundIcon";
 
 export default function VisaPointsCalculator() {
     const router = useRouter();
@@ -89,15 +94,15 @@ export default function VisaPointsCalculator() {
             <div className="mb-8">
                 <button
                     onClick={() => router.back()}
-                    className="mb-6 flex items-center gap-2 text-[#263773] hover:opacity-75 transition-opacity"
+                    className="mb-6 flex items-center gap-2 text-navy-blue hover:opacity-75 transition-opacity"
                 >
                     <BackIcon />
-                    <span className="font-urbanist font-bold text-base text-[#263773] capitalize tracking-[0.2px]">
+                    <span className="font-semibold text-base text-navy-blue capitalize tracking-[0.2px]">
                         Back
                     </span>
                 </button>
 
-                <h1 className="font-urbanist font-bold text-2xl text-[#263773] tracking-[0.608px]">
+                <h1 className="font-semibold text-heading1 text-navy-blue tracking-[0.608px]">
                     Visa Points Calculator
                 </h1>
             </div>
@@ -109,10 +114,10 @@ export default function VisaPointsCalculator() {
                     <div className="bg-white rounded-2xl border border-white/80 backdrop-blur-[20px] p-6">
                         {/* Section Header */}
                         <div className="mb-6">
-                            <h2 className="font-urbanist font-bold text-2xl text-[#333] tracking-[0.608px] mb-1">
+                            <h2 className="font-semibold text-heading1 text-neutrals-700 tracking-[0.608px] mb-1">
                                 Choose Your Visa Subclass
                             </h2>
-                            <p className="font-urbanist text-sm text-[#696969] leading-6 tracking-[0.2px] capitalize">
+                            <p className="text-sm text-neutrals leading-6 tracking-[0.2px] capitalize">
                                 Select the visa type you are applying for:
                             </p>
                         </div>
@@ -143,51 +148,11 @@ export default function VisaPointsCalculator() {
                                         >
                                             {selectedVisa === option.id ? (
                                                 <div className="relative">
-                                                    <svg
-                                                        width="24"
-                                                        height="24"
-                                                        viewBox="0 0 24 24"
-                                                        fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                    >
-                                                        <circle
-                                                            cx="12"
-                                                            cy="12"
-                                                            r="11.25"
-                                                            stroke="#6FAC96"
-                                                            strokeWidth="1.5"
-                                                        />
-                                                        <circle
-                                                            cx="12"
-                                                            cy="12"
-                                                            r="6"
-                                                            fill="#6FAC96"
-                                                        />
-                                                    </svg>
+                                                    <FillRadioIcon />
                                                 </div>
                                             ) : (
                                                 <div className="relative">
-                                                    <svg
-                                                        width="24"
-                                                        height="24"
-                                                        viewBox="0 0 24 24"
-                                                        fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                    >
-                                                        <circle
-                                                            cx="12"
-                                                            cy="12"
-                                                            r="11.25"
-                                                            stroke="#D3D3D3"
-                                                            strokeWidth="1.5"
-                                                        />
-                                                        <circle
-                                                            cx="12"
-                                                            cy="12"
-                                                            r="6"
-                                                            fill="#D3D3D3"
-                                                        />
-                                                    </svg>
+                                                    <RadioButtonIcon />
                                                 </div>
                                             )}
                                         </label>
@@ -195,10 +160,10 @@ export default function VisaPointsCalculator() {
 
                                     {/* Option Content */}
                                     <div className="flex-1">
-                                        <h3 className="font-urbanist font-bold text-base text-[#333] leading-6 tracking-[0.2px] capitalize mb-1">
+                                        <h3 className="font-semibold text-base text-neutrals-700 leading-6 tracking-[0.2px] capitalize mb-1">
                                             {option.title}
                                         </h3>
-                                        <p className="font-urbanist text-sm text-[#696969] leading-6 tracking-[0.2px] capitalize">
+                                        <p className="text-sm text-neutrals leading-6 tracking-[0.2px] capitalize">
                                             {option.description}
                                         </p>
                                     </div>
@@ -208,42 +173,12 @@ export default function VisaPointsCalculator() {
 
                         {/* Next Button */}
                         <div className="flex justify-end">
-                            <button className="flex items-center gap-2.5 bg-[#263773] text-white px-6 py-2 rounded-[5px] hover:bg-[#263773]/90 transition-colors">
-                                <span className="font-urbanist text-sm tracking-[0.46px]">
+                            <button className="flex items-center gap-2.5 bg-navy-blue text-neutrals-0 px-6 py-2 rounded-[5px] hover:bg-navy-blue/90 transition-colors">
+                                <span className="text-sm tracking-[0.46px]">
                                     Next
                                 </span>
                                 <div className="relative w-6 h-6">
-                                    <svg
-                                        width="7"
-                                        height="12"
-                                        viewBox="0 0 7 12"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            d="M1 11L6 6L1 1"
-                                            stroke="white"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                    </svg>
-                                    <svg
-                                        width="7"
-                                        height="12"
-                                        viewBox="0 0 7 12"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="absolute -left-2"
-                                    >
-                                        <path
-                                            d="M1 11L6 6L1 1"
-                                            stroke="white"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                    </svg>
+                                    <ArrowRightIcon />
                                 </div>
                             </button>
                         </div>
@@ -288,23 +223,25 @@ export default function VisaPointsCalculator() {
 
                             <div className="flex-1">
                                 <div className="mb-2">
-                                    <span className="font-urbanist text-base text-[#515F8F] tracking-[0.2px]">
+                                    <span className="text-base text-navy-blue-400 tracking-[0.2px]">
                                         Total Score:
                                     </span>
-                                    <span className="font-urbanist text-2xl text-[#515F8F] tracking-[0.2px] ml-1">
+                                    <span className="text-2xl text-navy-blue-400 tracking-[0.2px] ml-1">
                                         {totalScore.toString().padStart(2, "0")}
                                     </span>
-                                    <span className="font-urbanist text-base text-[#515F8F] tracking-[0.2px] ml-1">
+                                    <span className="text-base text-navy-blue-400 tracking-[0.2px] ml-1">
                                         Points
                                     </span>
                                 </div>
-                                <p className="font-urbanist text-xs text-[#929BB9] tracking-[0.2px]">
-                                    <span className="text-[#929BB9]">
+                                <p className="text-xs text-navy-blue-200 tracking-[0.2px]">
+                                    <span className="text-navy-blue-200">
                                         Minimum required score for most skilled
                                         visas
                                     </span>
-                                    <span className="text-[#515F8F]">: </span>
-                                    <span className="text-[#263773] font-medium">
+                                    <span className="text-navy-blue-400">
+                                        :{" "}
+                                    </span>
+                                    <span className="text-navy-blue font-medium">
                                         {minimumScore} points
                                     </span>
                                 </p>
@@ -317,57 +254,29 @@ export default function VisaPointsCalculator() {
                                 <div
                                     key={item.id}
                                     className={`flex items-center justify-between p-3 rounded-lg ${
-                                        item.completed ? "bg-[#F7F8FD]" : ""
+                                        item.completed ? "bg-background" : ""
                                     }`}
                                 >
                                     <div className="flex items-center gap-4">
                                         {/* Checkbox */}
                                         <div className="w-6 h-6 flex-shrink-0">
                                             {item.completed ? (
-                                                <div className="relative w-6 h-6 bg-[#6FAC96] rounded-full flex items-center justify-center">
-                                                    <svg
-                                                        width="8"
-                                                        height="6"
-                                                        viewBox="0 0 8 6"
-                                                        fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                    >
-                                                        <path
-                                                            d="M1 3L3 5L7 1"
-                                                            stroke="white"
-                                                            strokeWidth="2"
-                                                            strokeLinecap="round"
-                                                            strokeLinejoin="round"
-                                                        />
-                                                    </svg>
+                                                <div className="relative w-6 h-6 bg-mint-green-600 rounded-full flex items-center justify-center">
+                                                    <CheckFillIcon />
                                                 </div>
                                             ) : (
-                                                <div className="w-6 h-6 border-2 border-[#C0C0C0] rounded-full flex items-center justify-center">
-                                                    <svg
-                                                        width="8"
-                                                        height="6"
-                                                        viewBox="0 0 8 6"
-                                                        fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                    >
-                                                        <path
-                                                            d="M1 3L3 5L7 1"
-                                                            stroke="#C0C0C0"
-                                                            strokeWidth="2"
-                                                            strokeLinecap="round"
-                                                            strokeLinejoin="round"
-                                                        />
-                                                    </svg>
+                                                <div className="w-6 h-6 rounded-full flex items-center justify-center">
+                                                    <CheckRoundIcon />
                                                 </div>
                                             )}
                                         </div>
 
                                         {/* Label */}
                                         <span
-                                            className={`font-urbanist text-sm tracking-[0.2px] capitalize leading-6 ${
+                                            className={`text-sm tracking-[0.2px] capitalize leading-6 ${
                                                 item.completed
-                                                    ? "text-[#263773] font-bold"
-                                                    : "text-[#515F8F]"
+                                                    ? "text-navy-blue font-bold"
+                                                    : "text-navy-blue-400"
                                             }`}
                                         >
                                             {item.label}
@@ -376,8 +285,8 @@ export default function VisaPointsCalculator() {
 
                                     {/* Points Badge */}
                                     {item.completed && item.points && (
-                                        <div className="w-6 h-6 bg-[#DCF3EB] rounded-xl flex items-center justify-center">
-                                            <span className="font-urbanist font-bold text-xs text-[#538171] tracking-[0.2px] capitalize">
+                                        <div className="w-6 h-6 bg-mint-green-50 rounded-xl flex items-center justify-center">
+                                            <span className="font-bold text-xs text-mint-green-700 tracking-[0.2px] capitalize">
                                                 {item.points}
                                             </span>
                                         </div>
