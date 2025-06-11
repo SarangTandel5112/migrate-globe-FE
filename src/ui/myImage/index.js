@@ -1,23 +1,25 @@
-'use client'
-import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
-import Image from 'next/image'
+"use client";
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import Image from "next/image";
 
 /**
  * MyImage component
  * @param {Object} props - Component props
  * @param {string|object} props.src - Source URL or object for the image
  * @param {string} props.alt - Alternative text for the image
+ * @param {string} props.height - Height for the image
+ * @param {string} props.width - Width for the image
  * @param {string} props.errorSrc - Source URL or object to use when the image fails to load
  * @param {string} props.className - Additional CSS classes for the image
  * @returns {React.ReactElement} Image component
  */
 function MyImage({ src, className, alt, height, width, errorSrc, ...rest }) {
-  const [url, setUrl] = useState(src)
+  const [url, setUrl] = useState(src);
 
   useEffect(() => {
-    setUrl(src)
-  }, [src])
+    setUrl(src);
+  }, [src]);
 
   return (
     <Image
@@ -28,17 +30,17 @@ function MyImage({ src, className, alt, height, width, errorSrc, ...rest }) {
       className={`${className}`}
       {...rest}
       onError={(e) => {
-        setUrl(errorSrc)
-        if (typeof rest?.onError === 'function') rest.onError(e)
+        setUrl(errorSrc);
+        if (typeof rest?.onError === "function") rest.onError(e);
       }}
     />
-  )
+  );
 }
 
 MyImage.defaultProps = {
-  src: '',
-  errorSrc: 'defaultErrorImage.png'
-}
+  src: "",
+  errorSrc: "defaultErrorImage.png",
+};
 
 MyImage.propTypes = {
   src: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
@@ -46,11 +48,11 @@ MyImage.propTypes = {
   alt: PropTypes.string,
   className: PropTypes.string,
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-}
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};
 
 MyImage.defaultProps = {
-  src: ''
-}
+  src: "",
+};
 
-export default React.memo(MyImage)
+export default React.memo(MyImage);

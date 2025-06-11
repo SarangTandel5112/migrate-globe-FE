@@ -49,6 +49,7 @@ module.exports = {
         'navy-blue': {
           50: 'var(--navy-blue-50)',
           100: 'var(--navy-blue-100)',
+          150: 'var(--navy-blue-150)',
           200: 'var(--navy-blue-200)',
           300: 'var(--navy-blue-300)',
           400: 'var(--navy-blue-400)',

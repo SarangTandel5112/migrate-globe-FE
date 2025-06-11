@@ -2,6 +2,7 @@
 
   --primary-blue: #2851E3;
   --red: #ED1D24;
+  --light-red: #FFCBCB
   --background: #F7F8FD;
   --background-1: #F7F8FD;
   --neutrals-00: #FFFFFF;
@@ -28,6 +29,7 @@
 
   --navy-blue-50: #BEC3D5;
   --navy-blue-100: #A8AFC7;
+  --navy-blue-150: #EBEDFA;
   --navy-blue-200: #929BB9;
   --navy-blue-300: #7D87AB;
   --navy-blue-400: #515F8F;
@@ -43,6 +45,7 @@
   :root {
     --primary-blue: #2851E3;
     --red: #ED1D24;
+    --light-red: #FFCBCB;
     --background: #F7F8FD;
     --background-1: #F7F8FD;
     --neutrals-00: #FFFFFF;
@@ -69,6 +72,7 @@
 
     --navy-blue-50: #BEC3D5;
     --navy-blue-100: #A8AFC7;
+    --navy-blue-150: #EBEDFA;
     --navy-blue-200: #929BB9;
     --navy-blue-300: #7D87AB;
     --navy-blue-400: #515F8F;
