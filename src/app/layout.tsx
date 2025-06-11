@@ -28,7 +28,7 @@ export default function RootLayout({
             >
                 <Navbar />
 
-                <div className="relative container-1440 container-padding py-12">
+                <div className="relative container-1440 container-padding py-12 bg-gradient-top10">
                     {/* Subtle shadow separator */}
                     {/* <div className="w-full container-1200 h-5 bg-navy-blue-200 blur-2xl z-10" /> */}
 

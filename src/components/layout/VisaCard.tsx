@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function VisaCard({ visa }: { visa: any }) {
     return (
-        <div className="rounded-xl overflow-hidden border border-[#E0E4F3] shadow-bottom-blue transition-transform hover:scale-105 bg-white">
+        <div className="rounded-xl overflow-hidden border border-[#E0E4F3] shadow-bottom-blue transition-transform hover:scale-105 bg-white cursor-pointer">
             <Image
                 src="/india.png"
                 alt={visa.title}

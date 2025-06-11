@@ -15,7 +15,7 @@ const DocumentsChecklistsPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background-1">
+    <div className="min-h-screen ">
       <div className="container-1200 px-4 md:px-6 lg:px-8 py-8">
         <div className="flex flex-col gap-8">
           {/* Back Button */}

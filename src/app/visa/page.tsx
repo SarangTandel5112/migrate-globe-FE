@@ -1,4 +1,4 @@
-import VisaCard from "@/components/layout/VisaCard";
+import CommonCard from "@/components/layout/CommonCard";
 import React from "react";
 
 function page() {
@@ -52,7 +52,16 @@ function page() {
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
                 {visaTypes.map((visa, index) => (
-                    <VisaCard visa={visa} key={index} />
+                    // <VisaCard visa={visa} key={index} />
+                    <CommonCard
+                        image={{ src: "/india.png", alt: visa.title }}
+                        title={visa.title}
+                        key={index}
+                        description={visa.description}
+                        // wrapperClassName="hover:scale-105"
+                        wrapperClassName="shadow-sm border-gray-200 hover:shadow-md"
+                        link={{ href: "#", label: "Get Details" }}
+                    />
                 ))}
             </div>
         </div>
