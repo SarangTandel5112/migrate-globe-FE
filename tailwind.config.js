@@ -64,6 +64,14 @@ module.exports = {
       },
       boxShadow: {
         'header-bottom-navy': '0 -4px 8px -2px rgba(38, 55, 115, 0.2), 0 4px 8px -2px rgba(38, 55, 115, 0.2)',
+        'custom-nav': '0px 32px 71px 0px rgba(38, 55, 115, 0.1)',
+        'custom-deep': '0px 130px 130px 0px rgba(38, 55, 115, 0.09)',
+        'custom-deep-xl': '0px 292px 175px 0px rgba(38, 55, 115, 0.05)',
+        'custom-combined': `
+          0px 32px 71px rgba(38, 55, 115, 0.1),
+          0px 130px 130px rgba(38, 55, 115, 0.09),
+          0px 292px 175px rgba(38, 55, 115, 0.05)
+        `,
       },
       fontSize: {
         xs: '0.75rem',   // 12px
