@@ -4,6 +4,10 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import BackIcon from "@/components/icons/BackIcon";
 import TitleDescription from "@/components/common/TitleDescription";
+import MyImage from "@/ui/myImage";
+import EducationIcon from '@assets/images/education.png'
+import VloggerIcon from '@assets/images/vlogger.png'
+import BusinessmanIcon from '@assets/images/businessman.png'
 
 type QualificationLevel = "diploma" | "bachelors" | "masters" | "other";
 
@@ -21,6 +25,9 @@ export default function SkillAssessment() {
         { id: "masters", label: "Masters" },
         { id: "other", label: "Other" },
     ];
+    const [formData, setFormData] = useState({
+        experience: "",
+    });
 
     const handleQualificationSelect = (qualification: QualificationLevel) => {
         setSelectedQualification(qualification);
@@ -48,6 +55,13 @@ export default function SkillAssessment() {
         } else {
             router.back();
         }
+    };
+
+    const handleInputChange = (field: string, value: string) => {
+        setFormData((prev) => ({
+            ...prev,
+            [field]: value,
+        }));
     };
 
     return (
@@ -91,43 +105,7 @@ export default function SkillAssessment() {
                                 <div className="w-48 h-48 flex items-center justify-center">
                                     <div className="relative">
                                         {/* Graduation Cap Icon */}
-                                        <svg
-                                            width="128"
-                                            height="128"
-                                            viewBox="0 0 128 128"
-                                            fill="none"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="text-navy-blue"
-                                        >
-                                            <path
-                                                d="M64 16L8 40L64 64L120 40L64 16Z"
-                                                stroke="currentColor"
-                                                strokeWidth="3"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                fill="none"
-                                            />
-                                            <path
-                                                d="M24 56V88C24 96 44 104 64 104C84 104 104 96 104 88V56"
-                                                stroke="currentColor"
-                                                strokeWidth="3"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                fill="none"
-                                            />
-                                            <path
-                                                d="M120 40V80"
-                                                stroke="currentColor"
-                                                strokeWidth="3"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                            />
-                                        </svg>
-
-                                        {/* Certificate/Diploma overlay */}
-                                        <div className="absolute -bottom-4 -right-4 w-16 h-12 bg-[#6FAC96] rounded-sm flex items-center justify-center">
-                                            <div className="w-3 h-6 bg-[#8BD7BC] rounded-sm"></div>
-                                        </div>
+                                        <MyImage src={EducationIcon} alt='education' />
                                     </div>
                                 </div>
 
@@ -147,12 +125,11 @@ export default function SkillAssessment() {
                                                         qualification.id
                                                     )
                                                 }
-                                                className={`px-4 py-3 rounded-full border transition-all duration-200 ${
-                                                    selectedQualification ===
-                                                    qualification.id
+                                                className={`px-4 py-3 rounded-full border transition-all duration-200 ${selectedQualification ===
+                                                        qualification.id
                                                         ? "bg-navy-blue text-white border-white"
                                                         : "bg-[#EDEDED] text-[#696969] border-white hover:bg-[#D3D3D3]"
-                                                }`}
+                                                    }`}
                                             >
                                                 <span className="font-urbanist text-lg font-medium tracking-[0.608px] capitalize">
                                                     {qualification.label}
@@ -170,53 +147,7 @@ export default function SkillAssessment() {
                                 <div className="w-48 h-48 flex items-center justify-center">
                                     <div className="relative">
                                         {/* Person with laptop icon */}
-                                        <svg
-                                            width="128"
-                                            height="128"
-                                            viewBox="0 0 128 128"
-                                            fill="none"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="text-navy-blue"
-                                        >
-                                            {/* Head */}
-                                            <circle
-                                                cx="64"
-                                                cy="32"
-                                                r="16"
-                                                stroke="currentColor"
-                                                strokeWidth="3"
-                                                fill="none"
-                                            />
-                                            {/* Body */}
-                                            <path
-                                                d="M48 48C48 48 48 64 64 64C80 64 80 48 80 48"
-                                                stroke="currentColor"
-                                                strokeWidth="3"
-                                                strokeLinecap="round"
-                                            />
-                                            {/* Arms */}
-                                            <path
-                                                d="M32 72L48 64L64 72"
-                                                stroke="currentColor"
-                                                strokeWidth="3"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                            />
-                                            <path
-                                                d="M96 72L80 64L64 72"
-                                                stroke="currentColor"
-                                                strokeWidth="3"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                            />
-                                        </svg>
-
-                                        {/* Laptop overlay */}
-                                        <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-20 h-12 bg-[#6FAC96] rounded-sm flex items-center justify-center">
-                                            <div className="w-16 h-10 bg-[#8BD7BC] rounded-sm flex items-center justify-center">
-                                                <div className="w-3 h-3 bg-[#6FAC96] rounded-full"></div>
-                                            </div>
-                                        </div>
+                                        <MyImage src={VloggerIcon} alt='vlogger-icon' />
                                     </div>
                                 </div>
 
@@ -234,11 +165,10 @@ export default function SkillAssessment() {
                                                 <div
                                                     className="h-2 bg-navy-blue rounded-full relative"
                                                     style={{
-                                                        width: `${
-                                                            (workExperience /
+                                                        width: `${(workExperience /
                                                                 30) *
                                                             100
-                                                        }%`,
+                                                            }%`,
                                                     }}
                                                 >
                                                     <div className="absolute -right-2.5 -top-1.5 w-5 h-5 bg-navy-blue border-2 border-white rounded-full shadow-lg cursor-pointer"></div>
@@ -268,6 +198,64 @@ export default function SkillAssessment() {
                                                     years
                                                 </span>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </>
+                        )}
+
+                        {currentStep === 3 && (
+                            <>
+                                {/* Work Experience Icon */}
+                                <div className="w-48 h-48 flex items-center justify-center">
+                                    <div className="relative">
+                                        {/* Person with laptop icon */}
+                                        <MyImage src={BusinessmanIcon} alt='vlogger-icon' />
+                                    </div>
+                                </div>
+
+                                {/* Title and Slider */}
+                                <div className="w-full space-y-6">
+                                    <h2 className="font-urbanist font-bold text-xl text-navy-blue text-center tracking-[0.24px] capitalize">
+                                        Field of Experience
+                                    </h2>
+
+                                    {/* Slider Container */}
+                                    <div className="relative">
+                                        <select
+                                            value={formData.experience}
+                                            onChange={(e) =>
+                                                handleInputChange(
+                                                    "experience",
+                                                    e.target.value
+                                                )
+                                            }
+                                            className="w-full px-3 py-2.5 bg-background-1 border border-neutrals-200 rounded text-base text-navy-blue appearance-none cursor-pointer focus:outline-none focus:border-navy-blue-300"
+                                        >
+                                            <option value="" disabled>
+                                                Select Field
+                                            </option>
+                                            <option value="1">1+</option>
+                                            <option value="2">2+</option>
+                                            <option value="3">3+</option>
+                                            <option value="4">4+</option>
+                                        </select>
+                                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                            <svg
+                                                width="12"
+                                                height="7"
+                                                viewBox="0 0 12 7"
+                                                fill="none"
+                                                className="w-3 h-2"
+                                            >
+                                                <path
+                                                    d="M1.35156 1.2L6.15156 6L10.9516 1.2"
+                                                    stroke="#7D87AB"
+                                                    strokeWidth="1.6"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                />
+                                            </svg>
                                         </div>
                                     </div>
                                 </div>
