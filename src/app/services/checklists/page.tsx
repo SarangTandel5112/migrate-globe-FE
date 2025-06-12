@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { motion, Variants } from "framer-motion";
 import BackIcon from "@/components/icons/BackIcon";
 import UserIcon from "@/components/icons/UserIcon";
 import BreifCaseIcon from "@/components/icons/BreifCaseIcon";
@@ -54,9 +55,23 @@ const DocumentsChecklistsPage: React.FC = () => {
     const [selectedVisaCategory, setSelectedVisaCategory] =
         useState<string>("");
 
+    const fadeUpVariants: Variants = {
+        hidden: { opacity: 0, y: 40 },
+        visible: (custom) => ({
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.6,
+                ease: [0.25, 0.1, 0.25, 1], // Use easing array (cubic-bezier equivalent to easeOut)
+                delay: custom * 0.15, // use custom for delay control
+            },
+        }),
+    };
+
     return (
         <div className="container-1200">
             <div className="flex flex-col gap-8">
+                {/* Back Button */}
                 <button
                     onClick={() => router.back()}
                     className="flex items-center gap-2 text-navy-blue hover:opacity-75 transition-opacity"
@@ -72,7 +87,15 @@ const DocumentsChecklistsPage: React.FC = () => {
                     description="Lorem ipsum dolor sit amet consectetur. Urna ullamcorper orci tortor sed morbi enim."
                 />
 
-                <div className="bg-white rounded-2xl p-4 md:p-6 flex flex-col gap-6 md:gap-10">
+                {/* ✅ Animate This Card */}
+                <motion.div
+                    className="bg-white rounded-2xl p-4 md:p-6 flex flex-col gap-6 md:gap-10"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                    variants={fadeUpVariants}
+                    custom={0}
+                >
                     <div className="flex flex-col gap-2">
                         <h2 className="text-navy-blue text-base font-semibold tracking-[0.24px] capitalize">
                             Select Enquiry Type
@@ -126,22 +149,57 @@ const DocumentsChecklistsPage: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </motion.div>
 
-                <div className="bg-white rounded-2xl p-4 md:p-6 flex flex-col gap-6">
+                {/* ✅ Animate Visa Options - With Stagger */}
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.1 }}
+                    variants={{
+                        hidden: { opacity: 0, y: 50 },
+                        visible: {
+                            opacity: 1,
+                            y: 0,
+                            transition: {
+                                delayChildren: 0.4, // Increase initial delay
+                                staggerChildren: 0.25, // More delay between children for slower stagger
+                                duration: 0.8, // Add duration for the parent
+                                ease: [0.25, 0.1, 0.25, 1], // Smooth easing (equivalent to ease-out)
+                            },
+                        },
+                    }}
+                    className="bg-white rounded-2xl p-4 md:p-6 flex flex-col gap-6"
+                >
                     <h2 className="text-navy-blue text-heading1 font-semibold tracking-[0.608px]">
                         Distinguished Talent Visa
                     </h2>
+
                     <div className="flex flex-col gap-6">
                         {VISA_OPTIONS.map((visa, index) => (
-                            <VisaOption
+                            <motion.div
                                 key={index}
-                                title={visa.title}
-                                description={visa.description}
-                            />
+                                variants={{
+                                    hidden: { opacity: 0, y: 30 },
+                                    visible: {
+                                        opacity: 1,
+                                        y: 0,
+                                        transition: {
+                                            duration: 0.7,
+                                            ease: "easeOut",
+                                            delay: index * 0.15,
+                                        },
+                                    },
+                                }}
+                            >
+                                <VisaOption
+                                    title={visa.title}
+                                    description={visa.description}
+                                />
+                            </motion.div>
                         ))}
                     </div>
-                </div>
+                </motion.div>
             </div>
         </div>
     );
