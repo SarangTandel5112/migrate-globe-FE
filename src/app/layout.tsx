@@ -24,7 +24,7 @@ export default function RootLayout({
         <html lang="en">
             <body
                 // className={`${urbanist.variable} antialiased px-5 md:px-6 lg:px-8`}
-                className={`${urbanist.variable} antialiased`}
+                className={`${urbanist.variable} antialiased bg-gradient-top10`}
             >
                 <Navbar />
 

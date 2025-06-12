@@ -57,10 +57,10 @@ export default function SkillAssessment() {
                 <div className="w-full">
                     <button
                         onClick={() => router.back()}
-                        className="flex items-center gap-2 text-[#263773] hover:opacity-75 transition-opacity"
+                        className="flex items-center gap-2 text-navy-blue hover:opacity-75 transition-opacity"
                     >
                         <BackIcon />
-                        <span className="font-urbanist font-bold text-base text-[#263773] capitalize tracking-[0.2px]">
+                        <span className="font-urbanist font-bold text-base text-navy-blue capitalize tracking-[0.2px]">
                             Back
                         </span>
                     </button>
@@ -78,7 +78,7 @@ export default function SkillAssessment() {
                 <div className="w-full max-w-3xl bg-white rounded-2xl shadow-sm p-6 space-y-6">
                     {/* Step Indicator */}
                     <div className="text-right">
-                        <span className="font-urbanist font-bold text-xs text-[#333] tracking-[0.608px] capitalize">
+                        <span className="font-urbanist font-bold text-xs text-neutrals-700 tracking-[0.608px] capitalize">
                             Step {currentStep} of {totalSteps}
                         </span>
                     </div>
@@ -97,7 +97,7 @@ export default function SkillAssessment() {
                                             viewBox="0 0 128 128"
                                             fill="none"
                                             xmlns="http://www.w3.org/2000/svg"
-                                            className="text-[#263773]"
+                                            className="text-navy-blue"
                                         >
                                             <path
                                                 d="M64 16L8 40L64 64L120 40L64 16Z"
@@ -133,7 +133,7 @@ export default function SkillAssessment() {
 
                                 {/* Title and Options */}
                                 <div className="w-full space-y-6">
-                                    <h2 className="font-urbanist font-bold text-xl text-[#263773] text-center tracking-[0.24px] capitalize">
+                                    <h2 className="font-urbanist font-bold text-xl text-navy-blue text-center tracking-[0.24px] capitalize">
                                         Your Qualification
                                     </h2>
 
@@ -150,7 +150,7 @@ export default function SkillAssessment() {
                                                 className={`px-4 py-3 rounded-full border transition-all duration-200 ${
                                                     selectedQualification ===
                                                     qualification.id
-                                                        ? "bg-[#263773] text-white border-white"
+                                                        ? "bg-navy-blue text-white border-white"
                                                         : "bg-[#EDEDED] text-[#696969] border-white hover:bg-[#D3D3D3]"
                                                 }`}
                                             >
@@ -176,7 +176,7 @@ export default function SkillAssessment() {
                                             viewBox="0 0 128 128"
                                             fill="none"
                                             xmlns="http://www.w3.org/2000/svg"
-                                            className="text-[#263773]"
+                                            className="text-navy-blue"
                                         >
                                             {/* Head */}
                                             <circle
@@ -222,7 +222,7 @@ export default function SkillAssessment() {
 
                                 {/* Title and Slider */}
                                 <div className="w-full space-y-6">
-                                    <h2 className="font-urbanist font-bold text-xl text-[#263773] text-center tracking-[0.24px] capitalize">
+                                    <h2 className="font-urbanist font-bold text-xl text-navy-blue text-center tracking-[0.24px] capitalize">
                                         Work Experience
                                     </h2>
 
@@ -232,7 +232,7 @@ export default function SkillAssessment() {
                                         <div className="flex-1 relative">
                                             <div className="w-full h-2 bg-[#EDEDED] rounded-full">
                                                 <div
-                                                    className="h-2 bg-[#263773] rounded-full relative"
+                                                    className="h-2 bg-navy-blue rounded-full relative"
                                                     style={{
                                                         width: `${
                                                             (workExperience /
@@ -241,7 +241,7 @@ export default function SkillAssessment() {
                                                         }%`,
                                                     }}
                                                 >
-                                                    <div className="absolute -right-2.5 -top-1.5 w-5 h-5 bg-[#263773] border-2 border-white rounded-full shadow-lg cursor-pointer"></div>
+                                                    <div className="absolute -right-2.5 -top-1.5 w-5 h-5 bg-navy-blue border-2 border-white rounded-full shadow-lg cursor-pointer"></div>
                                                 </div>
                                             </div>
                                             <input
@@ -276,20 +276,20 @@ export default function SkillAssessment() {
                     </div>
 
                     {/* Divider */}
-                    <div className="w-full h-px bg-[#EDEDED]"></div>
+                    <div className="w-full h-px bg-neutrals-100"></div>
 
                     {/* Navigation Buttons */}
                     <div className="flex justify-center items-center gap-5">
                         <button
                             onClick={handleBack}
-                            className="py-2 px-6 border border-[#C0C0C0] text-[#333] rounded-md font-urbanist text-sm tracking-[0.46px] hover:bg-[#F7F8FD] transition-colors"
+                            className="py-2 px-6 border border-neutrals-300 text-neutrals-700 rounded-md font-urbanist text-sm tracking-[0.46px] hover:bg-[#F7F8FD] transition-colors"
                         >
                             Back
                         </button>
 
                         <button
                             onClick={handleNext}
-                            className="py-2 px-6 bg-[#263773] text-white rounded-md font-urbanist text-sm tracking-[0.46px] hover:bg-[#263773]/90 transition-colors"
+                            className="py-2 px-6 bg-navy-blue text-white rounded-md font-urbanist text-sm tracking-[0.46px] hover:bg-navy-blue/90 transition-colors"
                         >
                             Next
                         </button>

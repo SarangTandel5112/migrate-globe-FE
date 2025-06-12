@@ -17,7 +17,6 @@ module.exports = {
         foreground: 'var(--foreground)',
         'primary-blue': 'var(--primary-blue)',
         'red': 'var(--red)',
-        'background': 'var(--background)',
         'background-1': 'var(--background-1)',
         // Neutrals
         neutrals: {
@@ -61,7 +60,11 @@ module.exports = {
         },
         boxShadow: {
           navigation: '0 4px 8px 0 rgb(0 0 0 / 24%)'
-        }
+        },
+      },
+      backgroundImage: {
+        // 'gradient-top10': 'linear-gradient(to bottom, #e9eaf6 10%, #f7f8fd 100%)',
+        'gradient-top10': 'linear-gradient(to bottom, #e4e6f2 10%, #f7f8fd 100%)'
       },
       boxShadow: {
         'header-bottom-navy': '0 -4px 8px -2px rgba(38, 55, 115, 0.2), 0 4px 8px -2px rgba(38, 55, 115, 0.2)',
