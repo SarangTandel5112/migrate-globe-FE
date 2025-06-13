@@ -56,7 +56,13 @@ export default function FaqsSection() {
     };
 
     return (
-        <div className="py-10 lg:py-20 px-4 md:px-6 lg:px-8">
+        <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="py-10 lg:py-20 px-4 md:px-6 lg:px-8"
+        >
             <div className="mx-auto max-w-4xl">
                 <div className="text-center mb-8">
                     <h2 className="font-bold text-4xl text-navy-blue tracking-[0.608px] mb-2">
@@ -69,8 +75,16 @@ export default function FaqsSection() {
 
                 <div className="space-y-6">
                     {faqItems.map((item) => (
-                        <div
+                        <motion.div
                             key={item.id}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.2 }}
+                            transition={{
+                                duration: 0.6,
+                                delay: Number(item.id) * 0.1,
+                                ease: "easeOut",
+                            }}
                             className="border-b border-neutrals-200 pb-5"
                         >
                             <button
@@ -108,10 +122,10 @@ export default function FaqsSection() {
                                     </motion.div>
                                 )}
                             </AnimatePresence>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 }
