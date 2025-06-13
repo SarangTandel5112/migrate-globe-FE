@@ -13,6 +13,7 @@ import VideoIcon from "@assets/images/Video.svg";
 import ToolIcon from "@assets/images/ToolBox.svg";
 import Boxlayout from "@/components/services/Boxlayout";
 import LineLayout from "@/components/services/LineLayout";
+import { motion } from "framer-motion";
 
 export default function Services() {
     const services = [
@@ -113,23 +114,55 @@ export default function Services() {
                 </div>
             </div>
             <section className="py-3">
-                <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-[350px] sm:max-w-none mx-auto">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, ease: "easeInOut" }}
+                    className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-[350px] sm:max-w-none mx-auto"
+                >
                     {displayCard &&
                         services.map((service, index) => (
-                            <Boxlayout key={index} service={service} />
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{
+                                    duration: 0.5,
+                                    delay: index * 0.1,
+                                    ease: "easeOut",
+                                }}
+                            >
+                                <Boxlayout key={index} service={service} />
+                            </motion.div>
                         ))}
-                </div>
+                </motion.div>
 
-                <div className="rounded-xl bg-white">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, ease: "easeInOut" }}
+                    className="rounded-xl bg-white"
+                >
                     {!displayCard &&
                         services.map((service, index) => (
-                            <LineLayout
-                                service={service}
+                            <motion.div
                                 key={index}
-                                isLast={index < services.length - 1}
-                            />
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{
+                                    duration: 0.5,
+                                    delay: index * 0.1,
+                                    ease: "easeOut",
+                                }}
+                            >
+                                <LineLayout
+                                    service={service}
+                                    key={index}
+                                    isLast={index < services.length - 1}
+                                />
+                            </motion.div>
                         ))}
-                </div>
+                </motion.div>
             </section>
         </div>
     );
