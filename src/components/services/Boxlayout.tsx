@@ -1,5 +1,6 @@
 import MyImage from "@/ui/myImage";
 import Arrow from "@assets/images/Arrow.svg";
+import Link from "next/link";
 
 function Boxlayout({ service }: any) {
     return (
@@ -30,7 +31,10 @@ function Boxlayout({ service }: any) {
                 <button className="flex items-center text-base font-semibold text-gray-800 group px-3 py-2">
                     Learn more
                 </button>
-                <span className="ml-2 w-8 h-8 rounded-full bg-white border border-gray-300 flex items-center justify-center ">
+                <Link
+                    href={service.link}
+                    className="pointer ml-2 w-8 h-8 rounded-full bg-white border border-gray-300 flex items-center justify-center "
+                >
                     <MyImage
                         src={Arrow}
                         alt="Arrow"
@@ -38,7 +42,7 @@ function Boxlayout({ service }: any) {
                         height="15"
                         width="15"
                     />
-                </span>
+                </Link>
             </div>
         </div>
     );

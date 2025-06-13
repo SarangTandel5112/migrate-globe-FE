@@ -23,6 +23,7 @@ export default function Services() {
                 "Create Your Personalized Migration Route With Our Interactive Planning Map.",
             color: "bg-[#E0F3FF]",
             icon: PlaneIcon,
+            link: "#",
         },
         {
             title: "Buy Documents Checklists",
@@ -30,6 +31,7 @@ export default function Services() {
                 "Get A Verified Checklist Tailored To Your Visa And Occupation. No Confusion. No Missing Docs.",
             color: "bg-orange-100",
             icon: FileIcon,
+            link: "/services/checklists",
         },
         {
             title: "Find Visa Options",
@@ -37,6 +39,7 @@ export default function Services() {
                 "Explore Visa Types That Match Your Profile, Goals, And Timeline — Fast And Accurate.",
             color: "bg-purple-100",
             icon: SearchFileIcon,
+            link: "/visa",
         },
         {
             title: "Skill Assessment",
@@ -44,6 +47,7 @@ export default function Services() {
                 "Check If Your Occupation Is Eligible And Buy The Step-By-Step Assessment Guide Instantly.",
             color: "bg-green-100",
             icon: ChartIcon,
+            link: "/services/skill-assessment",
         },
         {
             title: "Buy Cheapest Insurance",
@@ -51,6 +55,7 @@ export default function Services() {
                 "Compare And Purchase Affordable Overseas Health Cover From Top Providers.",
             color: "bg-[#FFCBCB]",
             icon: UmbrellaIcon,
+            link: "/insurance",
         },
         {
             title: "Zoom Consultations",
@@ -58,6 +63,7 @@ export default function Services() {
                 "Get Expert Advice Face-To-Face — Online. Book A Call With Our Migration Consultants.",
             color: "bg-yellow-100",
             icon: VideoIcon,
+            link: "/services/zoom-consultation",
         },
         {
             title: "Occupation Tracking Tool",
@@ -65,6 +71,7 @@ export default function Services() {
                 "Track Updates On Your Occupation — Demand Trends, State Invites, And Policy Changes.",
             color: "bg-gray-100",
             icon: ToolIcon,
+            link: "/services/occupation-tracking-tool",
         },
         {
             title: "Admission & Course Change Advice",
@@ -72,6 +79,7 @@ export default function Services() {
                 "Switching Your Course Or College? Get Guidance To Stay Compliant And Visa-Safe.",
             color: "bg-green-200",
             icon: ShakehandsIcon,
+            link: "#",
         },
     ];
 

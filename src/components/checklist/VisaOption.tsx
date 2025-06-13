@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const VisaOption = ({
     title,
     description,
@@ -15,9 +17,12 @@ const VisaOption = ({
             </p>
         </div>
         <div className="flex gap-4 sm:gap-5">
-            <button className="flex-1 sm:flex-none px-6 py-2 border border-neutrals-300 rounded text-neutrals-700 text-sm font-medium tracking-[0.46px] hover:border-neutrals-400 transition-colors">
+            <Link
+                href={"checklists/1"}
+                className="flex-1 sm:flex-none px-6 py-2 border border-neutrals-300 rounded text-neutrals-700 text-sm font-medium tracking-[0.46px] hover:border-neutrals-400 transition-colors"
+            >
                 More info
-            </button>
+            </Link>
             <button className="flex-1 sm:flex-none px-6 py-2 bg-navy-blue text-white rounded text-sm font-medium tracking-[0.46px] hover:bg-navy-blue-600 transition-colors">
                 Buy checklist
             </button>

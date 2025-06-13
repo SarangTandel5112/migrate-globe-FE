@@ -1,5 +1,6 @@
 import MyImage from "@/ui/myImage";
 import GoArrow from "@assets/images/GoArrow.svg";
+import Link from "next/link";
 
 function LineLayout({ service, isLast }: any) {
     return (
@@ -28,7 +29,10 @@ function LineLayout({ service, isLast }: any) {
                 </div>
 
                 {/* ARROW */}
-                <span className="ml-2 w-10 h-10 rounded-full bg-navy-blue-150 border flex items-center justify-center">
+                <Link
+                    href={service.link}
+                    className="ml-2 w-10 h-10 rounded-full bg-navy-blue-150 border flex items-center justify-center"
+                >
                     <MyImage
                         src={GoArrow}
                         alt="Go Arrow"
@@ -36,7 +40,7 @@ function LineLayout({ service, isLast }: any) {
                         height={15}
                         width={15}
                     />
-                </span>
+                </Link>
             </div>
 
             {isLast && (
