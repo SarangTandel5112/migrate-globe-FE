@@ -133,7 +133,7 @@ export default function Cart() {
                             <h3 className="font-bold text-base text-[#333] tracking-[0.2px] capitalize">
                                 {service.title}
                             </h3>
-                            <p className="text-sm text-[#696969] tracking-[0.2px] capitalize">
+                            <p className="text-sm text-neutrals tracking-[0.2px] capitalize">
                                 {service.description}
                             </p>
                         </div>

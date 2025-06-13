@@ -5,9 +5,9 @@ import { useRouter } from "next/navigation";
 import BackIcon from "@/components/icons/BackIcon";
 import TitleDescription from "@/components/common/TitleDescription";
 import MyImage from "@/ui/myImage";
-import EducationIcon from '@assets/images/education.png'
-import VloggerIcon from '@assets/images/vlogger.png'
-import BusinessmanIcon from '@assets/images/businessman.png'
+import EducationIcon from "@assets/images/education.png";
+import VloggerIcon from "@assets/images/vlogger.png";
+import BusinessmanIcon from "@assets/images/businessman.png";
 
 type QualificationLevel = "diploma" | "bachelors" | "masters" | "other";
 
@@ -105,7 +105,10 @@ export default function SkillAssessment() {
                                 <div className="w-48 h-48 flex items-center justify-center">
                                     <div className="relative">
                                         {/* Graduation Cap Icon */}
-                                        <MyImage src={EducationIcon} alt='education' />
+                                        <MyImage
+                                            src={EducationIcon}
+                                            alt="education"
+                                        />
                                     </div>
                                 </div>
 
@@ -125,11 +128,12 @@ export default function SkillAssessment() {
                                                         qualification.id
                                                     )
                                                 }
-                                                className={`px-4 py-3 rounded-full border transition-all duration-200 ${selectedQualification ===
-                                                        qualification.id
+                                                className={`px-4 py-3 rounded-full border transition-all duration-200 ${
+                                                    selectedQualification ===
+                                                    qualification.id
                                                         ? "bg-navy-blue text-white border-white"
-                                                        : "bg-[#EDEDED] text-[#696969] border-white hover:bg-[#D3D3D3]"
-                                                    }`}
+                                                        : "bg-[#EDEDED] text-neutrals border-white hover:bg-[#D3D3D3]"
+                                                }`}
                                             >
                                                 <span className="font-urbanist text-lg font-medium tracking-[0.608px] capitalize">
                                                     {qualification.label}
@@ -147,7 +151,10 @@ export default function SkillAssessment() {
                                 <div className="w-48 h-48 flex items-center justify-center">
                                     <div className="relative">
                                         {/* Person with laptop icon */}
-                                        <MyImage src={VloggerIcon} alt='vlogger-icon' />
+                                        <MyImage
+                                            src={VloggerIcon}
+                                            alt="vlogger-icon"
+                                        />
                                     </div>
                                 </div>
 
@@ -165,10 +172,11 @@ export default function SkillAssessment() {
                                                 <div
                                                     className="h-2 bg-navy-blue rounded-full relative"
                                                     style={{
-                                                        width: `${(workExperience /
+                                                        width: `${
+                                                            (workExperience /
                                                                 30) *
                                                             100
-                                                            }%`,
+                                                        }%`,
                                                     }}
                                                 >
                                                     <div className="absolute -right-2.5 -top-1.5 w-5 h-5 bg-navy-blue border-2 border-white rounded-full shadow-lg cursor-pointer"></div>
@@ -210,7 +218,10 @@ export default function SkillAssessment() {
                                 <div className="w-48 h-48 flex items-center justify-center">
                                     <div className="relative">
                                         {/* Person with laptop icon */}
-                                        <MyImage src={BusinessmanIcon} alt='vlogger-icon' />
+                                        <MyImage
+                                            src={BusinessmanIcon}
+                                            alt="vlogger-icon"
+                                        />
                                     </div>
                                 </div>
 
