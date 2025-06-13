@@ -27,7 +27,9 @@ export default function CommonCard({
     contentClassName = "",
 }: CommonCardProps) {
     return (
-        <div className={`bg-white rounded-xl overflow-hidden border border-[#E0E4F3] shadow-bottom-blue transition-transform cursor-pointer flex flex-col ${wrapperClassName}`}>
+        <div
+            className={`bg-white rounded-xl overflow-hidden border border-[#E0E4F3] shadow-bottom-blue transition-transform cursor-pointer flex flex-col ${wrapperClassName}`}
+        >
             <Image
                 src={image.src}
                 alt={image.alt || title}
@@ -42,7 +44,7 @@ export default function CommonCard({
                     <h3 className="text-description1 font-semibold text-left text-navy-blue">
                         {title}
                     </h3>
-                    <p className="text-sm text-navy-blue-400">
+                    <p className="text-sm text-navy-blue-400 line-clamp-2 min-h-[calc(1.5rem*2)]">
                         {description}
                     </p>
                 </div>
@@ -50,7 +52,9 @@ export default function CommonCard({
                 {link && (
                     <Link
                         href={link.href}
-                        className={`mt-3 text-mint-green-600 text-description1 font-semibold underline ${link.className || ""}`}
+                        className={`mt-3 text-mint-green-600 text-description1 font-semibold underline ${
+                            link.className || ""
+                        }`}
                     >
                         {link.label}
                     </Link>
