@@ -1,4 +1,7 @@
+"use client";
+
 import { useState } from "react";
+import { motion } from "framer-motion";
 import ArrowDownIcon from "../icons/ArrowDown";
 
 function ContactForm() {
@@ -22,8 +25,15 @@ function ContactForm() {
         console.log("Form submitted:", formData);
         // Handle form submission here
     };
+
     return (
-        <div className="lg:w-2/5 p-10">
+        <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+            className="lg:w-2/5 p-10"
+        >
             <div className="max-w-md mx-auto">
                 <div className="mb-6">
                     <h2 className="font-bold text-heading1 text-neutrals-700 capitalize mb-2">
@@ -157,7 +167,7 @@ function ContactForm() {
                     </div>
                 </form>
             </div>
-        </div>
+        </motion.div>
     );
 }
 

@@ -1,8 +1,22 @@
-import CallIcon from "../icons/CallIcon";
-import LocationIcon from "../icons/LocationIcon";
-import LocationLargeIcon from "../icons/LocationLargeIcon";
-import LocationCard from "./LocationCard";
+"use client";
 
+import { motion } from "framer-motion";
+import CallIcon from "../icons/CallIcon";
+import LocationCard from "./LocationCard";
+import { fadeUpVariants } from "@/utils/animation-variant";
+
+const fadeUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: (i = 0) => ({
+        opacity: 1,
+        y: 0,
+        transition: {
+            delay: i * 0.2,
+            duration: 0.6,
+            ease: [0.25, 0.1, 0.25, 1],
+        },
+    }),
+};
 function MapSection() {
     const offices = [
         {
@@ -40,7 +54,13 @@ function MapSection() {
         <div className="lg:w-3/5 bg-navy-blue relative">
             <div className="p-10">
                 {/* Contact Info Header */}
-                <div className="flex flex-col lg:flex-row gap-10 mb-8">
+                <motion.div
+                    className="flex flex-col lg:flex-row gap-10 mb-8"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                    variants={fadeUpVariants}
+                >
                     <div className="flex-1">
                         <h3 className="font-bold text-sm text-neutrals-0 tracking-[0.608px] capitalize mb-1">
                             E-mail
@@ -72,10 +92,16 @@ function MapSection() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </motion.div>
 
                 {/* World Map */}
-                <div className="h-96 bg-navy-blue relative mb-8 overflow-hidden">
+                <motion.div
+                    className="h-96 bg-navy-blue relative mb-8 overflow-hidden"
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    viewport={{ once: true, amount: 0.2 }}
+                >
                     {/* Simplified world map with dot pattern */}
                     <div className="absolute inset-0 opacity-30">
                         <svg
@@ -117,38 +143,56 @@ function MapSection() {
                     </div>
 
                     {/* Location marker for Australia */}
-                    <div className="absolute bottom-20 right-32">
-                        <div className="relative">
-                            <div className="w-3 h-3 bg-navy-blue border border-mint-green rounded-full"></div>
-                            <div className="w-2 h-2 bg-mint-green rounded-full absolute top-0.5 left-0.5"></div>
-                        </div>
-                        <div className="absolute -top-8 -left-8 bg-mint-green rounded-full px-2 py-1 flex items-center gap-1">
-                            <LocationIcon />
-                            <span className="font-bold text-xs text-neutrals-700 tracking-[0.348px] capitalize">
-                                Australia
-                            </span>
-                        </div>
-                    </div>
-                </div>
+                </motion.div>
 
                 {/* Our Locations */}
-                <div className="mb-8">
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                    variants={{
+                        hidden: { opacity: 0, y: 30 },
+                        visible: {
+                            opacity: 1,
+                            y: 0,
+                            transition: {
+                                duration: 0.7,
+                                ease: "easeOut",
+                                staggerChildren: 0.2,
+                                delayChildren: 0.2,
+                            },
+                        },
+                    }}
+                    className="mb-8"
+                >
                     <h2 className="font-bold text-2xl text-white capitalize mb-4">
                         Our Locations
                     </h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
-                        {offices.slice(0, 3).map((office) => (
-                            <LocationCard key={office.id} {...office} />
+                        {offices.slice(0, 3).map((office, index) => (
+                            <motion.div
+                                key={office.id}
+                                variants={fadeUpVariants}
+                                custom={index}
+                            >
+                                <LocationCard {...office} />
+                            </motion.div>
                         ))}
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {offices.slice(3).map((office) => (
-                            <LocationCard key={office.id} {...office} />
+                        {offices.slice(3).map((office, index) => (
+                            <motion.div
+                                key={office.id}
+                                variants={fadeUpVariants}
+                                custom={index + 3}
+                            >
+                                <LocationCard {...office} />
+                            </motion.div>
                         ))}
                     </div>
-                </div>
+                </motion.div>
             </div>
         </div>
     );

@@ -10,6 +10,7 @@ import ApplicationTypeButton from "@/components/checklist/ApplicationTypeButton"
 import VisaOption from "@/components/checklist/VisaOption";
 import ArrowDownIcon from "@/components/icons/ArrowDown";
 import TitleDescription from "@/components/common/TitleDescription";
+import { fadeUpVariants } from "@/utils/animation-variant";
 
 const ENQUIRY_OPTIONS = [
     {
@@ -54,19 +55,6 @@ const DocumentsChecklistsPage: React.FC = () => {
     >("individual");
     const [selectedVisaCategory, setSelectedVisaCategory] =
         useState<string>("");
-
-    const fadeUpVariants: Variants = {
-        hidden: { opacity: 0, y: 40 },
-        visible: (custom) => ({
-            opacity: 1,
-            y: 0,
-            transition: {
-                duration: 0.6,
-                ease: [0.25, 0.1, 0.25, 1], // Use easing array (cubic-bezier equivalent to easeOut)
-                delay: custom * 0.15, // use custom for delay control
-            },
-        }),
-    };
 
     return (
         <div className="container-1200">
