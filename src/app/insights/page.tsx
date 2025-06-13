@@ -1,8 +1,11 @@
+"use client";
+
 import TitleDescription from "@/components/common/TitleDescription";
 import VisaCard from "@/components/layout/VisaCard";
+import { motion } from "framer-motion";
 import React from "react";
 
-function page() {
+function Page() {
     const visaTypes = [
         {
             title: "Student Visa",
@@ -49,13 +52,30 @@ function page() {
                     description="Stay informed with the latest news, reforms, and expert tips on Australian visas and migration."
                 />
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+
+            <motion.div
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+            >
                 {visaTypes.map((visa, index) => (
-                    <VisaCard visa={visa} key={index} />
+                    <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{
+                            duration: 0.5,
+                            delay: index * 0.1,
+                            ease: "easeOut",
+                        }}
+                    >
+                        <VisaCard visa={visa} />
+                    </motion.div>
                 ))}
-            </div>
+            </motion.div>
         </div>
     );
 }
 
-export default page;
+export default Page;

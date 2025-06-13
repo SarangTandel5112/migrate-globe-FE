@@ -5,9 +5,11 @@ import Link from "next/link";
 import MobileMenu from "./MobileMenu";
 import { navigationItems } from "@/constants/navigation";
 import CartIcon from "../icons/CartIcon";
+import { usePathname } from "next/navigation";
 
 function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const pathname = usePathname();
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -30,28 +32,37 @@ function Navbar() {
                     </Link>
                     {/* Desktop Navigation */}
                     <div className="hidden lg:flex gap-8 items-center self-stretch my-auto text-base font-medium whitespace-nowrap min-w-60 text-stone-500">
-                        {navigationItems.map((item) => (
-                            <Link
-                                key={item.name}
-                                href={item.href}
-                                className={`gap-2.5 self-stretch pb-1 my-auto ${
-                                    item.isActive
-                                        ? "border-b-2 border-solid border-b-mint-green text-neutrals-700"
-                                        : "text-neutrals hover:text-neutrals-700 transition-colors"
-                                }`}
-                            >
-                                {item.name}
-                            </Link>
-                        ))}
+                        {navigationItems.map((item) => {
+                            const isActive =
+                                item.href === "/"
+                                    ? pathname === "/"
+                                    : pathname.startsWith(item.href);
+                            return (
+                                <Link
+                                    key={item.name}
+                                    href={item.href}
+                                    className={`gap-2.5 self-stretch pb-1 my-auto ${
+                                        isActive
+                                            ? "border-b-2 border-solid border-b-mint-green text-neutrals-700"
+                                            : "text-neutrals hover:text-neutrals-700 transition-colors"
+                                    }`}
+                                >
+                                    {item.name}
+                                </Link>
+                            );
+                        })}
                     </div>
                     {/* Desktop Action Buttons */}
                     <div className="hidden lg:flex gap-6 items-center self-stretch my-auto min-w-60">
                         <button className="gap-2.5 self-stretch px-6 py-2 my-auto text-sm font-medium text-center text-white bg-navy-blue rounded-md">
                             Book a Consultation
                         </button>
-                        <button className="flex gap-2 items-center self-stretch my-auto w-6">
+                        <Link
+                            href="cart"
+                            className="flex gap-2 items-center self-stretch my-auto w-6"
+                        >
                             <CartIcon />
-                        </button>
+                        </Link>
                         <button className="gap-2.5 self-stretch px-6 py-2 my-auto text-sm font-medium text-center whitespace-nowrap rounded-md border border-solid border-neutrals-300 text-neutrals-700">
                             Login
                         </button>

@@ -82,16 +82,16 @@ export default function ZoomConsultation() {
             <div className="mb-8">
                 <button
                     onClick={() => router.back()}
-                    className="mb-8 flex items-center gap-2 text-[#263773] hover:opacity-75 transition-opacity"
+                    className="mb-8 flex items-center gap-2 text-navy-blue hover:opacity-75 transition-opacity"
                 >
                     <BackIcon />
-                    <span className="font-urbanist font-bold text-base text-[#263773] capitalize tracking-[0.2px]">
+                    <span className="font-urbanist font-bold text-base text-navy-blue capitalize tracking-[0.2px]">
                         Back
                     </span>
                 </button>
 
                 <div className="space-y-2">
-                    <h1 className="font-urbanist font-bold text-2xl text-[#263773] tracking-[0.608px]">
+                    <h1 className="font-urbanist font-bold text-2xl text-navy-blue tracking-[0.608px]">
                         Zoom consultation
                     </h1>
                     <p className="font-urbanist text-base text-[#515F8F] leading-6 tracking-[0.2px] capitalize max-w-2xl">
@@ -130,7 +130,7 @@ export default function ZoomConsultation() {
                                     {currentMonth}
                                 </h3>
 
-                                <button className="w-9 h-9 rounded-full bg-[#263773] flex items-center justify-center">
+                                <button className="w-9 h-9 rounded-full bg-navy-blue flex items-center justify-center">
                                     <svg
                                         width="9"
                                         height="15"
@@ -176,7 +176,7 @@ export default function ZoomConsultation() {
                                                 }
                                                 className={`relative w-12 h-12 flex items-center justify-center rounded-full text-lg font-urbanist tracking-[-0.274px] transition-all ${
                                                     day === selectedDate
-                                                        ? "bg-[#263773] text-white"
+                                                        ? "bg-navy-blue text-white"
                                                         : day >= 14 && day <= 30
                                                         ? "hover:bg-white text-[#333]"
                                                         : "text-[#696969] cursor-not-allowed"
@@ -184,7 +184,7 @@ export default function ZoomConsultation() {
                                                 disabled={day < 14}
                                             >
                                                 {day === 13 && (
-                                                    <div className="absolute bottom-1 right-1 w-1 h-1 bg-[#696969] rounded-full"></div>
+                                                    <div className="absolute bottom-1 right-1 w-1 h-1 bg-neutrals rounded-full"></div>
                                                 )}
                                                 {day >= 14 &&
                                                     day <= 30 &&
@@ -218,8 +218,8 @@ export default function ZoomConsultation() {
                                         onClick={() => setSelectedTime(time)}
                                         className={`flex-1 py-4 px-18 rounded-xl border text-lg font-urbanist leading-6 transition-all ${
                                             selectedTime === time
-                                                ? "bg-[#263773] text-white border-[#263773]"
-                                                : "bg-[#F7F8FD] text-[#333] border-[#D3D3D3] hover:border-[#263773]"
+                                                ? "bg-navy-blue text-white border-navy-blue"
+                                                : "bg-[#F7F8FD] text-[#333] border-[#D3D3D3] hover:border-navy-blue"
                                         }`}
                                     >
                                         {time}
@@ -254,7 +254,7 @@ export default function ZoomConsultation() {
                                     )
                                 }
                                 placeholder="Enter First Name"
-                                className="w-full py-2.5 px-3 rounded border border-[#D3D3D3] bg-[#F7F8FD] font-urbanist text-base tracking-[0.24px] placeholder:text-[#D3D3D3] focus:outline-none focus:border-[#263773]"
+                                className="w-full py-2.5 px-3 rounded border border-[#D3D3D3] bg-[#F7F8FD] font-urbanist text-base tracking-[0.24px] placeholder:text-[#D3D3D3] focus:outline-none focus:border-navy-blue"
                             />
                         </div>
 
@@ -273,7 +273,7 @@ export default function ZoomConsultation() {
                                     )
                                 }
                                 placeholder="Enter Last Name"
-                                className="w-full py-2.5 px-3 rounded border border-[#D3D3D3] bg-[#F7F8FD] font-urbanist text-base tracking-[0.24px] placeholder:text-[#D3D3D3] focus:outline-none focus:border-[#263773]"
+                                className="w-full py-2.5 px-3 rounded border border-[#D3D3D3] bg-[#F7F8FD] font-urbanist text-base tracking-[0.24px] placeholder:text-[#D3D3D3] focus:outline-none focus:border-navy-blue"
                             />
                         </div>
 
@@ -332,7 +332,7 @@ export default function ZoomConsultation() {
                                         )
                                     }
                                     placeholder="123 456 7890"
-                                    className="flex-1 py-2.5 px-4 border border-[#D3D3D3] bg-[#F7F8FD] rounded font-urbanist font-bold text-base text-[#C0C0C0] leading-6 focus:outline-none focus:border-[#263773]"
+                                    className="flex-1 py-2.5 px-4 border border-[#D3D3D3] bg-[#F7F8FD] rounded font-urbanist font-bold text-base text-[#C0C0C0] leading-6 focus:outline-none focus:border-navy-blue"
                                 />
                             </div>
                         </div>
@@ -351,7 +351,7 @@ export default function ZoomConsultation() {
                                             e.target.value
                                         )
                                     }
-                                    className="w-full py-2.5 px-3 rounded border border-[#D3D3D3] bg-[#F7F8FD] font-urbanist text-base tracking-[0.24px] text-[#D3D3D3] focus:outline-none focus:border-[#263773] appearance-none"
+                                    className="w-full py-2.5 px-3 rounded border border-[#D3D3D3] bg-[#F7F8FD] font-urbanist text-base tracking-[0.24px] text-[#D3D3D3] focus:outline-none focus:border-navy-blue appearance-none"
                                 >
                                     <option value="Australia">Australia</option>
                                     <option value="India">India</option>
@@ -385,7 +385,7 @@ export default function ZoomConsultation() {
                             disabled={!isFormValid}
                             className={`w-full h-10 rounded-md font-urbanist text-sm tracking-[0.46px] transition-all ${
                                 isFormValid
-                                    ? "bg-[#263773] text-white hover:bg-[#263773]/90"
+                                    ? "bg-navy-blue text-white hover:bg-navy-blue/90"
                                     : "bg-[#D3D3D3] text-[#696969] cursor-not-allowed"
                             }`}
                         >

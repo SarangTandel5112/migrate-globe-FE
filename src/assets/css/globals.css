@@ -33,3 +33,14 @@
     font-family: 'Urbanist', sans-serif;
   }
 }
+
+
+@media (min-width: 768px) {
+  .card-title {
+    min-height: calc(1.75rem * 2) !important;
+  }
+
+  .card-description {
+    min-height: calc(1.5rem * 3) !important;
+  }
+}

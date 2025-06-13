@@ -1,189 +1,177 @@
 "use client";
 import MyImage from "@/ui/myImage";
-import GoArrow from "@assets/images/GoArrow.svg";
-import Arrow from "@assets/images/Arrow.svg";
 import Grid from "@assets/images/Grid.svg";
 import Rows from "@assets/images/Rows.svg";
 import React, { useState } from "react";
+import PlaneIcon from "@assets/images/plane.svg";
+import FileIcon from "@assets/images/file.svg";
+import SearchFileIcon from "@assets/images/visa-search.svg";
+import ChartIcon from "@assets/images/chart-network.svg";
+import UmbrellaIcon from "@assets/images/Umbrella.svg";
+import ShakehandsIcon from "@assets/images/shakehands.svg";
+import VideoIcon from "@assets/images/Video.svg";
+import ToolIcon from "@assets/images/ToolBox.svg";
+import Boxlayout from "@/components/services/Boxlayout";
+import LineLayout from "@/components/services/LineLayout";
+import { motion } from "framer-motion";
 
 export default function Services() {
-  const services = [
-    {
-      title: "Smart Migration Plan (Buy Map)",
-      description:
-        "Create Your Personalized Migration Route With Our Interactive Planning Map.",
-      color: "bg-blue-100",
-      icon: "✈️",
-    },
-    {
-      title: "Buy Documents Checklists",
-      description:
-        "Get A Verified Checklist Tailored To Your Visa And Occupation. No Confusion. No Missing Docs.",
-      color: "bg-orange-100",
-      icon: "📄",
-    },
-    {
-      title: "Find Visa Options",
-      description:
-        "Explore Visa Types That Match Your Profile, Goals, And Timeline — Fast And Accurate.",
-      color: "bg-purple-100",
-      icon: "📄",
-    },
-    {
-      title: "Skill Assessment",
-      description:
-        "Check If Your Occupation Is Eligible And Buy The Step-By-Step Assessment Guide Instantly.",
-      color: "bg-green-100",
-      icon: "📋",
-    },
-    {
-      title: "Buy Cheapest Insurance",
-      description:
-        "Compare And Purchase Affordable Overseas Health Cover From Top Providers.",
-      color: "bg-red-100",
-      icon: "🌍",
-    },
-    {
-      title: "Zoom Consultations",
-      description:
-        "Get Expert Advice Face-To-Face — Online. Book A Call With Our Migration Consultants.",
-      color: "bg-yellow-100",
-      icon: "💻",
-    },
-    {
-      title: "Occupation Tracking Tool",
-      description:
-        "Track Updates On Your Occupation — Demand Trends, State Invites, And Policy Changes.",
-      color: "bg-gray-100",
-      icon: "🛠️",
-    },
-    {
-      title: "Admission & Course Change Advice",
-      description:
-        "Switching Your Course Or College? Get Guidance To Stay Compliant And Visa-Safe.",
-      color: "bg-green-200",
-      icon: "🧾",
-    },
-  ];
+    const services = [
+        {
+            title: "Smart Migration Plan (Buy Map)",
+            description:
+                "Create Your Personalized Migration Route With Our Interactive Planning Map.",
+            color: "bg-[#E0F3FF]",
+            icon: PlaneIcon,
+            link: "#",
+        },
+        {
+            title: "Buy Documents Checklists",
+            description:
+                "Get A Verified Checklist Tailored To Your Visa And Occupation. No Confusion. No Missing Docs.",
+            color: "bg-orange-100",
+            icon: FileIcon,
+            link: "/services/checklists",
+        },
+        {
+            title: "Find Visa Options",
+            description:
+                "Explore Visa Types That Match Your Profile, Goals, And Timeline — Fast And Accurate.",
+            color: "bg-purple-100",
+            icon: SearchFileIcon,
+            link: "/visa",
+        },
+        {
+            title: "Skill Assessment",
+            description:
+                "Check If Your Occupation Is Eligible And Buy The Step-By-Step Assessment Guide Instantly.",
+            color: "bg-green-100",
+            icon: ChartIcon,
+            link: "/services/skill-assessment",
+        },
+        {
+            title: "Buy Cheapest Insurance",
+            description:
+                "Compare And Purchase Affordable Overseas Health Cover From Top Providers.",
+            color: "bg-[#FFCBCB]",
+            icon: UmbrellaIcon,
+            link: "/insurance",
+        },
+        {
+            title: "Zoom Consultations",
+            description:
+                "Get Expert Advice Face-To-Face — Online. Book A Call With Our Migration Consultants.",
+            color: "bg-yellow-100",
+            icon: VideoIcon,
+            link: "/services/zoom-consultation",
+        },
+        {
+            title: "Occupation Tracking Tool",
+            description:
+                "Track Updates On Your Occupation — Demand Trends, State Invites, And Policy Changes.",
+            color: "bg-gray-100",
+            icon: ToolIcon,
+            link: "/services/occupation-tracking-tool",
+        },
+        {
+            title: "Admission & Course Change Advice",
+            description:
+                "Switching Your Course Or College? Get Guidance To Stay Compliant And Visa-Safe.",
+            color: "bg-green-200",
+            icon: ShakehandsIcon,
+            link: "#",
+        },
+    ];
 
-  const [displayCard, setDisplayCard] = useState(true);
-  return (
-    <>
-      <div className="container-1200 flex items-center justify-between mb-6">
-        <h1 className="text-heading1 text-navy-blue">Services We Offer</h1>
-        <div className="flex gap-1 border-2 border-white bg-white rounded-3xl p-2">
-          <button
-            onClick={() => setDisplayCard(false)}
-            className={`w-9 h-9 flex items-center justify-center rounded-3xl ${
-              !displayCard ? "bg-navy-blue" : ""
-            }`}
-          >
-            <MyImage
-              src={Rows}
-              alt="Rows"
-              className="max-w-[280px] mx-auto "
-              height="16"
-              width="16"
-            />
-          </button>
-          <button
-            onClick={() => setDisplayCard(true)}
-            className={`w-9 h-9 flex items-center justify-center rounded-3xl ${
-              displayCard ? "bg-navy-blue" : ""
-            }`}
-          >
-            <MyImage
-              src={Grid}
-              alt="Grid"
-              className="max-w-[280px] mx-auto bg-navy-blue"
-              height="16"
-              width="16"
-            />
-          </button>
-        </div>
-      </div>
-      <section className="py-3 blue-50 container-1200">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {displayCard &&
-            services.map((service, index) => (
-              <div
-                key={index}
-                className={`bg-white p-2 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200`}
-              >
-                <div
-                  className={`order-2 border-white p-2 rounded-xl ${service.color}`}
+    const [displayCard, setDisplayCard] = useState(true);
+    return (
+        <div className="container-1200">
+            <div className="flex items-center justify-between mb-6">
+                <h1 className="text-heading1 text-navy-blue">
+                    Services We Offer
+                </h1>
+                <div className="flex gap-1 bg-white rounded-3xl p-1">
+                    <button
+                        onClick={() => setDisplayCard(false)}
+                        className={`w-8 h-8 flex items-center justify-center rounded-3xl ${
+                            !displayCard ? "bg-navy-blue" : ""
+                        }`}
+                    >
+                        <MyImage
+                            src={Rows}
+                            alt="Rows"
+                            className="max-w-[280px] mx-auto "
+                            height="16"
+                            width="16"
+                        />
+                    </button>
+                    <button
+                        onClick={() => setDisplayCard(true)}
+                        className={`w-8 h-8 flex items-center justify-center rounded-3xl ${
+                            displayCard ? "bg-navy-blue" : ""
+                        }`}
+                    >
+                        <MyImage
+                            src={Grid}
+                            alt="Grid"
+                            className="max-w-[280px] mx-auto bg-navy-blue"
+                            height="16"
+                            width="16"
+                        />
+                    </button>
+                </div>
+            </div>
+            <section className="py-3">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, ease: "easeInOut" }}
+                    className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-[350px] sm:max-w-none mx-auto"
                 >
-                  <div className="top-4 left-4">
-                    <div className="w-8 h-8 bg-white border border-gray-300 rounded-full flex items-center justify-center shadow-sm">
-                      <span className="text-sm">{service.icon}</span>
-                    </div>
-                  </div>
-                  <div className="pt-5">
-                    <h3 className="text-heading2 text-gray-800 mb-2">
-                      {service.title}
-                    </h3>
-                    <p className="text-sm text-gray-700 leading-relaxed">
-                      {service.description}
-                    </p>
-                  </div>
-                </div>
-                <div className="mt-6 pb-1 flex justify-between">
-                  <button className="flex items-center text-sm font-medium text-gray-800 group">
-                    Learn more
-                  </button>
-                  <span className="ml-2 w-6 h-6 rounded-full bg-white border border-gray-300 flex items-center justify-center ">
-                    <MyImage
-                      src={Arrow}
-                      alt="Arrow"
-                      className="max-w-[280px] mx-auto"
-                      height="15"
-                      width="15"
-                    />
-                  </span>
-                </div>
-              </div>
-            ))}{" "}
-        </div>
+                    {displayCard &&
+                        services.map((service, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{
+                                    duration: 0.5,
+                                    delay: index * 0.1,
+                                    ease: "easeOut",
+                                }}
+                            >
+                                <Boxlayout key={index} service={service} />
+                            </motion.div>
+                        ))}
+                </motion.div>
 
-        <div className="rounded-xl border-4 border-white">
-          {!displayCard &&
-            services.map((service, index) => (
-              <div key={index}>
-                <div
-                  key={index}
-                  className="flex items-center gap-4 p-3 m-0 bg-white "
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, ease: "easeInOut" }}
+                    className="rounded-xl bg-white"
                 >
-                  <div
-                    className={`${service.color} w-10 h-10 flex items-center justify-center rounded-md ${service.icon}`}
-                  >
-                    {service.icon}
-                  </div>
-                  <div className="flex-1 ">
-                    <h3 className="font-semibold text-gray-800 text-base">
-                      {service.title}
-                    </h3>
-                    <p className="text-sm text-gray-500">
-                      {service.description}
-                    </p>
-                  </div>
-                  <span className="ml-2 w-6 h-6 rounded-full bg-navy-blue-150 border  flex items-center justify-center">
-                    <MyImage
-                      src={GoArrow}
-                      alt="Go Arrow"
-                      className="max-w-[280px] mx-auto"
-                      height="15"
-                      width="15"
-                    />
-                  </span>{" "}
-                </div>
-
-                {index < services.length - 1 && (
-                  <hr className="mx-3 border-t border-gray-200" />
-                )}
-              </div>
-            ))}
+                    {!displayCard &&
+                        services.map((service, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{
+                                    duration: 0.5,
+                                    delay: index * 0.1,
+                                    ease: "easeOut",
+                                }}
+                            >
+                                <LineLayout
+                                    service={service}
+                                    key={index}
+                                    isLast={index < services.length - 1}
+                                />
+                            </motion.div>
+                        ))}
+                </motion.div>
+            </section>
         </div>
-      </section>
-    </>
-  );
+    );
 }

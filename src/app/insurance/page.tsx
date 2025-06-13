@@ -146,7 +146,7 @@ const InsuranceComparisonPage: React.FC = () => {
                                             e.target.value
                                         )
                                     }
-                                    className="w-full px-3 py-2.5 bg-background-1 border border-neutrals-200 rounded text-base text-neutrals-200 appearance-none cursor-pointer focus:outline-none focus:border-navy-blue-300"
+                                    className="w-full px-3 py-2.5 bg-background-1 border border-neutrals-200 rounded text-base text-navy-blue appearance-none cursor-pointer focus:outline-none focus:border-navy-blue-300"
                                 >
                                     <option value="" disabled>
                                         Adults
@@ -190,7 +190,7 @@ const InsuranceComparisonPage: React.FC = () => {
                                             e.target.value
                                         )
                                     }
-                                    className="w-full px-3 py-2.5 bg-background-1 border border-neutrals-200 rounded text-base text-neutrals-200 appearance-none cursor-pointer focus:outline-none focus:border-navy-blue-300"
+                                    className="w-full px-3 py-2.5 bg-background-1 border border-neutrals-200 rounded text-base text-navy-blue appearance-none cursor-pointer focus:outline-none focus:border-navy-blue-300"
                                 >
                                     <option value="" disabled>
                                         Adults

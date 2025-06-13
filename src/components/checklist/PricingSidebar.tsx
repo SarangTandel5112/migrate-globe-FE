@@ -1,23 +1,26 @@
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 
 function PricingSidebar() {
     const router = useRouter();
 
     const handleBuyChecklist = () => {
-        // Handle purchase logic here
         console.log("Buy checklist clicked");
-        // Could redirect to cart or payment page
         router.push("/cart");
     };
 
     const handleBookConsultation = () => {
-        // Handle consultation booking
         console.log("Book consultation clicked");
-        // Could redirect to consultation booking page
         router.push("/zoom-consultation");
     };
+
     return (
-        <div className="md:w-72 lg:w-96">
+        <motion.div
+            className="md:w-72 lg:w-96"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+        >
             <div className="md:sticky md:top-8">
                 <div className="bg-white rounded-xl p-6 space-y-4">
                     {/* Product Title */}
@@ -51,24 +54,33 @@ function PricingSidebar() {
                     {/* Action Buttons */}
                     <div className="flex flex-col sm:flex-row md:flex-col gap-4">
                         {/* Buy Checklist Button */}
-                        <button
+                        <motion.button
                             onClick={handleBuyChecklist}
-                            className="w-full py-2 px-6 bg-navy-blue text-white rounded-md text-sm tracking-[0.46px] hover:bg-navy-blue/90 transition-colors"
+                            className="w-full py-2 px-6 bg-navy-blue text-white rounded-md text-sm tracking-[0.46px]"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            transition={{ type: "spring", stiffness: 300 }}
                         >
                             Buy checklist
-                        </button>
+                        </motion.button>
 
                         {/* Book Consultation Button */}
-                        <button
+                        <motion.button
                             onClick={handleBookConsultation}
-                            className="w-full py-2 px-6 border border-[#D3D3D3] text-navy-blue rounded-md text-sm tracking-[0.46px] hover:bg-[#F7F8FD] transition-colors"
+                            className="w-full py-2 px-6 border border-[#D3D3D3] text-navy-blue rounded-md text-sm tracking-[0.46px]"
+                            whileHover={{
+                                scale: 1.05,
+                                backgroundColor: "#F7F8FD",
+                            }}
+                            whileTap={{ scale: 0.95 }}
+                            transition={{ type: "spring", stiffness: 300 }}
                         >
                             Book a Consultation
-                        </button>
+                        </motion.button>
                     </div>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 }
 

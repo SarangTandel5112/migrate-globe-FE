@@ -1,6 +1,9 @@
+"use client";
+
 import CommonCard from "@/components/layout/CommonCard";
 import TitleDescription from "@/components/common/TitleDescription";
 import React from "react";
+import { motion } from "framer-motion";
 
 function page() {
     const visaTypes = [
@@ -51,20 +54,36 @@ function page() {
                 with family, or exploring new destinations."
                 />
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+            <motion.div
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+            >
                 {visaTypes.map((visa, index) => (
                     // <VisaCard visa={visa} key={index} />
-                    <CommonCard
-                        image={{ src: "/india.png", alt: visa.title }}
-                        title={visa.title}
+                    <motion.div
                         key={index}
-                        description={visa.description}
-                        // wrapperClassName="hover:scale-105"
-                        wrapperClassName="shadow-sm border-gray-200 hover:shadow-md"
-                        link={{ href: "#", label: "Get Details" }}
-                    />
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{
+                            duration: 0.5,
+                            delay: index * 0.1,
+                            ease: "easeOut",
+                        }}
+                    >
+                        <CommonCard
+                            image={{ src: "/india.png", alt: visa.title }}
+                            title={visa.title}
+                            key={index}
+                            description={visa.description}
+                            // wrapperClassName="hover:scale-105"
+                            wrapperClassName="shadow-sm border-gray-200 hover:shadow-md"
+                            link={{ href: "visa/2", label: "Get Details" }}
+                        />
+                    </motion.div>
                 ))}
-            </div>
+            </motion.div>
         </div>
     );
 }
