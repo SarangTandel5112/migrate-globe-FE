@@ -79,7 +79,7 @@ function page() {
                             description={visa.description}
                             // wrapperClassName="hover:scale-105"
                             wrapperClassName="shadow-sm border-gray-200 hover:shadow-md"
-                            link={{ href: "#", label: "Get Details" }}
+                            link={{ href: "visa/2", label: "Get Details" }}
                         />
                     </motion.div>
                 ))}
