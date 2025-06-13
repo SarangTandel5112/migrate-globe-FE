@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import BackIcon from "@/components/icons/BackIcon";
 import UserIcon from "@/components/icons/UserIcon";
 import BreifCaseIcon from "@/components/icons/BreifCaseIcon";

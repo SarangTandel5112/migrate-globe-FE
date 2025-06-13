@@ -41,10 +41,10 @@ export default function CommonCard({
             {/* Content block with flex-grow for spacing */}
             <div className={`p-4 flex flex-col flex-1 ${contentClassName}`}>
                 <div className="flex-1 flex flex-col gap-2">
-                    <h3 className="text-description1 font-semibold text-left text-navy-blue">
+                    <h3 className="text-heading2 font-semibold text-left text-navy-blue">
                         {title}
                     </h3>
-                    <p className="text-sm text-navy-blue-400 line-clamp-2 min-h-[calc(1.5rem*2)]">
+                    <p className="text-sm md:text-base text-navy-blue-400 line-clamp-2 min-h-[calc(1.5rem*2)]">
                         {description}
                     </p>
                 </div>

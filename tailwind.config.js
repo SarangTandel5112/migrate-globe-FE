@@ -92,6 +92,12 @@ module.exports = {
       fontFamily: {
         urbanist: ['Urbanist', 'sans-serif'],
       },
+      minHeight: {
+        'title-sm': '1.5rem',     // 1.5rem * 2 = 48px
+        'title-md': '2rem',   // 1.75rem * 2 = 56px
+        'desc-sm': '3.9rem',    // 1.3rem * 3 ≈ 62px
+        'desc-md': '4.5rem',    // 1.5rem * 3 = 72px
+      },
     },
   },
   plugins: [
