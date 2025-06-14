@@ -98,6 +98,9 @@ module.exports = {
         'desc-sm': '3.9rem',    // 1.3rem * 3 ≈ 62px
         'desc-md': '4.5rem',    // 1.5rem * 3 = 72px
       },
+      gridTemplateColumns: {
+        24: 'repeat(24, minmax(0, 1fr))',
+      },
     },
   },
   plugins: [
