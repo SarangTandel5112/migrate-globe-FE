@@ -6,7 +6,7 @@ import BlogsCards from "@components/dashboard/blogs-cards";
 export default function HeroSection() {
     return (
         <section className="py-16 relative">
-            <div className="container mx-auto px-4 text-center">
+            <div className="text-center">
                 <h1 className="text-navy-blue font-normal text-3xl md:text-4xl lg:text-6xl">
                     Planning To Move To
                     <span className="font-bold"> Australia?</span>
