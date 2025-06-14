@@ -1,15 +1,13 @@
 import React from "react";
-import MyImage from "@/ui/myImage";
-import Icon1 from "@assets/images/checklist.png";
+import Lottie from "lottie-react";
+import animationData from "@assets/vlogger.json";
 
 const features = [
     {
         icon: (
-            <MyImage
-                src={Icon1}
-                alt="icon1"
-                className="text-3xl text-blue-600"
-            />
+            <div className="h-[70px] w-[70px]">
+                <Lottie animationData={animationData} loop={true} />
+            </div>
         ),
         title: "Buy Documents Checklists",
         description:
@@ -18,13 +16,9 @@ const features = [
     },
     {
         icon: (
-            <MyImage
-                src={Icon1}
-                alt="icon1"
-                height={220}
-                width={220}
-                className="text-3xl text-blue-600"
-            />
+            <div className="h-[200px] w-[200px]">
+                <Lottie animationData={animationData} loop={true} />
+            </div>
         ),
         title: "Skill Assessment",
         description:
@@ -33,11 +27,9 @@ const features = [
     },
     {
         icon: (
-            <MyImage
-                src={Icon1}
-                alt="icon1"
-                className="text-3xl text-blue-600"
-            />
+            <div className="h-[70px] w-[70px]">
+                <Lottie animationData={animationData} loop={true} />
+            </div>
         ),
         title: "Buy Cheapest Insurance",
         description:
@@ -46,11 +38,9 @@ const features = [
     },
     {
         icon: (
-            <MyImage
-                src={Icon1}
-                alt="icon1"
-                className="text-3xl text-blue-600"
-            />
+            <div className="h-[70px] w-[70px]">
+                <Lottie animationData={animationData} loop={true} />
+            </div>
         ),
         title: "Smart Migration Plan",
         description:
@@ -59,11 +49,9 @@ const features = [
     },
     {
         icon: (
-            <MyImage
-                src={Icon1}
-                alt="icon1"
-                className="text-3xl text-blue-600"
-            />
+            <div className="h-[70px] w-[70px]">
+                <Lottie animationData={animationData} loop={true} />
+            </div>
         ),
         title: "Occupation Tracking Tool",
         description:
@@ -72,11 +60,9 @@ const features = [
     },
     {
         icon: (
-            <MyImage
-                src={Icon1}
-                alt="icon1"
-                className="text-3xl text-blue-600"
-            />
+            <div className="h-[70px] w-[70px]">
+                <Lottie animationData={animationData} loop={true} />
+            </div>
         ),
         title: "Find Visa Options",
         description:
@@ -85,11 +71,9 @@ const features = [
     },
     {
         icon: (
-            <MyImage
-                src={Icon1}
-                alt="icon1"
-                className="text-3xl text-blue-600"
-            />
+            <div className="h-[70px] w-[70px]">
+                <Lottie animationData={animationData} loop={true} />
+            </div>
         ),
         title: "Zoom Consultations",
         description:
@@ -119,7 +103,7 @@ const features = [
 
 export default function FeatureGrid() {
     return (
-        <div className="py-10">
+        <div className="py-10 px-6 pt-[160px]">
             <div className="grid grid-cols-24 grid-rows-3 lg:grid-rows-2 gap-4 auto-rows-fr">
                 {features.map((item, i) => (
                     <div
