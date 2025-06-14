@@ -52,16 +52,19 @@ export default function CartSummary() {
 
     return (
         <div className="flex-1 space-y-4">
-            <AnimatePresence>
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+            >
                 {cartItems.map((item, index) => (
                     <motion.div
-                        key={item.id}
+                        key={index}
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
                         transition={{
-                            duration: 0.7,
-                            delay: index * 0.1, // <- stagger by index
+                            duration: 0.5,
+                            delay: index * 0.1,
                             ease: "easeOut",
                         }}
                         className={`rounded-lg p-4 flex items-start gap-3 ${
@@ -148,7 +151,7 @@ export default function CartSummary() {
                         </div>
                     </motion.div>
                 ))}
-            </AnimatePresence>
+            </motion.div>
         </div>
     );
 }

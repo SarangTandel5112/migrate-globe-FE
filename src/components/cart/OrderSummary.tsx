@@ -15,12 +15,11 @@ function OrderSummary({
 }) {
     return (
         <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
             className="md:w-72 lg:w-96"
         >
-            {" "}
             <div className="md:sticky md:top-8 bg-neutrals-0 rounded-xl p-6 space-y-4">
                 <h2 className="font-bold text-base text-neutrals-700 leading-6 tracking-[0.2px] capitalize">
                     Order Summary
