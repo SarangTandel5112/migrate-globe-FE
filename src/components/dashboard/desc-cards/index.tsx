@@ -1,6 +1,7 @@
 import React from "react";
 import Lottie from "lottie-react";
 import animationData from "@assets/vlogger.json";
+import { motion } from "framer-motion";
 
 const features = [
     {
@@ -82,32 +83,27 @@ const features = [
     },
 ];
 
-// export default function FeatureGrid() {
-//     return (
-//         <div className="bg-[#6E85DC] py-10 px-4">
-//             <div className="max-w-7xl mx-auto grid grid-cols-5 grid-rows-2 gap-4 auto-rows-fr">
-//                 {features.map((item, i) => (
-//                     <div
-//                         key={i}
-//                         className={`bg-white p-5 rounded-xl shadow-md flex flex-col gap-2 ${item.span}`}
-//                     >
-//                         <div className="text-2xl">{item.icon}</div>
-//                         <h3 className="font-semibold text-neutrals-700">{item.title}</h3>
-//                         <p className="text-sm text-neutrals">{item.description}</p>
-//                     </div>
-//                 ))}
-//             </div>
-//         </div>
-//     );
-// }
-
 export default function FeatureGrid() {
     return (
-        <div className="py-10 px-6 pt-[160px]">
-            <div className="grid grid-cols-24 grid-rows-3 lg:grid-rows-2 gap-4 auto-rows-fr">
+        <div className="py-10 px-6 md:pt-[100px] lg:pt-[160px]">
+            <motion.div
+                className="grid grid-cols-24 grid-rows-3 lg:grid-rows-2 gap-4 auto-rows-fr"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+                viewport={{ once: true, amount: 0.2 }} // 👈 triggers when 20% visible
+            >
                 {features.map((item, i) => (
-                    <div
+                    <motion.div
                         key={i}
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{
+                            duration: 0.5,
+                            delay: i * 0.1,
+                            ease: "easeOut",
+                        }}
+                        viewport={{ once: true, amount: 0.2 }} // 👈 apply here as well
                         className={`bg-white p-4 rounded-xl shadow-md flex flex-col gap-2 ${item.span}`}
                     >
                         <div className="text-2xl">{item.icon}</div>
@@ -119,9 +115,9 @@ export default function FeatureGrid() {
                                 {item.description}
                             </p>
                         </div>
-                    </div>
+                    </motion.div>
                 ))}
-            </div>
+            </motion.div>
         </div>
     );
 }
