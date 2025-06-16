@@ -1,3 +1,8 @@
+import DownloadIcon from "../icons/DownloadIcon";
+import EyeIcon from "../icons/EyeIcon";
+import FileIcon from "../icons/FileIcon";
+import FileInvoiceIcon from "../icons/FileInvoice";
+
 const documents = [
     {
         title: "Subclass 858 (Global Talent Visa - Permanent) Check List",
@@ -25,7 +30,7 @@ const documents = [
     },
 ];
 
-const ActionButton = ({ icon, className = "bg-navy-blue-500" }: any) => (
+const ActionButton = ({ icon, className = "bg-navy-blue" }: any) => (
     <button
         className={`p-1 rounded ${className} text-white hover:opacity-90 transition-opacity`}
     >
@@ -36,7 +41,7 @@ const ActionButton = ({ icon, className = "bg-navy-blue-500" }: any) => (
 function PurchaseTab() {
     return (
         <div>
-            <h2 className=" font-bold text-2xl text-neutrals-700 capitalize mb-6">
+            <h2 className="font-bold text-heading1 text-neutrals-700 capitalize mb-6">
                 My Purchase
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -44,25 +49,21 @@ function PurchaseTab() {
                     <div className="bg-background-1 rounded-lg p-4 flex gap-4">
                         <div className="relative flex-shrink-0">
                             <div className="w-12 h-12 bg-mint-green-50 rounded-full flex items-center justify-center">
-                                {/* <FileText className="w-6 h-6 text-navy-blue-500" /> */}
+                                <FileIcon className="text-navy-blue-500" />
                             </div>
                         </div>
                         <div className="flex-1 min-w-0">
-                            <h3 className=" font-semibold text-sm text-neutrals-700 mb-1 leading-tight">
+                            <h3 className=" font-semibold text-base text-neutrals-700 mb-1 leading-tight">
                                 {title}
                             </h3>
-                            <p className=" text-xs text-neutrals-500 mb-4">
+                            <p className=" text-sm text-neutrals mb-4">
                                 {date}
                             </p>
                             <div className="flex gap-6">
                                 <div className="flex gap-6">
-                                    {/* <ActionButton icon={<Eye className="w-4 h-4" />} />
-                        <ActionButton icon={<FileText className="w-4 h-4" />} />
-                        <ActionButton icon={<Download className="w-4 h-4" />} /> */}
-
-                                    <ActionButton />
-                                    <ActionButton />
-                                    <ActionButton />
+                                    <ActionButton icon={<EyeIcon />} />
+                                    <ActionButton icon={<FileInvoiceIcon />} />
+                                    <ActionButton icon={<DownloadIcon />} />
                                 </div>
                             </div>
                         </div>

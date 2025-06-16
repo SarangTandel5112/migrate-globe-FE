@@ -15,7 +15,7 @@ function ProfileTab() {
                 <InputField label="City" placeholder="Enter Last Name" />
             </div>
             <div className="flex justify-end">
-                <button className="bg-navy-blue-500 text-white px-6 py-2.5 rounded  text-sm font-medium tracking-wide hover:bg-navy-blue-600 transition-colors">
+                <button className="bg-navy-blue text-white px-20 py-3 rounded  text-sm font-medium tracking-wide hover:bg-navy-blue-600 transition-colors">
                     Save
                 </button>
             </div>
