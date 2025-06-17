@@ -4,7 +4,7 @@ import RahulImg from "@assets/images/rahul.png";
 function Testimonials() {
     return (
         <div className="container-1200">
-            <h2 className="text-center text-navy-blue text-2xl font-semibold mb-8">
+            <h2 className="text-center text-navy-blue text-heading-large font-semibold mb-8">
                 What Our Clients Says
             </h2>
             <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 flex flex-col md:flex-row gap-6">
@@ -32,11 +32,11 @@ function Testimonials() {
                     </div>
 
                     {/* Middle Content */}
-                    <div className="flex-1">
-                        <h3 className="text-xl font-semibold text-navy-blue mb-4 leading-snug">
+                    <div className="">
+                        <h3 className="text-heading-large2 font-semibold text-navy-blue mb-4 leading-snug">
                             Landing My Dream Job In Australia – Stress-Free!
                         </h3>
-                        <p className="text-sm text-gray-600 leading-relaxed">
+                        <p className="text-base text-gray-600 leading-relaxed">
                             MigrateGlobe made the entire visa process crystal
                             clear. I used their visa points calculator and
                             instantly knew I was eligible for Subclass 189.

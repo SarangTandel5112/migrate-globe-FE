@@ -121,6 +121,19 @@ module.exports = {
             fontSize: '36px',
           },
         },
+        '.text-heading-large2': {
+          fontSize: '20px', // Default (mobile)
+          // lineHeight: '120%',
+          fontWeight: '600',
+          // letterSpacing: '-0.02em',
+          // fontFamily: theme('fontFamily.space-grotesk').join(', '),
+          '@screen md': {
+            fontSize: '24px',
+          },
+          '@screen lg': {
+            fontSize: '30px',
+          },
+        },
         '.text-heading1': {
           fontSize: '16px', // Default (mobile)
           // lineHeight: '120%',

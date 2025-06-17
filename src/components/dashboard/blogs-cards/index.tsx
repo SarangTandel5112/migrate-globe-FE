@@ -22,7 +22,7 @@ const BlogsCards = () => {
     ];
     return (
         <section className="container-1200">
-            <h2 className="text-center text-2xl md:text-3xl font-semibold text-navy-blue mb-10">
+            <h2 className="text-center text-heading-large md:text-3xl font-semibold text-navy-blue mb-10">
                 From Our Blog
             </h2>
 

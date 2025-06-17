@@ -7,7 +7,7 @@ const VisaCalculatorSection = () => {
     return (
         <section className="container-1200">
             {/* Top Section: Visa Calculator */}
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr_auto] gap-10 py-4 md:py-8 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr_auto] gap-10 items-center">
                 {/* Left Column: Text & CTA */}
                 <div className="text-navy-blue flex gap-3 flex-col-reverse sm:flex-row">
                     <div>
