@@ -98,6 +98,9 @@ module.exports = {
         'desc-sm': '3.9rem',    // 1.3rem * 3 ≈ 62px
         'desc-md': '4.5rem',    // 1.5rem * 3 = 72px
       },
+      gridTemplateColumns: {
+        24: 'repeat(24, minmax(0, 1fr))',
+      },
     },
   },
   plugins: [
@@ -105,6 +108,32 @@ module.exports = {
     plugin(function ({ addUtilities, addComponents }) {
 
       addComponents({
+        '.text-heading-large': {
+          fontSize: '24px', // Default (mobile)
+          // lineHeight: '120%',
+          fontWeight: '600',
+          // letterSpacing: '-0.02em',
+          // fontFamily: theme('fontFamily.space-grotesk').join(', '),
+          '@screen md': {
+            fontSize: '30px',
+          },
+          '@screen lg': {
+            fontSize: '36px',
+          },
+        },
+        '.text-heading-large2': {
+          fontSize: '20px', // Default (mobile)
+          // lineHeight: '120%',
+          fontWeight: '600',
+          // letterSpacing: '-0.02em',
+          // fontFamily: theme('fontFamily.space-grotesk').join(', '),
+          '@screen md': {
+            fontSize: '24px',
+          },
+          '@screen lg': {
+            fontSize: '30px',
+          },
+        },
         '.text-heading1': {
           fontSize: '16px', // Default (mobile)
           // lineHeight: '120%',

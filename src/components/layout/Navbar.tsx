@@ -58,7 +58,7 @@ function Navbar() {
                             Book a Consultation
                         </button>
                         <Link
-                            href="cart"
+                            href="/cart"
                             className="flex gap-2 items-center self-stretch my-auto w-6"
                         >
                             <CartIcon />
