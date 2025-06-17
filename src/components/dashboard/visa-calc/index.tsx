@@ -1,33 +1,40 @@
 "use client";
 import MyImage from "@/ui/myImage";
-import Illustration from "@assets/images/Illustration.svg";
-import RightIcon from "@assets/images/right-icon.svg";
-import RahulImg from "@assets/images/rahul.png";
+import Illustration from "@assets/images/visa_calculator.svg";
 import { motion } from "framer-motion";
 
 const VisaCalculatorSection = () => {
     return (
-        <section className="py-12 px-4 lg:px-0">
+        <section className="container-1200">
             {/* Top Section: Visa Calculator */}
-            <div className="container-1200 grid grid-cols-1 lg:grid-cols-[1fr_1.2fr_auto] gap-10 py-16 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr_auto] gap-10 py-4 md:py-8 items-center">
                 {/* Left Column: Text & CTA */}
-                <div className="text-navy-blue">
-                    <h2 className="text-heading-large font-semibold mb-4">
-                        Visa Calculator
-                    </h2>
-                    <p className="text-description1 leading-relaxed mb-6">
-                        Use our free points calculator to check your eligibility
-                        under Subclass 189, 190, or 491 visas. Find out if
-                        you're eligible for Australian PR.
-                    </p>
-                    <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        transition={{ type: "spring", stiffness: 300 }}
-                        className="bg-navy-blue text-navy-blue text-white px-6 py-2 rounded-md text-sm hover:bg-[#1f2e59] transition"
-                    >
-                        Start Calculator
-                    </motion.button>
+                <div className="text-navy-blue flex gap-3 flex-col-reverse sm:flex-row">
+                    <div>
+                        <h2 className="text-heading-large font-semibold mb-4">
+                            Visa Calculator
+                        </h2>
+                        <p className="text-description1 leading-relaxed mb-6">
+                            Use our free points calculator to check your
+                            eligibility under Subclass 189, 190, or 491 visas.
+                            Find out if you're eligible for Australian PR.
+                        </p>
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            transition={{ type: "spring", stiffness: 300 }}
+                            className="w-full sm:w-auto bg-navy-blue text-navy-blue text-white px-6 py-2 rounded-md text-sm hover:bg-[#1f2e59] transition"
+                        >
+                            Start Calculator
+                        </motion.button>
+                    </div>
+                    <div className="block lg:hidden">
+                        <MyImage
+                            src={Illustration}
+                            alt="Visa Calculator Illustration"
+                            className="max-w-[280px] mx-auto"
+                        />
+                    </div>
                 </div>
 
                 {/* Middle Column: Grid of Cards */}
@@ -72,79 +79,12 @@ const VisaCalculatorSection = () => {
                 </div>
 
                 {/* Right Column: SVG Illustration */}
-                <div className="">
+                <div className="hidden lg:block">
                     <MyImage
                         src={Illustration}
                         alt="Visa Calculator Illustration"
                         className="max-w-[280px] mx-auto"
                     />
-                </div>
-            </div>
-
-            {/* Bottom Section: Testimonials */}
-            <div className="container-1200">
-                <h2 className="text-center text-navy-blue text-2xl font-semibold mb-8">
-                    What Our Clients Says
-                </h2>
-                <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 flex flex-col md:flex-row gap-6">
-                    {/* Left: Client Image + Label */}
-                    <div className="w-full md:w-[320px] flex-shrink-0 flex flex-col items-center bg-[#FADADA] rounded-xl p-4 relative">
-                        <MyImage
-                            src={RahulImg}
-                            alt="Rahul Mehra"
-                            className="rounded-xl w-full object-cover"
-                        />
-                        <div className="bg-white px-3 py-1 rounded-md text-xs mt-3 text-navy-blue text-center shadow">
-                            Rahul Mehra
-                            <br />
-                            Skilled Independent Visa – Subclass 189
-                        </div>
-                    </div>
-
-                    {/* Right: Text & Arrows */}
-                    <div className="flex flex-col text-left justify-between w-full">
-                        {/* Top Label */}
-                        <div>
-                            <p className="text-sm text-gray-500 uppercase tracking-wide font-medium mb-2">
-                                // Success Stories
-                            </p>
-                        </div>
-
-                        {/* Middle Content */}
-                        <div className="flex-1">
-                            <h3 className="text-xl font-semibold text-navy-blue mb-4 leading-snug">
-                                Landing My Dream Job In Australia – Stress-Free!
-                            </h3>
-                            <p className="text-sm text-gray-600 leading-relaxed">
-                                MigrateGlobe made the entire visa process
-                                crystal clear. I used their visa points
-                                calculator and instantly knew I was eligible for
-                                Subclass 189. Their team helped fine-tune my
-                                documentation and guided me through every
-                                government touchpoint. Today, I'm living and
-                                working in Sydney as a Data Analyst — all thanks
-                                to them!
-                            </p>
-                        </div>
-
-                        {/* Bottom Arrows */}
-                        <div className="flex justify-end gap-3 mt-6">
-                            <button className="w-10 h-10 rounded-full bg-[#f0f1f7] flex items-center justify-center">
-                                <MyImage
-                                    src={RightIcon}
-                                    alt="left-icon"
-                                    className="rotate-180 w-3 h-3"
-                                />
-                            </button>
-                            <button className="w-10 h-10 rounded-full bg-navy-blue text-white flex items-center justify-center">
-                                <MyImage
-                                    src={RightIcon}
-                                    alt="right-icon"
-                                    className="w-3 h-3"
-                                />
-                            </button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
