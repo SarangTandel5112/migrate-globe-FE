@@ -1,7 +1,9 @@
+"use client";
 import MyImage from "@/ui/myImage";
 import Illustration from "@assets/images/Illustration.svg";
 import RightIcon from "@assets/images/right-icon.svg";
 import RahulImg from "@assets/images/rahul.png";
+import { motion } from "framer-motion";
 
 const VisaCalculatorSection = () => {
     return (
@@ -10,24 +12,31 @@ const VisaCalculatorSection = () => {
             <div className="container-1200 grid grid-cols-1 lg:grid-cols-[1fr_1.2fr_auto] gap-10 py-16 items-center">
                 {/* Left Column: Text & CTA */}
                 <div className="text-navy-blue">
-                    <h2 className="text-3xl font-semibold mb-4">
+                    <h2 className="text-heading-large font-semibold mb-4">
                         Visa Calculator
                     </h2>
-                    <p className="text-sm leading-relaxed mb-6">
+                    <p className="text-description1 leading-relaxed mb-6">
                         Use our free points calculator to check your eligibility
                         under Subclass 189, 190, or 491 visas. Find out if
                         you're eligible for Australian PR.
                     </p>
-                    <button className="bg-navy-blue text-navy-blue text-white px-6 py-2 rounded-md text-sm hover:bg-[#1f2e59] transition">
+                    <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={{ type: "spring", stiffness: 300 }}
+                        className="bg-navy-blue text-navy-blue text-white px-6 py-2 rounded-md text-sm hover:bg-[#1f2e59] transition"
+                    >
                         Start Calculator
-                    </button>
+                    </motion.button>
                 </div>
 
                 {/* Middle Column: Grid of Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {/* Card 1 - How It Works */}
                     <div className="bg-white p-6 rounded-xl shadow-md text-navy-blue text-sm">
-                        <h3 className="font-semibold mb-3">How It Works</h3>
+                        <h3 className="font-semibold text-heading1 mb-6">
+                            How It Works
+                        </h3>
                         <ul className="space-y-2">
                             <li>
                                 <strong>Step 1:</strong> Choose Your Visa
@@ -46,7 +55,9 @@ const VisaCalculatorSection = () => {
 
                     {/* Card 2 - Who Is It For */}
                     <div className="bg-white p-6 rounded-xl shadow-md text-navy-blue text-sm">
-                        <h3 className="font-semibold mb-3">Who Is It For?</h3>
+                        <h3 className="font-semibold text-heading1 mb-6">
+                            Who Is It For?
+                        </h3>
                         <ul className="space-y-2">
                             <li>🎓 Recent Graduates</li>
                             <li>💼 Skilled Professionals</li>

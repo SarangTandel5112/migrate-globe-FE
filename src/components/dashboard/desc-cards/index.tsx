@@ -97,7 +97,7 @@ export default function FeatureGrid() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: "easeInOut" }}
-                viewport={{ once: true, amount: 0.2 }} // 👈 triggers when 20% visible
+                viewport={{ once: true, amount: 0.2 }}
             >
                 {features.map((item, i) => (
                     <motion.div

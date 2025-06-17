@@ -108,6 +108,19 @@ module.exports = {
     plugin(function ({ addUtilities, addComponents }) {
 
       addComponents({
+        '.text-heading-large': {
+          fontSize: '24px', // Default (mobile)
+          // lineHeight: '120%',
+          fontWeight: '600',
+          // letterSpacing: '-0.02em',
+          // fontFamily: theme('fontFamily.space-grotesk').join(', '),
+          '@screen md': {
+            fontSize: '30px',
+          },
+          '@screen lg': {
+            fontSize: '36px',
+          },
+        },
         '.text-heading1': {
           fontSize: '16px', // Default (mobile)
           // lineHeight: '120%',
