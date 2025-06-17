@@ -28,25 +28,6 @@ function VideosSection() {
                     description="Visa interviews can be stressful — avoid these common mistakes!"
                     link={{ href: "#", label: "Watch Now" }}
                 />
-                {/* {[
-                        "/thumb1.jpg",
-                        "/thumb2.jpg",
-                        "/thumb3.jpg",
-                    ].map((thumb, idx) => (
-                        <div key={idx} className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
-                            <div className="relative">
-                                <img src={thumb} alt="Video Thumbnail" className="w-full h-48 object-cover" />
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <img src="/play-icon.svg" alt="Play" className="w-12 h-12" />
-                                </div>
-                            </div>
-                            <div className="p-4">
-                                <h3 className="font-semibold text-base text-navy-blue">
-                                    Top 5 Mistakes To Avoid During Your Visa Interview
-                                </h3>
-                            </div>
-                        </div>
-                    ))} */}
             </div>
 
             {/* Pagination */}
