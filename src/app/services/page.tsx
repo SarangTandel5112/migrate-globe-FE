@@ -1,7 +1,4 @@
 "use client";
-import MyImage from "@/ui/myImage";
-import Grid from "@assets/images/Grid.svg";
-import Rows from "@assets/images/Rows.svg";
 import React, { useState } from "react";
 import PlaneIcon from "@assets/images/plane.svg";
 import FileIcon from "@assets/images/file.svg";
@@ -14,6 +11,8 @@ import ToolIcon from "@assets/images/ToolBox.svg";
 import Boxlayout from "@/components/services/Boxlayout";
 import LineLayout from "@/components/services/LineLayout";
 import { motion } from "framer-motion";
+import RowsIcon from "@/components/icons/RowsIcon";
+import GridIcon from "@/components/icons/GridIcon";
 
 export default function Services() {
     const services = [
@@ -97,13 +96,7 @@ export default function Services() {
                             !displayCard ? "bg-navy-blue" : ""
                         }`}
                     >
-                        <MyImage
-                            src={Rows}
-                            alt="Rows"
-                            className="max-w-[280px] mx-auto "
-                            height="16"
-                            width="16"
-                        />
+                        <RowsIcon color={!displayCard ? '#fff' : '#7D87AB'} />
                     </button>
                     <button
                         onClick={() => setDisplayCard(true)}
@@ -111,13 +104,7 @@ export default function Services() {
                             displayCard ? "bg-navy-blue" : ""
                         }`}
                     >
-                        <MyImage
-                            src={Grid}
-                            alt="Grid"
-                            className="max-w-[280px] mx-auto bg-navy-blue"
-                            height="16"
-                            width="16"
-                        />
+                        <GridIcon color={displayCard ? '#fff' : '#7D87AB'} />
                     </button>
                 </div>
             </div>
