@@ -1,9 +1,7 @@
 "use client";
-import * as React from "react";
 import Link from "next/link";
 import { useOutsideClick } from "@/hooks/useOutsideClick";
 import { navigationItems } from "@/constants/navigation";
-import Image from "next/image";
 import CartIcon from "../icons/CartIcon";
 
 interface MobileMenuProps {
