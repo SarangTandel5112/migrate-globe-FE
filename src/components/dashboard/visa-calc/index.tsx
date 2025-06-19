@@ -2,8 +2,11 @@
 import MyImage from "@/ui/myImage";
 import Illustration from "@assets/images/visa_calculator.svg";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const VisaCalculatorSection = () => {
+    const router = useRouter();
+
     return (
         <section className="container-1200">
             {/* Top Section: Visa Calculator */}
@@ -20,6 +23,9 @@ const VisaCalculatorSection = () => {
                             Find out if you&apos;re eligible for Australian PR.
                         </p>
                         <motion.button
+                            onClick={() =>
+                                router.push("/visa-points-calculator")
+                            }
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             transition={{ type: "spring", stiffness: 300 }}
