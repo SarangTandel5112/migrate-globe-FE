@@ -4,6 +4,7 @@ import React from "react";
 import { FooterLinkSection } from "../footer/FooterLinkSection";
 import { SocialIcons } from "../footer/SocialIcons";
 import { LegalLinksRow } from "../footer/LegalLinksRow";
+import Image from "next/image";
 
 const NAV_LINKS = [
     { href: "/", label: "Home" },
@@ -79,10 +80,12 @@ const Footer: React.FC = () => {
             <div className="container-1200 pb-4 md:pb-8 lg:pb-16">
                 <div className="flex flex-col gap-6 md:flex-row md:justify-between md:items-center">
                     <div className="flex items-center">
-                        <img
+                        <Image
                             src="/logo-white.svg"
-                            className="object-contain shrink-0 self-stretch my-auto rounded-none"
                             alt="Migrate Globe Logo"
+                            width={160}
+                            height={40}
+                            className="object-contain shrink-0 self-stretch my-auto rounded-none"
                         />
                     </div>
 

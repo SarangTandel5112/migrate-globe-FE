@@ -9,8 +9,9 @@ import ProfileTab from "@/components/profile/ProfileTab";
 import PurchaseTab from "@/components/profile/PurchaseTab";
 import TabButton from "@/components/profile/TabButton";
 import { useState } from "react";
+import Image from "next/image";
 
-function page() {
+export default function Page() {
     const [activeTab, setActiveTab] = useState("profile");
 
     return (
@@ -24,10 +25,12 @@ function page() {
                     </div>
                     <div className="w-100 -mt-12 z-10">
                         <div className="bg-white shadow-lg p-6 flex items-end gap-6 min-w-96">
-                            <div className="w-25 h-25 bg-gray-300 overflow-hidden">
-                                <img
+                            <div className="w-[100px] h-[100px] bg-gray-300 overflow-hidden">
+                                <Image
                                     src="/profile.png"
                                     alt="Belle Ferguson"
+                                    width={100}
+                                    height={100}
                                     className="w-full h-full object-cover relative"
                                 />
                             </div>
@@ -83,5 +86,3 @@ function page() {
         </div>
     );
 }
-
-export default page;

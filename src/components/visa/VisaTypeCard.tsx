@@ -1,25 +1,29 @@
-function VisaTypeCard({ type }: any) {
+interface VisaTypeCardProps {
+    active?: boolean;
+    title?: string;
+    description?: string;
+}
+
+function VisaTypeCard({ active, title, description }: VisaTypeCardProps) {
     return (
         <div
             className={`border px-4 py-3 rounded-lg w-full md:w-auto cursor-pointer transition-colors ${
-                type.active
-                    ? "bg-navy-blue"
-                    : "border-navy-blue bg-background-1"
+                active ? "bg-navy-blue" : "border-navy-blue bg-background-1"
             }`}
         >
             <h3
                 className={`text-base font-semibold ${
-                    type.active ? "text-neutrals-00" : "text-neutrals-700"
+                    active ? "text-neutrals-00" : "text-neutrals-700"
                 }`}
             >
-                {type.title}
+                {title}
             </h3>
             <p
                 className={`text-sm font-normal ${
-                    type.active ? "text-neutrals-100" : "text-neutrals"
+                    active ? "text-neutrals-100" : "text-neutrals"
                 }`}
             >
-                {type.description}
+                {description}
             </p>
         </div>
     );

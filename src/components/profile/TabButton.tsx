@@ -1,4 +1,11 @@
-const TabButton = ({ id, label, icon, isActive, onClick }: any) => (
+interface TabButtonProps {
+  id: string;
+  label: string;
+  icon: React.ReactNode;
+  isActive: boolean;
+  onClick: (id: string) => void;
+}
+const TabButton = ({ id, label, icon, isActive, onClick }: TabButtonProps) => (
     <button
         onClick={() => onClick(id)}
         className={`flex items-center gap-2 px-5 py-2.5 rounded-md  font-bold text-base tracking-wide transition-all ${

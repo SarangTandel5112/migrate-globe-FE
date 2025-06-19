@@ -30,7 +30,11 @@ const documents = [
     },
 ];
 
-const ActionButton = ({ icon, className = "bg-navy-blue" }: any) => (
+interface ActionButtonProps {
+    icon: React.ReactNode;
+    className?: string;
+}
+const ActionButton = ({ icon, className = "bg-navy-blue" }: ActionButtonProps) => (
     <button
         className={`p-1 rounded ${className} text-white hover:opacity-90 transition-opacity`}
     >
@@ -45,8 +49,8 @@ function PurchaseTab() {
                 My Purchase
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {documents.map(({ title, date }: any) => (
-                    <div className="bg-background-1 rounded-lg p-4 flex gap-4">
+                {documents.map(({ title, date }, idx) => (
+                    <div key={idx} className="bg-background-1 rounded-lg p-4 flex gap-4">
                         <div className="relative flex-shrink-0">
                             <div className="w-12 h-12 bg-mint-green-50 rounded-full flex items-center justify-center">
                                 <FileIcon className="text-navy-blue-500" />

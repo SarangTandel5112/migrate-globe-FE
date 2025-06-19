@@ -64,7 +64,11 @@ export default function Page() {
                 >
                     {visaTypes.map((type, index) => (
                         <motion.div key={index} variants={cardVariants}>
-                            <VisaTypeCard type={type} />
+                            <VisaTypeCard
+                                title={type.title}
+                                description={type.description}
+                                active={type.active}
+                            />
                         </motion.div>
                     ))}
                 </motion.div>

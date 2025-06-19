@@ -17,7 +17,7 @@ const VisaCalculatorSection = () => {
                         <p className="text-description1 leading-relaxed mb-6">
                             Use our free points calculator to check your
                             eligibility under Subclass 189, 190, or 491 visas.
-                            Find out if you're eligible for Australian PR.
+                            Find out if you&apos;re eligible for Australian PR.
                         </p>
                         <motion.button
                             whileHover={{ scale: 1.05 }}

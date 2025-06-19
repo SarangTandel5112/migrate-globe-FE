@@ -61,7 +61,6 @@ function page() {
                 transition={{ duration: 0.6, ease: "easeInOut" }}
             >
                 {visaTypes.map((visa, index) => (
-                    // <VisaCard visa={visa} key={index} />
                     <motion.div
                         key={index}
                         initial={{ opacity: 0, y: 30 }}

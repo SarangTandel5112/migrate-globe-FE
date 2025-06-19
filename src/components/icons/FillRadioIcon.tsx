@@ -1,4 +1,4 @@
-const FillRadioIcon = (props: any) => (
+const FillRadioIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         width={24}

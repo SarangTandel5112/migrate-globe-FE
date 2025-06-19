@@ -1,5 +1,5 @@
 import * as React from "react"
-const CalendarIcon = ({ color = '#7D87AB', width = 20, height = 20, className = '' }: any) => (
+const CalendarIcon = ({ color = '#7D87AB', width = 20, height = 20, className = '' }: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}

@@ -14,7 +14,7 @@ interface CartItem {
 }
 
 export default function Cart() {
-    const [cartItems, setCartItems] = useState<CartItem[]>([
+    const [cartItems] = useState<CartItem[]>([
         {
             id: "1",
             title: "Global Talent visa (subclass 858)",
@@ -40,8 +40,6 @@ export default function Cart() {
             selected: false,
         },
     ]);
-
-    const [couponCode, setCouponCode] = useState("");
 
     const selectedItems = cartItems.filter((item) => item.selected);
     const subtotal = selectedItems.reduce((sum, item) => sum + item.price, 0);

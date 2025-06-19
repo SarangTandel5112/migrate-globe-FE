@@ -140,7 +140,14 @@ export default function Services() {
                                     ease: "easeOut",
                                 }}
                             >
-                                <Boxlayout key={index} service={service} />
+                                <Boxlayout
+                                    key={index}
+                                    title={service.title}
+                                    description={service.description}
+                                    icon={service.icon}
+                                    color={service.color}
+                                    link={service.link}
+                                />
                             </motion.div>
                         ))}
                 </motion.div>

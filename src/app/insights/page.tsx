@@ -70,7 +70,10 @@ function Page() {
                             ease: "easeOut",
                         }}
                     >
-                        <VisaCard visa={visa} />
+                        <VisaCard
+                            title={visa.title}
+                            description={visa.description}
+                        />
                     </motion.div>
                 ))}
             </motion.div>
