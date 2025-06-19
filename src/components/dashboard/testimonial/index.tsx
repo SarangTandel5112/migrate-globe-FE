@@ -27,7 +27,7 @@ function Testimonials() {
                     {/* Top Label */}
                     <div>
                         <p className="text-sm text-gray-500 uppercase tracking-wide font-medium mb-2">
-                            // Success Stories
+                            {/* Success Stories */}
                         </p>
                     </div>
 
@@ -42,7 +42,7 @@ function Testimonials() {
                             instantly knew I was eligible for Subclass 189.
                             Their team helped fine-tune my documentation and
                             guided me through every government touchpoint.
-                            Today, I'm living and working in Sydney as a Data
+                            Today, I&apos;m living and working in Sydney as a Data
                             Analyst — all thanks to them!
                         </p>
                     </div>

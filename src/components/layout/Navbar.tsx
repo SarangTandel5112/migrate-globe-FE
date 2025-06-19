@@ -6,6 +6,7 @@ import MobileMenu from "./MobileMenu";
 import { navigationItems } from "@/constants/navigation";
 import CartIcon from "../icons/CartIcon";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -24,10 +25,12 @@ function Navbar() {
                         href="/"
                         className="flex gap-2 items-center self-stretch my-auto w-36 text-xl leading-5 text-green-300"
                     >
-                        <img
+                        <Image
                             src="/logo.svg"
-                            className="object-contain shrink-0 self-stretch my-auto rounded-none"
                             alt="Migrate Globe Logo"
+                            width={144}
+                            height={40}
+                            className="object-contain shrink-0 self-stretch my-auto rounded-none"
                         />
                     </Link>
                     {/* Desktop Navigation */}

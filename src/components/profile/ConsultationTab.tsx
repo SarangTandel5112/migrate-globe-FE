@@ -46,10 +46,12 @@ const consultations = [
     },
 ];
 
-const ActionButton = ({
-    icon,
-    className = "bg-navy-blue h-[26px] w-[26px]",
-}: any) => (
+interface ActionButtonProps {
+    icon: React.ReactNode;
+    className?: string;
+}
+
+const ActionButton = ({ icon, className = "bg-navy-blue h-[26px] w-[26px]" }: ActionButtonProps) => (
     <button
         className={`p-1 rounded ${className} text-white hover:opacity-90 transition-opacity`}
     >

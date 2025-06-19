@@ -1,12 +1,20 @@
 import BreifCaseIcon from "../icons/BreifCaseIcon";
 
+interface InputFieldProps {
+    label: string;
+    value?: string;
+    placeholder?: string;
+    type?: string;
+    className?: string;
+}
+
 const InputField = ({
     label,
     value,
     placeholder,
     type = "text",
     className = "",
-}: any) => (
+}: InputFieldProps) => (
     <div className="flex flex-col gap-2">
         <label className=" font-semibold text-sm text-neutrals capitalize tracking-wide">
             {label}

@@ -9,25 +9,36 @@ import ProfileTab from "@/components/profile/ProfileTab";
 import PurchaseTab from "@/components/profile/PurchaseTab";
 import TabButton from "@/components/profile/TabButton";
 import { useState } from "react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 
-function page() {
+export default function Page() {
     const [activeTab, setActiveTab] = useState("profile");
+
+    const fadeVariants = {
+        initial: { opacity: 0, y: 20 },
+        animate: { opacity: 1, y: 0 },
+        exit: { opacity: 0, y: -20 },
+    };
 
     return (
         <div className="container-1200">
-            {/* <ProfileDashboard /> */}
             <div className="flex flex-col gap-10">
-                {/* Header with gradient background */}
-                <div className="rounded-lg overflow-hidden">
-                    <div className="h-28 bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 relative">
-                        {/* Profile Card */}
-                    </div>
+                <motion.div
+                    className="rounded-lg overflow-hidden"
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <div className="h-28 bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 relative" />
                     <div className="w-100 -mt-12 z-10">
                         <div className="bg-white shadow-lg p-6 flex items-end gap-6 min-w-96">
-                            <div className="w-25 h-25 bg-gray-300 overflow-hidden">
-                                <img
+                            <div className="w-[100px] h-[100px] bg-gray-300 overflow-hidden">
+                                <Image
                                     src="/profile.png"
                                     alt="Belle Ferguson"
+                                    width={100}
+                                    height={100}
                                     className="w-full h-full object-cover relative"
                                 />
                             </div>
@@ -48,8 +59,15 @@ function page() {
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className="flex gap-0">
+                </motion.div>
+
+                <motion.div
+                    className="flex gap-0"
+                    initial="initial"
+                    animate="animate"
+                    variants={fadeVariants}
+                    transition={{ duration: 0.3, delay: 0.3 }}
+                >
                     <TabButton
                         id="profile"
                         label="Profile"
@@ -71,17 +89,24 @@ function page() {
                         isActive={activeTab === "consultation"}
                         onClick={setActiveTab}
                     />
-                </div>
-                <div className="bg-white rounded-2xl shadow-lg p-6">
-                    {activeTab === "profile" && <ProfileTab />}
+                </motion.div>
 
-                    {activeTab === "purchase" && <PurchaseTab />}
-
-                    {activeTab === "consultation" && <ConsultationTab />}
-                </div>
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        key={activeTab}
+                        className="bg-white rounded-2xl shadow-lg p-6"
+                        variants={fadeVariants}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
+                        transition={{ duration: 0.3 }}
+                    >
+                        {activeTab === "profile" && <ProfileTab />}
+                        {activeTab === "purchase" && <PurchaseTab />}
+                        {activeTab === "consultation" && <ConsultationTab />}
+                    </motion.div>
+                </AnimatePresence>
             </div>
         </div>
     );
 }
-
-export default page;

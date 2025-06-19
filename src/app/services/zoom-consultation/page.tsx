@@ -11,7 +11,7 @@ const daysInMonth = (month: number, year: number) => new Date(year, month + 1, 0
 
 export default function ZoomConsultation() {
     const router = useRouter();
-    const [selectedTime, setSelectedTime] = useState<string>("");
+    const [selectedTime] = useState<string>('');
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",

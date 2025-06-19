@@ -5,18 +5,6 @@ import CallIcon from "../icons/CallIcon";
 import LocationCard from "./LocationCard";
 import { fadeUpVariants } from "@/utils/animation-variant";
 
-const fadeUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: (i = 0) => ({
-        opacity: 1,
-        y: 0,
-        transition: {
-            delay: i * 0.2,
-            duration: 0.6,
-            ease: [0.25, 0.1, 0.25, 1],
-        },
-    }),
-};
 function MapSection() {
     const offices = [
         {

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import DeleteIcon from "@/components/icons/DeleteIcon";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface CartItem {
     id: string;
