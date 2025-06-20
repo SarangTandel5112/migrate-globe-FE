@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { AnimatePresence, motion, Variants, Easing } from "framer-motion";
 import BackIcon from "@/components/icons/BackIcon";
 import TitleDescription from "@/components/common/TitleDescription";
 import MyImage from "@/ui/myImage";
@@ -11,76 +12,84 @@ import BusinessmanIcon from "@assets/images/businessman.png";
 
 type QualificationLevel = "diploma" | "bachelors" | "masters" | "other";
 
+const cubicBezier: Easing = [0.42, 0, 0.58, 1]; // Cast the array to Easing
+
+const variants: Variants = {
+    initial: (direction: number) => ({
+        opacity: 0,
+        y: direction > 0 ? 20 : -20,
+    }),
+    animate: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.4,
+            ease: cubicBezier, // ✅ properly typed now
+        },
+    },
+    exit: (direction: number) => ({
+        opacity: 0,
+        y: direction > 0 ? -20 : 20,
+        transition: {
+            duration: 0.4,
+            ease: cubicBezier, // ✅ properly typed now
+        },
+    }),
+};
 export default function SkillAssessment() {
     const router = useRouter();
+    const totalSteps = 3;
     const [selectedQualification, setSelectedQualification] =
         useState<QualificationLevel>("diploma");
     const [workExperience, setWorkExperience] = useState<number>(14);
+    const [formData, setFormData] = useState({ experience: "" });
     const [currentStep, setCurrentStep] = useState<number>(1);
-    const totalSteps = 3;
+    const [direction, setDirection] = useState<number>(1); // 1 for next, -1 for back
 
-    const qualifications: { id: QualificationLevel; label: string }[] = [
+    const qualifications = [
         { id: "diploma", label: "Diploma" },
         { id: "bachelors", label: "Bachelors" },
         { id: "masters", label: "Masters" },
         { id: "other", label: "Other" },
-    ];
-    const [formData, setFormData] = useState({
-        experience: "",
-    });
-
-    const handleQualificationSelect = (qualification: QualificationLevel) => {
-        setSelectedQualification(qualification);
-    };
-
-    const handleWorkExperienceChange = (value: number) => {
-        setWorkExperience(value);
-    };
+    ] as const;
 
     const handleNext = () => {
         if (currentStep < totalSteps) {
-            setCurrentStep(currentStep + 1);
+            setDirection(1);
+            setCurrentStep((prev) => prev + 1);
         } else {
-            // Handle final submission
             console.log("Assessment completed:", {
                 selectedQualification,
                 workExperience,
+                ...formData,
             });
         }
     };
 
     const handleBack = () => {
         if (currentStep > 1) {
-            setCurrentStep(currentStep - 1);
+            setDirection(-1);
+            setCurrentStep((prev) => prev - 1);
         } else {
             router.back();
         }
     };
 
-    const handleInputChange = (field: string, value: string) => {
-        setFormData((prev) => ({
-            ...prev,
-            [field]: value,
-        }));
-    };
-
     return (
         <div className="container-1200">
             <div className="flex flex-col items-center gap-10">
-                {/* Back Button */}
                 <div className="w-full">
                     <button
                         onClick={() => router.back()}
                         className="flex items-center gap-2 text-navy-blue hover:opacity-75 transition-opacity"
                     >
                         <BackIcon />
-                        <span className="font-urbanist font-bold text-base text-navy-blue capitalize tracking-[0.2px]">
+                        <span className="font-bold text-base text-navy-blue capitalize tracking-[0.2px]">
                             Back
                         </span>
                     </button>
                 </div>
 
-                {/* Page Header */}
                 <div className="w-full space-y-2">
                     <TitleDescription
                         title="Skill Assessment"
@@ -88,160 +97,125 @@ export default function SkillAssessment() {
                     />
                 </div>
 
-                {/* Assessment Card */}
                 <div className="w-full max-w-3xl bg-white rounded-2xl shadow-sm p-6 space-y-6">
-                    {/* Step Indicator */}
-                    <div className="text-right">
-                        <span className="font-urbanist font-bold text-xs text-neutrals-700 tracking-[0.608px] capitalize">
-                            Step {currentStep} of {totalSteps}
-                        </span>
+                    <div className="text-right text-xs text-neutrals-700 capitalize font-bold tracking-wide">
+                        Step {currentStep} of {totalSteps}
                     </div>
 
-                    {/* Main Content */}
-                    <div className="flex flex-col items-center space-y-6">
-                        {currentStep === 1 && (
-                            <>
-                                {/* Education Icon */}
-                                <div className="w-48 h-48 flex items-center justify-center">
-                                    <div className="relative">
-                                        {/* Graduation Cap Icon */}
+                    <div className="relative w-full h-[500px] overflow-hidden">
+                        <AnimatePresence custom={direction} mode="wait">
+                            <motion.div
+                                key={currentStep}
+                                custom={direction}
+                                variants={variants}
+                                initial="initial"
+                                animate="animate"
+                                exit="exit"
+                                className="absolute w-full h-full flex flex-col items-center justify-center"
+                            >
+                                {currentStep === 1 && (
+                                    <>
                                         <MyImage
                                             src={EducationIcon}
                                             alt="education"
+                                            className="w-40 h-40 mb-6"
                                         />
-                                    </div>
-                                </div>
+                                        <h2 className="text-xl font-bold text-center text-navy-blue mb-6">
+                                            Your Qualification
+                                        </h2>
+                                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+                                            {qualifications.map((q) => (
+                                                <button
+                                                    key={q.id}
+                                                    onClick={() =>
+                                                        setSelectedQualification(
+                                                            q.id
+                                                        )
+                                                    }
+                                                    className={`px-4 py-2 rounded-full border transition-all ${
+                                                        selectedQualification ===
+                                                        q.id
+                                                            ? "bg-navy-blue text-white"
+                                                            : "bg-gray-200 text-neutrals hover:bg-gray-300"
+                                                    }`}
+                                                >
+                                                    {q.label}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </>
+                                )}
 
-                                {/* Title and Options */}
-                                <div className="w-full space-y-6">
-                                    <h2 className="font-urbanist font-bold text-xl text-navy-blue text-center tracking-[0.24px] capitalize">
-                                        Your Qualification
-                                    </h2>
-
-                                    {/* Qualification Options */}
-                                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                                        {qualifications.map((qualification) => (
-                                            <button
-                                                key={qualification.id}
-                                                onClick={() =>
-                                                    handleQualificationSelect(
-                                                        qualification.id
-                                                    )
-                                                }
-                                                className={`px-4 py-3 rounded-full border transition-all duration-200 ${
-                                                    selectedQualification ===
-                                                    qualification.id
-                                                        ? "bg-navy-blue text-white border-white"
-                                                        : "bg-[#EDEDED] text-neutrals border-white hover:bg-[#D3D3D3]"
-                                                }`}
-                                            >
-                                                <span className="font-urbanist text-lg font-medium tracking-[0.608px] capitalize">
-                                                    {qualification.label}
-                                                </span>
-                                            </button>
-                                        ))}
-                                    </div>
-                                </div>
-                            </>
-                        )}
-
-                        {currentStep === 2 && (
-                            <>
-                                {/* Work Experience Icon */}
-                                <div className="w-48 h-48 flex items-center justify-center">
-                                    <div className="relative">
-                                        {/* Person with laptop icon */}
+                                {currentStep === 2 && (
+                                    <>
                                         <MyImage
                                             src={VloggerIcon}
-                                            alt="vlogger-icon"
+                                            alt="experience"
+                                            className="w-40 h-40 mb-6"
                                         />
-                                    </div>
-                                </div>
-
-                                {/* Title and Slider */}
-                                <div className="w-full space-y-6">
-                                    <h2 className="font-urbanist font-bold text-xl text-navy-blue text-center tracking-[0.24px] capitalize">
-                                        Work Experience
-                                    </h2>
-
-                                    {/* Slider Container */}
-                                    <div className="flex items-center gap-6">
-                                        {/* Slider */}
-                                        <div className="flex-1 relative">
-                                            <div className="w-full h-2 bg-[#EDEDED] rounded-full">
-                                                <div
-                                                    className="h-2 bg-navy-blue rounded-full relative"
-                                                    style={{
-                                                        width: `${
-                                                            (workExperience /
-                                                                30) *
-                                                            100
-                                                        }%`,
-                                                    }}
-                                                >
-                                                    <div className="absolute -right-2.5 -top-1.5 w-5 h-5 bg-navy-blue border-2 border-white rounded-full shadow-lg cursor-pointer"></div>
+                                        <h2 className="text-xl font-bold text-center text-navy-blue mb-6">
+                                            Work Experience
+                                        </h2>
+                                        <div className="flex items-center gap-4 w-full">
+                                            <div className="relative flex-1">
+                                                <div className="h-2 bg-gray-200 rounded-full">
+                                                    <div
+                                                        className="h-2 bg-navy-blue rounded-full"
+                                                        style={{
+                                                            width: `${
+                                                                (workExperience /
+                                                                    30) *
+                                                                100
+                                                            }%`,
+                                                        }}
+                                                    />
                                                 </div>
+                                                <input
+                                                    type="range"
+                                                    min="0"
+                                                    max="30"
+                                                    value={workExperience}
+                                                    onChange={(e) =>
+                                                        setWorkExperience(
+                                                            parseInt(
+                                                                e.target.value
+                                                            )
+                                                        )
+                                                    }
+                                                    className="absolute inset-0 w-full h-full opacity-0"
+                                                />
                                             </div>
-                                            <input
-                                                type="range"
-                                                min="0"
-                                                max="30"
-                                                value={workExperience}
-                                                onChange={(e) =>
-                                                    handleWorkExperienceChange(
-                                                        parseInt(e.target.value)
-                                                    )
-                                                }
-                                                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                                            />
-                                        </div>
-
-                                        {/* Years Display */}
-                                        <div className="bg-white border border-gray-200 rounded-lg px-4 py-3 shadow-sm min-w-[120px]">
-                                            <div className="flex items-center justify-between">
-                                                <span className="font-urbanist text-xl text-[#141414] font-medium">
+                                            <div className="min-w-[100px] text-center">
+                                                <span className="text-xl font-semibold">
                                                     {workExperience}
-                                                </span>
-                                                <span className="font-urbanist text-xl text-[#737373] ml-2">
+                                                </span>{" "}
+                                                <span className="text-gray-500">
                                                     years
                                                 </span>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </>
-                        )}
+                                    </>
+                                )}
 
-                        {currentStep === 3 && (
-                            <>
-                                {/* Work Experience Icon */}
-                                <div className="w-48 h-48 flex items-center justify-center">
-                                    <div className="relative">
-                                        {/* Person with laptop icon */}
+                                {currentStep === 3 && (
+                                    <>
                                         <MyImage
                                             src={BusinessmanIcon}
-                                            alt="vlogger-icon"
+                                            alt="field"
+                                            className="w-40 h-40 mb-6"
                                         />
-                                    </div>
-                                </div>
-
-                                {/* Title and Slider */}
-                                <div className="w-full space-y-6">
-                                    <h2 className="font-urbanist font-bold text-xl text-navy-blue text-center tracking-[0.24px] capitalize">
-                                        Field of Experience
-                                    </h2>
-
-                                    {/* Slider Container */}
-                                    <div className="relative">
+                                        <h2 className="text-xl font-bold text-center text-navy-blue mb-6">
+                                            Field of Experience
+                                        </h2>
                                         <select
                                             value={formData.experience}
                                             onChange={(e) =>
-                                                handleInputChange(
-                                                    "experience",
-                                                    e.target.value
-                                                )
+                                                setFormData((prev) => ({
+                                                    ...prev,
+                                                    experience: e.target.value,
+                                                }))
                                             }
-                                            className="w-full px-3 py-2.5 bg-background-1 border border-neutrals-200 rounded text-base text-navy-blue appearance-none cursor-pointer focus:outline-none focus:border-navy-blue-300"
+                                            className="w-full border rounded px-3 py-2 text-base"
                                         >
                                             <option value="" disabled>
                                                 Select Field
@@ -251,44 +225,24 @@ export default function SkillAssessment() {
                                             <option value="3">3+</option>
                                             <option value="4">4+</option>
                                         </select>
-                                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                                            <svg
-                                                width="12"
-                                                height="7"
-                                                viewBox="0 0 12 7"
-                                                fill="none"
-                                                className="w-3 h-2"
-                                            >
-                                                <path
-                                                    d="M1.35156 1.2L6.15156 6L10.9516 1.2"
-                                                    stroke="#7D87AB"
-                                                    strokeWidth="1.6"
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </>
-                        )}
+                                    </>
+                                )}
+                            </motion.div>
+                        </AnimatePresence>
                     </div>
 
-                    {/* Divider */}
                     <div className="w-full h-px bg-neutrals-100"></div>
 
-                    {/* Navigation Buttons */}
-                    <div className="flex justify-center items-center gap-5">
+                    <div className="flex justify-center gap-4">
                         <button
                             onClick={handleBack}
-                            className="py-2 px-6 border border-neutrals-300 text-neutrals-700 rounded-md font-urbanist text-sm tracking-[0.46px] hover:bg-[#F7F8FD] transition-colors"
+                            className="py-2 px-5 border border-gray-300 rounded text-sm text-gray-700 hover:bg-gray-100"
                         >
                             Back
                         </button>
-
                         <button
                             onClick={handleNext}
-                            className="py-2 px-6 bg-navy-blue text-white rounded-md font-urbanist text-sm tracking-[0.46px] hover:bg-navy-blue/90 transition-colors"
+                            className="py-2 px-5 bg-navy-blue text-white rounded text-sm hover:bg-navy-blue/90"
                         >
                             Next
                         </button>
