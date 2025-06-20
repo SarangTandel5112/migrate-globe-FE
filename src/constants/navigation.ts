@@ -6,9 +6,9 @@ export interface NavigationItem {
 
 export const navigationItems: NavigationItem[] = [
   { name: "Home", href: "/", isActive: true },
-  { name: "Visa", href: "/visa" },
+  { name: "Visa", href: "/services/visa" },
   { name: "Services", href: "/services" },
-  { name: "Insurance", href: "/insurance" },
+  { name: "Insurance", href: "/services/insurance" },
   { name: "Insights", href: "/insights" },
   { name: "Contact", href: "/contact" },
 ];
