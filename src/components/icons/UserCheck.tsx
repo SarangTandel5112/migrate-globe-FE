@@ -1,8 +1,8 @@
-const UserCheck = (props: React.SVGProps<SVGSVGElement>) => (
+const UserCheck = ({ color = 'silver', width = 18, height = 18, ...props }: React.SVGProps<SVGSVGElement>) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
-        width={18}
-        height={18}
+        width={width}
+        height={height}
         fill="none"
         {...props}
     >
@@ -10,13 +10,13 @@ const UserCheck = (props: React.SVGProps<SVGSVGElement>) => (
             cx={6.75}
             cy={5.25}
             r={3}
-            stroke="#fff"
+            stroke={color}
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={1.75}
         />
         <path
-            stroke="#fff"
+            stroke={color}
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={1.75}

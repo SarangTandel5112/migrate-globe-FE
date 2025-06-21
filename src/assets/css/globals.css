@@ -44,3 +44,7 @@
     min-height: calc(1.5rem * 3) !important;
   }
 }
+
+.no-scroll {
+  overflow: hidden;
+}

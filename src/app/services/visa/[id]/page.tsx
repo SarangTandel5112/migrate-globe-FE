@@ -1,8 +1,9 @@
 "use client";
-
 import { easeOut, motion } from "framer-motion";
 import VisaDetail from "@/components/visa/VisaDetails";
-import VisaTypeCard from "@/components/visa/VisaTypeCard";
+// import VisaTypeCard from "@/components/visa/VisaTypeCard";
+import ArrowDownIcon from "@/components/icons/ArrowDown";
+import { useState } from "react";
 
 const visaTypes = [
     {
@@ -40,6 +41,16 @@ const cardVariants = {
 };
 
 export default function Page() {
+    const [formData, setFormData] = useState({
+        selectedPlan: "sub500",
+    });
+
+    const handleInputChange = (field: string, value: string) => {
+        setFormData((prev: any) => ({
+            ...prev,
+            [field]: value,
+        }));
+    };
     return (
         <div className="container-1200">
             <div className="flex flex-col gap-4 md:gap-6">
@@ -62,7 +73,7 @@ export default function Page() {
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.2 }}
                 >
-                    {visaTypes.map((type, index) => (
+                    {/* {visaTypes.map((type, index) => (
                         <motion.div key={index} variants={cardVariants}>
                             <VisaTypeCard
                                 title={type.title}
@@ -70,7 +81,25 @@ export default function Page() {
                                 active={type.active}
                             />
                         </motion.div>
-                    ))}
+                    ))} */}
+                    <div className="relative">
+                        <select
+                            value={formData.selectedPlan}
+                            onChange={(e) =>
+                                handleInputChange("selectedPlan", e.target.value)
+                            }
+                            className="w-full p-3 rounded border-2 border-navy-blue bg-background-1 text-base font-semibold tracking-[0.24px] text-neutrals-700 focus:outline-none focus:border-navy-blue appearance-none"
+                        >
+                            <option value="sub590">Student Guardian Visa (Subclass 590)</option>
+                            <option value="sub500">Student Visa (Subclass 500)</option>
+                            <option value="USA">USA</option>
+                            <option value="UK">UK</option>
+                            <option value="Canada">Canada</option>
+                        </select>
+                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                            <ArrowDownIcon />
+                        </div>
+                    </div>
                 </motion.div>
 
                 {/* Animated Heading */}

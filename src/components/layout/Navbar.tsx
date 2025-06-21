@@ -1,5 +1,5 @@
 "use client";
-import * as React from "react";
+import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import Link from "next/link";
 import MobileMenu from "./MobileMenu";
@@ -7,13 +7,39 @@ import { navigationItems } from "@/constants/navigation";
 import CartIcon from "../icons/CartIcon";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import LoginModal from "../login";
 
 function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [showLoginModal, setShowLoginModal] = useState(false);
     const pathname = usePathname();
+    const modalRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+            if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+                document.body.classList.remove('no-scroll')
+                setShowLoginModal(false)
+            }
+        }
+
+        if (showLoginModal) {
+            document.addEventListener('mousedown', handleClickOutside)
+        } else {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    }, [showLoginModal])
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
+    const toggleLogin = () => {
+        document.body.classList.toggle('no-scroll')
+        setShowLoginModal(!showLoginModal);
     };
 
     return (
@@ -44,11 +70,10 @@ function Navbar() {
                                 <Link
                                     key={item.name}
                                     href={item.href}
-                                    className={`gap-2.5 self-stretch pb-1 my-auto ${
-                                        isActive
+                                    className={`gap-2.5 self-stretch pb-1 my-auto ${isActive
                                             ? "border-b-2 border-solid border-b-mint-green text-neutrals-700"
                                             : "text-neutrals hover:text-neutrals-700 transition-colors"
-                                    }`}
+                                        }`}
                                 >
                                     {item.name}
                                 </Link>
@@ -66,7 +91,7 @@ function Navbar() {
                         >
                             <CartIcon />
                         </Link>
-                        <button className="gap-2.5 self-stretch px-6 py-2 my-auto text-sm font-medium text-center whitespace-nowrap rounded-md border border-solid border-neutrals-300 text-neutrals-700">
+                        <button onClick={toggleLogin} className="gap-2.5 self-stretch px-6 py-2 my-auto text-sm font-medium text-center whitespace-nowrap rounded-md border border-solid border-neutrals-300 text-neutrals-700">
                             Login
                         </button>
                     </div>
@@ -77,23 +102,20 @@ function Navbar() {
                         aria-label="Toggle mobile menu"
                     >
                         <span
-                            className={`w-6 h-0.5 bg-zinc-800 transition-all duration-300 ${
-                                isMobileMenuOpen
+                            className={`w-6 h-0.5 bg-zinc-800 transition-all duration-300 ${isMobileMenuOpen
                                     ? "rotate-45 translate-y-1.5"
                                     : ""
-                            }`}
+                                }`}
                         ></span>
                         <span
-                            className={`w-6 h-0.5 bg-zinc-800 transition-all duration-300 ${
-                                isMobileMenuOpen ? "opacity-0" : ""
-                            }`}
+                            className={`w-6 h-0.5 bg-zinc-800 transition-all duration-300 ${isMobileMenuOpen ? "opacity-0" : ""
+                                }`}
                         ></span>
                         <span
-                            className={`w-6 h-0.5 bg-zinc-800 transition-all duration-300 ${
-                                isMobileMenuOpen
+                            className={`w-6 h-0.5 bg-zinc-800 transition-all duration-300 ${isMobileMenuOpen
                                     ? "-rotate-45 -translate-y-1.5"
                                     : ""
-                            }`}
+                                }`}
                         ></span>
                     </button>
                 </div>
@@ -103,6 +125,14 @@ function Navbar() {
                     isOpen={isMobileMenuOpen}
                     onClose={() => setIsMobileMenuOpen(false)}
                 />
+
+                {showLoginModal && (
+                    <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
+                        <div ref={modalRef}>
+                            <LoginModal isModal onClose={toggleLogin} />
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );

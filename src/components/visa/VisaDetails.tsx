@@ -1,4 +1,5 @@
 import Image from "next/image";
+import CheckList from '@assets/images/checklist.png'
 
 const requirements = [
     "Valid Passport",
@@ -13,17 +14,17 @@ const requirements = [
 
 const services = [
     {
-        icon: "/icons/insurance.svg",
+        icon: CheckList,
         title: "Buy Cheapest Insurance",
         desc: "Compare And Purchase Affordable Overseas Health Cover From Top",
     },
     {
-        icon: "/icons/checklist.svg",
+        icon: CheckList,
         title: "Buy Documents Checklists",
         desc: "Get A Verified Checklist Tailored To Your Visa And Occupation. No",
     },
     {
-        icon: "/icons/consultation.svg",
+        icon: CheckList,
         title: "Zoom Consultations",
         desc: "Get Expert Advice Face-To-Face — Online. Book A Call With Our",
     },
@@ -86,8 +87,27 @@ export default function VisaDetail() {
                 {services.map((service, index) => (
                     <div
                         key={index}
-                        className="border rounded-xl p-4 bg-white shadow-sm hover:shadow-md transition"
+                        className="relative border rounded-xl p-4 bg-white shadow-sm transition duration-300 cursor-pointer hover:bg-lime-100 group"
                     >
+                        {/* Hover icon */}
+                        <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-2 rounded-full bg-neutral-100">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="w-4 h-4 text-mint-green-600"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M13 7h4v4m0-4L10 14"
+                                />
+                            </svg>
+                        </div>
+
+                        {/* Icon */}
                         <div className="mb-3">
                             <Image
                                 src={service.icon}
@@ -96,10 +116,14 @@ export default function VisaDetail() {
                                 height={32}
                             />
                         </div>
-                        <h4 className="font-semibold text-navyBlue-600 mb-1">
+
+                        {/* Title */}
+                        <h4 className="font-semibold text-neutrals-700 mb-1">
                             {service.title}
                         </h4>
-                        <p className="text-sm text-neutrals-500">
+
+                        {/* Description */}
+                        <p className="text-sm text-neutrals">
                             {service.desc}
                         </p>
                     </div>

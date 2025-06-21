@@ -1,13 +1,21 @@
-const VideoIcon = (props: React.SVGProps<SVGSVGElement>) => (
+const VideoIcon = ({
+    color = 'silver',
+    width = 18,
+    height = 18,
+    ...props
+}: Omit<React.SVGProps<SVGSVGElement>, 'width' | 'height'> & {
+    width?: number;
+    height?: number;
+}) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
-        width={18}
-        height={18}
+        width={width}
+        height={height}
         fill="none"
         {...props}
     >
         <path
-            stroke="silver"
+            stroke={color}
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={1.75}
@@ -15,11 +23,11 @@ const VideoIcon = (props: React.SVGProps<SVGSVGElement>) => (
             clipRule="evenodd"
         />
         <rect
-            width={9}
-            height={9}
+            width={width / 2}
+            height={height / 2}
             x={2.25}
             y={4.5}
-            stroke="silver"
+            stroke={color}
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={1.75}

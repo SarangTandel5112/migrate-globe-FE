@@ -157,26 +157,33 @@ function MapSection() {
                         Our Locations
                     </h2>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+                    <div className="flex flex-col gap-4 md:flex-row">
                         {offices.slice(0, 3).map((office, index) => (
                             <motion.div
                                 key={office.id}
                                 variants={fadeUpVariants}
                                 custom={index}
+                                className="w-full lg:w-1/3 flex"
                             >
-                                <LocationCard {...office} />
+                                <div className="h-full w-full">
+                                    <LocationCard {...office} />
+                                </div>
                             </motion.div>
                         ))}
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {/* Second row: 2 equal-height cards */}
+                    <div className="flex flex-col gap-4 md:flex-row mt-4">
                         {offices.slice(3).map((office, index) => (
                             <motion.div
                                 key={office.id}
                                 variants={fadeUpVariants}
                                 custom={index + 3}
+                                className="w-full lg:w-1/2 flex"
                             >
-                                <LocationCard {...office} />
+                                <div className="h-full w-full">
+                                    <LocationCard {...office} />
+                                </div>
                             </motion.div>
                         ))}
                     </div>

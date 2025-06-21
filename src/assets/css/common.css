@@ -14,7 +14,11 @@
   --neutrals-600: #494949;
   --neutrals-700: #333333;
   --neutrals-800: #212121;
-
+  
+  --gray-500: #717680;
+  --gray-600: #535862;
+  --gray-700: #414651;
+  --gray-900: #181D27;
 
   --mint-green-50: #DCF3EB;
   --mint-green-100: #D1EFE4;
@@ -57,7 +61,11 @@
     --neutrals-600: #494949;
     --neutrals-700: #333333;
     --neutrals-800: #212121;
-
+    
+    --gray-500: #717680;
+    --gray-600: #535862;
+    --gray-700: #414651;
+    --gray-900: #181D27;
 
     --mint-green-50: #DCF3EB;
     --mint-green-100: #D1EFE4;
