@@ -14,7 +14,7 @@ const VisaCalculatorSection = () => {
                 {/* Left Column: Text & CTA */}
                 <div className="text-navy-blue flex gap-3 flex-col-reverse sm:flex-row">
                     <div>
-                        <h2 className="text-heading-large font-semibold mb-4">
+                        <h2 className="text-heading-large font-bold mb-4">
                             Visa Calculator
                         </h2>
                         <p className="text-description1 leading-relaxed mb-6">
@@ -44,7 +44,7 @@ const VisaCalculatorSection = () => {
                 </div>
 
                 {/* Middle Column: Grid of Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-2 gap-4">
                     {/* Card 1 - How It Works */}
                     <div className="bg-white p-6 rounded-xl shadow-md text-navy-blue text-sm">
                         <h3 className="font-semibold text-heading1 mb-6">
@@ -79,7 +79,7 @@ const VisaCalculatorSection = () => {
                     </div>
 
                     {/* Card 3 - Testimonials/Trust */}
-                    <div className="bg-white p-4 rounded-xl shadow-md text-xs sm:col-span-2 text-navy-blue text-center">
+                    <div className="bg-white p-4 rounded-xl shadow-md text-xs col-span-2 text-navy-blue text-center">
                         Trusted by 5,000+ Applicants. 98% Client Satisfaction
                     </div>
                 </div>

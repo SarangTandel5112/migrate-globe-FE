@@ -20,9 +20,7 @@ export default function VideoCard({
     contentClassName = "",
 }: VideoCardProps) {
     return (
-        <div
-            className={`bg-white rounded-xl overflow-hidden border border-[#E0E4F3] shadow-bottom-blue hover:scale-105 transition-transform cursor-pointer flex flex-col ${wrapperClassName}`}
-        >
+        <div className={`bg-white rounded-xl overflow-hidden border border-[#E0E4F3] shadow-bottom-blue hover:scale-105 transition-transform cursor-pointer flex flex-col ${wrapperClassName}`}>
             <div className="w-full aspect-video">
                 <iframe
                     className="w-full h-full"

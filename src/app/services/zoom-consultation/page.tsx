@@ -145,10 +145,10 @@ export default function ZoomConsultation() {
             </div>
 
             {/* Main Content */}
-            <div className="flex flex-col lg:flex-row gap-6">
+            <div className="flex flex-col lg:flex-row gap-6 items-stretch">
                 {/* Left Column - Calendar and Time Slots */}
-                <div className="flex-1">
-                    <div className="bg-white rounded-xl flex flex-col md:flex-row justify-between p-4">
+                <div className="flex-1 flex flex-col">
+                    <div className="bg-white rounded-xl flex flex-col md:flex-row justify-between p-4 h-full">
                         <div className="bg-[#F7F8FD] rounded-lg p-8 w-full md:w-[62%] lg:w-[68%]">
                             {/* Calendar Header */}
                             <div className="flex items-center justify-center gap-4 mb-4">

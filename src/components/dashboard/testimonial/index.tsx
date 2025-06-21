@@ -4,21 +4,26 @@ import RahulImg from "@assets/images/rahul.png";
 function Testimonials() {
     return (
         <div className="container-1200">
-            <h2 className="text-center text-navy-blue text-heading-large font-semibold mb-8">
+            <h2 className="text-center text-navy-blue text-heading-large font-bold mb-8">
                 What Our Clients Says
             </h2>
             <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 flex flex-col md:flex-row gap-6">
                 {/* Left: Client Image + Label */}
-                <div className="w-full md:w-[320px] flex-shrink-0 flex flex-col items-center bg-[#FADADA] rounded-xl p-4 relative">
-                    <MyImage
-                        src={RahulImg}
-                        alt="Rahul Mehra"
-                        className="rounded-xl w-full object-cover"
-                    />
-                    <div className="bg-white px-3 py-1 rounded-md text-xs mt-3 text-navy-blue text-center shadow">
-                        Rahul Mehra
-                        <br />
-                        Skilled Independent Visa – Subclass 189
+                <div className="w-full md:w-[360px] flex-shrink-0 relative">
+                    {/* Image Container */}
+                    <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden">
+                        <MyImage
+                            src={RahulImg}
+                            alt="Rahul Mehra"
+                            className="object-cover w-full h-full"
+                        />
+
+                        {/* Floating Label Inside Image */}
+                        <div className="absolute left-4 bottom-4 bg-white px-3 py-1 rounded-md text-xs text-navy-blue text-left shadow">
+                            Rahul Mehra
+                            <br />
+                            Skilled Independent Visa – Subclass 189
+                        </div>
                     </div>
                 </div>
 

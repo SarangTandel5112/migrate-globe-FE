@@ -23,7 +23,7 @@ const ZoomBookForm: React.FC<ZoomBookFormProps> = ({
 }) => {
     const { inputType } = usePlatformInput();
     return (
-        <div className="lg:w-80">
+        <div className="lg:w-80 h-full">
             <div className="bg-white rounded-xl p-4 space-y-6">
                 {/* First Name */}
                 <div className="space-y-2">

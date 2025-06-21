@@ -30,6 +30,12 @@ module.exports = {
           700: 'var(--neutrals-700)',
           800: 'var(--neutrals-800)',
         },
+        grayish: {
+          DEFAULT: 'var(--gray-500)',
+          600: 'var(--gray-600)',
+          700: 'var(--gray-700)',
+          900: 'var(--gray-900)'
+        },
         // Mint Green
         'mint-green': {
           50: 'var(--mint-green-50)',

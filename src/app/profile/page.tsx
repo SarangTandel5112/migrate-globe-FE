@@ -1,7 +1,6 @@
 "use client";
 
 import CalenderIcon from "@/components/icons/CalenderIcon";
-import CouponIcon from "@/components/icons/CouponIcon";
 import UserCheck from "@/components/icons/UserCheck";
 import VideoIcon from "@/components/icons/VideoIcon";
 import ConsultationTab from "@/components/profile/ConsultationTab";
@@ -11,6 +10,7 @@ import TabButton from "@/components/profile/TabButton";
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import PurchaseIcon from "@/components/icons/PurchaseIcon";
 
 export default function Page() {
     const [activeTab, setActiveTab] = useState("profile");
@@ -71,21 +71,21 @@ export default function Page() {
                     <TabButton
                         id="profile"
                         label="Profile"
-                        icon={<UserCheck className="w-5 h-5" />}
+                        icon={<UserCheck className="w-5 h-5" color={activeTab === "profile" ? '#fff' : 'silver'} />}
                         isActive={activeTab === "profile"}
                         onClick={setActiveTab}
                     />
                     <TabButton
                         id="purchase"
                         label="My purchase"
-                        icon={<CouponIcon className="w-5 h-5" />}
+                        icon={<PurchaseIcon className="w-5 h-5" color={activeTab === "purchase" ? '#fff' : 'silver'} />}
                         isActive={activeTab === "purchase"}
                         onClick={setActiveTab}
                     />
                     <TabButton
                         id="consultation"
                         label="Consultation"
-                        icon={<VideoIcon className="w-5 h-5" />}
+                        icon={<VideoIcon className="w-5 h-5" color={activeTab === "consultation" ? '#fff' : 'silver'} />}
                         isActive={activeTab === "consultation"}
                         onClick={setActiveTab}
                     />
