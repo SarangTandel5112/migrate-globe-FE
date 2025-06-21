@@ -1,16 +1,42 @@
+"use client";
+
+import { motion, easeOut } from "framer-motion";
 import MyImage from "@/ui/myImage";
 import RightIcon from "@assets/images/right-icon.svg";
 import RahulImg from "@assets/images/rahul.png";
+import { containerVariants } from "@/utils/animation-variant";
+
 function Testimonials() {
     return (
-        <div className="container-1200">
-            <h2 className="text-center text-navy-blue text-heading-large font-bold mb-8">
+        <motion.div
+            className="container-1200"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={containerVariants}
+        >
+            <motion.h2
+                className="text-center text-navy-blue text-heading-large font-bold mb-8"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1.2, ease: "easeOut" }}
+            >
                 What Our Clients Says
-            </h2>
-            <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 flex flex-col md:flex-row gap-6">
+            </motion.h2>
+
+            <motion.div
+                className="bg-white rounded-xl shadow-lg p-6 md:p-8 flex flex-col md:flex-row gap-6"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1.2, ease: "easeOut" }}
+            >
                 {/* Left: Client Image + Label */}
-                <div className="w-full md:w-[360px] flex-shrink-0 relative">
-                    {/* Image Container */}
+                <motion.div
+                    className="w-full md:w-[360px] flex-shrink-0 relative"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1.2, ease: "easeOut" }}
+                >
                     <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden">
                         <MyImage
                             src={RahulImg}
@@ -18,26 +44,22 @@ function Testimonials() {
                             className="object-cover w-full h-full"
                         />
 
-                        {/* Floating Label Inside Image */}
                         <div className="absolute left-4 bottom-4 bg-white px-3 py-1 rounded-md text-xs text-navy-blue text-left shadow">
                             Rahul Mehra
                             <br />
                             Skilled Independent Visa – Subclass 189
                         </div>
                     </div>
-                </div>
+                </motion.div>
 
                 {/* Right: Text & Arrows */}
-                <div className="flex flex-col text-left justify-between w-full">
-                    {/* Top Label */}
+                <motion.div
+                    className="flex flex-col text-left justify-between w-full"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
+                >
                     <div>
-                        <p className="text-sm text-gray-500 uppercase tracking-wide font-medium mb-2">
-                            {/* Success Stories */}
-                        </p>
-                    </div>
-
-                    {/* Middle Content */}
-                    <div className="">
                         <h3 className="text-heading-large2 font-semibold text-navy-blue mb-4 leading-snug">
                             Landing My Dream Job In Australia – Stress-Free!
                         </h3>
@@ -47,8 +69,8 @@ function Testimonials() {
                             instantly knew I was eligible for Subclass 189.
                             Their team helped fine-tune my documentation and
                             guided me through every government touchpoint.
-                            Today, I&apos;m living and working in Sydney as a Data
-                            Analyst — all thanks to them!
+                            Today, I&apos;m living and working in Sydney as a
+                            Data Analyst — all thanks to them!
                         </p>
                     </div>
 
@@ -69,9 +91,9 @@ function Testimonials() {
                             />
                         </button>
                     </div>
-                </div>
-            </div>
-        </div>
+                </motion.div>
+            </motion.div>
+        </motion.div>
     );
 }
 

@@ -12,3 +12,29 @@ export const fadeUpVariants: Variants = {
         },
     }),
 };
+
+export const containerVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    show: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 1.2,
+            ease: "easeOut",
+            staggerChildren: 0.2, // ⭐ cards animate one by one
+            delayChildren: 0.3, // ⭐ starts AFTER title animation
+        },
+    },
+};
+
+export const childVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    show: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 1,
+            ease: "easeOut",
+        },
+    },
+};
