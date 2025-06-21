@@ -1,4 +1,6 @@
-import React from "react";
+'use client'
+import React, { useEffect, useRef, useState } from "react";
+import ArrowDownIcon from "../icons/ArrowDown";
 
 const visaCategories = [
     {
@@ -10,14 +12,6 @@ const visaCategories = [
             "Visitor (subclass 600)",
             "Work and Holiday visa (subclass 462)",
             "Working Holiday visa (subclass 417)",
-        ],
-    },
-    {
-        title: "Studying and training visas",
-        visas: [
-            "Student visa (subclass 500)",
-            "Student Guardian visa (subclass 590)",
-            "Training visa (subclass 407)",
         ],
     },
     {
@@ -45,25 +39,78 @@ const visaCategories = [
             "Prospective Marriage visa (subclass 300)",
         ],
     },
+    {
+        title: "Studying and training visas",
+        visas: [
+            "Student visa (subclass 500)",
+            "Student Guardian visa (subclass 590)",
+            "Training visa (subclass 407)",
+        ],
+    },
 ];
 
-export default function VisaCategoriesGrid() {
+const newVisaCategories = [
+    [visaCategories[0], visaCategories[2], visaCategories[0]],  // Visitor, Studying, Visitor
+    [visaCategories[1]], // Family and partner visas
+    [visaCategories[0], visaCategories[2]]  // Visitor, Studying
+];
+
+export const VisaCategoriesGrid = () => {
+    const [open, setOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target as Node)
+            ) {
+                setOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
     return (
-        <div className="border border-gray-300 rounded-lg p-6 bg-white">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {visaCategories.map((category, i) => (
-                    <div key={i}>
-                        <h3 className="font-semibold text-gray-900 mb-2">
-                            {category.title}
-                        </h3>
-                        <ul className="space-y-1 text-gray-700 text-sm">
-                            {category.visas.map((visa, j) => (
-                                <li key={j}>{visa}</li>
-                            ))}
-                        </ul>
+        <div className="relative" ref={dropdownRef}>
+            <button
+                onClick={() => setOpen((prev) => !prev)}
+                className="flex items-center gap-1 text-neutrals hover:text-neutrals-700 font-medium transition"
+            >
+                Visa
+                <span className="text-xs">{open ? <ArrowDownIcon className="rotate-180" /> : <ArrowDownIcon />}</span>
+            </button>
+
+            {open && (
+                <div
+                    className="absolute -left-52 top-full mt-2 max-w-[95vw] sm:w-[80vw] md:w-[70vw] lg:w-[75vw] 2xl:w-[55vw] bg-white border border-gray-200 shadow-xl rounded-xl z-50"
+                >
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+                        {newVisaCategories.map((categoryGroup, colIdx) => (
+                            <div key={colIdx} className="space-y-4">
+                                {categoryGroup.map((category, idx) => (
+                                    <div key={idx}>
+                                        <h4 className="text-lg font-semibold text-navy-blue mb-3">
+                                            {category.title}
+                                        </h4>
+                                        <ul className="space-y-1">
+                                            {category.visas.map((visa, idx) => (
+                                                <li
+                                                    key={idx}
+                                                    className="text-sm text-gray-600 hover:text-navy-blue cursor-pointer text-wrap"
+                                                >
+                                                    {visa}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                ))}
+                            </div>
+                        ))}
                     </div>
-                ))}
-            </div>
+                </div>
+            )}
         </div>
     );
-}
+};

@@ -3,20 +3,20 @@ import { easeOut, motion } from "framer-motion";
 import VisaDetail from "@/components/visa/VisaDetails";
 // import VisaTypeCard from "@/components/visa/VisaTypeCard";
 import ArrowDownIcon from "@/components/icons/ArrowDown";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const visaTypes = [
-    {
-        title: "Student Visa (Subclass 500)",
-        description: "Lorem Ipsum Dolor Sit Amet Consectetur.",
-        active: true,
-    },
-    {
-        title: "Student Guardian Visa (Subclass 590)",
-        description: "Lorem Ipsum Dolor Sit Amet Consectetur.",
-        active: false,
-    },
-];
+// const visaTypes = [
+//     {
+//         title: "Student Visa (Subclass 500)",
+//         description: "Lorem Ipsum Dolor Sit Amet Consectetur.",
+//         active: true,
+//     },
+//     {
+//         title: "Student Guardian Visa (Subclass 590)",
+//         description: "Lorem Ipsum Dolor Sit Amet Consectetur.",
+//         active: false,
+//     },
+// ];
 
 const containerVariants = {
     hidden: {},
@@ -28,22 +28,39 @@ const containerVariants = {
     },
 };
 
-const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: {
-            duration: 0.5,
-            ease: easeOut, // ✅ Correct type for Framer Motion v10+
-        },
-    },
-};
+// const cardVariants = {
+//     hidden: { opacity: 0, y: 20 },
+//     visible: {
+//         opacity: 1,
+//         y: 0,
+//         transition: {
+//             duration: 0.5,
+//             ease: easeOut,
+//         },
+//     },
+// };
+
+const visaDropdownList = ['Visitor visas', 'Studying and training visas', 'Family and partner visas', 'Working and skilled visas', 'Refugee and humanitarian visas', 'Other visas', 'Repealed visas']
 
 export default function Page() {
+    const [open, setOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
     const [formData, setFormData] = useState({
         selectedPlan: "sub500",
     });
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target as Node)
+            ) {
+                setOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
 
     const handleInputChange = (field: string, value: string) => {
         setFormData((prev: any) => ({
@@ -55,9 +72,33 @@ export default function Page() {
         <div className="container-1200">
             <div className="flex flex-col gap-4 md:gap-6">
                 <div className="flex justify-between items-start">
-                    <h1 className="text-heading1 text-navy-blue">
+                    <div className="relative" ref={dropdownRef}>
+                        {/* Student Visa Header with Dropdown */}
+                        <div className="flex items-center cursor-pointer" onClick={() => setOpen((prev) => !prev)}>
+                            <h1 className="text-heading1 text-navy-blue ">
+                                Student Visa
+                            </h1>
+                            <span className="text-xs ml-2">{open ? <ArrowDownIcon className="rotate-180" color="#263773" /> : <ArrowDownIcon color="#263773" />}</span>
+                        </div>
+
+                        {/* Dropdown Popover */}
+                        {open && (
+                            <div className="absolute top-full mt-2 w-56 max-h-[350px] overflow-y-auto bg-white border border-gray-200 shadow-xl rounded-md z-50">
+                                <ul className="space-y-4 p-3">
+                                    {visaDropdownList?.map((o, i) => {
+                                        return (
+                                            <li key={i} className="text-sm text-neutrals hover:text-navy-blue cursor-pointer">
+                                                {o}
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            </div>
+                        )}
+                    </div>
+                    {/* <h1 className="text-heading1 text-navy-blue">
                         Student Visa
-                    </h1>
+                    </h1> */}
                     <button className="bg-navy-blue text-white px-6 py-2 rounded-md text-sm font-medium">
                         Book a Consultation
                     </button>

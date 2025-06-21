@@ -8,6 +8,7 @@ import CartIcon from "../icons/CartIcon";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import LoginModal from "../login";
+import { VisaCategoriesGrid } from "../visa/VisaCategoriesGrid";
 
 function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -66,6 +67,35 @@ function Navbar() {
                                 item.href === "/"
                                     ? pathname === "/"
                                     : pathname.startsWith(item.href);
+                                     if (item.name === "Visa") {
+                                        return (
+                                            <div key={item.name}>
+                                                <VisaCategoriesGrid />
+                                            </div>
+                                        );
+                                    }
+                            return (
+                                <Link
+                                    key={item.name}
+                                    href={item.href}
+                                    className={`gap-2.5 self-stretch pb-1 my-auto ${
+                                        isActive
+                                            ? "border-b-2 border-solid border-b-mint-green text-neutrals-700"
+                                            : "text-neutrals hover:text-neutrals-700 transition-colors"
+                                    }`}
+                                >
+                                    {item.name}
+                                </Link>
+                            );
+                        })}
+                    </div>
+                    {/* Desktop Navigation */}
+                    {/* <div className="hidden lg:flex gap-8 items-center self-stretch my-auto text-base font-medium whitespace-nowrap min-w-60 text-stone-500">
+                        {navigationItems.map((item) => {
+                            const isActive =
+                                item.href === "/"
+                                    ? pathname === "/"
+                                    : pathname.startsWith(item.href);
                             return (
                                 <Link
                                     key={item.name}
@@ -79,7 +109,7 @@ function Navbar() {
                                 </Link>
                             );
                         })}
-                    </div>
+                    </div> */}
                     {/* Desktop Action Buttons */}
                     <div className="hidden lg:flex gap-6 items-center self-stretch my-auto min-w-60">
                         <button className="gap-2.5 self-stretch px-6 py-2 my-auto text-sm font-medium text-center text-white bg-navy-blue rounded-md">
