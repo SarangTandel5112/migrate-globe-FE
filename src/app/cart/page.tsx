@@ -4,6 +4,7 @@ import { useState } from "react";
 import CartSummary from "@/components/cart/CartSummary";
 import OrderSummary from "@/components/cart/OrderSummary";
 import { motion } from "framer-motion";
+import ServiceCard from "@/components/common/ServiceCard";
 
 interface CartItem {
     id: string;
@@ -122,19 +123,8 @@ export default function Cart() {
                                 },
                             },
                         }}
-                        className="bg-white rounded-2xl p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
                     >
-                        <div className="w-[70px] h-[70px] bg-[#F7F8FD] rounded-xl flex items-center justify-center text-3xl mb-4">
-                            {service.icon}
-                        </div>
-                        <div className="space-y-2">
-                            <h3 className="font-bold text-base text-[#333] tracking-[0.2px] capitalize">
-                                {service.title}
-                            </h3>
-                            <p className="text-sm text-neutrals tracking-[0.2px] capitalize">
-                                {service.description}
-                            </p>
-                        </div>
+                        <ServiceCard {...service} />
                     </motion.div>
                 ))}
             </motion.div>
