@@ -76,10 +76,12 @@ export const VisaCategoriesGrid = () => {
         <div className="relative" ref={dropdownRef}>
             <button
                 onClick={() => setOpen((prev) => !prev)}
+                onMouseEnter={() => setOpen(true)}
+                // onMouseLeave={() => setOpen(false)}
                 className="flex items-center gap-1 text-neutrals hover:text-neutrals-700 font-medium transition"
             >
                 Visa
-                <span className="text-xs">{open ? <ArrowDownIcon className="rotate-180" /> : <ArrowDownIcon />}</span>
+                <span className="text-xs"><ArrowDownIcon className={open ? "rotate-180" : ""} /></span>
             </button>
 
             {open && (

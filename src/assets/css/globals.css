@@ -48,3 +48,20 @@
 .no-scroll {
   overflow: hidden;
 }
+
+/* Fix for Safari on iOS devices */
+select::-webkit-select-menu-button {
+  display: none;
+}
+
+/* Fix for iOS 12 & below */
+select::-webkit-outer-spin-button,
+select::-webkit-inner-spin-button {
+  display: none;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+} 

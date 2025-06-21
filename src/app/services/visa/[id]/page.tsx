@@ -4,6 +4,7 @@ import VisaDetail from "@/components/visa/VisaDetails";
 // import VisaTypeCard from "@/components/visa/VisaTypeCard";
 import ArrowDownIcon from "@/components/icons/ArrowDown";
 import { useEffect, useRef, useState } from "react";
+import CustomSelect, { Option } from "@/ui/CustomSelect";
 
 // const visaTypes = [
 //     {
@@ -42,12 +43,21 @@ const containerVariants = {
 
 const visaDropdownList = ['Visitor visas', 'Studying and training visas', 'Family and partner visas', 'Working and skilled visas', 'Refugee and humanitarian visas', 'Other visas', 'Repealed visas']
 
+const visaOptions: Option[] = [
+  { label: 'Student Guardian Visa (Subclass 590)', value: 'sub590' },
+  { label: 'Student Visa (Subclass 500)', value: 'sub500' },
+  { label: 'USA', value: 'USA' },
+  { label: 'UK', value: 'UK' },
+  { label: 'Canada', value: 'Canada' },
+];
+
 export default function Page() {
     const [open, setOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const [formData, setFormData] = useState({
         selectedPlan: "sub500",
     });
+    const [selected, setSelected] = useState<Option>(visaOptions[0]);
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -124,7 +134,12 @@ export default function Page() {
                         </motion.div>
                     ))} */}
                     <div className="relative">
-                        <select
+                        <CustomSelect
+                            options={visaOptions}
+                            selected={selected}
+                            onChange={setSelected}
+                        />
+                        {/* <select
                             value={formData.selectedPlan}
                             onChange={(e) =>
                                 handleInputChange("selectedPlan", e.target.value)
@@ -139,7 +154,7 @@ export default function Page() {
                         </select>
                         <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
                             <ArrowDownIcon />
-                        </div>
+                        </div> */}
                     </div>
                 </motion.div>
 
