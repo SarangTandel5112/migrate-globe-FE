@@ -1,5 +1,4 @@
 "use client";
-
 import { motion, Variants } from "framer-motion";
 import Blog1 from "@assets/images/blog1.png";
 import CommonCard from "@/components/layout/CommonCard";
@@ -29,7 +28,8 @@ const BlogsCards = () => {
     return (
         <motion.section
             className="sm:container-1200"
-            initial="hidden"
+            // initial="hidden"
+            initial={false}
             whileInView="show"
             viewport={{ once: true, amount: 0.05 }}
         >
@@ -49,7 +49,8 @@ const BlogsCards = () => {
             {/* Cards */}
             <motion.div
                 variants={containerVariants}
-                initial="hidden"
+                // initial="hidden"
+                initial={false}
                 whileInView="show"
                 viewport={{ once: true, amount: 0.1 }}
                 className="hidden sm:grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6"
@@ -86,7 +87,8 @@ const BlogsCards = () => {
             {/* Mobile view */}
             <motion.div
                 variants={containerVariants}
-                initial="hidden"
+                // initial="hidden"
+                initial={false}
                 whileInView="show"
                 viewport={{ once: true, amount: 0.2 }}
                 className="sm:hidden space-y-4"

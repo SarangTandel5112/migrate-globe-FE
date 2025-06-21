@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useRef, useState } from "react";
 import { motion, Variants } from "framer-motion";
 import MyImage from "@/ui/myImage";
@@ -40,16 +39,18 @@ function VideosSection() {
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const updateCardsPerPage = () => {
-            const width = window.innerWidth;
-            if (width < 768) setCardsPerPage(1);
-            else if (width < 1024) setCardsPerPage(2);
-            else setCardsPerPage(3);
-        };
-
-        updateCardsPerPage();
-        window.addEventListener("resize", updateCardsPerPage);
-        return () => window.removeEventListener("resize", updateCardsPerPage);
+        if (typeof window !== "undefined") {
+            const updateCardsPerPage = () => {
+                const width = window.innerWidth;
+                if (width < 768) setCardsPerPage(1);
+                else if (width < 1024) setCardsPerPage(2);
+                else setCardsPerPage(3);
+            };
+    
+            updateCardsPerPage();
+            window.addEventListener("resize", updateCardsPerPage);
+            return () => window.removeEventListener("resize", updateCardsPerPage);
+        }
     }, []);
 
     const handlePrev = () => {
@@ -68,7 +69,8 @@ function VideosSection() {
     return (
         <motion.section
             className="sm:container-1200"
-            initial="hidden"
+            // initial="hidden"
+            initial={false}
             whileInView="show"
             viewport={{ once: true, amount: 0.05 }}
             variants={containerVariants}
@@ -127,7 +129,8 @@ function VideosSection() {
             {/* Desktop carousel with animated cards */}
             <motion.div
                 variants={containerVariants}
-                initial="hidden"
+                // initial="hidden"
+                initial={false}
                 whileInView="show"
                 viewport={{ once: true, amount: 0.2 }}
                 className="hidden sm:block relative overflow-hidden"

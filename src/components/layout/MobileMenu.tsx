@@ -3,6 +3,9 @@ import Link from "next/link";
 import { useOutsideClick } from "@/hooks/useOutsideClick";
 import { navigationItems } from "@/constants/navigation";
 import CartIcon from "../icons/CartIcon";
+import { useEffect, useState } from "react";
+import ArrowDownIcon from "../icons/ArrowDown";
+import { usePathname } from "next/navigation";
 
 interface MobileMenuProps {
     isOpen: boolean;
@@ -10,28 +13,39 @@ interface MobileMenuProps {
 }
 
 function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+    const [openMega, setOpenMega] = useState<string | null>(null);
     const menuRef = useOutsideClick<HTMLDivElement>(onClose);
+    const pathname = usePathname();
+    const segments = pathname.split("/").filter(Boolean);
+    const last = segments.at(-1);
+    const secondLast = segments.at(-2);
+
+    useEffect(() => {
+        document.body.classList.toggle("overflow-hidden", isOpen);
+
+        return () => {
+            document.body.classList.remove("overflow-hidden");
+        };
+    }, [isOpen]);
 
     return (
         <>
             {/* Backdrop */}
             <div
-                className={`fixed inset-0 bg-black z-40 lg:hidden transition-opacity duration-300 ease-in-out ${
-                    isOpen
-                        ? "bg-opacity-50 opacity-100"
-                        : "bg-opacity-0 opacity-0 pointer-events-none"
-                }`}
+                className={`fixed inset-0 bg-black z-40 lg:hidden transition-opacity duration-300 ease-in-out ${isOpen
+                    ? "bg-opacity-50 opacity-100"
+                    : "bg-opacity-0 opacity-0 pointer-events-none"
+                    }`}
                 onClick={onClose}
             ></div>
 
             {/* Mobile Menu Content */}
             <div
                 ref={menuRef}
-                className={`fixed top-0 right-0 h-full w-80 bg-white shadow-xl z-50 transform transition-transform duration-300 ease-in-out lg:hidden ${
-                    isOpen ? "translate-x-0" : "translate-x-full"
-                }`}
+                className={`fixed top-0 right-0 h-full w-80 bg-white shadow-xl z-50 transform transition-transform duration-300 ease-in-out lg:hidden ${isOpen ? "translate-x-0" : "translate-x-full"
+                    }`}
             >
-                <div className="flex flex-col p-6">
+                <div className="flex flex-col h-full overflow-y-auto p-6">
                     {/* Close Button */}
                     <button
                         onClick={onClose}
@@ -41,7 +55,7 @@ function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                         <svg
                             className="w-6 h-6"
                             fill="none"
-                            stroke="currentColor"
+                            stroke="#000"
                             viewBox="0 0 24 24"
                         >
                             <path
@@ -54,7 +68,7 @@ function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                     </button>
 
                     {/* Navigation Items */}
-                    <div className="flex flex-col gap-6 text-base font-medium tracking-wide">
+                    {/* <div className="flex flex-col gap-6 text-base font-medium tracking-wide">
                         {navigationItems.map((item) => (
                             <Link
                                 key={item.name}
@@ -69,7 +83,65 @@ function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                                 {item.name}
                             </Link>
                         ))}
+                    </div> */}
+                    <div className="flex flex-col gap-6 text-base font-medium tracking-wide">
+                        {navigationItems.map((item) => {
+                            const isMega = item.type === "mega";
+                            const isOpen = openMega === item.name;
+                            // const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+                            const hrefSlug = item.href.split("/").filter(Boolean).at(-1);
+                            const isActive = hrefSlug === last || (!last && hrefSlug === secondLast);
+
+                            if (isMega) {
+                                return (
+                                    <div key={item.name} className="pt-2">
+                                        <button
+                                            onClick={() => setOpenMega(isOpen ? null : item.name)}
+                                            className="w-full flex justify-between items-center text-left text-neutrals border-b-2 border-gray-100 pb-2"
+                                        >
+                                            <span>{item.name}</span>
+                                            <ArrowDownIcon className={`text-neutrals ${isOpen ? ' rotate-180' : ''}`} />
+                                        </button>
+
+                                        {isOpen && item.groups?.map((group) => (
+                                            <div key={group.title} className="mt-3 mb-4">
+                                                <p className="text-sm font-medium text-gray-500 mb-2">{group.title}</p>
+                                                <ul className="space-y-1 pl-2">
+                                                    {group.items.map((link) => (
+                                                        <li key={link.name}>
+                                                            <Link
+                                                                href={link.href}
+                                                                onClick={onClose}
+                                                                className="block text-gray-700 hover:text-navy-blue transition"
+                                                            >
+                                                                {link.name}
+                                                            </Link>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        ))}
+                                    </div>
+                                );
+                            }
+
+                            // Regular nav item
+                            return (
+                                <Link
+                                    key={item.name}
+                                    href={item.href}
+                                    onClick={onClose}
+                                    className={`pb-2 ${isActive
+                                        ? "border-b-2 border-[--Mint-Green] text-navy-blue"
+                                        : "text-neutrals border-b border-gray-100 hover:text-zinc-800"
+                                        }`}
+                                >
+                                    {item.name}
+                                </Link>
+                            );
+                        })}
                     </div>
+
 
                     {/* Action Buttons */}
                     <div className="flex flex-col gap-4 mt-8">

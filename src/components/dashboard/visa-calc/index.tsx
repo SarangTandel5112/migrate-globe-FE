@@ -31,7 +31,8 @@ const VisaCalculatorSection = () => {
     return (
         <motion.section
             className="container-1200"
-            initial="hidden"
+            // initial="hidden"
+            initial={false}
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
             variants={containerVariants}

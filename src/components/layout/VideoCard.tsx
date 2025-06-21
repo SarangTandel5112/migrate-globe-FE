@@ -1,3 +1,4 @@
+'use client'
 interface VideoCardProps {
     youtubeId: string;
     title: string;

@@ -14,6 +14,9 @@ function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [showLoginModal, setShowLoginModal] = useState(false);
     const pathname = usePathname();
+    const segments = pathname.split("/").filter(Boolean);
+    const last = segments.at(-1);
+    const secondLast = segments.at(-2);
     const modalRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -63,26 +66,24 @@ function Navbar() {
                     {/* Desktop Navigation */}
                     <div className="hidden lg:flex gap-8 items-center self-stretch my-auto text-base font-medium whitespace-nowrap min-w-60 text-stone-500">
                         {navigationItems.map((item) => {
-                            const isActive =
-                                item.href === "/"
-                                    ? pathname === "/"
-                                    : pathname.startsWith(item.href);
-                                     if (item.name === "Visa") {
-                                        return (
-                                            <div key={item.name}>
-                                                <VisaCategoriesGrid />
-                                            </div>
-                                        );
-                                    }
+                            // const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+                            const hrefSlug = item.href.split("/").filter(Boolean).at(-1);
+                            const isActive = hrefSlug === last || (!last && hrefSlug === secondLast);
+                            if (item.name === "Visa") {
+                                return (
+                                    <div key={item.name}>
+                                        <VisaCategoriesGrid />
+                                    </div>
+                                );
+                            }
                             return (
                                 <Link
                                     key={item.name}
                                     href={item.href}
-                                    className={`gap-2.5 self-stretch pb-1 my-auto ${
-                                        isActive
+                                    className={`gap-2.5 self-stretch pb-1 my-auto ${isActive
                                             ? "border-b-2 border-solid border-b-mint-green text-neutrals-700"
                                             : "text-neutrals hover:text-neutrals-700 transition-colors"
-                                    }`}
+                                        }`}
                                 >
                                     {item.name}
                                 </Link>
@@ -133,8 +134,8 @@ function Navbar() {
                     >
                         <span
                             className={`w-6 h-0.5 bg-zinc-800 transition-all duration-300 ${isMobileMenuOpen
-                                    ? "rotate-45 translate-y-1.5"
-                                    : ""
+                                ? "rotate-45 translate-y-1.5"
+                                : ""
                                 }`}
                         ></span>
                         <span
@@ -143,8 +144,8 @@ function Navbar() {
                         ></span>
                         <span
                             className={`w-6 h-0.5 bg-zinc-800 transition-all duration-300 ${isMobileMenuOpen
-                                    ? "-rotate-45 -translate-y-1.5"
-                                    : ""
+                                ? "-rotate-45 -translate-y-1.5"
+                                : ""
                                 }`}
                         ></span>
                     </button>
