@@ -106,7 +106,6 @@ export default function FeatureGrid() {
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{
                             duration: 0.5,
-                            delay: i * 0.1,
                             ease: "easeOut",
                         }}
                         viewport={{ once: true, amount: 0.2 }}
