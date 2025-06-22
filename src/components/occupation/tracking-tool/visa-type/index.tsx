@@ -63,77 +63,17 @@ const VisaType = ({ visaTypes }: { visaTypes: VisaTypeProps[] }) => {
 
                         {/* Desktop Table Rows */}
                         <div className="hidden md:block">
-                            {visaTypes?.map((visa: any, index: any) => (
-                                <div
-                                    key={index}
-                                    className="flex justify-between items-center p-4 border-b border-neutrals-100"
-                                >
-                                    <div className="text-base font-normal w-64 text-heading1 text-neutrals-600">
-                                        {visa.subclass}
-                                    </div>
-                                    <div className="flex justify-center w-16">
-                                        <div className="w-6 h-6 bg-mint-green-600 rounded-full flex items-center justify-center">
-                                            <svg
-                                                width="8"
-                                                height="6"
-                                                viewBox="0 0 8 6"
-                                                fill="none"
-                                            >
-                                                <path
-                                                    d="M1 3L3 5L7 1"
-                                                    stroke="white"
-                                                    strokeWidth="2"
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-2 bg-background-1 border border-neutrals-200 rounded-full px-3 py-2 w-24">
-                                        <span className="text-navy-blue text-sm font-semibold">
-                                            {visa.list}
-                                        </span>
-                                        <div className="bg-mint-green-50 rounded-full p-1">
-                                            <svg
-                                                width="8"
-                                                height="8"
-                                                viewBox="0 0 8 8"
-                                                fill="none"
-                                            >
-                                                <path
-                                                    d="M0.666504 0.666687H7.33317V7.33335M0.666504 7.33335L7.33317 0.666687"
-                                                    stroke="#263773"
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* Mobile View */}
-                        <div className="block md:hidden">
-                            {visaTypes.map((visa: any, index: any) => (
-                                <div
-                                    key={index}
-                                    className="border-b border-neutrals-100 px-4 py-3"
-                                >
-                                    {/* Visa Subclass Label and Value */}
-                                    <div className="mb-1">
-                                        <div className="text-base font-normal text-heading1 text-neutrals-600">
+                            {visaTypes?.map(
+                                (visa: VisaTypeProps, index: number) => (
+                                    <div
+                                        key={index}
+                                        className="flex justify-between items-center p-4 border-b border-neutrals-100"
+                                    >
+                                        <div className="text-base font-normal w-64 text-heading1 text-neutrals-600">
                                             {visa.subclass}
                                         </div>
-                                        <span className="text-xs text-neutrals-600 block md:hidden">
-                                            Visa Subclass
-                                        </span>
-                                    </div>
-
-                                    {/* Eligibility and List */}
-                                    <div className="flex items-center gap-2 mt-2">
-                                        <div className="flex items-center gap-2 text-neutrals-600 text-sm">
-                                            <div className="w-5 h-5 bg-mint-green-600 rounded-full flex items-center justify-center">
+                                        <div className="flex justify-center w-16">
+                                            <div className="w-6 h-6 bg-mint-green-600 rounded-full flex items-center justify-center">
                                                 <svg
                                                     width="8"
                                                     height="6"
@@ -149,9 +89,8 @@ const VisaType = ({ visaTypes }: { visaTypes: VisaTypeProps[] }) => {
                                                     />
                                                 </svg>
                                             </div>
-                                            <span>Eligibility</span>
                                         </div>
-                                        <div className="flex items-center gap-2 bg-background-1 border border-neutrals-200 rounded-full px-3 py-2 ml-auto">
+                                        <div className="flex items-center gap-2 bg-background-1 border border-neutrals-200 rounded-full px-3 py-2 w-24">
                                             <span className="text-navy-blue text-sm font-semibold">
                                                 {visa.list}
                                             </span>
@@ -172,8 +111,73 @@ const VisaType = ({ visaTypes }: { visaTypes: VisaTypeProps[] }) => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))}
+                                )
+                            )}
+                        </div>
+
+                        {/* Mobile View */}
+                        <div className="block md:hidden">
+                            {visaTypes.map(
+                                (visa: VisaTypeProps, index: number) => (
+                                    <div
+                                        key={index}
+                                        className="border-b border-neutrals-100 px-4 py-3"
+                                    >
+                                        {/* Visa Subclass Label and Value */}
+                                        <div className="mb-1">
+                                            <div className="text-base font-normal text-heading1 text-neutrals-600">
+                                                {visa.subclass}
+                                            </div>
+                                            <span className="text-xs text-neutrals-600 block md:hidden">
+                                                Visa Subclass
+                                            </span>
+                                        </div>
+
+                                        {/* Eligibility and List */}
+                                        <div className="flex items-center gap-2 mt-2">
+                                            <div className="flex items-center gap-2 text-neutrals-600 text-sm">
+                                                <div className="w-5 h-5 bg-mint-green-600 rounded-full flex items-center justify-center">
+                                                    <svg
+                                                        width="8"
+                                                        height="6"
+                                                        viewBox="0 0 8 6"
+                                                        fill="none"
+                                                    >
+                                                        <path
+                                                            d="M1 3L3 5L7 1"
+                                                            stroke="white"
+                                                            strokeWidth="2"
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                        />
+                                                    </svg>
+                                                </div>
+                                                <span>Eligibility</span>
+                                            </div>
+                                            <div className="flex items-center gap-2 bg-background-1 border border-neutrals-200 rounded-full px-3 py-2 ml-auto">
+                                                <span className="text-navy-blue text-sm font-semibold">
+                                                    {visa.list}
+                                                </span>
+                                                <div className="bg-mint-green-50 rounded-full p-1">
+                                                    <svg
+                                                        width="8"
+                                                        height="8"
+                                                        viewBox="0 0 8 8"
+                                                        fill="none"
+                                                    >
+                                                        <path
+                                                            d="M0.666504 0.666687H7.33317V7.33335M0.666504 7.33335L7.33317 0.666687"
+                                                            stroke="#263773"
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                        />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            )}
                         </div>
                     </motion.div>
                 )}

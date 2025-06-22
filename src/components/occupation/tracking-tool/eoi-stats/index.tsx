@@ -1,11 +1,16 @@
-'use client'
-import MyImage from '@/ui/myImage'
-import React, { useState } from 'react'
+"use client";
+import MyImage from "@/ui/myImage";
+import React, { useState } from "react";
 import Check from "@assets/images/Check.svg";
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from "framer-motion";
 
-const EOIStatistics = ({ chartColors }: any) => {
-    const [showEOIStats, setShowEOIStats] = useState(true)
+interface ChartColorProps {
+    color: string;
+    label: string;
+}
+
+const EOIStatistics = ({ chartColors }: { chartColors: ChartColorProps[] }) => {
+    const [showEOIStats, setShowEOIStats] = useState(true);
     return (
         <div className="bg-white rounded-xl border border-neutrals-100 p-4 md:p-4">
             <div
@@ -20,7 +25,9 @@ const EOIStatistics = ({ chartColors }: any) => {
                     height="8"
                     viewBox="0 0 14 8"
                     fill="none"
-                    className={`transition-transform ${showEOIStats ? "rotate-180" : ""}`}
+                    className={`transition-transform ${
+                        showEOIStats ? "rotate-180" : ""
+                    }`}
                 >
                     <path
                         d="M1 1L7 7L13 1"
@@ -61,14 +68,16 @@ const EOIStatistics = ({ chartColors }: any) => {
                         {/* Desktop Filter Controls */}
                         <div className="hidden md:flex justify-between items-center mb-6">
                             <div className="flex gap-2">
-                                {["Submitted", "Logged", "Held", "Invited"].map((status) => (
-                                    <button
-                                        key={status}
-                                        className="px-3 py-2 bg-neutrals-100 rounded-full text-navy-blue-400 text-xs font-medium"
-                                    >
-                                        {status}
-                                    </button>
-                                ))}
+                                {["Submitted", "Logged", "Held", "Invited"].map(
+                                    (status) => (
+                                        <button
+                                            key={status}
+                                            className="px-3 py-2 bg-neutrals-100 rounded-full text-navy-blue-400 text-xs font-medium"
+                                        >
+                                            {status}
+                                        </button>
+                                    )
+                                )}
                             </div>
 
                             <div className="flex gap-2">
@@ -83,17 +92,24 @@ const EOIStatistics = ({ chartColors }: any) => {
 
                         {/* Chart Legend */}
                         <div className="flex flex-wrap justify-start md:justify-end gap-4 mb-4">
-                            {chartColors.map((item: any, index: any) => (
-                                <div key={index} className="flex items-center gap-1">
+                            {chartColors.map(
+                                (item: ChartColorProps, index: number) => (
                                     <div
-                                        className="w-4 h-4 rounded-full"
-                                        style={{ backgroundColor: item.color }}
-                                    ></div>
-                                    <span className="text-neutrals-700 text-xs">
-                                        {item.label}
-                                    </span>
-                                </div>
-                            ))}
+                                        key={index}
+                                        className="flex items-center gap-1"
+                                    >
+                                        <div
+                                            className="w-4 h-4 rounded-full"
+                                            style={{
+                                                backgroundColor: item.color,
+                                            }}
+                                        ></div>
+                                        <span className="text-neutrals-700 text-xs">
+                                            {item.label}
+                                        </span>
+                                    </div>
+                                )
+                            )}
                         </div>
 
                         {/* Chart View Dropdown for Mobile */}
@@ -124,7 +140,10 @@ const EOIStatistics = ({ chartColors }: any) => {
                                 "Subclass 491 (Family Sponsored stream)",
                                 "Subclass 491 (State Sponsored stream)",
                             ].map((title, index) => (
-                                <div key={index} className="flex flex-col items-center gap-6">
+                                <div
+                                    key={index}
+                                    className="flex flex-col items-center gap-6"
+                                >
                                     <div className="w-40 h-40 flex items-center justify-center">
                                         {/* Dummy SVG Pie Chart */}
                                         <svg
@@ -133,7 +152,12 @@ const EOIStatistics = ({ chartColors }: any) => {
                                             viewBox="0 0 36 36"
                                             className="rotate-[-90deg]"
                                         >
-                                            <circle cx="18" cy="18" r="15.915" fill="white" />
+                                            <circle
+                                                cx="18"
+                                                cy="18"
+                                                r="15.915"
+                                                fill="white"
+                                            />
                                             <circle
                                                 cx="18"
                                                 cy="18"
@@ -204,13 +228,15 @@ const EOIStatistics = ({ chartColors }: any) => {
                                     width="16"
                                 />
                                 <p className="text-neutrals-600 mt-1 text-base leading-normal align-baseline">
-                                    An EOI that meets all the requirements for all selected visa
-                                    subclasses and has all fields completed can be submitted.
-                                    Once submitted, points are attributed to the EOI based on
-                                    the information provided. Submitted EOIs are eligible for
-                                    selection in an invitation round, by a State and Territory
-                                    government agency or Austrade, depending on the visa
-                                    subclass(es) selected.
+                                    An EOI that meets all the requirements for
+                                    all selected visa subclasses and has all
+                                    fields completed can be submitted. Once
+                                    submitted, points are attributed to the EOI
+                                    based on the information provided. Submitted
+                                    EOIs are eligible for selection in an
+                                    invitation round, by a State and Territory
+                                    government agency or Austrade, depending on
+                                    the visa subclass(es) selected.
                                 </p>
                             </div>
                         </div>
@@ -218,7 +244,7 @@ const EOIStatistics = ({ chartColors }: any) => {
                 )}
             </AnimatePresence>
         </div>
-    )
-}
+    );
+};
 
-export default EOIStatistics
+export default EOIStatistics;
