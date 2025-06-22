@@ -1,5 +1,5 @@
 "use client";
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import Blog1 from "@assets/images/blog1.png";
 import CommonCard from "@/components/layout/CommonCard";
 import MyImage from "@/ui/myImage";

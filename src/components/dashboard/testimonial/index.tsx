@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, easeOut } from "framer-motion";
+import { motion } from "framer-motion";
 import MyImage from "@/ui/myImage";
 import RightIcon from "@assets/images/right-icon.svg";
 import RahulImg from "@assets/images/rahul.png";

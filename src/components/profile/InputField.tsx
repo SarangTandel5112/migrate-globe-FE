@@ -1,5 +1,4 @@
 import ArrowDownIcon from "../icons/ArrowDown";
-import BreifCaseIcon from "../icons/BreifCaseIcon";
 
 interface InputFieldProps {
     label: string;

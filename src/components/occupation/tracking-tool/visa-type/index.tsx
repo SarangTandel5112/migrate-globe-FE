@@ -1,15 +1,16 @@
-'use client'
-import { AnimatePresence, motion } from 'framer-motion';
-import React, { useState } from 'react'
+"use client";
+import { AnimatePresence, motion } from "framer-motion";
+import React, { useState } from "react";
 
 interface VisaTypeProps {
     subclass: string;
     eligible: boolean;
     list: string;
-}[]
+}
+[];
 
 const VisaType = ({ visaTypes }: any) => {
-    const [showAllVisaTypes, setShowAllVisaTypes] = useState(true)
+    const [showAllVisaTypes, setShowAllVisaTypes] = useState(true);
     return (
         <div className="bg-white rounded-xl border border-neutrals-100 overflow-hidden">
             {/* Toggle Header */}
@@ -25,8 +26,9 @@ const VisaType = ({ visaTypes }: any) => {
                     height="8"
                     viewBox="0 0 14 8"
                     fill="none"
-                    className={`transition-transform ${showAllVisaTypes ? "rotate-180" : ""
-                        }`}
+                    className={`transition-transform ${
+                        showAllVisaTypes ? "rotate-180" : ""
+                    }`}
                 >
                     <path
                         d="M1 1L7 7L13 1"
@@ -72,7 +74,12 @@ const VisaType = ({ visaTypes }: any) => {
                                     </div>
                                     <div className="flex justify-center w-16">
                                         <div className="w-6 h-6 bg-mint-green-600 rounded-full flex items-center justify-center">
-                                            <svg width="8" height="6" viewBox="0 0 8 6" fill="none">
+                                            <svg
+                                                width="8"
+                                                height="6"
+                                                viewBox="0 0 8 6"
+                                                fill="none"
+                                            >
                                                 <path
                                                     d="M1 3L3 5L7 1"
                                                     stroke="white"
@@ -88,7 +95,12 @@ const VisaType = ({ visaTypes }: any) => {
                                             {visa.list}
                                         </span>
                                         <div className="bg-mint-green-50 rounded-full p-1">
-                                            <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
+                                            <svg
+                                                width="8"
+                                                height="8"
+                                                viewBox="0 0 8 8"
+                                                fill="none"
+                                            >
                                                 <path
                                                     d="M0.666504 0.666687H7.33317V7.33335M0.666504 7.33335L7.33317 0.666687"
                                                     stroke="#263773"
@@ -123,7 +135,12 @@ const VisaType = ({ visaTypes }: any) => {
                                     <div className="flex items-center gap-2 mt-2">
                                         <div className="flex items-center gap-2 text-neutrals-600 text-sm">
                                             <div className="w-5 h-5 bg-mint-green-600 rounded-full flex items-center justify-center">
-                                                <svg width="8" height="6" viewBox="0 0 8 6" fill="none">
+                                                <svg
+                                                    width="8"
+                                                    height="6"
+                                                    viewBox="0 0 8 6"
+                                                    fill="none"
+                                                >
                                                     <path
                                                         d="M1 3L3 5L7 1"
                                                         stroke="white"
@@ -140,7 +157,12 @@ const VisaType = ({ visaTypes }: any) => {
                                                 {visa.list}
                                             </span>
                                             <div className="bg-mint-green-50 rounded-full p-1">
-                                                <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
+                                                <svg
+                                                    width="8"
+                                                    height="8"
+                                                    viewBox="0 0 8 8"
+                                                    fill="none"
+                                                >
                                                     <path
                                                         d="M0.666504 0.666687H7.33317V7.33335M0.666504 7.33335L7.33317 0.666687"
                                                         stroke="#263773"
@@ -158,7 +180,7 @@ const VisaType = ({ visaTypes }: any) => {
                 )}
             </AnimatePresence>
         </div>
-    )
-}
+    );
+};
 
-export default VisaType
+export default VisaType;

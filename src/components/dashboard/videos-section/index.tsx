@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import MyImage from "@/ui/myImage";
 import RightIcon from "@assets/images/right-icon.svg";
 import VideoCard from "@/components/layout/VideoCard";
@@ -46,10 +46,11 @@ function VideosSection() {
                 else if (width < 1024) setCardsPerPage(2);
                 else setCardsPerPage(3);
             };
-    
+
             updateCardsPerPage();
             window.addEventListener("resize", updateCardsPerPage);
-            return () => window.removeEventListener("resize", updateCardsPerPage);
+            return () =>
+                window.removeEventListener("resize", updateCardsPerPage);
         }
     }, []);
 
