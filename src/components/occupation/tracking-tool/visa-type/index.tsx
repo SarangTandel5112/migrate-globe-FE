@@ -7,9 +7,8 @@ interface VisaTypeProps {
     eligible: boolean;
     list: string;
 }
-[];
 
-const VisaType = ({ visaTypes }: any) => {
+const VisaType = ({ visaTypes }: { visaTypes: VisaTypeProps[] }) => {
     const [showAllVisaTypes, setShowAllVisaTypes] = useState(true);
     return (
         <div className="bg-white rounded-xl border border-neutrals-100 overflow-hidden">

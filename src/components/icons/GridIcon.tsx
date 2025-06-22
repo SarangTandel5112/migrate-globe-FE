@@ -1,4 +1,3 @@
-import * as React from "react";
 const GridIcon = ({ width = 16, height = 16, color = "#7D87AB" }) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
