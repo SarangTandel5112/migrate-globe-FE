@@ -36,9 +36,7 @@ const visaOptions: Option[] = [
 export default function Page() {
     const [open, setOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
-    const [_, setFormData] = useState({
-        selectedPlan: "sub500",
-    });
+
     const [selected, setSelected] = useState<Option>(visaOptions[0]);
 
     useEffect(() => {
