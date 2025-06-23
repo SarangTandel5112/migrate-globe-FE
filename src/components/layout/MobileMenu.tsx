@@ -33,18 +33,20 @@ function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         <>
             {/* Backdrop */}
             <div
-                className={`fixed inset-0 bg-black z-40 lg:hidden transition-opacity duration-300 ease-in-out ${isOpen
-                    ? "bg-opacity-50 opacity-100"
-                    : "bg-opacity-0 opacity-0 pointer-events-none"
-                    }`}
+                className={`fixed inset-0 bg-black z-40 lg:hidden transition-opacity duration-300 ease-in-out ${
+                    isOpen
+                        ? "bg-opacity-50 opacity-100"
+                        : "bg-opacity-0 opacity-0 pointer-events-none"
+                }`}
                 onClick={onClose}
             ></div>
 
             {/* Mobile Menu Content */}
             <div
                 ref={menuRef}
-                className={`fixed top-0 right-0 h-full w-80 bg-white shadow-xl z-50 transform transition-transform duration-300 ease-in-out lg:hidden ${isOpen ? "translate-x-0" : "translate-x-full"
-                    }`}
+                className={`fixed top-0 right-0 h-full w-80 bg-white shadow-xl z-50 transform transition-transform duration-300 ease-in-out lg:hidden ${
+                    isOpen ? "translate-x-0" : "translate-x-full"
+                }`}
             >
                 <div className="flex flex-col h-full overflow-y-auto p-6">
                     {/* Close Button */}
@@ -90,8 +92,13 @@ function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                             const isMega = item.type === "mega";
                             const isOpen = openMega === item.name;
                             // const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
-                            const hrefSlug = item.href.split("/").filter(Boolean).at(-1);
-                            const isActive = hrefSlug === last || (!last && hrefSlug === secondLast);
+                            const hrefSlug = item.href
+                                .split("/")
+                                .filter(Boolean)
+                                .at(-1);
+                            const isActive =
+                                hrefSlug === last ||
+                                (!last && hrefSlug === secondLast);
 
                             if (isMega) {
                                 return (
@@ -99,38 +106,69 @@ function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                                         <button
                                             // onClick={() => setOpenMega(isOpen ? null : item.name)}
                                             onClick={() => {
-                                                if (item?.name === 'Visa') router.push('/services/visa')
+                                                if (item?.name === "Visa")
+                                                    router.push(
+                                                        "/services/visa"
+                                                    );
                                             }}
-                                            className={`w-full flex justify-between items-center text-left pb-2 ${isActive ? 'border-b-2 border-[--Mint-Green] text-navy-blue' : 'text-neutrals border-b-2 border-gray-100'}`}
+                                            className={`w-full flex justify-between items-center text-left pb-2 ${
+                                                isActive
+                                                    ? "border-b-2 border-[--Mint-Green] text-navy-blue"
+                                                    : "text-neutrals border-b-2 border-gray-100"
+                                            }`}
                                         >
                                             <span>{item.name}</span>
                                             <ArrowDownIcon
-                                                className={`text-neutrals ${isOpen ? ' rotate-180' : ''}`}
+                                                className={`text-neutrals ${
+                                                    isOpen ? " rotate-180" : ""
+                                                }`}
                                                 onClick={(e) => {
                                                     e.stopPropagation();
-                                                    setOpenMega(isOpen ? null : item?.name)
+                                                    setOpenMega(
+                                                        isOpen
+                                                            ? null
+                                                            : item?.name
+                                                    );
                                                 }}
                                             />
                                         </button>
 
-                                        {isOpen && item.groups?.map((group) => (
-                                            <div key={group.title} className="mt-3 mb-4">
-                                                <p className="text-sm font-medium text-gray-500 mb-2">{group.title}</p>
-                                                <ul className="space-y-1 pl-2">
-                                                    {group.items.map((link) => (
-                                                        <li key={link.name}>
-                                                            <Link
-                                                                href={link.href}
-                                                                onClick={onClose}
-                                                                className="block text-gray-700 hover:text-navy-blue transition"
-                                                            >
-                                                                {link.name}
-                                                            </Link>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                        ))}
+                                        {isOpen &&
+                                            item.groups?.map((group) => (
+                                                <div
+                                                    key={group.title}
+                                                    className="mt-3 mb-4"
+                                                >
+                                                    <p className="text-sm font-medium text-gray-500 mb-2">
+                                                        {group.title}
+                                                    </p>
+                                                    <ul className="space-y-1 pl-2">
+                                                        {group.items.map(
+                                                            (link) => (
+                                                                <li
+                                                                    key={
+                                                                        link.name
+                                                                    }
+                                                                >
+                                                                    <Link
+                                                                        href={
+                                                                            link.href
+                                                                        }
+                                                                        onClick={
+                                                                            onClose
+                                                                        }
+                                                                        className="block text-gray-700 hover:text-navy-blue transition"
+                                                                    >
+                                                                        {
+                                                                            link.name
+                                                                        }
+                                                                    </Link>
+                                                                </li>
+                                                            )
+                                                        )}
+                                                    </ul>
+                                                </div>
+                                            ))}
                                     </div>
                                 );
                             }
@@ -141,10 +179,11 @@ function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                                     key={item.name}
                                     href={item.href}
                                     onClick={onClose}
-                                    className={`pb-2 ${isActive
-                                        ? "border-b-2 border-[--Mint-Green] text-navy-blue"
-                                        : "text-neutrals border-b border-gray-100 hover:text-zinc-800"
-                                        }`}
+                                    className={`pb-2 ${
+                                        isActive
+                                            ? "border-b-2 border-[--Mint-Green] text-navy-blue"
+                                            : "text-neutrals border-b border-gray-100 hover:text-zinc-800"
+                                    }`}
                                 >
                                     {item.name}
                                 </Link>
@@ -152,15 +191,17 @@ function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                         })}
                     </div>
 
-
                     {/* Action Buttons */}
                     <div className="flex flex-col gap-4 mt-8">
                         <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-center text-white bg-navy-blue rounded-md">
                             Book a Consultation
                         </button>
-                        <div className="flex items-center justify-center gap-2 py-2">
+                        <Link
+                            href="/cart"
+                            className="flex items-center justify-center gap-2 py-2"
+                        >
                             <CartIcon />
-                        </div>
+                        </Link>
                         <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-center rounded-md border border-solid border-[color:var(--Neutrals-300,#C0C0C0)] text-zinc-800">
                             LogIn
                         </button>
