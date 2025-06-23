@@ -32,9 +32,9 @@ function ContactForm() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-            className="lg:w-2/5 p-10"
+            className="lg:w-2/5 my-auto"
         >
-            <div className="max-w-md mx-auto">
+            <div className="mx-auto">
                 <div className="mb-6">
                     <h2 className="font-bold text-heading1 text-neutrals-700 capitalize mb-2">
                         Feel free to Contact
@@ -160,7 +160,7 @@ function ContactForm() {
                     <div className="flex justify-end">
                         <button
                             type="submit"
-                            className="w-50 h-10 bg-navy-blue text-white rounded-md text-sm tracking-[0.46px] hover:bg-navy-blue/90 transition-colors px-20 py-3"
+                            className="w-50 w-full sm:w-auto h-10 bg-navy-blue text-white rounded-md text-sm tracking-[0.46px] hover:bg-navy-blue/90 transition-colors px-20 py-3"
                         >
                             Submit
                         </button>

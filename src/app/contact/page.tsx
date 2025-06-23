@@ -8,7 +8,7 @@ export default function Contact() {
     return (
         <div className="container-1200">
             {/* Contact Section */}
-            <div className="flex flex-col lg:flex-row">
+            <div className="flex flex-col lg:flex-row gap-10">
                 {/* Left Section - Map and Locations */}
                 <MapSection />
 

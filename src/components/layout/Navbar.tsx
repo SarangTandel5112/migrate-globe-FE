@@ -61,9 +61,17 @@ function Navbar() {
                         <Image
                             src="/logo.svg"
                             alt="Migrate Globe Logo"
+                            width={100}
+                            height={40}
+                            className="block md:hidden object-contain shrink-0 self-stretch my-auto rounded-none"
+                        />
+
+                        <Image
+                            src="/logo.svg"
+                            alt="Migrate Globe Logo"
                             width={144}
                             height={40}
-                            className="object-contain shrink-0 self-stretch my-auto rounded-none"
+                            className="hidden md:block object-contain shrink-0 self-stretch my-auto rounded-none"
                         />
                     </Link>
                     {/* Desktop Navigation */}
