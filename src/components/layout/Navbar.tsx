@@ -21,28 +21,31 @@ function Navbar() {
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
-            if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-                document.body.classList.remove('no-scroll')
-                setShowLoginModal(false)
+            if (
+                modalRef.current &&
+                !modalRef.current.contains(event.target as Node)
+            ) {
+                document.body.classList.remove("no-scroll");
+                setShowLoginModal(false);
             }
         }
 
         if (showLoginModal) {
-            document.addEventListener('mousedown', handleClickOutside)
+            document.addEventListener("mousedown", handleClickOutside);
         } else {
-            document.removeEventListener('mousedown', handleClickOutside)
+            document.removeEventListener("mousedown", handleClickOutside);
         }
 
         return () => {
-            document.removeEventListener('mousedown', handleClickOutside)
-        }
-    }, [showLoginModal])
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [showLoginModal]);
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
     const toggleLogin = () => {
-        document.body.classList.toggle('no-scroll')
+        document.body.classList.toggle("no-scroll");
         setShowLoginModal(!showLoginModal);
     };
 
@@ -67,12 +70,22 @@ function Navbar() {
                     <div className="hidden lg:flex gap-8 items-center self-stretch my-auto text-base font-medium whitespace-nowrap min-w-60 text-stone-500">
                         {navigationItems.map((item) => {
                             // const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
-                            const hrefSlug = item.href.split("/").filter(Boolean).at(-1);
-                            const isActive = hrefSlug === last || (!last && hrefSlug === secondLast);
+                            const hrefSlug = item.href
+                                .split("/")
+                                .filter(Boolean)
+                                .at(-1);
+                            const isActive =
+                                hrefSlug === last ||
+                                (!last && hrefSlug === secondLast);
                             if (item.name === "Visa") {
                                 return (
-                                    <div key={item.name}>
-                                        <VisaCategoriesGrid isActive={isActive} />
+                                    <div
+                                        className="pb-1 my-auto"
+                                        key={item.name}
+                                    >
+                                        <VisaCategoriesGrid
+                                            isActive={isActive}
+                                        />
                                     </div>
                                 );
                             }
@@ -80,10 +93,11 @@ function Navbar() {
                                 <Link
                                     key={item.name}
                                     href={item.href}
-                                    className={`gap-2.5 self-stretch pb-1 my-auto ${isActive
+                                    className={`gap-2.5 self-stretch pb-1 my-auto ${
+                                        isActive
                                             ? "border-b-2 border-solid border-b-mint-green text-neutrals-700"
                                             : "text-neutrals hover:text-neutrals-700 transition-colors"
-                                        }`}
+                                    }`}
                                 >
                                     {item.name}
                                 </Link>
@@ -122,7 +136,10 @@ function Navbar() {
                         >
                             <CartIcon />
                         </Link>
-                        <button onClick={toggleLogin} className="gap-2.5 self-stretch px-6 py-2 my-auto text-sm font-medium text-center whitespace-nowrap rounded-md border border-solid border-neutrals-300 text-neutrals-700">
+                        <button
+                            onClick={toggleLogin}
+                            className="gap-2.5 self-stretch px-6 py-2 my-auto text-sm font-medium text-center whitespace-nowrap rounded-md border border-solid border-neutrals-300 text-neutrals-700"
+                        >
                             Login
                         </button>
                     </div>
@@ -133,20 +150,23 @@ function Navbar() {
                         aria-label="Toggle mobile menu"
                     >
                         <span
-                            className={`w-6 h-0.5 bg-zinc-800 transition-all duration-300 ${isMobileMenuOpen
-                                ? "rotate-45 translate-y-1.5"
-                                : ""
-                                }`}
+                            className={`w-6 h-0.5 bg-zinc-800 transition-all duration-300 ${
+                                isMobileMenuOpen
+                                    ? "rotate-45 translate-y-1.5"
+                                    : ""
+                            }`}
                         ></span>
                         <span
-                            className={`w-6 h-0.5 bg-zinc-800 transition-all duration-300 ${isMobileMenuOpen ? "opacity-0" : ""
-                                }`}
+                            className={`w-6 h-0.5 bg-zinc-800 transition-all duration-300 ${
+                                isMobileMenuOpen ? "opacity-0" : ""
+                            }`}
                         ></span>
                         <span
-                            className={`w-6 h-0.5 bg-zinc-800 transition-all duration-300 ${isMobileMenuOpen
-                                ? "-rotate-45 -translate-y-1.5"
-                                : ""
-                                }`}
+                            className={`w-6 h-0.5 bg-zinc-800 transition-all duration-300 ${
+                                isMobileMenuOpen
+                                    ? "-rotate-45 -translate-y-1.5"
+                                    : ""
+                            }`}
                         ></span>
                     </button>
                 </div>
