@@ -163,7 +163,16 @@ const InsuranceComparisonPage: React.FC = () => {
                                         )
                                     }
                                     ref={policyStartDateRef}
-                                    className="w-full px-3 py-2.5 pr-10 bg-background-1 border border-neutrals-200 rounded text-base text-navy-blue focus:outline-none focus:border-navy-blue-300 [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:pointer-events-none"
+                                    // className="w-full px-3 py-2.5 pr-10 bg-background-1 border border-neutrals-200 rounded text-base text-navy-blue focus:outline-none focus:border-navy-blue-300 [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:pointer-events-none"
+                                    className="w-full px-3 py-2.5 pr-10 bg-background-1 border border-neutrals-200 rounded text-base text-navy-blue appearance-none focus:outline-none focus:border-navy-blue-300
+                                        [&::-webkit-inner-spin-button]:appearance-none
+                                        [&::-webkit-clear-button]:appearance-none
+                                        [&::-webkit-calendar-picker-indicator]:opacity-0
+                                        [&::-webkit-calendar-picker-indicator]:pointer-events-none
+                                        [&::-webkit-calendar-picker-indicator]:absolute
+                                        [&::-webkit-calendar-picker-indicator]:right-3
+                                        [&::-webkit-calendar-picker-indicator]:top-1/2
+                                        [&::-webkit-calendar-picker-indicator]:-translate-y-1/2"
                                 />
                                 <button
                                     type="button"
@@ -203,7 +212,16 @@ const InsuranceComparisonPage: React.FC = () => {
                                         )
                                     }
                                     ref={policyEndDateRef}
-                                    className="w-full px-3 py-2.5 pr-10 bg-background-1 border border-neutrals-200 rounded text-base text-navy-blue focus:outline-none focus:border-navy-blue-300 [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:pointer-events-none"
+                                    // className="w-full px-3 py-2.5 pr-10 bg-background-1 border border-neutrals-200 rounded text-base text-navy-blue focus:outline-none focus:border-navy-blue-300 [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:pointer-events-none"
+                                    className="w-full px-3 py-2.5 pr-10 bg-background-1 border border-neutrals-200 rounded text-base text-navy-blue appearance-none focus:outline-none focus:border-navy-blue-300
+                                        [&::-webkit-inner-spin-button]:appearance-none
+                                        [&::-webkit-clear-button]:appearance-none
+                                        [&::-webkit-calendar-picker-indicator]:opacity-0
+                                        [&::-webkit-calendar-picker-indicator]:pointer-events-none
+                                        [&::-webkit-calendar-picker-indicator]:absolute
+                                        [&::-webkit-calendar-picker-indicator]:right-3
+                                        [&::-webkit-calendar-picker-indicator]:top-1/2
+                                        [&::-webkit-calendar-picker-indicator]:-translate-y-1/2"
                                 />
                                 <button
                                     type="button"

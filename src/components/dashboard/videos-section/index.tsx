@@ -97,9 +97,9 @@ function VideosSection() {
                 {videos.slice(0, 3).map((video, i) => {
                     // Different top offsets and scale for the stacked effect (like your original)
                     const positions = [
-                        { top: 0, scale: 1, zIndex: 30, width: "100%" },
-                        { top: -16, scale: 0.98, zIndex: 20, width: "95%" },
-                        { top: -32, scale: 0.96, zIndex: 10, width: "90%" },
+                        { top: 0, scale: 1, zIndex: 30, width: "100%", left: "0%" },
+                        { top: -18, scale: 0.98, zIndex: 20, width: "95%", left: "2%" },
+                        { top: -27, scale: 0.96, zIndex: 10, width: "85%", left: "7%" }
                     ];
                     const style =
                         positions[i] || positions[positions.length - 1];
@@ -108,11 +108,13 @@ function VideosSection() {
                         <motion.div
                             key={i}
                             variants={childVariants}
-                            className="absolute left-1/2 rounded-md shadow-sm"
+                            className="absolute left-0 rounded-md shadow-sm"
                             style={{
                                 top: style.top,
                                 zIndex: style.zIndex,
                                 width: style.width,
+                                left: style.left,
+                                margin: 'auto',
                                 transform: `translateX(-50%) scale(${style.scale})`,
                             }}
                         >
