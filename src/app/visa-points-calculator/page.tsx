@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import BackIcon from "@/components/icons/BackIcon";
@@ -8,6 +7,7 @@ import RadioButtonIcon from "@/components/icons/RadioButtonIcon";
 import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
 import CheckFillIcon from "@/components/icons/CheckFillIcon";
 import CheckRoundIcon from "@/components/icons/CheckRoundIcon";
+import { motion } from "framer-motion";
 
 export default function VisaPointsCalculator() {
     const router = useRouter();
@@ -108,7 +108,13 @@ export default function VisaPointsCalculator() {
             </div>
 
             {/* Main Content */}
-            <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+            {/* <div className="flex flex-col lg:flex-row gap-6 lg:gap-8"> */}
+            <motion.div
+                className="flex flex-col lg:flex-row gap-6 lg:gap-8"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+            >
                 {/* Left Column - Form Section */}
                 <div className="flex-1">
                     <div className="bg-white rounded-2xl border border-white/80 backdrop-blur-[20px] p-6">
@@ -124,10 +130,13 @@ export default function VisaPointsCalculator() {
 
                         {/* Visa Options */}
                         <div className="space-y-6 mb-8">
-                            {visaOptions.map((option) => (
-                                <div
+                            {visaOptions.map((option, index) => (
+                                <motion.div
                                     key={option.id}
                                     className="flex items-start gap-4"
+                                    initial={{ opacity: 0, y: 30 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
                                 >
                                     {/* Radio Button */}
                                     <div className="relative flex-shrink-0 w-6 h-6 mt-1">
@@ -167,7 +176,7 @@ export default function VisaPointsCalculator() {
                                             {option.description}
                                         </p>
                                     </div>
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
 
@@ -212,9 +221,8 @@ export default function VisaPointsCalculator() {
                                         fill="none"
                                         stroke="#6FAC96"
                                         strokeWidth="17"
-                                        strokeDasharray={`${
-                                            progressPercentage * 2.6
-                                        } ${260 - progressPercentage * 2.6}`}
+                                        strokeDasharray={`${progressPercentage * 2.6
+                                            } ${260 - progressPercentage * 2.6}`}
                                         strokeLinecap="round"
                                         className="transition-all duration-500"
                                     />
@@ -250,13 +258,19 @@ export default function VisaPointsCalculator() {
 
                         {/* Checklist */}
                         <div className="space-y-0">
-                            {checklistItems.map((item) => (
-                                <div
-                                    key={item.id}
-                                    className={`flex items-center justify-between p-3 rounded-lg ${
-                                        item.completed ? "bg-background" : ""
-                                    }`}
-                                >
+                            {checklistItems.map((item, index) => (
+                                // <div
+                                //     key={item.id}
+                                //     className={`flex items-center justify-between p-3 rounded-lg ${item.completed ? "bg-background" : ""
+                                //         }`}
+                                // >
+                                    <motion.div
+                                        key={item.id}
+                                        className={`flex items-center justify-between p-3 rounded-lg ${item.completed ? "bg-background" : ""}`}
+                                        initial={{ opacity: 0, y: 30 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
+                                    >
                                     <div className="flex items-center gap-4">
                                         {/* Checkbox */}
                                         <div className="w-6 h-6 flex-shrink-0">
@@ -273,11 +287,10 @@ export default function VisaPointsCalculator() {
 
                                         {/* Label */}
                                         <span
-                                            className={`text-sm tracking-[0.2px] capitalize leading-6 ${
-                                                item.completed
+                                            className={`text-sm tracking-[0.2px] capitalize leading-6 ${item.completed
                                                     ? "text-navy-blue font-bold"
                                                     : "text-navy-blue-400"
-                                            }`}
+                                                }`}
                                         >
                                             {item.label}
                                         </span>
@@ -291,12 +304,12 @@ export default function VisaPointsCalculator() {
                                             </span>
                                         </div>
                                     )}
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
                     </div>
                 </div>
-            </div>
+            </motion.div>
         </div>
     );
 }

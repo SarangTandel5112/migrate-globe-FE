@@ -5,7 +5,7 @@ import { navigationItems } from "@/constants/navigation";
 import CartIcon from "../icons/CartIcon";
 import { useEffect, useState } from "react";
 import ArrowDownIcon from "../icons/ArrowDown";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 interface MobileMenuProps {
     isOpen: boolean;
@@ -16,6 +16,7 @@ function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     const [openMega, setOpenMega] = useState<string | null>(null);
     const menuRef = useOutsideClick<HTMLDivElement>(onClose);
     const pathname = usePathname();
+    const router = useRouter();
     const segments = pathname.split("/").filter(Boolean);
     const last = segments.at(-1);
     const secondLast = segments.at(-2);
@@ -96,11 +97,20 @@ function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                                 return (
                                     <div key={item.name} className="pt-2">
                                         <button
-                                            onClick={() => setOpenMega(isOpen ? null : item.name)}
-                                            className="w-full flex justify-between items-center text-left text-neutrals border-b-2 border-gray-100 pb-2"
+                                            // onClick={() => setOpenMega(isOpen ? null : item.name)}
+                                            onClick={() => {
+                                                if (item?.name === 'Visa') router.push('/services/visa')
+                                            }}
+                                            className={`w-full flex justify-between items-center text-left pb-2 ${isActive ? 'border-b-2 border-[--Mint-Green] text-navy-blue' : 'text-neutrals border-b-2 border-gray-100'}`}
                                         >
                                             <span>{item.name}</span>
-                                            <ArrowDownIcon className={`text-neutrals ${isOpen ? ' rotate-180' : ''}`} />
+                                            <ArrowDownIcon
+                                                className={`text-neutrals ${isOpen ? ' rotate-180' : ''}`}
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    setOpenMega(isOpen ? null : item?.name)
+                                                }}
+                                            />
                                         </button>
 
                                         {isOpen && item.groups?.map((group) => (

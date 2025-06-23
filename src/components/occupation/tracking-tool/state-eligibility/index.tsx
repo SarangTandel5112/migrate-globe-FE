@@ -1,4 +1,5 @@
 "use client";
+
 import MyImage from "@/ui/myImage";
 import React, { useState } from "react";
 import Check from "@assets/images/Check.svg";
@@ -6,11 +7,19 @@ import Frame from "@assets/images/Frame.svg";
 import none from "@assets/images/none.svg";
 import { motion, AnimatePresence } from "framer-motion";
 
+type EligibilityStatus = "eligible" | "not_eligible" | string;
+
+type StateMap = Record<string, EligibilityStatus>;
+
+interface StateEligibilityProps {
+    stateEligibility: Record<string, StateMap>;
+}
+
 const StatusIcon = ({
     status,
     classname = "",
 }: {
-    status: string;
+    status: EligibilityStatus;
     classname?: string;
 }) => {
     const commonClasses =
@@ -47,7 +56,7 @@ const StatusIcon = ({
     );
 };
 
-const StateEligibility = ({ stateEligibility }: any) => {
+const StateEligibility = ({ stateEligibility }: StateEligibilityProps) => {
     const [showStateEligibility, setShowStateEligibility] = useState(true);
 
     return (
@@ -123,7 +132,7 @@ const StateEligibility = ({ stateEligibility }: any) => {
 
                         <div className="border-t border-neutrals-100 pt-6">
                             {Object.entries(stateEligibility).map(
-                                ([visaCode, states]: any, index, arr) => {
+                                ([visaCode, states], index, arr) => {
                                     const stateEntries = Object.entries(states);
 
                                     return (
@@ -137,13 +146,10 @@ const StateEligibility = ({ stateEligibility }: any) => {
                                                 </div>
                                                 <div className="columns-4 gap-2 space-y-2">
                                                     {stateEntries.map(
-                                                        ([
-                                                            state,
-                                                            status,
-                                                        ]: any) => (
+                                                        ([state, status]) => (
                                                             <div
                                                                 key={state}
-                                                                className="flex items-center gap-2 px-3 py-1 bg-background-1 border border-neutrals-100 rounded-full whitespace-nowrap "
+                                                                className="flex items-center gap-2 px-3 py-1 bg-background-1 border border-neutrals-100 rounded-full whitespace-nowrap"
                                                             >
                                                                 <StatusIcon
                                                                     status={
@@ -178,10 +184,7 @@ const StateEligibility = ({ stateEligibility }: any) => {
                                                     }}
                                                 >
                                                     {stateEntries.map(
-                                                        ([
-                                                            state,
-                                                            status,
-                                                        ]: any) => (
+                                                        ([state, status]) => (
                                                             <div
                                                                 key={state}
                                                                 className="flex items-center gap-1 px-3 py-1 bg-background-1 border border-neutrals-100 rounded-full w-fit"

@@ -70,8 +70,8 @@ function VideosSection() {
     return (
         <motion.section
             className="sm:container-1200"
-            // initial="hidden"
-            initial={false}
+            initial="hidden"
+            // initial={false}
             whileInView="show"
             viewport={{ once: true, amount: 0.05 }}
             variants={containerVariants}
@@ -130,8 +130,8 @@ function VideosSection() {
             {/* Desktop carousel with animated cards */}
             <motion.div
                 variants={containerVariants}
-                // initial="hidden"
-                initial={false}
+                initial="hidden"
+                // initial={false}
                 whileInView="show"
                 viewport={{ once: true, amount: 0.2 }}
                 className="hidden sm:block relative overflow-hidden"

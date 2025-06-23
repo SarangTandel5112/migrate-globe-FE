@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import { FooterLinkSection } from "../footer/FooterLinkSection";
 import { SocialIcons } from "../footer/SocialIcons";
@@ -31,10 +30,7 @@ const Footer: React.FC = () => {
                 <div className="flex flex-col md:flex-row md:justify-between gap-6 md:gap-12">
                     <div className="flex flex-row gap-8 md:gap-12 lg:gap-16 justify-between sm:justify-start">
                         <FooterLinkSection title="Content" links={NAV_LINKS} />
-                        <FooterLinkSection
-                            title="Services"
-                            links={SERVICE_LINKS}
-                        />
+                        <FooterLinkSection title="Services" links={SERVICE_LINKS} />
                     </div>
 
                     <div className="flex flex-col gap-4 md:max-w-xs">

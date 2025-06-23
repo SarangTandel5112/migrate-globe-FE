@@ -16,7 +16,7 @@ function ProfileTab() {
                 <InputField label="City" placeholder="Enter Last Name" onChange={() => console.log('called')} />
             </div>
             <div className="flex justify-end">
-                <button className="bg-navy-blue text-white px-20 py-3 rounded  text-sm font-medium tracking-wide hover:bg-navy-blue-600 transition-colors">
+                <button className="w-full sm:w-fit bg-navy-blue text-white px-20 py-3 rounded text-sm font-medium tracking-wide hover:bg-navy-blue-600 transition-colors">
                     Save
                 </button>
             </div>

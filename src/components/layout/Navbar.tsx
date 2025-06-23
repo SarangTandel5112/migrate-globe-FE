@@ -72,7 +72,7 @@ function Navbar() {
                             if (item.name === "Visa") {
                                 return (
                                     <div key={item.name}>
-                                        <VisaCategoriesGrid />
+                                        <VisaCategoriesGrid isActive={isActive} />
                                     </div>
                                 );
                             }
@@ -160,7 +160,7 @@ function Navbar() {
                 {showLoginModal && (
                     <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
                         <div ref={modalRef}>
-                            <LoginModal isModal onClose={toggleLogin} />
+                            <LoginModal isModal />
                         </div>
                     </div>
                 )}

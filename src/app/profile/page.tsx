@@ -62,7 +62,7 @@ export default function Page() {
                 </motion.div>
 
                 <motion.div
-                    className="flex gap-0"
+                    className="flex gap-0 overflow-x-auto"
                     initial="initial"
                     animate="animate"
                     variants={fadeVariants}
@@ -71,14 +71,14 @@ export default function Page() {
                     <TabButton
                         id="profile"
                         label="Profile"
-                        icon={<UserCheck className="w-5 h-5" color={activeTab === "profile" ? '#fff' : 'silver'} />}
+                        icon={<UserCheck className="" color={activeTab === "profile" ? '#fff' : 'silver'} />}
                         isActive={activeTab === "profile"}
                         onClick={setActiveTab}
                     />
                     <TabButton
                         id="purchase"
                         label="My purchase"
-                        icon={<PurchaseIcon className="w-5 h-5" color={activeTab === "purchase" ? '#fff' : 'silver'} />}
+                        icon={<PurchaseIcon className="" color={activeTab === "purchase" ? '#fff' : 'silver'} />}
                         isActive={activeTab === "purchase"}
                         onClick={setActiveTab}
                     />

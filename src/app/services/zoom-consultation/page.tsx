@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import BackIcon from "@/components/icons/BackIcon";
 import LeftSignIcon from "@/components/icons/LeftSign";
 import ZoomBookForm from "@/components/zoom-book-form";
-
+import { motion } from "framer-motion";
 
 const daysInMonth = (month: number, year: number) => new Date(year, month + 1, 0).getDate();
 // const weekDays = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
@@ -145,7 +145,13 @@ export default function ZoomConsultation() {
             </div>
 
             {/* Main Content */}
-            <div className="flex flex-col lg:flex-row gap-6 items-stretch">
+            {/* <div className="flex flex-col lg:flex-row gap-6 items-stretch"> */}
+            <motion.div
+                className="flex flex-col lg:flex-row gap-6 items-stretch"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+            >
                 {/* Left Column - Calendar and Time Slots */}
                 <div className="flex-1 flex flex-col">
                     <div className="bg-white rounded-xl flex flex-col md:flex-row justify-between p-4 h-full">
@@ -232,9 +238,16 @@ export default function ZoomConsultation() {
 
                             <div className="space-y-2">
                                 {timeSlots.map((time) => (
-                                    <div
+                                    // <div
+                                    //     key={time}
+                                    //     className="flex items-center gap-1.5 group"
+                                    // >
+                                    <motion.div
                                         key={time}
                                         className="flex items-center gap-1.5 group"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ duration: 0.4, delay: 0.1, ease: "easeOut" }}
                                     >
                                         <button
                                             // onClick={() => setSelectedTime(time)}
@@ -246,7 +259,7 @@ export default function ZoomConsultation() {
                                         <button className="py-4 px-5 bg-[#333] text-white text-base font-lexend leading-6 rounded-xl hidden group-hover:block">
                                             Weiter
                                         </button>
-                                    </div>
+                                    </motion.div>
                                 ))}
                             </div>
                         </div>
@@ -261,7 +274,7 @@ export default function ZoomConsultation() {
                     isFormValid={isFormValid}
                     key={'book-form'}
                 />
-            </div>
+            </motion.div>
         </div>
     );
 }
