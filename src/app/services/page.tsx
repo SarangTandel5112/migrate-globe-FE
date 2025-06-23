@@ -38,7 +38,7 @@ export default function Services() {
                 "Explore Visa Types That Match Your Profile, Goals, And Timeline — Fast And Accurate.",
             color: "bg-purple-100",
             icon: SearchFileIcon,
-            link: "/visa",
+            link: "/services/visa",
         },
         {
             title: "Skill Assessment",
@@ -54,7 +54,7 @@ export default function Services() {
                 "Compare And Purchase Affordable Overseas Health Cover From Top Providers.",
             color: "bg-[#FFCBCB]",
             icon: UmbrellaIcon,
-            link: "/insurance",
+            link: "/services/insurance",
         },
         {
             title: "Zoom Consultations",
@@ -96,7 +96,7 @@ export default function Services() {
                             !displayCard ? "bg-navy-blue" : ""
                         }`}
                     >
-                        <RowsIcon color={!displayCard ? '#fff' : '#7D87AB'} />
+                        <RowsIcon color={!displayCard ? "#fff" : "#7D87AB"} />
                     </button>
                     <button
                         onClick={() => setDisplayCard(true)}
@@ -104,7 +104,7 @@ export default function Services() {
                             displayCard ? "bg-navy-blue" : ""
                         }`}
                     >
-                        <GridIcon color={displayCard ? '#fff' : '#7D87AB'} />
+                        <GridIcon color={displayCard ? "#fff" : "#7D87AB"} />
                     </button>
                 </div>
             </div>

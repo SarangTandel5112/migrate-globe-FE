@@ -19,7 +19,7 @@ const VisaOption = ({
         <div className="flex gap-4 sm:gap-5">
             <Link
                 href={"checklists/1"}
-                className="flex-1 sm:flex-none px-6 py-2 border border-neutrals-300 rounded text-neutrals-700 text-sm font-medium tracking-[0.46px] hover:border-neutrals-400 transition-colors"
+                className="flex-1 text-center sm:flex-none px-6 py-2 border border-neutrals-300 rounded text-neutrals-700 text-sm font-medium tracking-[0.46px] hover:border-neutrals-400 transition-colors"
             >
                 More info
             </Link>
