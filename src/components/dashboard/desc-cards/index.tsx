@@ -112,6 +112,7 @@ export default function FeatureGrid() {
                         className={`bg-white p-4 rounded-xl shadow-md flex flex-row items-center ${item.span}`}
                     >
                         <div className="text-2xl">{item.icon}</div>
+
                         <div className="flex flex-col gap-1 text-left">
                             <h3 className="font-semibold text-neutrals-700 text-base">
                                 {item.title}
