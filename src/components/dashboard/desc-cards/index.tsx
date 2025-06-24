@@ -12,86 +12,86 @@ import zoomAnimation from "@assets/animations/ZoomMeeting.json";
 const features = [
     {
         icon: (
-            <div className="md:h-[90px] md:w-[90px] lg:h-[100px] lg:w-[100px]">
+            <div className="h-[70px] w-[70px] md:h-[90px] md:w-[90px] lg:h-[100px] lg:w-[100px]">
                 <Lottie animationData={checkListAnimation} loop={true} />
             </div>
         ),
         title: "Buy Documents Checklists",
         description:
             "Get A Verified Checklist Tailored To Your Visa And Occupation.",
-        span: "col-span-8 lg:col-span-5",
+        span: "col-span-12 md:col-span-8 lg:col-span-5",
     },
     {
         icon: (
-            <div className="md:h-[180px] md:w-[180px] lg:h-[200px] lg:w-[200px]">
+            <div className="h-[70px] w-[70px] md:h-[180px] md:w-[180px] lg:h-[200px] lg:w-[200px]">
                 <Lottie animationData={skillAnimation} loop={true} />
             </div>
         ),
         title: "Skill Assessment",
         description:
             "Check If Your Occupation Is Eligible And Buy The Step-By-Step Assessment Guide Instantly.",
-        span: "col-span-8 lg:col-span-5 row-span-2 flex-col",
+        span: "col-span-12 md:col-span-8 lg:col-span-5 md:row-span-2 md:flex-col",
     },
     {
         icon: (
-            <div className="md:h-[90px] md:w-[90px] lg:h-[110px] lg:w-[110px]">
+            <div className="h-[70px] w-[70px] md:h-[90px] md:w-[90px] lg:h-[110px] lg:w-[110px]">
                 <Lottie animationData={insuranceAnimation} loop={true} />
             </div>
         ),
         title: "Buy Cheapest Insurance",
         description:
             "Compare And Purchase Affordable Overseas Health Cover From Top",
-        span: "col-span-8 lg:col-span-6",
+        span: "col-span-12 md:col-span-8 lg:col-span-6",
     },
     {
         icon: (
-            <div className="md:h-[90px] md:w-[90px] lg:h-[120px] lg:w-[120px]">
+            <div className="h-[70px] w-[70px] md:h-[90px] md:w-[90px] lg:h-[120px] lg:w-[120px]">
                 <Lottie animationData={airplaneAnimation} loop={true} />
             </div>
         ),
         title: "Smart Migration Plan",
         description:
             "Create Your Personalized Migration Route With Our Interactive Planning.",
-        span: "col-span-8",
+        span: "col-span-12 md:col-span-8",
     },
     {
         icon: (
-            <div className="md:h-[90px] md:w-[90px]">
+            <div className="h-[70px] w-[70px] md:h-[90px] md:w-[90px]">
                 <Lottie animationData={occupationAnimation} loop={true} />
             </div>
         ),
         title: "Occupation Tracking Tool",
         description:
             "Track Updates On Your Occupation — Demand Trends, State Invites.",
-        span: "col-span-8 lg:col-span-5",
+        span: "col-span-12 md:col-span-8 lg:col-span-5",
     },
     {
         icon: (
-            <div className="h-[120px] w-[120px]">
+            <div className="h-[70px] w-[70px] md:h-[120px] md:w-[120px]">
                 <Lottie animationData={visaAnimation} loop={true} />
             </div>
         ),
         title: "Find Visa Options",
         description:
             "Explore Visa Types That Match Your Profile, Goals, And Timeline — Fast",
-        span: "col-span-12 lg:col-span-8",
+        span: "col-span-12 md:col-span-12 lg:col-span-8",
     },
     {
         icon: (
-            <div className="h-[110px] w-[110px]">
+            <div className="h-[70px] w-[70px] md:h-[110px] md:w-[110px]">
                 <Lottie animationData={zoomAnimation} loop={true} />
             </div>
         ),
         title: "Zoom Consultations",
         description:
             "Get Expert Advice Face-To-Face — Online. Book A Call With Our",
-        span: "col-span-12 lg:col-span-6",
+        span: "col-span-full md:col-span-12 lg:col-span-6",
     },
 ];
 
 export default function FeatureGrid() {
     return (
-        <div className="py-10 px-6 md:pt-[100px] lg:pt-[160px]">
+        <div className="py-10 px-6 pt-[130px] md:pt-[100px] lg:pt-[160px]">
             <motion.div
                 className="grid grid-cols-24 grid-rows-3 lg:grid-rows-2 gap-4 auto-rows-fr"
                 initial={{ opacity: 0, y: 20 }}
@@ -116,7 +116,7 @@ export default function FeatureGrid() {
                             <h3 className="font-semibold text-neutrals-700 text-base">
                                 {item.title}
                             </h3>
-                            <p className="text-xs md:text-sm text-neutrals">
+                            <p className="text-xs md:text-sm text-neutrals hidden sm:block">
                                 {item.description}
                             </p>
                         </div>

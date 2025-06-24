@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 export default function HeroSection() {
     return (
         <div className="-mx-8">
-            <div className="md:bg-[url('/hero_md.png')] lg:bg-[url('/hero_main.png')] bg-cover bg-center w-full md:-mt-20 lg:-mt-24 mx-auto relative">
+            <div className="bg-[url('/hero_sm.png')] md:bg-[url('/hero_md.png')] lg:bg-[url('/hero_main.png')] bg-cover bg-center w-full  -mt-20 lg:-mt-24 mx-auto relative">
                 <div className="pt-[60px] md:pt-[120px] z-[2] relative">
                     <div className="text-center px-10 sm:px-16">
                         <motion.h1

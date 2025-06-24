@@ -107,6 +107,13 @@ module.exports = {
       gridTemplateColumns: {
         24: 'repeat(24, minmax(0, 1fr))',
       },
+      gridColumn: {
+        // Support col-span-1 through col-span-24
+        ...Array.from({ length: 24 }, (_, i) => i + 1).reduce((acc, num) => {
+          acc[num] = `${num}`;
+          return acc;
+        }, {}),
+      },
     },
   },
   plugins: [

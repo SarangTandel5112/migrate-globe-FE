@@ -12,7 +12,7 @@ const GetStartedForm = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true, amount: 0.2 }}
-            className="px-10 sm:px-16"
+            className="px-10 sm:px-16 hidden md:block"
         >
             <div className="mt-10 bg-navy-blue text-white max-w-6xl mx-auto my-10 rounded-2xl px-6 py-6 shadow-lg">
                 <div className="grid grid-cols-1 md:grid-cols-[1fr_1px_1fr_1px_auto] items-end gap-4 md:gap-0">
