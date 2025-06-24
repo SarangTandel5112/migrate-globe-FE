@@ -9,7 +9,7 @@ export default function HeroSection() {
     return (
         <div className="-mx-8">
             <div className="bg-[url('/hero_sm.png')] md:bg-[url('/hero_md.png')] lg:bg-[url('/hero_main.png')] bg-cover bg-center w-full  -mt-20 lg:-mt-24 mx-auto relative">
-                <div className="pt-[60px] md:pt-[120px] z-[2] relative">
+                <div className="pt-[40px] sm:pt-[60px] md:pt-[120px] z-[2] relative">
                     <div className="text-center px-10 sm:px-16">
                         <motion.h1
                             className="text-navy-blue font-normal text-3xl md:text-4xl lg:text-6xl"
