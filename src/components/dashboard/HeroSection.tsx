@@ -9,7 +9,7 @@ export default function HeroSection() {
     return (
         <div className="-mx-8">
             <div className="md:bg-[url('/hero_md.png')] lg:bg-[url('/hero_main.png')] bg-cover bg-center w-full md:-mt-20 lg:-mt-24 mx-auto relative">
-                <div className="pt-[60px] md:pt-[120px]">
+                <div className="pt-[60px] md:pt-[120px] z-[2] relative">
                     <div className="text-center px-10 sm:px-16">
                         <motion.h1
                             className="text-navy-blue font-normal text-3xl md:text-4xl lg:text-6xl"
@@ -38,7 +38,7 @@ export default function HeroSection() {
                     <GetStartedForm />
                     <FeatureGrid />
                 </div>
-                <div className="absolute top-0 z-[-1]">
+                <div className="absolute top-0 z-[1]">
                     <Lottie animationData={planeAnmiation} loop={true} />
                 </div>
             </div>
