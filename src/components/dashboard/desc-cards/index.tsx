@@ -91,7 +91,7 @@ const features = [
 
 export default function FeatureGrid() {
     return (
-        <div className="py-10 px-6 pt-[130px] md:pt-[100px] lg:pt-[160px]">
+        <div className="py-10 px-[10px] sm:px-6 pt-[130px] md:pt-[100px] lg:pt-[160px]">
             <motion.div
                 className="grid grid-cols-24 grid-rows-3 lg:grid-rows-2 gap-4 auto-rows-fr"
                 initial={{ opacity: 0, y: 20 }}
