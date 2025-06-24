@@ -26,8 +26,9 @@ export default function RootLayout({
                 // className={`${urbanist.variable} antialiased px-5 md:px-6 lg:px-8`}
                 className={`${urbanist.variable} antialiased bg-gradient-top10`}
             >
-                <Navbar />
                 
+                <Navbar />
+
                 <div className="relative container-1440 container-padding py-12">
                     {children}
                 </div>
