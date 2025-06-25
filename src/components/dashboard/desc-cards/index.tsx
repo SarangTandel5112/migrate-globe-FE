@@ -12,7 +12,7 @@ import zoomAnimation from "@assets/animations/ZoomMeeting.json";
 const features = [
     {
         icon: (
-            <div className="h-[60px] w-[60px] sm:h-[70px] sm:w-[70px] md:h-[90px] md:w-[90px] lg:h-[100px] lg:w-[100px]">
+            <div className="h-[50px] w-[50px] sm:h-[70px] sm:w-[70px] md:h-[90px] md:w-[90px] lg:h-[100px] lg:w-[100px]">
                 <Lottie animationData={checkListAnimation} loop={true} />
             </div>
         ),
@@ -23,7 +23,7 @@ const features = [
     },
     {
         icon: (
-            <div className="h-[60px] w-[60px] sm:h-[70px] sm:w-[70px] md:h-[180px] md:w-[180px] lg:h-[200px] lg:w-[200px]">
+            <div className="h-[50px] w-[50px] sm:h-[70px] sm:w-[70px] md:h-[180px] md:w-[180px] lg:h-[200px] lg:w-[200px]">
                 <Lottie animationData={skillAnimation} loop={true} />
             </div>
         ),
@@ -34,7 +34,7 @@ const features = [
     },
     {
         icon: (
-            <div className="h-[60px] w-[60px] sm:h-[70px] sm:w-[70px] md:h-[90px] md:w-[90px] lg:h-[110px] lg:w-[110px]">
+            <div className="h-[50px] w-[50px] sm:h-[70px] sm:w-[70px] md:h-[90px] md:w-[90px] lg:h-[110px] lg:w-[110px]">
                 <Lottie animationData={insuranceAnimation} loop={true} />
             </div>
         ),
@@ -45,7 +45,7 @@ const features = [
     },
     {
         icon: (
-            <div className="h-[60px] w-[60px] sm:h-[70px] sm:w-[70px] md:h-[90px] md:w-[90px] lg:h-[120px] lg:w-[120px]">
+            <div className="h-[50px] w-[50px] sm:h-[70px] sm:w-[70px] md:h-[90px] md:w-[90px] lg:h-[120px] lg:w-[120px]">
                 <Lottie animationData={airplaneAnimation} loop={true} />
             </div>
         ),
@@ -56,7 +56,7 @@ const features = [
     },
     {
         icon: (
-            <div className="h-[60px] w-[60px] sm:h-[70px] sm:w-[70px] md:h-[90px] md:w-[90px]">
+            <div className="h-[50px] w-[50px] sm:h-[70px] sm:w-[70px] md:h-[90px] md:w-[90px]">
                 <Lottie animationData={occupationAnimation} loop={true} />
             </div>
         ),
@@ -67,7 +67,7 @@ const features = [
     },
     {
         icon: (
-            <div className="h-[60px] w-[60px] sm:h-[70px] sm:w-[70px] md:h-[120px] md:w-[120px]">
+            <div className="h-[50px] w-[50px] sm:h-[70px] sm:w-[70px] md:h-[120px] md:w-[120px]">
                 <Lottie animationData={visaAnimation} loop={true} />
             </div>
         ),
@@ -78,7 +78,7 @@ const features = [
     },
     {
         icon: (
-            <div className="h-[60px] w-[60px] sm:h-[70px] sm:w-[70px] md:h-[110px] md:w-[110px]">
+            <div className="h-[50px] w-[50px] sm:h-[70px] sm:w-[70px] md:h-[110px] md:w-[110px]">
                 <Lottie animationData={zoomAnimation} loop={true} />
             </div>
         ),
@@ -109,7 +109,7 @@ export default function FeatureGrid() {
                             ease: "easeOut",
                         }}
                         viewport={{ once: true, amount: 0.2 }}
-                        className={`bg-white p-3 sm:p-4 rounded-xl shadow-md flex flex-row items-center ${item.span} `}
+                        className={`bg-white p-3 pl-1 pr-2 sm:p-4 rounded-xl shadow-md flex flex-row items-center ${item.span} `}
                     >
                         <div className="text-2xl">{item.icon}</div>
 
