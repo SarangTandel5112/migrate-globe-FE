@@ -15,14 +15,7 @@ import UmbrellaIcon from "@assets/images/Umbrella.svg";
 import ShakehandsIcon from "@assets/images/shakehands.svg";
 import VideoIcon from "@assets/images/Video.svg";
 import ToolIcon from "@assets/images/ToolBox.svg";
-
-type Service = {
-    id: number;
-    title: string;
-    subtitle: string;
-    key: string;
-    order: number;
-};
+import { Service } from "@/utils/interface";
 
 const ICON_MAP: Record<string, string> = {
     "smart-migration-plan": PlaneIcon,

@@ -3,6 +3,16 @@ import FaqsSection from "@/components/contact-us/FaqsSection";
 import MapSection from "@/components/contact-us/MapSection";
 
 export default function Contact() {
+    // const res = await fetch(
+    //     "http://localhost:1337/api/contact-us?populate=*",
+    //     {
+    //         next: { revalidate: 86400 }, // 24 hours
+    //     }
+    // );
+
+    // const json = await res.json();
+    // const contactUs = json.data;
+
     return (
         <div className="container-1200">
             {/* Contact Section */}
