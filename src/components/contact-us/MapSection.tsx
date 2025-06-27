@@ -5,39 +5,31 @@ import CallIcon from "../icons/CallIcon";
 import LocationCard from "./LocationCard";
 import { fadeUpVariants } from "@/utils/animation-variant";
 
-function MapSection() {
-    const offices = [
-        {
-            id: "australia",
-            name: "Australia",
-            address: "Suite 15, 11 Ada St, Harris Park, NSW 2150",
-        },
-        {
-            id: "delhi",
-            name: "New Delhi",
-            address:
-                "C8/1, 2nd Floor, Rohini Sector 7, Rohini East Metro Station, New Delhi-110085",
-        },
-        {
-            id: "rajasthan",
-            name: "Rajasthan",
-            address:
-                "Sri Ganga Nagar - 63, near PNB Bank, P Block, Sri Ganganagar, Rajasthan 335001, India",
-        },
-        {
-            id: "haryana1",
-            name: "Haryana",
-            address:
-                "Sirsa - Study Globe, Barnala Rd, near Welcome Palace, Sirsa, Haryana 125055, India",
-        },
-        {
-            id: "haryana2",
-            name: "Haryana",
-            address:
-                "Hisar - SHOPPING COMPLEX, SCO 83, 2ND FLOOR, near Jain Jewellers, PLA, Hisar, Haryana 125001, India",
-        },
-    ];
+interface Location {
+    id: number;
+    name: string;
+    address: string;
+    lat: number;
+    lon: number;
+}
+interface Phone {
+    id: number;
+    name: string;
+    number: string;
+}
+interface Email {
+    id: number;
+    name: string;
+    email: string;
+}
 
+interface MapSectionProps {
+    locations: Location[];
+    phones: Phone[];
+    emails: Email[];
+}
+
+function MapSection({ locations, phones, emails }: MapSectionProps) {
     return (
         <div className="lg:w-3/5 bg-navy-blue relative">
             <div className="p-10">
@@ -53,31 +45,26 @@ function MapSection() {
                         <h3 className="font-bold text-sm text-neutrals-0 tracking-[0.608px] capitalize mb-1">
                             E-mail
                         </h3>
-                        <p className="text-base text-neutrals-0 tracking-[0.608px]">
-                            📧 visas@studyglobe.au
-                        </p>
+                        {emails.map((email) => (
+                            <p key={email.id} className="text-base text-neutrals-0 tracking-[0.608px]">
+                                📧 {email.email}
+                            </p>
+                        ))}
                     </div>
 
                     <div>
                         <h3 className="font-bold text-sm text-neutrals-0 tracking-[0.608px] capitalize mb-1">
                             Phone
                         </h3>
-                        <div className="flex items-center gap-4">
-                            <div className="flex items-center gap-2">
-                                <CallIcon />
-                                <span className="text-base text-neutrals-0 tracking-[0.608px] capitalize">
-                                    +61 282136300
-                                </span>
-                            </div>
-
-                            <div className="w-px h-6 bg-navy-blue-300"></div>
-
-                            <div className="flex items-center gap-2">
-                                <CallIcon />
-                                <span className="text-base text-neutrals-0 tracking-[0.608px] capitalize">
-                                    +61 282136300
-                                </span>
-                            </div>
+                        <div className="flex flex-wrap items-center gap-4">
+                            {phones.map((phone) => (
+                                <div key={phone.id} className="flex items-center gap-2">
+                                    <CallIcon />
+                                    <span className="text-base text-neutrals-0 tracking-[0.608px] capitalize">
+                                        {phone.number}
+                                    </span>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </motion.div>
@@ -129,8 +116,6 @@ function MapSection() {
                             />
                         </svg>
                     </div>
-
-                    {/* Location marker for Australia */}
                 </motion.div>
 
                 {/* Our Locations */}
@@ -158,7 +143,7 @@ function MapSection() {
                     </h2>
 
                     <div className="flex flex-col gap-4 md:flex-row">
-                        {offices.slice(0, 3).map((office, index) => (
+                        {locations.slice(0, 3).map((office, index) => (
                             <motion.div
                                 key={office.id}
                                 variants={fadeUpVariants}
@@ -174,7 +159,7 @@ function MapSection() {
 
                     {/* Second row: 2 equal-height cards */}
                     <div className="flex flex-col gap-4 md:flex-row mt-4">
-                        {offices.slice(3).map((office, index) => (
+                        {locations.slice(3).map((office, index) => (
                             <motion.div
                                 key={office.id}
                                 variants={fadeUpVariants}

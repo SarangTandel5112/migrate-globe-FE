@@ -6,48 +6,22 @@ import MinusIcon from "../icons/MinusIcon";
 import PlusIcon from "../icons/PlusIcon";
 
 interface FAQItem {
-    id: string;
+    id: number | string;
     question: string;
     answer: string;
     isOpen: boolean;
 }
 
-export default function FaqsSection() {
-    const [faqItems, setFaqItems] = useState<FAQItem[]>([
-        {
-            id: "1",
-            question: "What is MigrateGlobe?",
-            answer: "MigrateGlobe is a comprehensive visa and immigration platform offering expert guidance for students, workers, and travelers across multiple destinations.",
-            isOpen: false,
-        },
-        {
-            id: "2",
-            question: "Is visa consultation with MigrateGlobe free?",
-            answer: "Our initial consultation is completely free. You'll only pay for advanced services like documentation support or premium processing packages.",
-            isOpen: false,
-        },
-        {
-            id: "3",
-            question: "What are the types of visas I can apply for?",
-            answer: "We help with Student Visas, Work Visas, Business Visas, Family Visas, and specialized visas like Global Talent visas.",
-            isOpen: false,
-        },
-        {
-            id: "4",
-            question: "How long does the visa process usually take?",
-            answer: "Visa processing times vary based on the country and type, ranging typically from 2 weeks to several months depending on the complexity.",
-            isOpen: false,
-        },
-        {
-            id: "5",
-            question:
-                "Can MigrateGlobe help me with SOPs, LORs, and resume writing?",
-            answer: "Yes, we provide support for crafting Statements of Purpose, Letters of Recommendation, and professional resumes to strengthen your application.",
-            isOpen: false,
-        },
-    ]);
+interface FaqsSectionProps {
+    faqs: { id: number | string; question: string; answer: string }[];
+}
 
-    const toggleFAQ = (id: string) => {
+export default function FaqsSection({ faqs }: FaqsSectionProps) {
+    const [faqItems, setFaqItems] = useState<FAQItem[]>(
+        faqs.map((faq) => ({ ...faq, isOpen: false }))
+    );
+
+    const toggleFAQ = (id: number | string) => {
         setFaqItems((items) =>
             items.map((item) =>
                 item.id === id ? { ...item, isOpen: !item.isOpen } : item

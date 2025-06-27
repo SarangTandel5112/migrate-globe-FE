@@ -1,7 +1,7 @@
 import LocationLargeIcon from "../icons/LocationLargeIcon";
 
 interface Location {
-    id: string;
+    id: number;
     name: string;
     address: string;
 }

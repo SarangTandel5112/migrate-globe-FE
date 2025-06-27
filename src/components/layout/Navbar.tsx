@@ -50,7 +50,7 @@ function Navbar() {
     };
 
     return (
-        <div className="fixed w-full z-40 bg-white container-padding shadow-custom-combined">
+        <div className="sticky top-0 w-full z-40 bg-white container-padding shadow-custom-combined">
             <div className="container-1200">
                 <div className="flex gap-10 justify-between items-center py-5 md:py-6 lg:py-8 md:gap-0">
                     {/* Logo Section */}
