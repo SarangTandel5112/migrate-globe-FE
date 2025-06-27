@@ -1,5 +1,3 @@
-"use client";
-
 import InsuranceComparisonPage from "@/components/insurance";
 
 const InsurancePage: React.FC = () => {
