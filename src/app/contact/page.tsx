@@ -1,5 +1,3 @@
-"use client";
-
 import ContactForm from "@/components/contact-us/ContactForm";
 import FaqsSection from "@/components/contact-us/FaqsSection";
 import MapSection from "@/components/contact-us/MapSection";
