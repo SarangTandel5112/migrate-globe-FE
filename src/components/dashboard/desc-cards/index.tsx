@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React from "react";
 import Lottie from "lottie-react";
 import { motion } from "framer-motion";
@@ -19,7 +19,7 @@ const features = [
             </div>
         ),
         title: "Buy Documents Checklists",
-        href: '/services/checklists',
+        href: "/services/checklists",
         description:
             "Get A Verified Checklist Tailored To Your Visa And Occupation.",
         span: "col-span-12 md:col-span-8 lg:col-span-5",
@@ -31,7 +31,7 @@ const features = [
             </div>
         ),
         title: "Skill Assessment",
-        href: '/services/skill-assessment',
+        href: "/services/skill-assessment",
         description:
             "Check If Your Occupation Is Eligible And Buy The Step-By-Step Assessment Guide Instantly.",
         span: "col-span-12 md:col-span-8 lg:col-span-5 md:row-span-2 md:flex-col",
@@ -43,7 +43,7 @@ const features = [
             </div>
         ),
         title: "Buy Cheapest Insurance",
-        href: '/services/insurance',
+        href: "/services/insurance",
         description:
             "Compare And Purchase Affordable Overseas Health Cover From Top",
         span: "col-span-12 md:col-span-8 lg:col-span-6",
@@ -55,7 +55,7 @@ const features = [
             </div>
         ),
         title: "Smart Migration Plan",
-        href: '/services/smart-migration-plan',
+        href: "/services/smart-migration-plan",
         description:
             "Create Your Personalized Migration Route With Our Interactive Planning.",
         span: "col-span-12 md:col-span-8",
@@ -67,7 +67,7 @@ const features = [
             </div>
         ),
         title: "Occupation Tracking Tool",
-        href: '/services/occupation-tracking-tool',
+        href: "/services/occupation-tracking-tool",
         description:
             "Track Updates On Your Occupation — Demand Trends, State Invites.",
         span: "col-span-12 md:col-span-8 lg:col-span-5",
@@ -79,7 +79,7 @@ const features = [
             </div>
         ),
         title: "Find Visa Options",
-        href: '/services/visa',
+        href: "/services/visa",
         description:
             "Explore Visa Types That Match Your Profile, Goals, And Timeline — Fast",
         span: "col-span-12 md:col-span-12 lg:col-span-8",
@@ -91,7 +91,7 @@ const features = [
             </div>
         ),
         title: "Zoom Consultations",
-        href: '/services/zoom-consultation',
+        href: "/services/zoom-consultation",
         description:
             "Get Expert Advice Face-To-Face — Online. Book A Call With Our",
         span: "col-span-full md:col-span-12 lg:col-span-6",
@@ -99,7 +99,7 @@ const features = [
 ];
 
 export default function FeatureGrid() {
-    const router = useRouter()
+    const router = useRouter();
     return (
         <div className="py-10 px-[10px] sm:px-6 pt-[100px] sm:pt-[130px] md:pt-[100px] lg:pt-[160px]">
             <motion.div
@@ -120,7 +120,7 @@ export default function FeatureGrid() {
                         }}
                         onClick={() => router.push(item.href)}
                         viewport={{ once: true, amount: 0.2 }}
-                        className={`bg-white p-3 pl-1 pr-2 sm:p-4 rounded-xl shadow-md flex flex-row items-center ${item.span} `}
+                        className={`bg-white hover:bg-gradient-to-r hover:from-[#C7D7FC] hover:to-[#6AF8C5] transition duration-300 p-3 pl-1 pr-2 sm:p-4 rounded-xl shadow-md flex flex-row items-center ${item.span} `}
                     >
                         <div className="text-2xl">{item.icon}</div>
 
