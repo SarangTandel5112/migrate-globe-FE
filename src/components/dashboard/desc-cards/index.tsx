@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 const features = [
     {
         icon: (
-            <div className="h-[50px] w-[50px] sm:h-[70px] sm:w-[70px] md:h-[90px] md:w-[90px] lg:h-[100px] lg:w-[100px]">
+            <div className="h-[42px] w-[42px] sm:h-[70px] sm:w-[70px] md:h-[90px] md:w-[90px] lg:h-[100px] lg:w-[100px]">
                 <Lottie animationData={checkListAnimation} loop={true} />
             </div>
         ),
@@ -38,7 +38,7 @@ const features = [
     },
     {
         icon: (
-            <div className="h-[50px] w-[50px] sm:h-[70px] sm:w-[70px] md:h-[90px] md:w-[90px] lg:h-[110px] lg:w-[110px]">
+            <div className="h-[42px] w-[42px] sm:h-[70px] sm:w-[70px] md:h-[90px] md:w-[90px] lg:h-[110px] lg:w-[110px]">
                 <Lottie animationData={insuranceAnimation} loop={true} />
             </div>
         ),
@@ -50,7 +50,7 @@ const features = [
     },
     {
         icon: (
-            <div className="h-[50px] w-[50px] sm:h-[70px] sm:w-[70px] md:h-[90px] md:w-[90px] lg:h-[120px] lg:w-[120px]">
+            <div className="h-[42px] w-[42px] sm:h-[70px] sm:w-[70px] md:h-[90px] md:w-[90px] lg:h-[120px] lg:w-[120px]">
                 <Lottie animationData={airplaneAnimation} loop={true} />
             </div>
         ),
@@ -62,7 +62,7 @@ const features = [
     },
     {
         icon: (
-            <div className="h-[50px] w-[50px] sm:h-[70px] sm:w-[70px] md:h-[90px] md:w-[90px]">
+            <div className="h-[42px] w-[42px] sm:h-[70px] sm:w-[70px] md:h-[90px] md:w-[90px]">
                 <Lottie animationData={occupationAnimation} loop={true} />
             </div>
         ),
@@ -74,7 +74,7 @@ const features = [
     },
     {
         icon: (
-            <div className="h-[50px] w-[50px] sm:h-[70px] sm:w-[70px] md:h-[120px] md:w-[120px]">
+            <div className="h-[42px] w-[42px] sm:h-[70px] sm:w-[70px] md:h-[120px] md:w-[120px]">
                 <Lottie animationData={visaAnimation} loop={true} />
             </div>
         ),
@@ -86,7 +86,7 @@ const features = [
     },
     {
         icon: (
-            <div className="h-[50px] w-[50px] sm:h-[70px] sm:w-[70px] md:h-[110px] md:w-[110px]">
+            <div className="h-[42px] w-[42px] sm:h-[70px] sm:w-[70px] md:h-[110px] md:w-[110px]">
                 <Lottie animationData={zoomAnimation} loop={true} />
             </div>
         ),
