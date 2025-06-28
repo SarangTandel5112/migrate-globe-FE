@@ -28,23 +28,23 @@ const Footer: React.FC = () => {
         <footer className="bg-navy-blue text-white container-padding">
             <div className="container-1200 pt-4 md:pt-8 lg:pt-20">
                 <div className="flex flex-col md:flex-row md:justify-between gap-6 md:gap-12">
-                    <div className="flex flex-row gap-8 md:gap-12 lg:gap-16 justify-evenly">
+                    <div className="flex flex-row gap-8 sm:gap-12 lg:gap-16 justify-start md:justify-evenly">
                         <FooterLinkSection title="Content" links={NAV_LINKS} />
                         <FooterLinkSection title="Services" links={SERVICE_LINKS} />
                     </div>
 
-                    <div className="hidden lg:block text-center md:text-left mt-2">
+                    {/* <div className="hidden lg:flex flex flex-col gap-4 text-center md:text-left">
                         <h3 className="hidden md:block text-white text-base font-bold leading-7">
                             Social Media
                         </h3>
                         <div className="flex items-center gap-4">
                             <SocialIcons />
                         </div>
-                    </div>
+                    </div> */}
 
-                    <div className="flex flex-col-reverse lg:flex-row items-center md:items-start">
-                        <div className="block lg:hidden text-center md:text-left mt-4 lg:mt-0">
-                            <h3 className="hidden md:block text-white text-base font-bold leading-7">
+                    <div className="flex gap-4 sm:gap-12 md:gap-4 lg:gap-16 flex-col sm:flex-row-reverse md:flex-col-reverse lg:flex-row items-start md:items-start">
+                        <div className="flex items-start flex-col gap-3 block text-center md:text-left lg:mt-0">
+                            <h3 className="text-white text-base font-bold leading-7">
                                 Social Media
                             </h3>
                             <div className="flex items-center gap-4">
@@ -94,7 +94,7 @@ const Footer: React.FC = () => {
             <div className="border-t border-white/6 my-5 md:my-8 lg:my-10"></div>
 
             <div className="container-1200 pb-4 md:pb-8 lg:pb-16">
-                <div className="flex flex-col-reverse gap-6 md:flex-row md:justify-between items-center">
+                <div className="flex flex-col-reverse gap-6 sm:flex-row sm:justify-between items-center">
                     <div className="flex items-center">
                         <Image
                             src="/logo-white.svg"
@@ -105,12 +105,12 @@ const Footer: React.FC = () => {
                         />
                     </div>
 
-                    <div className="flex justify-between gap-4 md:hidden">
+                    <div className="flex justify-between gap-4 sm:hidden">
                         <LegalLinksRow />
                         {/* <SocialIcons /> */}
                     </div>
 
-                    <div className="hidden md:flex md:items-center gap-6 lg:gap-8">
+                    <div className="hidden sm:flex sm:items-center gap-6 lg:gap-8">
                         <LegalLinksRow />
                     </div>
 
