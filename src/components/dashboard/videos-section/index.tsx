@@ -98,7 +98,7 @@ function VideosSection() {
                     // Different top offsets and scale for the stacked effect (like your original)
                     const positions = [
                         { top: 0, scale: 1, zIndex: 30, width: "100%", left: "0%" },
-                        { top: -18, scale: 0.98, zIndex: 20, width: "95%", left: "2%" },
+                        { top: -14, scale: 0.98, zIndex: 20, width: "94%", left: "3%" },
                         { top: -27, scale: 0.96, zIndex: 10, width: "85%", left: "7%" }
                     ];
                     const style =
