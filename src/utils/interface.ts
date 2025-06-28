@@ -56,3 +56,83 @@ export type ContactUs = {
         sortOrder: number;
     }[];
 };
+
+export interface QuestionOption {
+    id: number;
+    item: string;
+    value: string;
+    point: number;
+    label: string;
+  }
+  
+  export interface Question {
+    order: number;
+    id: number;
+    item: string;
+    title: string;
+    question: string;
+    option: QuestionOption[];
+  }
+  
+ 
+  export interface VisaCalculatorProps {
+    questions: Question[];
+    scoreRequired: number;
+    title: string;
+  }
+  
+  export interface QuestionOption {
+    id: number;
+    item: string;
+    value: string;
+    point: number;
+    label: string;
+  }
+  
+  export interface Question {
+    order: number;
+    id: number;
+    item: string;
+    title: string;
+    question: string;
+    option: QuestionOption[];
+  }
+  
+  export interface VisaCalculatorData {
+    id: number;
+    documentId: string;
+    title: string;
+    description: string | null;
+    scoreRequired: number;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+    question: Question[];
+  }
+
+  export interface QuestionOption {
+    id: number;
+    item: string;
+    value: string;
+    point: number;
+    label: string;
+  }
+  
+  export interface Question {
+    order: number;
+    id: number;
+    item: string;
+    title: string;
+    question: string;
+    option: QuestionOption[];
+  }
+  
+  export interface CalculatorState {
+    [key: string]: number;
+  }
+  
+  export interface VisaCalculatorProps {
+    questions: Question[];
+    scoreRequired: number;
+    title: string;
+  }
