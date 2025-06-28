@@ -120,7 +120,7 @@ export default function FeatureGrid() {
                         }}
                         onClick={() => router.push(item.href)}
                         viewport={{ once: true, amount: 0.2 }}
-                        className={`bg-white hover:bg-[linear-gradient(to_right,_#dce7ff_50%,_#6AF8C5_100%)] transition duration-300 p-3 pl-1 pr-2 sm:p-4 rounded-xl shadow-md flex flex-row items-center ${item.span} `}
+                        className={`bg-white hover:bg-gradient-to-r hover:from-[#dce7ff] hover:to-[#6AF8C5] transition duration-300 p-3 pl-1 pr-2 sm:p-4 rounded-xl shadow-md flex flex-row items-center ${item.span} `}
                     >
                         <div className="text-2xl">{item.icon}</div>
 
