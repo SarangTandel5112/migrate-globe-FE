@@ -1,11 +1,119 @@
 import InsuranceComparisonPage from "@/components/insurance";
 
-const InsurancePage: React.FC = () => {
-    return (
-        <div className="container-1200">
-            <InsuranceComparisonPage />
-        </div>
-    );
-};
+const insuranceData = [
+  {
+    id: 5,
+    documentId: "mqv8lknk8kl6h5yhqmta9ycx",
+    name: "ZURICH",
+    description: null,
+    price: 641.79,
+    publicHospital: true,
+    privateHospital: true,
+    privateRoom: true,
+    ambulanceService: true,
+    prescriptionMedicines: true,
+    psychiatricConditions: "2 Months",
+    pregnancyCoverage: "12 Months",
+    otherPreExisting: "2 Months",
+    refundPolicy: "Online Only",
+    createdAt: "2025-06-27T14:58:24.122Z",
+    updatedAt: "2025-06-27T15:00:03.285Z",
+    publishedAt: "2025-06-27T15:00:03.293Z",
+    Order: 1,
+  },
+  {
+    id: 6,
+    documentId: "tk5c6m5ku4pa09o4eqltr3we",
+    name: "BUPA",
+    description: null,
+    price: 641.79,
+    publicHospital: false,
+    privateHospital: true,
+    privateRoom: true,
+    ambulanceService: false,
+    prescriptionMedicines: true,
+    psychiatricConditions: "4 Months",
+    pregnancyCoverage: "12 Months",
+    otherPreExisting: "5 Months",
+    refundPolicy: "Online Only",
+    createdAt: "2025-06-27T14:58:30.400Z",
+    updatedAt: "2025-06-27T15:00:09.374Z",
+    publishedAt: "2025-06-27T15:00:09.379Z",
+    Order: 2,
+  },
+  {
+    id: 12,
+    documentId: "m3pswg68t8jrjxa9paj0386e",
+    name: "WINNER",
+    description: null,
+    price: 641.79,
+    publicHospital: true,
+    privateHospital: false,
+    privateRoom: true,
+    ambulanceService: false,
+    prescriptionMedicines: true,
+    psychiatricConditions: "2 Months",
+    pregnancyCoverage: "12 Months",
+    otherPreExisting: "2 Months",
+    refundPolicy: "Online Only",
+    createdAt: "2025-06-27T15:00:55.788Z",
+    updatedAt: "2025-06-27T15:01:09.541Z",
+    publishedAt: "2025-06-27T15:01:09.546Z",
+    Order: 5,
+  },
+  {
+    id: 13,
+    documentId: "vull6daohoiqbgy4nd5v4xv3",
+    name: "NIB",
+    description: null,
+    price: 641.79,
+    publicHospital: true,
+    privateHospital: false,
+    privateRoom: true,
+    ambulanceService: false,
+    prescriptionMedicines: true,
+    psychiatricConditions: "2 Months",
+    pregnancyCoverage: "12 Months",
+    otherPreExisting: "2 Months",
+    refundPolicy: "Online Only",
+    createdAt: "2025-06-27T15:00:13.695Z",
+    updatedAt: "2025-06-27T15:01:24.943Z",
+    publishedAt: "2025-06-27T15:01:24.948Z",
+    Order: 3,
+  },
+  {
+    id: 14,
+    documentId: "tp12dillbt7yc27nsnae85rw",
+    name: "VIG",
+    description: null,
+    price: 641.79,
+    publicHospital: true,
+    privateHospital: true,
+    privateRoom: true,
+    ambulanceService: true,
+    prescriptionMedicines: true,
+    psychiatricConditions: "2 Months",
+    pregnancyCoverage: "12 Months",
+    otherPreExisting: "2 Months",
+    refundPolicy: "Online Only",
+    createdAt: "2025-06-27T15:00:45.323Z",
+    updatedAt: "2025-06-27T15:01:35.475Z",
+    publishedAt: "2025-06-27T15:01:35.480Z",
+    Order: 4,
+  },
+];
 
-export default InsurancePage;
+export default async function InsurancePage() {
+  // Fetch from your API (update the URL as needed)
+  // const res = await fetch("http://localhost:1337/api/insurances?pagination[pageSize]=25", {
+  //     next: { revalidate: 3600 }, // cache for 1 hour, adjust as needed
+  // });
+  // const apiData = await res.json();
+  // const insuranceData = apiData.data;
+
+  return (
+    <div className="container-1200">
+      <InsuranceComparisonPage data={insuranceData} />
+    </div>
+  );
+}

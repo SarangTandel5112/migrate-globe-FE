@@ -136,3 +136,19 @@ export interface QuestionOption {
     scoreRequired: number;
     title: string;
   }
+
+  export interface Insurance {
+    id: number;
+    name: string;
+    price: number;
+    publicHospital: boolean;
+    privateHospital: boolean;
+    privateRoom: boolean;
+    ambulanceService: boolean;
+    prescriptionMedicines: boolean;
+    psychiatricConditions: string;
+    pregnancyCoverage: string;
+    otherPreExisting: string;
+    refundPolicy: string;
+    Order: number;
+}

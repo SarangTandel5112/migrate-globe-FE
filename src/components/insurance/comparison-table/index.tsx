@@ -2,85 +2,65 @@ import CheckIcon from "@/components/icons/CheckIcon";
 import Image from "next/image";
 import React from "react";
 import { motion } from "framer-motion";
+import { Insurance } from "@/utils/interface";
 
-const ComparisonTable = () => {
-    const insuranceProviders = [
-        { name: "ZURICH", price: "$641.79", logo: "/images/zurich-logo.png" },
-        { name: "BUPA", price: "$641.79", logo: "/images/bupa-logo.png" },
-        { name: "NIB", price: "$641.79", logo: "/images/nib-logo.png" },
-        { name: "VIG", price: "$641.79", logo: "/images/vig-logo.png" },
-        { name: "WINNER", price: "$641.79", logo: "/images/winner-logo.png" },
-    ];
+const ComparisonTable: React.FC<{ data: Insurance[] }> = ({ data }) => {
+    if (!Array.isArray(data) || data.length === 0) {
+        return <div>No insurance data available.</div>;
+    }
+
+
+    const insuranceProviders = data.map((item) => ({
+        name: item.name,
+        price: `$${item.price.toFixed(2)}`,
+        logo: `/images/${item.name.toLowerCase()}-logo.png`,
+    }));
 
     const features = [
         {
             name: "Public Hospital",
             type: "checkmark",
-            values: [true, true, true, true, true],
+            values: data.map((item) => item.publicHospital),
         },
         {
             name: "Private Hospital",
             type: "checkmark",
-            values: [true, true, true, true, true],
+            values: data.map((item) => item.privateHospital),
         },
         {
             name: "Private Room",
             type: "checkmark",
-            values: [true, true, true, true, true],
+            values: data.map((item) => item.privateRoom),
         },
         {
             name: "Ambulance Services",
             type: "checkmark",
-            values: [true, true, true, true, true],
+            values: data.map((item) => item.ambulanceService),
         },
         {
             name: "Prescription Medicines",
             type: "checkmark",
-            values: [true, true, true, true, true],
+            values: data.map((item) => item.prescriptionMedicines),
         },
         {
             name: "Psychiatric Conditions",
             type: "text",
-            values: [
-                "2 Months",
-                "2 Months",
-                "2 Months",
-                "2 Months",
-                "2 Months",
-            ],
+            values: data.map((item) => item.psychiatricConditions),
         },
         {
             name: "Pregnancy Coverage",
             type: "text",
-            values: [
-                "12 Months",
-                "12 Months",
-                "12 Months",
-                "12 Months",
-                "12 Months",
-            ],
+            values: data.map((item) => item.pregnancyCoverage),
         },
         {
             name: "Other Pre-Existing",
             type: "text",
-            values: [
-                "2 Months",
-                "2 Months",
-                "2 Months",
-                "2 Months",
-                "2 Months",
-            ],
+            values: data.map((item) => item.otherPreExisting),
         },
         {
             name: "Refund Policy",
             type: "text",
-            values: [
-                "Online Only",
-                "Online Only",
-                "Online Only",
-                "Online Only",
-                "Online Only",
-            ],
+            values: data.map((item) => item.refundPolicy),
         },
     ];
 

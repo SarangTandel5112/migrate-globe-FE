@@ -4,8 +4,13 @@ import CalendarIcon from "@/components/icons/Calendar";
 import ComparisonTable from "@/components/insurance/comparison-table";
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { Insurance } from "@/utils/interface";
 
-const InsuranceComparisonPage: React.FC = () => {
+interface InsuranceComparisonPageProps {
+    data: Insurance[];
+}
+
+const InsuranceComparisonPage: React.FC<InsuranceComparisonPageProps> = ({ data }) => {
     const [formData, setFormData] = useState({
         adults: "",
         dependants: "",
@@ -159,7 +164,6 @@ const InsuranceComparisonPage: React.FC = () => {
                                     )
                                 }
                                 ref={policyStartDateRef}
-                                // className="w-full px-3 py-2.5 pr-10 bg-background-1 border border-neutrals-200 rounded text-base text-navy-blue focus:outline-none focus:border-navy-blue-300 [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:pointer-events-none"
                                 className="w-full px-3 py-2.5 pr-10 bg-background-1 border border-neutrals-200 rounded text-base text-navy-blue appearance-none focus:outline-none focus:border-navy-blue-300
                                         [&::-webkit-inner-spin-button]:appearance-none
                                         [&::-webkit-clear-button]:appearance-none
@@ -206,7 +210,6 @@ const InsuranceComparisonPage: React.FC = () => {
                                     )
                                 }
                                 ref={policyEndDateRef}
-                                // className="w-full px-3 py-2.5 pr-10 bg-background-1 border border-neutrals-200 rounded text-base text-navy-blue focus:outline-none focus:border-navy-blue-300 [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:pointer-events-none"
                                 className="w-full px-3 py-2.5 pr-10 bg-background-1 border border-neutrals-200 rounded text-base text-navy-blue appearance-none focus:outline-none focus:border-navy-blue-300
                                         [&::-webkit-inner-spin-button]:appearance-none
                                         [&::-webkit-clear-button]:appearance-none
@@ -252,7 +255,7 @@ const InsuranceComparisonPage: React.FC = () => {
             </motion.div>
 
             {/* Comparison Table */}
-            <ComparisonTable />
+            <ComparisonTable data={data} />
         </div>
     );
 };
