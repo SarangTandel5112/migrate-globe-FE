@@ -42,7 +42,7 @@ function Visa({ visaTypes }: VisaProps) {
                             key={visa.id}
                             description={visa.description}
                             wrapperClassName="shadow-sm border-gray-200 hover:shadow-md"
-                            link={{ href: `/visa/${visa.documentId}`, label: "Get Details" }}
+                            link={{ href: `/services/visa/${visa.documentId}`, label: "Get Details" }}
                         />
                     </motion.div>
                 ))}
