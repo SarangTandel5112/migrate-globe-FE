@@ -21,25 +21,48 @@ const MyImage: React.FC<MyImageProps> = ({
   width,
   height,
   className,
-  errorSrc = '/defaultErrorImage.png',
+  errorSrc,
   ...rest
 }) => {
   const [url, setUrl] = useState<MyImageSource>(src);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     setUrl(src);
+    setHasError(false);
   }, [src]);
+
+  // Ensure width and height are provided, use defaults if not specified
+  const finalWidth = width || 100;
+  const finalHeight = height || 100;
+
+  // If there's an error and no errorSrc provided, show a placeholder div
+  if (hasError && !errorSrc) {
+    return (
+      <div 
+        className={`bg-gray-200 flex items-center justify-center text-gray-400 text-sm ${className}`}
+        style={{ width: finalWidth, height: finalHeight }}
+      >
+        Image not found
+      </div>
+    );
+  }
 
   return (
     <Image
       src={url}
       alt={alt}
-      width={width}
-      height={height}
+      width={finalWidth}
+      height={finalHeight}
       className={className}
       {...rest}
       onError={(e) => {
-        setUrl(errorSrc);
+        if (errorSrc && !hasError) {
+          setUrl(errorSrc);
+          setHasError(true);
+        } else {
+          setHasError(true);
+        }
         if (typeof rest.onError === 'function') {
           rest.onError(e);
         }

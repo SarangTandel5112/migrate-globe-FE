@@ -3,6 +3,8 @@ import MyImage from "@/ui/myImage";
 import Illustration from "@assets/images/visa_calculator.svg";
 import { motion, easeOut } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { VisaCalculatorSectionProps } from "@/utils/interface";
+import { parseRichText } from "@/utils/richTextParser";
 
 const containerVariants = {
     hidden: {},
@@ -25,7 +27,7 @@ const itemVariants = {
     },
 };
 
-const VisaCalculatorSection = () => {
+const VisaCalculatorSection = ({ visaCalculator }: VisaCalculatorSectionProps) => {
     const router = useRouter();
 
     return (
@@ -45,12 +47,10 @@ const VisaCalculatorSection = () => {
                 >
                     <div>
                         <h2 className="text-heading-large font-bold mb-4">
-                            Visa Calculator
+                            {visaCalculator.intro.title}
                         </h2>
                         <p className="text-description1 leading-relaxed mb-6">
-                            Use our free points calculator to check your
-                            eligibility under Subclass 189, 190, or 491 visas.
-                            Find out if you&apos;re eligible for Australian PR.
+                            {visaCalculator.intro.description}
                         </p>
                         <motion.button
                             onClick={() =>
@@ -72,6 +72,8 @@ const VisaCalculatorSection = () => {
                             <MyImage
                                 src={Illustration}
                                 alt="Visa Calculator Illustration"
+                                width={280}
+                                height={280}
                                 className="max-w-[280px] mx-auto"
                             />
                         </motion.div>
@@ -88,23 +90,7 @@ const VisaCalculatorSection = () => {
                         variants={itemVariants}
                         className="bg-white p-6 rounded-xl shadow-md text-navy-blue text-sm"
                     >
-                        <h3 className="font-semibold text-heading1 mb-6">
-                            How It Works
-                        </h3>
-                        <ul className="space-y-2">
-                            <li>
-                                <strong>Step 1:</strong> Choose Your Visa
-                                Subclass
-                            </li>
-                            <li>
-                                <strong>Step 2:</strong> Answer 10 Simple
-                                Questions
-                            </li>
-                            <li>
-                                <strong>Step 3:</strong> Get Your Estimated
-                                Points Instantly
-                            </li>
-                        </ul>
+                        {parseRichText(visaCalculator.step1)}
                     </motion.div>
 
                     {/* Card 2 */}
@@ -112,14 +98,7 @@ const VisaCalculatorSection = () => {
                         variants={itemVariants}
                         className="bg-white p-6 rounded-xl shadow-md text-navy-blue text-sm"
                     >
-                        <h3 className="font-semibold text-heading1 mb-6">
-                            Who Is It For?
-                        </h3>
-                        <ul className="space-y-2">
-                            <li>🎓 Recent Graduates</li>
-                            <li>💼 Skilled Professionals</li>
-                            <li>👨‍👩‍👧 Families Planning Migration</li>
-                        </ul>
+                        {parseRichText(visaCalculator.step2)}
                     </motion.div>
 
                     {/* Card 3 */}
@@ -127,7 +106,7 @@ const VisaCalculatorSection = () => {
                         variants={itemVariants}
                         className="bg-white p-4 rounded-xl shadow-md text-xs col-span-2 text-navy-blue text-center"
                     >
-                        Trusted by 5,000+ Applicants. 98% Client Satisfaction
+                        {visaCalculator.step3}
                     </motion.div>
                 </motion.div>
 
@@ -140,6 +119,8 @@ const VisaCalculatorSection = () => {
                     <MyImage
                         src={Illustration}
                         alt="Visa Calculator Illustration"
+                        width={280}
+                        height={280}
                         className="max-w-[280px] mx-auto"
                     />
                 </motion.div>

@@ -5,25 +5,18 @@ import CommonCard from "@/components/layout/CommonCard";
 import MyImage from "@/ui/myImage";
 import Link from "next/link";
 import { childVariants, containerVariants } from "@/utils/animation-variant";
+import { BlogsCardsProps } from "@/utils/interface";
+import { parseMarkdownTitle } from "@/utils/richTextParser";
 
-const BlogsCards = () => {
-    const blogsArr = [
-        {
-            title: "Top 5 Mistakes To Avoid During Your Visa Interview",
-            desc: "Visa interviews can be stressful, but avoiding common pitfalls like incomplete answers or inconsistent information can greatly increase your chances of approval.",
-            image: Blog1,
-        },
-        {
-            title: "How To Choose The Right Country For Studying Abroad",
-            desc: "Confused between Canada, Australia, or the UK? This guide breaks down the pros and cons of popular student destinations to help you make the best decision.",
-            image: Blog1,
-        },
-        {
-            title: "Understanding Your Visa Rejection: Next Steps",
-            desc: "Got a visa refusal? Don’t panic. We explain the most common reasons for rejections and how you can reapply with confidence.",
-            image: Blog1,
-        },
-    ];
+const BlogsCards = ({ blog }: BlogsCardsProps) => {
+    // Sort blogs by order and map to the required format
+    const sortedBlogs = blog.insights_and_updates.sort((a, b) => a.order - b.order);
+    const blogsArr = sortedBlogs.map(item => ({
+        title: item.title,
+        desc: item.description,
+        image: Blog1, // Using placeholder image for now
+        subtitle: item.subtitle,
+    }));
 
     return (
         <motion.section
@@ -39,7 +32,7 @@ const BlogsCards = () => {
                 className="flex items-center justify-between mb-10 w-full"
             >
                 <h2 className="text-left sm:text-center w-full text-heading-large md:text-3xl font-bold text-navy-blue">
-                    From Our Blog
+                    {parseMarkdownTitle(blog.intro.title)}
                 </h2>
                 <button className="sm:hidden bg-mint-green-50 text-nowrap text-neutrals-700 px-6 py-2 rounded-full text-sm font-medium hover:bg-mint-green-200">
                     View All

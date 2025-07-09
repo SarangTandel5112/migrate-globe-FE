@@ -137,7 +137,7 @@ export interface QuestionOption {
     title: string;
   }
 
-  export interface Insurance {
+export interface Insurance {
     id: number;
     name: string;
     price: number;
@@ -151,4 +151,130 @@ export interface QuestionOption {
     otherPreExisting: string;
     refundPolicy: string;
     Order: number;
+}
+
+// Homepage data interfaces
+export interface Intro {
+    id: number;
+    title: string;
+    description: string | null;
+}
+
+export interface ServiceItem {
+    id: number;
+    documentId: string;
+    title: string;
+    key: string;
+    subtitle: string;
+    serviceType: string | null;
+    order: number;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+}
+
+export interface HeroSection {
+    id: number;
+    intro: Intro;
+    services: ServiceItem[];
+}
+
+export interface VisaCalculatorSection {
+    id: number;
+    step1: string;
+    step2: string;
+    step3: string;
+    intro: Intro;
+}
+
+export interface TestimonialItem {
+    id: number;
+    documentId: string;
+    title: string;
+    clientName: string;
+    clientService: string;
+    clientReview: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+}
+
+export interface TestimonialSection {
+    id: number;
+    intro: Intro;
+    testimonials: TestimonialItem[];
+}
+
+export interface BlogItem {
+    id: number;
+    documentId: string;
+    title: string;
+    subtitle: string;
+    description: string;
+    content: string | null;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+    order: number;
+}
+
+export interface BlogSection {
+    id: number;
+    intro: Intro;
+    insights_and_updates: BlogItem[];
+}
+
+export interface VideoItem {
+    id: number;
+    documentId: string;
+    title: string;
+    description: string;
+    link: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+}
+
+export interface VideoSection {
+    id: number;
+    intro: Intro;
+    videos: VideoItem[];
+}
+
+export interface HomepageData {
+    id: number;
+    documentId: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+    heroSection: HeroSection;
+    visaCalculator: VisaCalculatorSection;
+    testimonial: TestimonialSection;
+    blog: BlogSection;
+    videos: VideoSection;
+}
+
+// Component props interfaces
+export interface HeroSectionProps {
+    heroSection: HeroSection;
+}
+
+export interface VisaCalculatorSectionProps {
+    visaCalculator: VisaCalculatorSection;
+}
+
+export interface TestimonialsProps {
+    testimonial: TestimonialSection;
+}
+
+export interface BlogsCardsProps {
+    blog: BlogSection;
+}
+
+export interface VideosSectionProps {
+    videos: VideoSection;
+}
+
+export interface FeatureGridProps {
+    services: ServiceItem[];
 }

@@ -5,35 +5,22 @@ import MyImage from "@/ui/myImage";
 import RightIcon from "@assets/images/right-icon.svg";
 import VideoCard from "@/components/layout/VideoCard";
 import { childVariants, containerVariants } from "@/utils/animation-variant";
+import { VideosSectionProps } from "@/utils/interface";
+import { parseMarkdownTitle } from "@/utils/richTextParser";
 
-const videos = [
-    {
-        youtubeId: "dQw4w9WgXcQ",
-        title: "Top 5 Mistakes To Avoid During Your Visa Interview",
-        description:
-            "Visa interviews can be stressful — avoid these common mistakes!",
-    },
-    {
-        youtubeId: "dQw4w9WgXcQ",
-        title: "Avoid Common Mistakes During Your Visa Interview",
-        description:
-            "Visa interviews can be stressful — avoid these common mistakes!",
-    },
-    {
-        youtubeId: "dQw4w9WgXcQ",
-        title: "Visa Interview Tips During Your Visa Interview",
-        description:
-            "Visa interviews can be stressful — avoid these common mistakes!",
-    },
-    {
-        youtubeId: "dQw4w9WgXcQ",
-        title: "Visa Interview Tips During Your Visa Interview",
-        description:
-            "Visa interviews can be stressful — avoid these common mistakes!",
-    },
-];
-
-function VideosSection() {
+function VideosSection({ videos: videosData }: VideosSectionProps) {
+    // Extract YouTube ID from the link
+    const extractYouTubeId = (url: string) => {
+        const match = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+        return match ? match[1] : "dQw4w9WgXcQ"; // fallback to default
+    };
+    
+    // Map videos data to the required format
+    const videos = videosData.videos.map(video => ({
+        youtubeId: extractYouTubeId(video.link),
+        title: video.title,
+        description: video.description,
+    }));
     const [cardsPerPage, setCardsPerPage] = useState(3);
     const [currentIndex, setCurrentIndex] = useState(0);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -82,7 +69,7 @@ function VideosSection() {
                 className="flex items-center justify-between mb-10 w-full"
             >
                 <h2 className="text-left sm:text-center w-full text-heading-large md:text-3xl font-bold text-navy-blue">
-                    Watch Our Videos
+                    {parseMarkdownTitle(videosData.intro.title)}
                 </h2>
                 <button className="sm:hidden bg-mint-green-50 whitespace-nowrap text-neutrals-700 px-6 py-2 rounded-full text-sm font-medium hover:bg-mint-green-200">
                     View All
@@ -181,6 +168,8 @@ function VideosSection() {
                     <MyImage
                         src={RightIcon}
                         alt="left-icon"
+                        width={12}
+                        height={12}
                         className="rotate-180 w-3 h-3 m-auto"
                     />
                 </button>
@@ -196,6 +185,8 @@ function VideosSection() {
                     <MyImage
                         src={RightIcon}
                         alt="right-icon"
+                        width={12}
+                        height={12}
                         className="w-3 h-3 m-auto"
                     />
                 </button>

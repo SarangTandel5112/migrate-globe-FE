@@ -10,96 +10,98 @@ import skillAnimation from "@assets/animations/SkillAssement.json";
 import visaAnimation from "@assets/animations/Visaoption.json";
 import zoomAnimation from "@assets/animations/ZoomMeeting.json";
 import { useRouter } from "next/navigation";
+import { FeatureGridProps } from "@/utils/interface";
 
-const features = [
-    {
-        icon: (
-            <div className="h-[42px] w-[42px] sm:h-[70px] sm:w-[70px] md:h-[90px] md:w-[90px] lg:h-[100px] lg:w-[100px]">
-                <Lottie animationData={checkListAnimation} loop={true} />
-            </div>
-        ),
-        title: "Buy Documents Checklists",
-        href: "/services/checklists",
-        description:
-            "Get A Verified Checklist Tailored To Your Visa And Occupation.",
-        span: "col-span-12 md:col-span-8 lg:col-span-5",
-    },
-    {
-        icon: (
-            <div className="h-[50px] w-[50px] sm:h-[70px] sm:w-[70px] md:h-[180px] md:w-[180px] lg:h-[200px] lg:w-[200px]">
-                <Lottie animationData={skillAnimation} loop={true} />
-            </div>
-        ),
-        title: "Skill Assessment",
-        href: "/services/skill-assessment",
-        description:
-            "Check If Your Occupation Is Eligible And Buy The Step-By-Step Assessment Guide Instantly.",
-        span: "col-span-12 md:col-span-8 lg:col-span-5 md:row-span-2 md:flex-col",
-    },
-    {
-        icon: (
-            <div className="h-[42px] w-[42px] sm:h-[70px] sm:w-[70px] md:h-[90px] md:w-[90px] lg:h-[110px] lg:w-[110px]">
-                <Lottie animationData={insuranceAnimation} loop={true} />
-            </div>
-        ),
-        title: "Buy Cheapest Insurance",
-        href: "/services/insurance",
-        description:
-            "Compare And Purchase Affordable Overseas Health Cover From Top",
-        span: "col-span-12 md:col-span-8 lg:col-span-6",
-    },
-    {
-        icon: (
-            <div className="h-[42px] w-[42px] sm:h-[70px] sm:w-[70px] md:h-[90px] md:w-[90px] lg:h-[120px] lg:w-[120px]">
-                <Lottie animationData={airplaneAnimation} loop={true} />
-            </div>
-        ),
-        title: "Smart Migration Plan",
-        href: "/services/smart-migration-plan",
-        description:
-            "Create Your Personalized Migration Route With Our Interactive Planning.",
-        span: "col-span-12 md:col-span-8",
-    },
-    {
-        icon: (
-            <div className="h-[42px] w-[42px] sm:h-[70px] sm:w-[70px] md:h-[90px] md:w-[90px]">
-                <Lottie animationData={occupationAnimation} loop={true} />
-            </div>
-        ),
-        title: "Occupation Tracking Tool",
-        href: "/services/occupation-tracking-tool",
-        description:
-            "Track Updates On Your Occupation — Demand Trends, State Invites.",
-        span: "col-span-12 md:col-span-8 lg:col-span-5",
-    },
-    {
-        icon: (
-            <div className="h-[42px] w-[42px] sm:h-[70px] sm:w-[70px] md:h-[120px] md:w-[120px]">
-                <Lottie animationData={visaAnimation} loop={true} />
-            </div>
-        ),
-        title: "Find Visa Options",
-        href: "/services/visa",
-        description:
-            "Explore Visa Types That Match Your Profile, Goals, And Timeline — Fast",
-        span: "col-span-12 md:col-span-12 lg:col-span-8",
-    },
-    {
-        icon: (
-            <div className="h-[42px] w-[42px] sm:h-[70px] sm:w-[70px] md:h-[110px] md:w-[110px]">
-                <Lottie animationData={zoomAnimation} loop={true} />
-            </div>
-        ),
-        title: "Zoom Consultations",
-        href: "/services/zoom-consultation",
-        description:
-            "Get Expert Advice Face-To-Face — Online. Book A Call With Our",
-        span: "col-span-full md:col-span-12 lg:col-span-6",
-    },
-];
 
-export default function FeatureGrid() {
+export default function FeatureGrid({ services }: FeatureGridProps) {
     const router = useRouter();
+    
+    // Create a map of service keys to their data for easy lookup
+    const serviceMap = services.reduce((acc, service) => {
+        acc[service.key] = service;
+        return acc;
+    }, {} as Record<string, typeof services[0]>);
+    
+    // Keep the original features array structure but use dynamic data when available
+    const features = [
+        {
+            icon: (
+                <div className="h-[42px] w-[42px] sm:h-[70px] sm:w-[70px] md:h-[90px] md:w-[90px] lg:h-[100px] lg:w-[100px]">
+                    <Lottie animationData={checkListAnimation} loop={true} />
+                </div>
+            ),
+            title: serviceMap["checklists"]?.title || "Buy Documents Checklists",
+            href: "/services/checklists",
+            description: serviceMap["checklists"]?.subtitle || "Get A Verified Checklist Tailored To Your Visa And Occupation.",
+            span: "col-span-12 md:col-span-8 lg:col-span-5",
+        },
+        {
+            icon: (
+                <div className="h-[50px] w-[50px] sm:h-[70px] sm:w-[70px] md:h-[180px] md:w-[180px] lg:h-[200px] lg:w-[200px]">
+                    <Lottie animationData={skillAnimation} loop={true} />
+                </div>
+            ),
+            title: serviceMap["skill-assessment"]?.title || "Skill Assessment",
+            href: "/services/skill-assessment",
+            description: serviceMap["skill-assessment"]?.subtitle || "Check If Your Occupation Is Eligible And Buy The Step-By-Step Assessment Guide Instantly.",
+            span: "col-span-12 md:col-span-8 lg:col-span-5 md:row-span-2 md:flex-col",
+        },
+        {
+            icon: (
+                <div className="h-[42px] w-[42px] sm:h-[70px] sm:w-[70px] md:h-[90px] md:w-[90px] lg:h-[110px] lg:w-[110px]">
+                    <Lottie animationData={insuranceAnimation} loop={true} />
+                </div>
+            ),
+            title: serviceMap["insurance"]?.title || "Buy Cheapest Insurance",
+            href: "/services/insurance",
+            description: serviceMap["insurance"]?.subtitle || "Compare And Purchase Affordable Overseas Health Cover From Top",
+            span: "col-span-12 md:col-span-8 lg:col-span-6",
+        },
+        {
+            icon: (
+                <div className="h-[42px] w-[42px] sm:h-[70px] sm:w-[70px] md:h-[90px] md:w-[90px] lg:h-[120px] lg:w-[120px]">
+                    <Lottie animationData={airplaneAnimation} loop={true} />
+                </div>
+            ),
+            title: serviceMap["smart-migration-plan"]?.title || "Smart Migration Plan",
+            href: "/services/smart-migration-plan",
+            description: serviceMap["smart-migration-plan"]?.subtitle || "Create Your Personalized Migration Route With Our Interactive Planning.",
+            span: "col-span-12 md:col-span-8",
+        },
+        {
+            icon: (
+                <div className="h-[42px] w-[42px] sm:h-[70px] sm:w-[70px] md:h-[90px] md:w-[90px]">
+                    <Lottie animationData={occupationAnimation} loop={true} />
+                </div>
+            ),
+            title: serviceMap["occupation-tracking-tool"]?.title || "Occupation Tracking Tool",
+            href: "/services/occupation-tracking-tool",
+            description: serviceMap["occupation-tracking-tool"]?.subtitle || "Track Updates On Your Occupation — Demand Trends, State Invites.",
+            span: "col-span-12 md:col-span-8 lg:col-span-5",
+        },
+        {
+            icon: (
+                <div className="h-[42px] w-[42px] sm:h-[70px] sm:w-[70px] md:h-[120px] md:w-[120px]">
+                    <Lottie animationData={visaAnimation} loop={true} />
+                </div>
+            ),
+            title: serviceMap["visa"]?.title || "Find Visa Options",
+            href: "/services/visa",
+            description: serviceMap["visa"]?.subtitle || "Explore Visa Types That Match Your Profile, Goals, And Timeline — Fast",
+            span: "col-span-12 md:col-span-12 lg:col-span-8",
+        },
+        {
+            icon: (
+                <div className="h-[42px] w-[42px] sm:h-[70px] sm:w-[70px] md:h-[110px] md:w-[110px]">
+                    <Lottie animationData={zoomAnimation} loop={true} />
+                </div>
+            ),
+            title: serviceMap["zoom-consultation"]?.title || "Zoom Consultations",
+            href: "/services/zoom-consultation",
+            description: serviceMap["zoom-consultation"]?.subtitle || "Get Expert Advice Face-To-Face — Online. Book A Call With Our",
+            span: "col-span-full md:col-span-12 lg:col-span-6",
+        },
+    ];
     return (
         <div className="py-10 px-[10px] sm:px-6 pt-[100px] sm:pt-[130px] md:pt-[100px] lg:pt-[160px]">
             <motion.div

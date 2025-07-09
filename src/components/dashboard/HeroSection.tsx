@@ -4,8 +4,11 @@ import FeatureGrid from "@components/dashboard/desc-cards";
 import Lottie from "lottie-react";
 import planeAnmiation from "@assets/animations/plane.json";
 import { motion } from "framer-motion";
+import { HeroSectionProps } from "@/utils/interface";
+import { parseMarkdownTitle } from "@/utils/richTextParser";
 
-export default function HeroSection() {
+export default function HeroSection({ heroSection }: HeroSectionProps) {
+
     return (
         <div className="-mx-5 md:-mx-6 lg:-mx-8">
             <div className="bg-[url('/hero_sm.png')] md:bg-[url('/hero_md.png')] lg:bg-[url('/hero_main.png')] bg-cover bg-center w-full  -mt-20 lg:-mt-24 mx-auto relative">
@@ -17,8 +20,7 @@ export default function HeroSection() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, ease: "easeOut" }}
                         >
-                            Planning To Move To{" "}
-                            <span className="font-bold">Australia?</span>
+                            {parseMarkdownTitle(heroSection.intro.title)}
                         </motion.h1>
 
                         <motion.p
@@ -31,12 +33,11 @@ export default function HeroSection() {
                                 delay: 0.2,
                             }}
                         >
-                            From Visas To Universities, Job Options To
-                            Eligibility Get Instant, Expert Answers.
+                            {heroSection.intro.description}
                         </motion.p>
                     </div>
                     <GetStartedForm />
-                    <FeatureGrid />
+                    <FeatureGrid services={heroSection.services} />
                 </div>
                 <div className="absolute top-0 z-[1]">
                     <Lottie animationData={planeAnmiation} loop={true} />
