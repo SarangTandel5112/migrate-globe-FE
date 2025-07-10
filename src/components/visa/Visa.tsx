@@ -37,7 +37,10 @@ function Visa({ visaTypes }: VisaProps) {
                         }}
                     >
                         <CommonCard
-                            image={{ src: "/india.png", alt: visa.name }}
+                            image={{ 
+                                src: visa.visaTypeImage ? `https://admin.migrateglobe.com${visa.visaTypeImage.url}` : "/india.png", 
+                                alt: visa.name 
+                            }}
                             title={visa.name}
                             key={visa.id}
                             description={visa.description}

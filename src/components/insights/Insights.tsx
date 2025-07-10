@@ -40,6 +40,7 @@ function Insights({ insights }: InsightsProps) {
                         <VisaCard
                             title={insight.title}
                             description={insight.subtitle}
+                            imageUrl={insight.image ? `https://admin.migrateglobe.com${insight.image.url}` : undefined}
                         />
                     </motion.div>
                 ))}

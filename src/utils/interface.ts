@@ -17,7 +17,7 @@ export type VisaType = {
     publishedAt: string;
     order: number;
     visas: unknown[];
-    visaTypeImage: unknown;
+    visaTypeImage: Image | null;
 };
 
 
@@ -32,6 +32,7 @@ export type Insight = {
     updatedAt: string;
     publishedAt: string;
     order: number;
+    image: Image | null;
 };
 
 export type ContactUs = {
@@ -151,6 +152,50 @@ export interface Insurance {
     otherPreExisting: string;
     refundPolicy: string;
     Order: number;
+    image?: Image;
+}
+
+// Image interface
+export interface ImageFormat {
+    ext: string;
+    url: string;
+    hash: string;
+    mime: string;
+    name: string;
+    path: string | null;
+    size: number;
+    width: number;
+    height: number;
+    sizeInBytes: number;
+}
+
+export interface ImageFormats {
+    large?: ImageFormat;
+    small?: ImageFormat;
+    medium?: ImageFormat;
+    thumbnail?: ImageFormat;
+}
+
+export interface Image {
+    id: number;
+    documentId: string;
+    name: string;
+    alternativeText: string | null;
+    caption: string | null;
+    width: number;
+    height: number;
+    formats: ImageFormats | null;
+    hash: string;
+    ext: string;
+    mime: string;
+    size: number;
+    url: string;
+    previewUrl: string | null;
+    provider: string;
+    provider_metadata: unknown;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
 }
 
 // Homepage data interfaces
@@ -197,6 +242,7 @@ export interface TestimonialItem {
     createdAt: string;
     updatedAt: string;
     publishedAt: string;
+    clientImage: Image;
 }
 
 export interface TestimonialSection {
@@ -216,6 +262,7 @@ export interface BlogItem {
     updatedAt: string;
     publishedAt: string;
     order: number;
+    image: Image;
 }
 
 export interface BlogSection {

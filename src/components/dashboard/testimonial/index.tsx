@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import MyImage from "@/ui/myImage";
-import RahulImg from "@assets/images/rahul.png";
 import { containerVariants } from "@/utils/animation-variant";
 import { TestimonialsProps } from "@/utils/interface";
 import { parseMarkdownTitle } from "@/utils/richTextParser";
@@ -87,7 +86,7 @@ function Testimonials({ testimonial }: TestimonialsProps) {
                         <div className="w-full md:w-[360px] flex-shrink-0 relative">
                             <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden">
                                 <MyImage
-                                    src={RahulImg}
+                                    src={`https://admin.migrateglobe.com${currentTestimonial.clientImage.url}`}
                                     alt={currentTestimonial.clientName}
                                     width={360}
                                     height={270}

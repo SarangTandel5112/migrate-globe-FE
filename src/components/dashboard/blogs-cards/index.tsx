@@ -1,6 +1,5 @@
 "use client";
 import { motion } from "framer-motion";
-import Blog1 from "@assets/images/blog1.png";
 import CommonCard from "@/components/layout/CommonCard";
 import MyImage from "@/ui/myImage";
 import Link from "next/link";
@@ -14,7 +13,7 @@ const BlogsCards = ({ blog }: BlogsCardsProps) => {
     const blogsArr = sortedBlogs.map(item => ({
         title: item.title,
         desc: item.description,
-        image: Blog1, // Using placeholder image for now
+image: `https://admin.migrateglobe.com${item.image.url}`,
         subtitle: item.subtitle,
     }));
 

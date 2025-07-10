@@ -4,14 +4,14 @@ import Link from "next/link";
 interface VisaCardProps {
     title: string;
     description: string;
-    [key: string]: unknown;
+    imageUrl?: string;
 }
 
-export default function VisaCard({ title, description }: VisaCardProps) {
+export default function VisaCard({ title, description, imageUrl }: VisaCardProps) {
     return (
         <div className="rounded-xl overflow-hidden border border-[#E0E4F3] shadow-bottom-blue transition-transform hover:scale-105 bg-white cursor-pointer">
             <Image
-                src="/india.png"
+src={imageUrl || "/india.png"}
                 alt={title}
                 width={500}
                 height={200}

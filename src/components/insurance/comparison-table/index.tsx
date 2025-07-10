@@ -13,7 +13,7 @@ const ComparisonTable: React.FC<{ data: Insurance[] }> = ({ data }) => {
     const insuranceProviders = data.map((item) => ({
         name: item.name,
         price: `$${item.price.toFixed(2)}`,
-        logo: `/images/${item.name.toLowerCase()}-logo.png`,
+logo: `https://admin.migrateglobe.com${item.image?.url || ""}` ,
     }));
 
     const features = [
@@ -94,7 +94,7 @@ const ComparisonTable: React.FC<{ data: Insurance[] }> = ({ data }) => {
                         className="border-b border-r last:border-r-0 border-neutrals-200 p-3 md:p-5"
                     >
                         <div className="flex flex-col items-center gap-3">
-                            <div className="w-12 h-12 md:w-16 md:h-12 bg-neutrals-100 rounded flex items-center justify-center">
+                            <div className="w-12 h-12 md:w-16 md:h-12 rounded flex items-center justify-center">
                                 <Image
                                     src={provider.logo}
                                     alt={provider.name}
