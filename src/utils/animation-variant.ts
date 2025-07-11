@@ -38,3 +38,13 @@ export const childVariants: Variants = {
         },
     },
 };
+
+export const visaContainerVariants = {
+    hidden: {},
+    visible: {
+        transition: {
+            staggerChildren: 0.15,
+            delayChildren: 0.2,
+        },
+    },
+};

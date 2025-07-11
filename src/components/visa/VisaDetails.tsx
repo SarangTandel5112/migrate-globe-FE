@@ -30,13 +30,20 @@ const services = [
     },
 ];
 
-export default function VisaDetail() {
+// Add props for title, description, and image
+interface VisaDetailProps {
+    title?: string;
+    description?: string;
+    image?: string;
+}
+
+export default function VisaDetail({ title, description, image }: VisaDetailProps) {
     return (
         <section>
             <div className="grid md:grid-cols-2 gap-10 mb-10">
                 <Image
-                    src="/visa.png" // Replace with your actual path
-                    alt="Student Visa"
+                    src={image || "/visa.png"} // Use prop or default
+                    alt={title || "Student Visa"}
                     width={600}
                     height={400}
                     className="rounded-xl object-cover w-full h-auto"
@@ -44,31 +51,15 @@ export default function VisaDetail() {
 
                 <div>
                     <h2 className="text-navy-blue text-heading1 mb-3">
-                        Description
+                        {title || "Description"}
                     </h2>
                     <div className="space-y-4 text-navy-blue-400 text-description1">
                         <p>
-                            Dignissim Mi Ac Luctus Ultrices Enim Nulla Volutpat
+                            {description || `Dignissim Mi Ac Luctus Ultrices Enim Nulla Volutpat
                             Aliquam. Quis Egestas Egestas Ornare Molestie
                             Dignissim Morbi Euismod. Proin Aliquet Mollis
                             Ultricies Mauris Urna Elit Tincidunt Bibendum. Nam
-                            Et Nunc Adipiscing Etiam Tellus.
-                        </p>
-                        <p>
-                            Commodo Vel Non Malesuada Nulla Sapien Odio In
-                            Viverra. Amet Integer Ullamcorper Morbi Phasellus
-                            Sed Tellus. Ultricies Nisl Enim Nec Felis Adipiscing
-                            Enim Ac Et Risus. Porttitor Dui Nunc Duis Morbi Ac.
-                            Fames Vel Tellus Accumsan Lacinia Nulla Duis Amet
-                            Hac Eget.
-                        </p>
-                        <p>
-                            Commodo Vel Non Malesuada Nulla Sapien Odio In
-                            Viverra. Amet Integer Ullamcorper Morbi Phasellus
-                            Sed Tellus. Ultricies Nisl Enim Nec Felis Adipiscing
-                            Enim Ac Et Risus. Porttitor Dui Nunc Duis Morbi Ac.
-                            Fames Vel Tellus Accumsan Lacinia Nulla Duis Amet
-                            Hac Eget.
+                            Et Nunc Adipiscing Etiam Tellus.`}
                         </p>
                     </div>
 
