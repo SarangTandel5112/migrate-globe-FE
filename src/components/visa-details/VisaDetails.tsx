@@ -43,7 +43,6 @@ export default function VisaDetails({
     const newVisa = (visaDetails.visas as visa[])?.find(
       (v) => v.documentId === selectedVisa.value
     );
-    console.log(selectedVisa, "---------------selectedVisa======");
     setSelected(selectedVisa);
     setCurrentVisa(newVisa);
   };
