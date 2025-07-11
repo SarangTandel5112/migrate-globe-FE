@@ -70,7 +70,7 @@ export default function VisaDetails({
               className="flex items-center cursor-pointer"
               onClick={() => setOpen((prev) => !prev)}
             >
-              <h1 className="text-heading1 text-navy-blue ">Student Visa</h1>
+              <h1 className="text-heading1 text-navy-blue ">{visaDetails.name}</h1>
               <span className="text-xs ml-2">
                 {open ? (
                   <ArrowDownIcon className="rotate-180" color="#263773" />
