@@ -101,7 +101,7 @@ function Navbar() {
                                 <Link
                                     key={item.name}
                                     href={item.href}
-                                    className={`gap-2.5 self-stretch pb-1 my-auto ${
+                                    className={`gap-2.5 font-bold self-stretch pb-1 my-auto ${
                                         isActive
                                             ? "border-b-2 border-solid border-b-mint-green text-neutrals-700"
                                             : "text-neutrals hover:text-neutrals-700 transition-colors"

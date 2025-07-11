@@ -110,7 +110,7 @@ export const VisaCategoriesGrid: React.FC<VisaCategoriesGridProps> = ({ isActive
                     router.push('/services/visa');
                     setOpen(false);
                 }}
-                className={`flex items-center gap-1 font-medium transition ${
+                className={`flex font-bold items-center gap-1 transition ${
                     isActive
                         ? "border-b-2 border-solid border-b-mint-green text-neutrals-700"
                         : "text-neutrals hover:text-neutrals-700 transition-colors"
