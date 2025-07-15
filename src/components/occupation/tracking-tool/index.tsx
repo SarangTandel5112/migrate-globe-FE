@@ -11,8 +11,8 @@ import StateEligibility from "@/components/occupation/tracking-tool/state-eligib
 import EOIStatistics from "@/components/occupation/tracking-tool/eoi-stats";
 import { fadeUpVariants } from "@/utils/animation-variant";
 
-const OccupationTracking: React.FC = () => {
-    const router = useRouter();
+const OccupationTracking: React.FC = ({ data }) => {
+const { anzsco, visaEligibility, stateEligibility, eoiStatistics } = data;
     const [searchQuery, setSearchQuery] = useState("Electrical Engineer");
 
     const handleBack = () => router.back();
@@ -23,47 +23,8 @@ const OccupationTracking: React.FC = () => {
         "Civil Engineer",
     ];
 
-    const visaTypes = [
-        {
-            subclass: "Subclass 189 (Skilled Independent) Points-Tested",
-            eligible: true,
-            list: "MLTSSL",
-        },
-        {
-            subclass: "Subclass 190 (State Sponsored)",
-            eligible: false,
-            list: "STSOL",
-        },
-    ];
 
-    const stateEligibility = {
-        "190": {
-            NT: "eligible",
-            VIC: "not-eligible",
-            WA: "eligible",
-            SA: "not-eligible",
-            Tasmania: "eligible",
-            NSW: "not-eligible",
-            ACT: "eligible",
-            QLD: "not-eligible",
-        },
-        "491": {
-            NT: "eligible",
-            VIC: "not-eligible",
-            WA: "eligible",
-            SA: "not-eligible",
-            Tasmania: "eligible",
-            NSW: "not-eligible",
-            ACT: "eligible",
-            QLD: "not-eligible",
-        },
-    };
 
-    const chartColors = [
-        { color: "#DCF3EB", label: "65" },
-        { color: "#A2DFC9", label: "85" },
-        { color: "#6FAC96", label: "130" },
-    ];
 
     return (
         <div className="container-1200">
@@ -170,12 +131,12 @@ const OccupationTracking: React.FC = () => {
                         ANZSCO
                     </span>
                     <div className="bg-mint-green-50 rounded-full px-3 py-1 md:px-4 md:py-1.5">
-                        <span className="text-neutrals-700 text-xs md:text-sm font-medium">
-                            233311
-                        </span>
+<span className="text-neutrals-700 text-xs md:text-sm font-medium">
+                        {anzsco.code}
+                    </span>
                     </div>
-                    <h1 className="text-navy-blue text-xl md:text-2xl font-semibold whitespace-nowrap">
-                        Electrical Engineer
+<h1 className="text-navy-blue text-xl md:text-2xl font-semibold whitespace-nowrap">
+                        {anzsco.title}
                     </h1>
                 </div>
 
@@ -197,9 +158,9 @@ const OccupationTracking: React.FC = () => {
                     animate="visible"
                     className="flex-1 flex flex-col gap-8 w-full lg:w-2/3 min-w-0"
                 >
-                    <VisaType visaTypes={visaTypes} />
+<VisaType visaTypes={visaEligibility} />
                     <StateEligibility stateEligibility={stateEligibility} />
-                    <EOIStatistics chartColors={chartColors} />
+<EOIStatistics chartColors={eoiStatistics.submitted.colorLegend} />
                 </motion.div>
 
                 {/* Sidebar */}
@@ -215,13 +176,13 @@ const OccupationTracking: React.FC = () => {
                                 ANZSCO
                             </span>
                             <div className="bg-mint-green-50 rounded-full px-3 py-1 md:px-4 md:py-1.5">
-                                <span className="text-neutrals-700 text-xs md:text-sm font-medium">
-                                    233311
-                                </span>
+<span className="text-neutrals-700 text-xs md:text-sm font-medium">
+                                {anzsco.code}
+                            </span>
                             </div>
                         </div>
-                        <span className="text-neutrals-600 text-xs md:text-sm">
-                            Electrical Engineer
+<span className="text-neutrals-600 text-xs md:text-sm">
+                            {anzsco.title}
                         </span>
 
                         <div className="border-t border-neutrals-100 my-4"></div>
