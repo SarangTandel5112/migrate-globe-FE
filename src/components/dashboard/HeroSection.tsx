@@ -36,7 +36,7 @@ export default function HeroSection({ heroSection }: HeroSectionProps) {
                             {heroSection.intro.description}
                         </motion.p>
                     </div>
-                    <GetStartedForm />
+                    <GetStartedForm services={heroSection.services}/>
                     <FeatureGrid services={heroSection.services} />
                 </div>
                 <div className="absolute top-0 z-[1]">
