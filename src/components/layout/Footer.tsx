@@ -7,20 +7,20 @@ import Image from "next/image";
 
 const NAV_LINKS = [
     { href: "/", label: "Home" },
-    { href: "/visa", label: "Visa" },
+    { href: "/services/visa", label: "Visa" },
     { href: "/services", label: "Services" },
-    { href: "/insurance", label: "Insurance" },
+    { href: "/services/insurance", label: "Insurance" },
     { href: "/insights", label: "Insights" },
     { href: "/contact", label: "Contact" },
 ];
 
 const SERVICE_LINKS = [
-    { href: "#", label: "Smart Migration Plan (Buy Map)" },
-    { href: "#", label: "Buy Documents Checklists" },
-    { href: "#", label: "Find Visa Options" },
-    { href: "#", label: "Buy Cheapest Insurance" },
-    { href: "#", label: "Zoom Consultations" },
-    { href: "#", label: "Occupation Tracking Tool" },
+    { href: "/services", label: "Smart Migration Plan (Buy Map)" },
+    { href: "/services/checklists", label: "Buy Documents Checklists" },
+    { href: "/services/visa", label: "Find Visa Options" },
+    { href: "/services/insurance", label: "Buy Cheapest Insurance" },
+    { href: "/services/zoom-consultation", label: "Zoom Consultations" },
+    { href: "/services/occupation-tracking-tool", label: "Occupation Tracking Tool" },
 ];
 
 const Footer: React.FC = () => {

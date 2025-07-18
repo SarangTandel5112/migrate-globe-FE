@@ -118,7 +118,7 @@ function Testimonials({ testimonial }: TestimonialsProps) {
                                     onClick={goToPrevious}
                                     whileHover={{ scale: 1.1 }}
                                     whileTap={{ scale: 0.9 }}
-                                    className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-200 ${
+                                    className={`w-10 text-navy-blue-700 h-10 rounded-full flex items-center justify-center transition-colors duration-200 ${
                                         testimonials.length === 1 
                                             ? 'bg-gray-200 cursor-not-allowed' 
                                             : 'bg-[#f0f1f7] hover:bg-[#e5e7eb]'
