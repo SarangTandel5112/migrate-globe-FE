@@ -1,5 +1,6 @@
 // import { notFound } from "next/navigation";
 import VisaDetails from "@/components/visa-details/VisaDetails";
+import { API_URL } from "@/constants";
 import { VisaType } from "@/utils/interface";
 import { notFound } from "next/navigation";
 
@@ -12,18 +13,29 @@ export async function generateStaticParams() {
     id: visa.documentId,
   }));
 }
-type tParams = Promise<{ id: string }>;
 
-export default async function VisaPage({ params }: { params: tParams }) {
+interface VisaPageProps {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
+export default async function VisaPage({ params, searchParams }: VisaPageProps) {
+  const { id } = await params;
+  const resolvedSearchParams = await searchParams;
+  
+  const rawVisaQuery = resolvedSearchParams.visa;
+  const visaQuery = Array.isArray(rawVisaQuery)
+    ? rawVisaQuery[0]
+    : rawVisaQuery ?? "";
+
   const resVisaTypes = await fetch(
-    "https://admin.migrateglobe.com/api/visa-types?populate=*&sort=order:asc"
+    `${API_URL}visa-types?populate=*&sort=order:asc`
   );
   const json = await resVisaTypes.json();
   const visaTypes: VisaType[] = json.data;
 
-  const { id } = await params;
   const res = await fetch(
-    `https://admin.migrateglobe.com/api/visa-types/${id}?populate[visas][populate]=visaImage&sort=order:asc`
+    `${API_URL}visa-types/${id}?populate[visas][populate]=visaImage&sort=order:asc`
   );
   const apiData = await res.json();
   const visaDoc: VisaType = apiData.data;
@@ -32,7 +44,7 @@ export default async function VisaPage({ params }: { params: tParams }) {
 
   return (
     <div className="container-1200">
-      <VisaDetails visaDetails={visaDoc} visaTypesDetails={visaTypes} />
+      <VisaDetails visaDetails={visaDoc} visaTypesDetails={visaTypes} visaQuery={visaQuery} />
     </div>
   );
 }

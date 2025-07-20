@@ -9,8 +9,10 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import LoginModal from "../login";
 import { VisaCategoriesGrid } from "../visa/VisaCategoriesGrid";
+import { VisaType } from "@/utils/interface";
+import { fetchInsights } from "@/api/insights";
 
-function Navbar() {
+const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [showLoginModal, setShowLoginModal] = useState(false);
     const pathname = usePathname();
@@ -18,6 +20,31 @@ function Navbar() {
     const last = segments.at(-1);
     const secondLast = segments.at(-2);
     const modalRef = useRef<HTMLDivElement>(null);
+    const [insights, setInsights] = useState<VisaType[]>([]);
+    const [loadingInsights, setLoadingInsights] = useState(true);
+    const [insightsError, setInsightsError] = useState<string | null>(null);
+
+    useEffect(() => {
+        const getInsights = async () => {
+            try {
+                setLoadingInsights(true);
+                const data = await fetchInsights();
+                setInsights(data);
+            } catch (error: unknown) {
+                if (error instanceof Error) {
+                    setInsightsError(error.message);
+                } else {
+                    setInsightsError("Unknown error");
+                }
+            } finally {
+                setLoadingInsights(false);
+            }
+        };
+        getInsights();
+    }, []);
+
+    console.log({insights});
+    
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
@@ -93,6 +120,9 @@ function Navbar() {
                                     >
                                         <VisaCategoriesGrid
                                             isActive={isActive}
+                                            categories={insights || []}
+                                            isLoading={loadingInsights}
+                                            error={insightsError}
                                         />
                                     </div>
                                 );

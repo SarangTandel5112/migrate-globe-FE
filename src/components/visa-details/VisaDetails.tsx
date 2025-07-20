@@ -10,9 +10,11 @@ import { visa, VisaType } from "@/utils/interface";
 export default function VisaDetails({
   visaDetails,
   visaTypesDetails,
+  visaQuery
 }: {
   visaDetails: VisaType;
   visaTypesDetails: VisaType[];
+  visaQuery: string;
 }) {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -28,16 +30,39 @@ export default function VisaDetails({
     }
   );
 
-  const [currentVisa, setCurrentVisa] = useState<visa | undefined>(
-    Array.isArray(visaDetails.visas)
-      ? (visaDetails.visas[0] as visa)
-      : undefined
-  );
+  // const [currentVisa, setCurrentVisa] = useState<visa | undefined>(
+  //   Array.isArray(visaDetails.visas)
+  //     ? (visaDetails.visas[0] as visa)
+  //     : undefined
+  // );
 
-  const [selected, setSelected] = useState<Option>({
-    label: currentVisa?.title || "",
-    value: currentVisa?.documentId || "",
-  });
+  // const [selected, setSelected] = useState<Option>({
+  //   label: currentVisa?.title || "",
+  //   value: currentVisa?.documentId || "",
+  // });
+  const visas: visa[] = Array.isArray(visaDetails.visas) ? visaDetails.visas as visa[] : [];
+
+  const getDefaultVisa = () => {
+    if (visaQuery) {
+      const match = visas.find((v) => v.title === visaQuery);
+      if (match) {
+        return {
+          label: match.title,
+          value: match.documentId,
+        };
+      }
+    }
+    // fallback to first visa
+    return {
+      label: visas[0]?.title || "",
+      value: visas[0]?.documentId || "",
+    };
+  };
+
+  const [selected, setSelected] = useState<Option>(getDefaultVisa());
+  const [currentVisa, setCurrentVisa] = useState<visa | undefined>(
+    visas.find((v) => v.title === visaQuery) || visas[0]
+  );
 
   const onVisaChange = (selectedVisa: Option) => {
     const newVisa = (visaDetails.visas as visa[])?.find(
@@ -83,12 +108,25 @@ export default function VisaDetails({
             {/* Dropdown Popover */}
             {open && (
               <div className="absolute top-full mt-2 w-56 max-h-[350px] overflow-y-auto bg-white border border-gray-200 shadow-xl rounded-md z-50">
-                <ul className="space-y-4 p-3">
+                {/* <ul className="space-y-4 p-3">
                   {visaDropdownList?.map((o, i) => {
                     return (
                       <li
                         key={i}
                         className="text-sm text-neutrals hover:text-navy-blue cursor-pointer"
+                      >
+                        {o}
+                      </li>
+                    );
+                  })}
+                </ul> */}
+                <ul className="space-y-4 p-3">
+                  {visaDropdownList?.map((o, i) => {
+                    const isSelected = o === (visaQuery || visaDetails.name);
+                    return (
+                      <li
+                        key={i}
+                        className={`text-sm text-neutrals hover:text-navy-blue cursor-pointer ${isSelected ? 'font-bold text-navy-blue' : ''}`}
                       >
                         {o}
                       </li>
