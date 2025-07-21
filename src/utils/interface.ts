@@ -282,6 +282,35 @@ export interface visa {
   requirements: unknown[];
 }
 
+// Rich text description types
+export interface RichTextChild {
+  text: string;
+  type: string;
+}
+
+export interface RichTextBlock {
+  type: string;
+  children: RichTextChild[];
+}
+
+export interface CheckListDetails {
+  id: number;
+  documentId: string;
+  title: string;
+  subtitle: string;
+  description: RichTextBlock[];
+  price: number | null;
+  processingTime: string | null;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  checkListType: string;
+  isConsultationOnly: boolean | null;
+  visa?: visa;
+  application_type?: ApplicationType;
+  visa_type?: VisaType;
+}
+
 
   
  
@@ -345,4 +374,14 @@ export interface VisaCalculatorProps {
   questions: Question[];
   scoreRequired: number;
   title: string;
+}
+
+export interface ApplicationType {
+  id: number;
+  documentId: string;
+  title: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
 }
