@@ -1,7 +1,14 @@
+"use client"
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 
-function PricingSidebar() {
+function PricingSidebar({
+    price,
+    processingTime,
+    }: {
+    price: number | null;
+    processingTime: string | null;
+    }) {
     const router = useRouter();
 
     const handleBuyChecklist = () => {
@@ -30,7 +37,7 @@ function PricingSidebar() {
 
                     {/* Price */}
                     <div className="font-semibold text-2xl text-neutrals-700 leading-6 tracking-[0.2px] capitalize">
-                        ₹1,999.00
+                        {price ? `₹${price.toLocaleString()}`: "N/A"}
                     </div>
 
                     {/* Description */}
@@ -47,7 +54,7 @@ function PricingSidebar() {
                             Processing time
                         </h4>
                         <p className="text-sm text-neutrals leading-6 tracking-[0.2px] capitalize">
-                            6 - 33 months
+                            {processingTime || "N/A"}
                         </p>
                     </div>
 

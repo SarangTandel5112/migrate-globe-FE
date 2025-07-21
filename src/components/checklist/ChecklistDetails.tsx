@@ -1,7 +1,32 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { RichTextBlock } from "@/utils/interface";
 
-function ChecklistDetails() {
+// Function to render rich text from Strapi
+const renderRichText = (description: RichTextBlock[]) => {
+  return description.map((block, index) => {
+    if (block.type === "paragraph") {
+      return (
+        <p key={index} className="text-base text-neutrals leading-6 tracking-[0.2px] capitalize">
+          {block.children.map((child, childIndex) => (
+            <span key={childIndex}>{child.text}</span>
+          ))}
+        </p>
+      );
+    }
+    // Add more block types here if needed (e.g., headings, lists)
+    return null;
+  });
+};
+
+
+function ChecklistDetails({
+    title,
+    description,
+  }: {
+    title: string;
+    description: RichTextBlock[];
+  }) {
     return (
         <>
             {/* Image Section */}
@@ -40,9 +65,9 @@ function ChecklistDetails() {
                     }}
                     transition={{ duration: 0.6 }}
                 >
-                    Global Talent visa (subclass 858)
+                    {title}
                 </motion.h2>
-                <motion.p
+                <motion.div
                     className="text-base text-neutrals leading-6 tracking-[0.2px] capitalize"
                     variants={{
                         visible: { opacity: 1, y: 0 },
@@ -50,14 +75,8 @@ function ChecklistDetails() {
                     }}
                     transition={{ duration: 0.6, delay: 0.2 }}
                 >
-                    Apply for the Global Talent visa (subclass 858) if you have
-                    an internationally recognised record of exceptional and
-                    outstanding achievement in an eligible field. To be eligible
-                    for this visa, you must demonstrate that you will be of
-                    benefit to the Australian community, be able to establish
-                    yourself in Australia, and have a record of achievement in a
-                    profession, sport, the arts, or academia and research.
-                </motion.p>
+                   {description && renderRichText(description)}
+                </motion.div>
             </motion.div>
         </>
     );
