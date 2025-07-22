@@ -10,61 +10,112 @@ import CheckRoundIcon from "@/components/icons/CheckRoundIcon";
 import { motion } from "framer-motion";
 import { CalculatorState, VisaCalculatorProps } from "@/utils/interface";
 
-// Types for the API response structure
-
-
-export default function VisaCalculator({ questions, scoreRequired, title }: VisaCalculatorProps) {
+export default function VisaCalculator({
+  questions,
+  scoreRequired,
+  title,
+}: VisaCalculatorProps) {
   const router = useRouter();
-  
-  // Initialize calculator state
+
   const [calculatorState, setCalculatorState] = useState<CalculatorState>({});
   const [currentStep, setCurrentStep] = useState<number>(0);
+  const [showResults, setShowResults] = useState(false);
 
-  // Get questions in order (filter out empty questions)
-  const validQuestions = questions.filter(q => q.option && q.option.length > 0);
+  const validQuestions = questions.filter(
+    (q) => q.option && q.option.length > 0
+  );
 
-  // Update calculator state
-  const updateCalculatorState = (questionId: string, points: number) => {
-    setCalculatorState(prev => ({
+  const updateCalculatorState = (questionId: number, optionId: number) => {
+    setCalculatorState((prev) => ({
       ...prev,
-      [questionId]: points
+      [questionId]: optionId,
     }));
   };
 
-  // Calculate total points according to Schedule 6D
   const calculateTotalPoints = () => {
     let total = 0;
-    
-    // Add points for each answered question
-    Object.values(calculatorState).forEach(points => {
-      total += points;
-    });
+    const overseasWorkQuestionId = 32;
+    const australianWorkQuestionId = 33;
 
-    // Apply work experience capping (overseas + Australian work experience max 20 points)
-    const overseasWork = calculatorState['6D.3'] || 0;
-    const australianWork = calculatorState['6D.4'] || 0;
-    const workExperience = overseasWork + australianWork;
-    const cappedWorkExperience = workExperience > 20 ? 20 : workExperience;
-    
-    // Remove individual work experience points and add capped total
-    total = total - overseasWork - australianWork + cappedWorkExperience;
-    
+    let overseasWorkPoints = 0;
+    let australianWorkPoints = 0;
+
+    for (const questionId in calculatorState) {
+      const selectedOptionId = calculatorState[questionId];
+      const question = validQuestions.find(
+        (q) => q.id === parseInt(questionId)
+      );
+
+      if (question && selectedOptionId !== undefined) {
+        const selectedOption = question.option.find(
+          (opt) => opt.id === selectedOptionId
+        );
+        if (selectedOption) {
+          if (question.id === overseasWorkQuestionId) {
+            overseasWorkPoints = selectedOption.point;
+          } else if (question.id === australianWorkQuestionId) {
+            australianWorkPoints = selectedOption.point;
+          } else {
+            total += selectedOption.point;
+          }
+        }
+      }
+    }
+
+    const cappedWorkExperience = Math.min(
+      overseasWorkPoints + australianWorkPoints,
+      20
+    );
+    total += cappedWorkExperience;
+
     return total;
   };
 
-  const totalScore = calculateTotalPoints();
-  const minimumScore = scoreRequired;
-  const progressPercentage = (totalScore / 100) * 100;
+  const calculateMaxPoints = () => {
+    let maxTotal = 0;
+    const overseasWorkQuestionId = 32;
+    const australianWorkQuestionId = 33;
 
-  // Handle question option selection
-  const handleOptionSelection = (questionId: string, points: number) => {
-    updateCalculatorState(questionId, points);
+    let maxOverseasPoints = 0;
+    let maxAustralianPoints = 0;
+
+    validQuestions.forEach((question) => {
+      const maxPointsForQuestion = Math.max(
+        ...question.option.map((opt) => opt.point)
+      );
+      if (question.id === overseasWorkQuestionId) {
+        maxOverseasPoints = maxPointsForQuestion;
+      } else if (question.id === australianWorkQuestionId) {
+        maxAustralianPoints = maxPointsForQuestion;
+      } else {
+        maxTotal += maxPointsForQuestion;
+      }
+    });
+
+    const cappedMaxWorkExperience = Math.min(
+      maxOverseasPoints + maxAustralianPoints,
+      20
+    );
+    maxTotal += cappedMaxWorkExperience;
+
+    return maxTotal;
   };
 
-  // Navigation functions
+  const totalScore = calculateTotalPoints();
+  const maxPossibleScore = calculateMaxPoints();
+  const minimumScore = scoreRequired;
+  const progressPercentage =
+    maxPossibleScore > 0 ? (totalScore / maxPossibleScore) * 100 : 0;
+
+  const handleOptionSelection = (questionId: number, optionId: number) => {
+    updateCalculatorState(questionId, optionId);
+  };
+
   const nextStep = () => {
     if (currentStep < validQuestions.length - 1) {
       setCurrentStep(currentStep + 1);
+    } else {
+      setShowResults(true);
     }
   };
 
@@ -78,13 +129,94 @@ export default function VisaCalculator({ questions, scoreRequired, title }: Visa
     setCurrentStep(step);
   };
 
-  // Get current question
+  if (showResults) {
+    return (
+      <div className="flex flex-col items-center justify-center my-[70px] md:my-[150px]">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="bg-white rounded-2xl p-8 shadow-lg text-center"
+        >
+          <h2 className="text-2xl font-bold text-navy-blue mb-4">
+            Your Results
+          </h2>
+          <div className="flex items-center justify-center gap-6">
+            <div className="relative w-25 h-25 flex-shrink-0">
+              <svg
+                width="100"
+                height="100"
+                viewBox="0 0 100 100"
+                className="transform -rotate-90"
+              >
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="41.5"
+                  fill="none"
+                  stroke="#DCF3EB"
+                  strokeWidth="17"
+                />
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="41.5"
+                  fill="none"
+                  stroke="#6FAC96"
+                  strokeWidth="17"
+                  strokeDasharray={`${progressPercentage * 2.6} ${
+                    260 - progressPercentage * 2.6
+                  }`}
+                  strokeLinecap="round"
+                  className="transition-all duration-500"
+                />
+              </svg>
+            </div>
+            <div className="flex-1">
+              <div className="mb-2">
+                <span className="text-base text-navy-blue-400 tracking-[0.2px]">
+                  Total Score:
+                </span>
+                <span className="text-2xl text-navy-blue-400 tracking-[0.2px] ml-1">
+                  {totalScore.toString().padStart(2, "0")}
+                </span>
+                <span className="text-base text-navy-blue-400 tracking-[0.2px] ml-1">
+                  Points
+                </span>
+              </div>
+              <p className="text-xs text-navy-blue-200 tracking-[0.2px]">
+                <span className="text-navy-blue-200">
+                  Minimum required score for most skilled visas
+                </span>
+                <span className="text-navy-blue-400">: </span>
+                <span
+                  className={`font-medium ${
+                    totalScore >= minimumScore
+                      ? "text-green-600"
+                      : "text-navy-blue"
+                  }`}
+                >
+                  {minimumScore} points
+                </span>
+              </p>
+              {totalScore >= minimumScore && (
+                <p className="text-xs text-green-600 font-medium mt-1">
+                  ✓ You meet the minimum requirement!
+                </p>
+              )}
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    );
+  }
+
   const currentQuestion = validQuestions[currentStep];
 
   if (!currentQuestion) {
     return <div>Loading...</div>;
   }
-
+  
   return (
     <div className="container-1200">
       {/* Header Section */}
@@ -98,16 +230,9 @@ export default function VisaCalculator({ questions, scoreRequired, title }: Visa
             Back
           </span>
         </button>
-
         <h1 className="font-semibold text-heading1 text-navy-blue tracking-[0.608px]">
           {title}
         </h1>
-        {/* <p className="text-lg text-gray-600 mt-2">
-          Based on Schedule 6D — General Points Test for General Skilled Migration Visas
-        </p>
-        <p className="text-sm text-gray-500 mt-1">
-          Current minimum requirement: <span className="font-semibold text-blue-600">{minimumScore} points</span>
-        </p> */}
       </div>
 
       {/* Main Content */}
@@ -120,16 +245,6 @@ export default function VisaCalculator({ questions, scoreRequired, title }: Visa
         {/* Left Column - Form Section */}
         <div className="flex-1">
           <div className="bg-white rounded-2xl border border-white/80 backdrop-blur-[20px] p-6">
-            {/* Section Header */}
-            {/* <div className="mb-6">
-              <h2 className="font-semibold text-heading1 text-neutrals-700 tracking-[0.608px] mb-1">
-                Step {currentStep + 1} of {validQuestions.length}
-              </h2>
-              <p className="text-sm text-neutrals leading-6 tracking-[0.2px] capitalize">
-                Complete the following question to calculate your points:
-              </p>
-            </div> */}
-
             {/* Current Question */}
             <div className="space-y-6 mb-8">
               <div className="mb-4">
@@ -140,7 +255,6 @@ export default function VisaCalculator({ questions, scoreRequired, title }: Visa
                   {currentQuestion.question}
                 </p>
               </div>
-
               <div className="space-y-4">
                 {currentQuestion.option.map((option, index) => (
                   <motion.div
@@ -154,22 +268,25 @@ export default function VisaCalculator({ questions, scoreRequired, title }: Visa
                       ease: "easeOut",
                     }}
                   >
-                    {/* Radio Button */}
                     <div className="relative flex-shrink-0 w-6 h-6">
                       <input
                         type="radio"
                         id={option.id.toString()}
-                        name={currentQuestion.item}
+                        name={currentQuestion.id.toString()}
                         value={option.value}
-                        checked={calculatorState[currentQuestion.item] === option.point}
-                        onChange={() => handleOptionSelection(currentQuestion.item, option.point)}
+                        checked={
+                          calculatorState[currentQuestion.id] === option.id
+                        }
+                        onChange={() =>
+                          handleOptionSelection(currentQuestion.id, option.id)
+                        }
                         className="sr-only"
                       />
                       <label
                         htmlFor={option.id.toString()}
                         className="cursor-pointer block w-full h-full"
                       >
-                        {calculatorState[currentQuestion.item] === option.point ? (
+                        {calculatorState[currentQuestion.id] === option.id ? (
                           <div className="relative">
                             <FillRadioIcon />
                           </div>
@@ -180,25 +297,16 @@ export default function VisaCalculator({ questions, scoreRequired, title }: Visa
                         )}
                       </label>
                     </div>
-
-                    {/* Option Content */}
                     <div className="flex-1">
                       <h3 className="font-semibold text-base text-neutrals-700 leading-6 tracking-[0.2px] capitalize mb-1">
-                        {option.label.split('\n')[0]}
+                        {option.label.split("\\n")[0]}
                       </h3>
-                      {option.label.includes('\n') && (
+                      {option.label.includes("\\n") && (
                         <p className="text-sm text-neutrals leading-6 tracking-[0.2px] capitalize">
-                          {option.label.split('\n').slice(1).join('\n')}
+                          {option.label.split("\\n").slice(1).join("\\n")}
                         </p>
                       )}
                     </div>
-
-                    {/* Points Badge */}
-                    {/* <div className="flex-shrink-0">
-                      <span className="inline-flex items-center justify-center w-8 h-8 bg-blue-600 text-white text-sm font-bold rounded-full">
-                        {option.point}
-                      </span>
-                    </div> */}
                   </motion.div>
                 ))}
               </div>
@@ -206,29 +314,25 @@ export default function VisaCalculator({ questions, scoreRequired, title }: Visa
 
             {/* Navigation Buttons */}
             <div className="flex justify-between items-center">
-              <button 
+              <button
                 onClick={prevStep}
                 disabled={currentStep === 0}
                 className={`flex items-center gap-2 px-4 py-2 rounded-[5px] transition-colors ${
                   currentStep === 0
-                    ? 'text-gray-400 cursor-not-allowed' 
-                    : 'text-navy-blue hover:bg-gray-100'
+                    ? "text-gray-400 cursor-not-allowed"
+                    : "text-navy-blue hover:bg-gray-100"
                 }`}
               >
                 <span className="text-sm tracking-[0.46px]">Previous</span>
               </button>
-
-              <button 
+              <button
                 onClick={nextStep}
-                disabled={currentStep === validQuestions.length - 1}
-                className={`flex items-center gap-2.5 px-6 py-2 rounded-[5px] transition-colors ${
-                  currentStep === validQuestions.length - 1
-                    ? 'bg-gray-300 cursor-not-allowed'
-                    : 'bg-navy-blue text-neutrals-0 hover:bg-navy-blue/90'
-                }`}
+                className={`flex items-center gap-2.5 px-6 py-2 rounded-[5px] transition-colors bg-navy-blue text-neutrals-0 hover:bg-navy-blue/90`}
               >
                 <span className="text-sm tracking-[0.46px]">
-                  {currentStep === validQuestions.length - 1 ? 'Complete' : 'Next'}
+                  {currentStep === validQuestions.length - 1
+                    ? "Calculate Score"
+                    : "Next"}
                 </span>
                 {currentStep < validQuestions.length - 1 && (
                   <div className="relative w-6 h-6">
@@ -267,15 +371,14 @@ export default function VisaCalculator({ questions, scoreRequired, title }: Visa
                     fill="none"
                     stroke="#6FAC96"
                     strokeWidth="17"
-                    strokeDasharray={`${
-                      progressPercentage * 2.6
-                    } ${260 - progressPercentage * 2.6}`}
+                    strokeDasharray={`${progressPercentage * 2.6} ${
+                      260 - progressPercentage * 2.6
+                    }`}
                     strokeLinecap="round"
                     className="transition-all duration-500"
                   />
                 </svg>
               </div>
-
               <div className="flex-1">
                 <div className="mb-2">
                   <span className="text-base text-navy-blue-400 tracking-[0.2px]">
@@ -290,15 +393,16 @@ export default function VisaCalculator({ questions, scoreRequired, title }: Visa
                 </div>
                 <p className="text-xs text-navy-blue-200 tracking-[0.2px]">
                   <span className="text-navy-blue-200">
-                    Minimum required score for most skilled
-                    visas
+                    Minimum required score for most skilled visas
                   </span>
-                  <span className="text-navy-blue-400">
-                    :{" "}
-                  </span>
-                  <span className={`font-medium ${
-                    totalScore >= minimumScore ? 'text-green-600' : 'text-navy-blue'
-                  }`}>
+                  <span className="text-navy-blue-400">: </span>
+                  <span
+                    className={`font-medium ${
+                      totalScore >= minimumScore
+                        ? "text-green-600"
+                        : "text-navy-blue"
+                    }`}
+                  >
                     {minimumScore} points
                   </span>
                 </p>
@@ -313,9 +417,14 @@ export default function VisaCalculator({ questions, scoreRequired, title }: Visa
             {/* Checklist */}
             <div className="space-y-0">
               {validQuestions.map((question, index) => {
-                const isCompleted = calculatorState[question.item] !== undefined;
-                const points = isCompleted ? calculatorState[question.item] : null;
-                
+                const isCompleted =
+                  calculatorState[question.id] !== undefined;
+                const selectedOptionId = calculatorState[question.id];
+                const selectedOption = question.option.find(
+                  (opt) => opt.id === selectedOptionId
+                );
+                const points = selectedOption ? selectedOption.point : null;
+
                 return (
                   <motion.div
                     key={question.id}
@@ -332,7 +441,6 @@ export default function VisaCalculator({ questions, scoreRequired, title }: Visa
                     onClick={() => goToStep(index)}
                   >
                     <div className="flex items-center gap-4">
-                      {/* Checkbox */}
                       <div className="w-6 h-6 flex-shrink-0">
                         {isCompleted ? (
                           <div className="relative w-6 h-6 bg-mint-green-600 rounded-full flex items-center justify-center">
@@ -344,8 +452,6 @@ export default function VisaCalculator({ questions, scoreRequired, title }: Visa
                           </div>
                         )}
                       </div>
-
-                      {/* Label */}
                       <span
                         className={`text-sm tracking-[0.2px] capitalize leading-6 ${
                           isCompleted
@@ -356,8 +462,6 @@ export default function VisaCalculator({ questions, scoreRequired, title }: Visa
                         {question.title}
                       </span>
                     </div>
-
-                    {/* Points Badge */}
                     {isCompleted && points !== null && (
                       <div className="w-6 h-6 bg-mint-green-50 rounded-xl flex items-center justify-center">
                         <span className="font-bold text-xs text-mint-green-700 tracking-[0.2px] capitalize">
@@ -372,24 +476,6 @@ export default function VisaCalculator({ questions, scoreRequired, title }: Visa
           </div>
         </div>
       </motion.div>
-
-      {/* Footer Information */}
-      {/* <div className="mt-8 bg-white rounded-2xl border border-white/80 backdrop-blur-[20px] p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">About Schedule 6D</h3>
-        <div className="text-sm text-gray-600 space-y-2">
-          <p>
-            This calculator is based on the official Schedule 6D — General Points Test for General Skilled Migration Visas 
-            mentioned in Subregulation 2.26AC(1) of the Migration Regulations 1994.
-          </p>
-          <p>
-            The points test evaluates applicants based on age, English language proficiency, work experience, 
-            educational qualifications, and other factors to determine eligibility for skilled migration visas.
-          </p>
-          <p>
-            <strong>Current minimum requirement:</strong> {minimumScore} points for all General Skilled Migration visas (Subclass 189, 190, 491).
-          </p>
-        </div>
-      </div> */}
     </div>
   );
 }
