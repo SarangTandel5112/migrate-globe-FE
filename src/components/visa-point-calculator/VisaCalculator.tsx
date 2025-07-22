@@ -216,7 +216,7 @@ export default function VisaCalculator({
   if (!currentQuestion) {
     return <div>Loading...</div>;
   }
-  
+
   return (
     <div className="container-1200">
       {/* Header Section */}
@@ -417,8 +417,7 @@ export default function VisaCalculator({
             {/* Checklist */}
             <div className="space-y-0">
               {validQuestions.map((question, index) => {
-                const isCompleted =
-                  calculatorState[question.id] !== undefined;
+                const isCompleted = calculatorState[question.id] !== undefined;
                 const selectedOptionId = calculatorState[question.id];
                 const selectedOption = question.option.find(
                   (opt) => opt.id === selectedOptionId
