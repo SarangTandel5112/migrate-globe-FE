@@ -24,10 +24,11 @@ function SocialButton({ icon, text }: { icon: StaticImageData; text: string }) {
 }
 
 type LoginPageProps = {
-    isModal?: boolean;
+    showModal?: boolean;
+    handleSignUp?: () => void;
 };
 
-export default function LoginModal({ isModal }: LoginPageProps) {
+export default function LoginModal({ showModal, handleSignUp }: LoginPageProps) {
     const [step, setStep] = useState<"email" | "password">("email");
     const [email, setEmail] = useState("");
     const [password] = useState("");
@@ -59,7 +60,7 @@ export default function LoginModal({ isModal }: LoginPageProps) {
     return (
         <div
             className={`bg-white ${
-                isModal ? "p-6 rounded-xl w-[400px]" : "min-h-screen p-6"
+                showModal ? "p-6 rounded-xl w-[400px]" : "min-h-screen p-6"
             }`}
         >
             <div className="flex justify-center mb-6">
@@ -146,7 +147,7 @@ export default function LoginModal({ isModal }: LoginPageProps) {
 
             <p className="text-sm text-center text-grayish-600 mt-4">
                 Don&apos;t have an account?{" "}
-                <span className="text-navy-blue font-medium cursor-pointer">
+                <span className="text-navy-blue font-medium cursor-pointer" onClick={handleSignUp}>
                     Sign Up
                 </span>
             </p>

@@ -11,10 +11,12 @@ import LoginModal from "../login";
 import { VisaCategoriesGrid } from "../visa/VisaCategoriesGrid";
 import { VisaType } from "@/utils/interface";
 import { fetchInsights } from "@/api/insights";
+import SignupModal from "../signup";
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [showLoginModal, setShowLoginModal] = useState(false);
+    const [showSignupModal, setShowSignupModal] = useState(false);
     const pathname = usePathname();
     const segments = pathname.split("/").filter(Boolean);
     const last = segments.at(-1);
@@ -75,6 +77,19 @@ const Navbar = () => {
         document.body.classList.toggle("no-scroll");
         setShowLoginModal(!showLoginModal);
     };
+    const toggleSignup = () => {
+        document.body.classList.toggle("no-scroll");
+        setShowSignupModal(!showSignupModal);
+    };
+
+    const handleSignUp = () => {
+        toggleSignup();
+        toggleLogin();
+    }
+    const handleLogin = () => {
+        toggleLogin();
+        toggleSignup();
+    }
 
     return (
         <div className="sticky top-0 w-full z-40 bg-white container-padding shadow-custom-combined">
@@ -218,7 +233,15 @@ const Navbar = () => {
                 {showLoginModal && (
                     <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
                         <div ref={modalRef}>
-                            <LoginModal isModal />
+                            <LoginModal showModal={showLoginModal} handleSignUp={handleSignUp} />
+                        </div>
+                    </div>
+                )}
+                {showSignupModal && (
+                    <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
+                        <div ref={modalRef}>
+                            {/* <LoginModal isLoginModal /> */}
+                            <SignupModal showModal={showSignupModal} handleLogin={handleLogin} />
                         </div>
                     </div>
                 )}
