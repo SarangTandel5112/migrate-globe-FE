@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import CustomSelect, { Option } from "@/ui/CustomSelect";
 import { visaContainerVariants } from "@/utils/animation-variant";
 import { visa, VisaType } from "@/utils/interface";
+import { useRouter } from "next/navigation";
 
 export default function VisaDetails({
   visaDetails,
@@ -16,10 +17,12 @@ export default function VisaDetails({
   visaTypesDetails: VisaType[];
   visaQuery: string;
 }) {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const visaDropdownList = visaTypesDetails?.map((visaType) => visaType.name);
+  // const visaDropdownList = visaTypesDetails?.map((visaType) => visaType.name);
+  const visaDropdownList: VisaType[] = visaTypesDetails ?? [];
 
   const visaOptions: Option[] = ((visaDetails?.visas as visa[]) ?? []).map(
     (currentVisa) => {
@@ -122,13 +125,14 @@ export default function VisaDetails({
                 </ul> */}
                 <ul className="space-y-4 p-3">
                   {visaDropdownList?.map((o, i) => {
-                    const isSelected = o === (visaQuery || visaDetails.name);
+                    const isSelected = o?.name === (visaQuery || visaDetails.name);
                     return (
                       <li
                         key={i}
                         className={`text-sm text-neutrals hover:text-navy-blue cursor-pointer ${isSelected ? 'font-bold text-navy-blue' : ''}`}
+                        onClick={() => router.push(`/services/visa/${o?.documentId}`)}
                       >
-                        {o}
+                        {o?.name}
                       </li>
                     );
                   })}
