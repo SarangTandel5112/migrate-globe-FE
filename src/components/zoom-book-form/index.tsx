@@ -4,6 +4,7 @@ import React from 'react'
 type FormDataType = {
   firstName: string;
   lastName: string;
+  emailId: string;
   phone: string;
   country: string;
 };
@@ -13,6 +14,8 @@ type ZoomBookFormProps = {
   handleInputChange: (field: keyof FormDataType, value: string) => void;
   handleBookSlot: () => void;
   isFormValid: boolean;
+  isBooking?: boolean;
+  bookingError?: string | null;
 };
 
 const ZoomBookForm: React.FC<ZoomBookFormProps> = ({
@@ -20,6 +23,8 @@ const ZoomBookForm: React.FC<ZoomBookFormProps> = ({
   handleInputChange,
   handleBookSlot,
   isFormValid,
+  isBooking = false,
+  bookingError = null,
 }) => {
     const { inputType } = usePlatformInput();
     return (
@@ -59,6 +64,25 @@ const ZoomBookForm: React.FC<ZoomBookFormProps> = ({
                             )
                         }
                         placeholder="Enter Last Name"
+                        className="w-full py-2.5 px-3 rounded border border-[#D3D3D3] bg-[#F7F8FD] font-urbanist text-base tracking-[0.24px] placeholder:text-[#D3D3D3] text-navy-blue focus:outline-none focus:border-navy-blue"
+                    />
+                </div>
+
+                {/* Email ID */}
+                <div className="space-y-2">
+                    <label className="block font-urbanist font-bold text-sm text-[#696969] tracking-[0.24px] capitalize">
+                        Email ID
+                    </label>
+                    <input
+                        type="email"
+                        value={formData.emailId}
+                        onChange={(e) =>
+                            handleInputChange(
+                                "emailId",
+                                e.target.value
+                            )
+                        }
+                        placeholder="Enter Email ID"
                         className="w-full py-2.5 px-3 rounded border border-[#D3D3D3] bg-[#F7F8FD] font-urbanist text-base tracking-[0.24px] placeholder:text-[#D3D3D3] text-navy-blue focus:outline-none focus:border-navy-blue"
                     />
                 </div>
@@ -166,16 +190,24 @@ const ZoomBookForm: React.FC<ZoomBookFormProps> = ({
                     </div>
                 </div>
 
+                {/* Error Message */}
+                {bookingError && (
+                    <div className="text-red-500 text-sm font-urbanist text-center">
+                        {bookingError}
+                    </div>
+                )}
+
                 {/* Book Slot Button */}
                 <button
                     onClick={handleBookSlot}
-                    disabled={!isFormValid}
-                    className={`w-full h-10 rounded-md font-urbanist text-sm tracking-[0.46px] transition-all ${isFormValid
-                        ? "bg-navy-blue text-white hover:bg-navy-blue/90"
-                        : "bg-[#D3D3D3] text-[#696969] cursor-not-allowed"
-                        }`}
+                    disabled={!isFormValid || isBooking}
+                    className={`w-full h-10 rounded-md font-urbanist text-sm tracking-[0.46px] transition-all ${
+                        isFormValid && !isBooking
+                            ? "bg-navy-blue text-white hover:bg-navy-blue/90"
+                            : "bg-[#D3D3D3] text-[#696969] cursor-not-allowed"
+                    }`}
                 >
-                    Book slot
+                    {isBooking ? "Booking..." : "Book slot"}
                 </button>
             </div>
         </div>
