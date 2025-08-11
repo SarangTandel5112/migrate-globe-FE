@@ -18,7 +18,7 @@ function PricingSidebar({
 
     const handleBookConsultation = () => {
         console.log("Book consultation clicked");
-        router.push("/zoom-consultation");
+        router.push("/services/zoom-consultation");
     };
 
     return (

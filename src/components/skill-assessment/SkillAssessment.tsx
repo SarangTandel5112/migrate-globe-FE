@@ -186,7 +186,7 @@ export default function SkillAssessment() {
                                                 />
                                             </div>
                                             <div className="min-w-[100px] text-center">
-                                                <span className="text-xl font-semibold">
+                                                <span className="text-xl font-semibold text-neutrals-700">
                                                     {workExperience}
                                                 </span>{" "}
                                                 <span className="text-gray-500">
@@ -215,7 +215,7 @@ export default function SkillAssessment() {
                                                     experience: e.target.value,
                                                 }))
                                             }
-                                            className="w-full border rounded px-3 py-2 text-base"
+                                            className="w-full border rounded px-3 py-2 text-base text-neutrals-700 border-neutral-700"
                                         >
                                             <option value="" disabled>
                                                 Select Field

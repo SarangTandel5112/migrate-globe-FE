@@ -2,29 +2,32 @@ import { useState, useEffect } from "react";
 
 export const usePlatformInput = () => {
   const [platform, setPlatform] = useState("Unknown");
-  const [inputType, setInputType] = useState("tel");
+  const [inputType, setInputType] = useState("number");
 
   const detectPlatform = () => {
     const userAgent = navigator.userAgent || navigator.vendor || '';
-    
-    // iOS detection - check for iOS devices and exclude Windows Phone
-    if (/iPad|iPhone|iPod/.test(userAgent) && !userAgent.includes('MSStream')) {
-      return "iOS";
+
+    // Apple devices (iOS or macOS)
+    if (
+      /iPhone|iPad|iPod|Macintosh|Mac OS X/.test(userAgent) &&
+      !/Windows/.test(userAgent)
+    ) {
+      return "Apple";
     }
-    
+
     if (/android/i.test(userAgent)) {
       return "Android";
     }
-    
-    return "Desktop";
+
+    return "Other";
   };
 
   useEffect(() => {
     const detectedPlatform = detectPlatform();
     setPlatform(detectedPlatform);
-    
-    // Android = number, iOS/Desktop = tel
-    setInputType(detectedPlatform === "Android" ? "number" : "tel");
+
+    // Use 'tel' for Apple devices, 'number' for others
+    setInputType(detectedPlatform === "Apple" ? "tel" : "number");
   }, []);
 
   return { platform, inputType };

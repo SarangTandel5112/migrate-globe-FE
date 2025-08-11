@@ -14,7 +14,13 @@ export const useTimeSlots = (selectedDate: Date | null) => {
                     setError(null);
                     
                     // Format date as YYYY-MM-DD
-                    const formattedDate = selectedDate.toISOString().split('T')[0];
+                    // const formattedDate = selectedDate.toISOString().split('T')[0];
+                    const year = selectedDate.getFullYear();
+                    const month = String(selectedDate.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+                    const day = String(selectedDate.getDate()).padStart(2, '0');
+
+                    const formattedDate = `${year}-${month}-${day}`;
+                    console.log('d--->', formattedDate);
                     const slots = await getTimeSlots(formattedDate);
                     setTimeSlots(slots);
                 } catch (error) {

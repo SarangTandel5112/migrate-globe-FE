@@ -193,9 +193,9 @@ function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
                     {/* Action Buttons */}
                     <div className="flex flex-col gap-4 mt-8">
-                        <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-center text-white bg-navy-blue rounded-md">
+                        <Link href='/services/zoom-consultation' className="w-full px-6 py-3 text-sm font-medium tracking-wide text-center text-white bg-navy-blue rounded-md">
                             Book a Consultation
-                        </button>
+                        </Link>
                         <Link
                             href="/cart"
                             className="flex items-center justify-center gap-2 py-2"

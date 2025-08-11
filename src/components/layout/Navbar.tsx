@@ -180,9 +180,9 @@ const Navbar = () => {
                     </div> */}
                     {/* Desktop Action Buttons */}
                     <div className="hidden lg:flex gap-6 items-center self-stretch my-auto min-w-60">
-                        <button className="gap-2.5 self-stretch px-6 py-2 my-auto text-sm font-medium text-center text-white bg-navy-blue rounded-md">
+                        <Link href='/services/zoom-consultation' className="gap-2.5 self-stretch px-6 py-2 my-auto text-sm font-medium text-center text-white bg-navy-blue rounded-md">
                             Book a Consultation
-                        </button>
+                        </Link>
                         <Link
                             href="/cart"
                             className="flex gap-2 items-center self-stretch my-auto w-6"

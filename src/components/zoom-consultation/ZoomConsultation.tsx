@@ -149,8 +149,6 @@ export default function ZoomConsultation() {
 
                 const result = await bookConsultation(bookingData);
                 
-                console.log("Booking successful:", result);
-                
                 // Handle successful booking - redirect to checkout URL
                 if (result?.checkout_url) {
                     // Redirect to the checkout URL

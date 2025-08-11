@@ -7,6 +7,7 @@ import CustomSelect, { Option } from "@/ui/CustomSelect";
 import { visaContainerVariants } from "@/utils/animation-variant";
 import { visa, VisaType } from "@/utils/interface";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function VisaDetails({
   visaDetails,
@@ -141,9 +142,9 @@ export default function VisaDetails({
             )}
           </div>
 
-          <button className="bg-navy-blue text-white px-6 py-2 rounded-md text-sm font-medium">
+          <Link href='/services/zoom-consultation' className="bg-navy-blue text-white px-6 py-2 rounded-md text-sm font-medium">
             Book a Consultation
-          </button>
+          </Link>
         </div>
 
         <div className="border-b border-[#DEE2E5]"></div>
