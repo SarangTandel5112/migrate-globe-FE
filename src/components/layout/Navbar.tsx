@@ -22,6 +22,7 @@ const Navbar = () => {
     const last = segments.at(-1);
     const secondLast = segments.at(-2);
     const modalRef = useRef<HTMLDivElement>(null);
+    const signupModalRef = useRef<HTMLDivElement>(null);
     const [insights, setInsights] = useState<VisaType[]>([]);
     const [loadingInsights, setLoadingInsights] = useState(true);
     const [insightsError, setInsightsError] = useState<string | null>(null);
@@ -45,9 +46,6 @@ const Navbar = () => {
         getInsights();
     }, []);
 
-    console.log({insights});
-    
-
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
             if (
@@ -69,6 +67,28 @@ const Navbar = () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [showLoginModal]);
+
+    useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+            if (
+                signupModalRef.current &&
+                !signupModalRef.current.contains(event.target as Node)
+            ) {
+                document.body.classList.remove("no-scroll");
+                setShowSignupModal(false);
+            }
+        }
+
+        if (showSignupModal) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [showSignupModal]);
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -239,8 +259,7 @@ const Navbar = () => {
                 )}
                 {showSignupModal && (
                     <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
-                        <div ref={modalRef}>
-                            {/* <LoginModal isLoginModal /> */}
+                        <div ref={signupModalRef}>
                             <SignupModal showModal={showSignupModal} handleLogin={handleLogin} />
                         </div>
                     </div>

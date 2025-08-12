@@ -126,6 +126,10 @@ export default function CheckList({
     [inquiryOptionsMap]
   );
 
+  const handleBookConsltation = () => {
+    router.push(`/services/zoom-consultation?enquiry=${selectedEnquiryType}&visa=${selectedVisaCategory}`)    
+  }
+
   return (
     <div className="flex flex-col gap-8">
       <button
@@ -257,6 +261,7 @@ export default function CheckList({
                   title={visa.title}
                   description={visa.subtitle}
                   isConsultationOnly={visa.isConsultationOnly}
+                  handleBookConsltation={handleBookConsltation}
                 />
               </motion.div>
             ))}

@@ -22,7 +22,7 @@ const ApplicationTypeButton = ({
         }`}
     >
         <div className="w-14 h-14 bg-white rounded-lg flex items-center justify-center flex-shrink-0 shadow-sm">
-            <Icon />
+            <Icon color={selected ? '#263773' : '#7D87AB'} />
         </div>
         <div className="flex flex-col gap-1 text-left">
             <h3 className="text-neutrals-700 text-lg md:text-xl font-semibold tracking-[0.2px] capitalize">

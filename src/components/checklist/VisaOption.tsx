@@ -5,11 +5,13 @@ const VisaOption = ({
   title,
   description,
   isConsultationOnly,
+  handleBookConsltation
 }: {
   id: string;
   title: string;
   description: string;
   isConsultationOnly: boolean | null;
+  handleBookConsltation: () => void;
 }) => (
   <div className="bg-background-1 rounded-lg p-4 md:p-6 flex flex-col gap-6">
     <div className="flex flex-col gap-2">
@@ -34,7 +36,7 @@ const VisaOption = ({
           </button>
         </>
       ) : (
-        <button className="flex-1 sm:flex-none px-6 py-2 bg-navy-blue text-white rounded text-sm font-medium tracking-[0.46px] hover:bg-navy-blue-600 transition-colors">
+        <button onClick={handleBookConsltation} className="flex-1 sm:flex-none px-6 py-2 bg-navy-blue text-white rounded text-sm font-medium tracking-[0.46px] hover:bg-navy-blue-600 transition-colors">
           Book Consultation
         </button>
       )}

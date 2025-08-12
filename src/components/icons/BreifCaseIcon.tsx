@@ -1,4 +1,4 @@
-const BreifCaseIcon = (props: React.SVGProps<SVGSVGElement>) => (
+const BreifCaseIcon = ({ color = '#7D87AB', ...props }) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         width={24}
@@ -11,14 +11,14 @@ const BreifCaseIcon = (props: React.SVGProps<SVGSVGElement>) => (
             height={13}
             x={3}
             y={7}
-            stroke="#7D87AB"
+            stroke={color}
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={1.75}
             rx={2}
         />
         <path
-            stroke="#7D87AB"
+            stroke={color}
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={1.75}
