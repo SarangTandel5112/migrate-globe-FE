@@ -7,6 +7,8 @@ import Facebook from "@assets/images/Facebook.png";
 import MyImage from "@/ui/myImage";
 import type { StaticImageData } from "next/image";
 import Image from "next/image";
+import CheckFillIcon from "../icons/CheckFillIcon";
+import { API_URL } from "@/constants";
 
 function SocialButton({ icon, text }: { icon: StaticImageData; text: string }) {
     return (
@@ -29,7 +31,7 @@ type SignupPageProps = {
 };
 
 export default function SignupModal({ showModal, handleLogin }: SignupPageProps) {
-    const [step, setStep] = useState<"form" | "otp">("form");
+    const [step, setStep] = useState<"form" | "otp" | "success">("form");
 
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -40,7 +42,7 @@ export default function SignupModal({ showModal, handleLogin }: SignupPageProps)
     const validateEmail = (value: string) =>
         /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
-    const handleNext = () => {
+    const handleNext = async () => {
         if (step === "form") {
             if (!username.trim()) {
                 return setError("Username is required");
@@ -53,14 +55,40 @@ export default function SignupModal({ showModal, handleLogin }: SignupPageProps)
             }
 
             setError("");
-            setStep("otp");
+            try {
+                const res = await fetch(`${API_URL}auth/local/register`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ username, email, password }),
+                });
+
+                if (!res.ok) {
+                    const errData = await res.json();
+                    console.log({errData});
+                    
+                    return setError(errData?.error?.message || "Failed to register");
+                }
+
+                // If backend sends success
+                const data = await res.json();
+                console.log("Register success:", data);
+
+                // Example: you may save token or ID if returned
+                // localStorage.setItem("userId", data.userId);
+
+                // Move to success screen
+                setStep("success");
+            } catch (err) {
+                console.error("Register error:", err);
+                setError("Something went wrong. Please try again.");
+            }
 
             // You can trigger OTP API call here
 
         } else {
-            if (otp.length !== 6) {
-                return setError("Enter valid 6-digit OTP");
-            }
+            // if (otp.length !== 6) {
+            //     return setError("Enter valid 6-digit OTP");
+            // }
 
             setError("");
             console.log({ username, email, password, otp });
@@ -205,16 +233,30 @@ export default function SignupModal({ showModal, handleLogin }: SignupPageProps)
                 </>
             )}
 
+            {/* Step 2: Success Message */}
+            {step === "success" && (
+                <div className="text-center p-6">
+                    <CheckFillIcon className="mx-auto text-green-500 text-4xl mb-4" />
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                        Verification Link Sent
+                    </h3>
+                    <p className="text-sm text-gray-600">
+                        We’ve sent a verification link to <strong>{email}</strong>.  
+                        Please check your inbox to verify your account.
+                    </p>
+                </div>
+            )}
+
             {/* Error Message */}
             {error && <p className="text-xs text-red mt-1">{error}</p>}
 
             {/* Action Button */}
-            <button
+            {step === 'form' && <button
                 onClick={handleNext}
                 className="w-full bg-navy-blue text-white py-2 rounded font-semibold text-sm mb-4 mt-2"
             >
                 {step === "form" ? "Next" : "Sign Up"}
-            </button>
+            </button>}
 
             {/* OR Divider */}
             <div className="relative my-4">
