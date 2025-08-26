@@ -9,8 +9,10 @@ export default function ConnectedPage() {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get("id_token");
 
-    if (token) {
-      localStorage.setItem("token", token);
+      if (token) {
+        if (typeof window !== 'undefined') {
+          localStorage.setItem("token", token);
+        }
       window.history.replaceState({}, "", "/connected");
       router.push("/");
     }

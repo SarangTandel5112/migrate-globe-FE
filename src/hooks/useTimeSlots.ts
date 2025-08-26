@@ -20,7 +20,6 @@ export const useTimeSlots = (selectedDate: Date | null) => {
                     const day = String(selectedDate.getDate()).padStart(2, '0');
 
                     const formattedDate = `${year}-${month}-${day}`;
-                    console.log('d--->', formattedDate);
                     const slots = await getTimeSlots(formattedDate);
                     setTimeSlots(slots);
                 } catch (error) {

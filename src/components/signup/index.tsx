@@ -2,17 +2,18 @@
 import { useState } from "react";
 import ErrorIcon from "@/components/icons/ErrorIcon";
 import Google from "@assets/images/Google.png";
-import Apple from "@assets/images/Apple.png";
-import Facebook from "@assets/images/Facebook.png";
+// import Apple from "@assets/images/Apple.png";
+// import Facebook from "@assets/images/Facebook.png";
 import MyImage from "@/ui/myImage";
 import type { StaticImageData } from "next/image";
 import Image from "next/image";
 import CheckFillIcon from "../icons/CheckFillIcon";
 import { API_URL } from "@/constants";
+import Toast from "@/ui/toast";
 
-function SocialButton({ icon, text }: { icon: StaticImageData; text: string }) {
+function SocialButton({ icon, text, handleClick }: { icon: StaticImageData; text: string; handleClick: () => void }) {
     return (
-        <button className="w-full border border-gray-300 rounded py-2 flex items-center justify-center gap-3 text-sm text-grayish-700 hover:bg-gray-50">
+        <button onClick={handleClick} className="w-full border border-gray-300 rounded py-2 flex items-center justify-center gap-3 text-sm text-grayish-700 hover:bg-gray-50">
             <MyImage
                 src={icon}
                 alt={text}
@@ -38,23 +39,29 @@ export default function SignupModal({ showModal, handleLogin }: SignupPageProps)
     const [password, setPassword] = useState("");
     const [otp, setOtp] = useState("");
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [toast, setToast] = useState<{
+        message: string;
+        type: "success" | "error" | "info";
+        isOpen: boolean;
+    }>({
+        message: "",
+        type: "success",
+        isOpen: false,
+    });
 
     const validateEmail = (value: string) =>
         /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
     const handleNext = async () => {
+        if (loading) return;
         if (step === "form") {
-            if (!username.trim()) {
-                return setError("Username is required");
-            }
-            if (!validateEmail(email)) {
-                return setError("Please enter a valid email");
-            }
-            if (password.length < 6) {
-                return setError("Password must be at least 6 characters");
-            }
+            if (!username.trim()) return setError("Username is required");
+            if (!validateEmail(email)) return setError("Please enter a valid email");
+            if (password.length < 6) return setError("Password must be at least 6 characters");
 
             setError("");
+            setLoading(true);
             try {
                 const res = await fetch(`${API_URL}auth/local/register`, {
                     method: "POST",
@@ -64,44 +71,48 @@ export default function SignupModal({ showModal, handleLogin }: SignupPageProps)
 
                 if (!res.ok) {
                     const errData = await res.json();
-                    console.log({errData});
-                    
-                    return setError(errData?.error?.message || "Failed to register");
+                    const msg = errData?.error?.message || "Failed to register";
+
+                    setError(msg);
+                    setToast({
+                        message: msg,
+                        type: "error",
+                        isOpen: true,
+                    });
+                    return;
                 }
 
-                // If backend sends success
                 const data = await res.json();
                 console.log("Register success:", data);
 
-                // Example: you may save token or ID if returned
-                // localStorage.setItem("userId", data.userId);
+                setToast({
+                    message: "Registration successful!",
+                    type: "success",
+                    isOpen: true,
+                });
 
-                // Move to success screen
                 setStep("success");
             } catch (err) {
                 console.error("Register error:", err);
-                setError("Something went wrong. Please try again.");
+                const msg = "Something went wrong. Please try again.";
+                setError(msg);
+                setToast({
+                    message: msg,
+                    type: "error",
+                    isOpen: true,
+                });
+            } finally {
+                setLoading(false);
             }
-
-            // You can trigger OTP API call here
-
         } else {
-            // if (otp.length !== 6) {
-            //     return setError("Enter valid 6-digit OTP");
-            // }
-
-            setError("");
-            console.log({ username, email, password, otp });
-
-            // Submit final signup here
+            // OTP flow if needed
         }
     };
 
     return (
         <div
-            className={`bg-white ${
-                showModal ? "p-6 rounded-xl w-[400px]" : "min-h-screen p-6"
-            }`}
+            className={`bg-white ${showModal ? "p-6 rounded-xl w-[400px]" : "min-h-screen p-6"
+                }`}
         >
             <div className="flex justify-center mb-6">
                 <Image
@@ -134,9 +145,8 @@ export default function SignupModal({ showModal, handleLogin }: SignupPageProps)
                                     setError("");
                                     setUsername(e.target.value);
                                 }}
-                                className={`w-full px-4 py-2 text-sm border rounded-lg ${
-                                    error && !username ? "border-red" : "border-gray-300"
-                                } focus:outline-none text-grayish`}
+                                className={`w-full px-4 py-2 text-sm border rounded-lg ${error && !username ? "border-red" : "border-gray-300"
+                                    } focus:outline-none text-grayish`}
                             />
                             {error && !username && (
                                 <ErrorIcon className="absolute right-3 top-2.5 text-red-500 text-xl" />
@@ -158,11 +168,10 @@ export default function SignupModal({ showModal, handleLogin }: SignupPageProps)
                                     setError("");
                                     setEmail(e.target.value);
                                 }}
-                                className={`w-full px-4 py-2 text-sm border rounded-lg ${
-                                    error && !validateEmail(email)
-                                        ? "border-red"
-                                        : "border-gray-300"
-                                } focus:outline-none text-grayish`}
+                                className={`w-full px-4 py-2 text-sm border rounded-lg ${error && !validateEmail(email)
+                                    ? "border-red"
+                                    : "border-gray-300"
+                                    } focus:outline-none text-grayish`}
                             />
                             {error && !validateEmail(email) && (
                                 <ErrorIcon className="absolute right-3 top-2.5 text-red-500 text-xl" />
@@ -184,11 +193,10 @@ export default function SignupModal({ showModal, handleLogin }: SignupPageProps)
                                     setError("");
                                     setPassword(e.target.value);
                                 }}
-                                className={`w-full px-4 py-2 text-sm border rounded-lg ${
-                                    error && password.length < 6
-                                        ? "border-red"
-                                        : "border-gray-300"
-                                } focus:outline-none text-grayish`}
+                                className={`w-full px-4 py-2 text-sm border rounded-lg ${error && password.length < 6
+                                    ? "border-red"
+                                    : "border-gray-300"
+                                    } focus:outline-none text-grayish`}
                             />
                             {error && password.length < 6 && (
                                 <ErrorIcon className="absolute right-3 top-2.5 text-red-500 text-xl" />
@@ -221,9 +229,8 @@ export default function SignupModal({ showModal, handleLogin }: SignupPageProps)
                                     setError("");
                                     setOtp(e.target.value);
                                 }}
-                                className={`w-full px-4 py-2 text-sm border text-grayish rounded-lg ${
-                                    error ? "border-red" : "border-gray-300"
-                                } focus:outline-none`}
+                                className={`w-full px-4 py-2 text-sm border text-grayish rounded-lg ${error ? "border-red" : "border-gray-300"
+                                    } focus:outline-none`}
                             />
                             {error && (
                                 <ErrorIcon className="absolute right-3 top-2.5 text-red-500 text-xl" />
@@ -241,7 +248,7 @@ export default function SignupModal({ showModal, handleLogin }: SignupPageProps)
                         Verification Link Sent
                     </h3>
                     <p className="text-sm text-gray-600">
-                        We’ve sent a verification link to <strong>{email}</strong>.  
+                        We’ve sent a verification link to <strong>{email}</strong>.
                         Please check your inbox to verify your account.
                     </p>
                 </div>
@@ -253,9 +260,39 @@ export default function SignupModal({ showModal, handleLogin }: SignupPageProps)
             {/* Action Button */}
             {step === 'form' && <button
                 onClick={handleNext}
-                className="w-full bg-navy-blue text-white py-2 rounded font-semibold text-sm mb-4 mt-2"
+                disabled={loading}
+                // className="w-full bg-navy-blue text-white py-2 rounded font-semibold text-sm mb-4 mt-2"
+                className={`w-full bg-navy-blue text-white py-2 rounded font-semibold text-sm mb-4 mt-2 flex items-center justify-center ${
+                    loading ? "opacity-70 cursor-not-allowed" : ""
+                }`}
             >
-                {step === "form" ? "Next" : "Sign Up"}
+                {loading ? (
+                        <span className="flex items-center gap-2">
+                            <svg
+                                className="animate-spin h-4 w-4 text-white"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                            >
+                                <circle
+                                    className="opacity-25"
+                                    cx="12"
+                                    cy="12"
+                                    r="10"
+                                    stroke="currentColor"
+                                    strokeWidth="4"
+                                ></circle>
+                                <path
+                                    className="opacity-75"
+                                    fill="currentColor"
+                                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                                ></path>
+                            </svg>
+                            Loading...
+                        </span>
+                    ) : (
+                        <>{step === "form" ? "Next" : "Sign Up"}</>
+                    )}
             </button>}
 
             {/* OR Divider */}
@@ -270,9 +307,9 @@ export default function SignupModal({ showModal, handleLogin }: SignupPageProps)
 
             {/* Social Logins */}
             <div className="space-y-2">
-                <SocialButton icon={Google} text="Sign up with Google" />
-                <SocialButton icon={Facebook} text="Sign up with Facebook" />
-                <SocialButton icon={Apple} text="Sign up with Apple" />
+                <SocialButton icon={Google} text="Sign up with Google" handleClick={() => { window.location.href = `${API_URL}connect/google`; }} />
+                {/* <SocialButton icon={Facebook} text="Sign up with Facebook" />
+                <SocialButton icon={Apple} text="Sign up with Apple" /> */}
             </div>
 
             <p className="text-sm text-center text-grayish-600 mt-4">
@@ -281,6 +318,12 @@ export default function SignupModal({ showModal, handleLogin }: SignupPageProps)
                     Login
                 </span>
             </p>
+            <Toast
+                message={toast.message}
+                type={toast.type}
+                isOpen={toast.isOpen}
+                onClose={() => setToast({ ...toast, isOpen: false })}
+            />
         </div>
     );
 }

@@ -2,9 +2,11 @@
 import TitleDescription from "@/components/common/TitleDescription";
 import CalendarIcon from "@/components/icons/Calendar";
 import ComparisonTable from "@/components/insurance/comparison-table";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Insurance } from "@/utils/interface";
+import { addInsuranceToCart } from "@/api/cart";
+import Toast from "@/ui/toast";
 
 interface InsuranceComparisonPageProps {
     data: Insurance[];
@@ -17,14 +19,67 @@ const InsuranceComparisonPage: React.FC<InsuranceComparisonPageProps> = ({ data 
         policyStart: "",
         policyEnd: "",
     });
+    const [quoteRequested, setQuoteRequested] = useState(false);
     const policyStartDateRef = useRef<HTMLInputElement>(null);
     const policyEndDateRef = useRef<HTMLInputElement>(null);
+    const [loadingId, setLoadingId] = useState<number | null>(null);
+    const [toast, setToast] = useState({ message: "", type: "success" as "success" | "error", open: false });
+    const [token, setToken] = useState(null);
+    
+    useEffect(() => {
+    if (typeof window !== 'undefined') {
+        const storedData = localStorage?.getItem('token');
+        if (storedData) setToken(JSON.parse(storedData));
+    }
+    }, []);
+
+    const handlePurchase = async (insuranceId: number | string) => {
+        if (!formData.policyStart || !formData.policyEnd || !formData.adults) {
+            setToast({ open: true, message: "Please fill all fields", type: "error" });
+            return;
+        }
+
+        try {
+            setLoadingId(Number(insuranceId)); // start loader for this insurance
+            // const token = localStorage.getItem("token");
+            if (!token) throw new Error("Please login first");
+
+            const payload = {
+                insurance: insuranceId,
+                numberOfAdults: Number(formData.adults),
+                numberOfDependents: Number(formData.dependants || 0),
+                policyStartDate: formData.policyStart,
+                policyEndDate: formData.policyEnd,
+                quantity: 1,
+                notes: "",
+            };
+
+            await addInsuranceToCart(token, payload);
+
+            setToast({ message: "Insurance added to cart successfully", type: "success", open: true });
+            setTimeout(() => setToast((prev) => ({ ...prev, open: false })), 3000); // auto-close after 3s
+        } catch (err: any) {
+            setToast({ message: err.message || "Something went wrong", type: "error", open: true });
+            setTimeout(() => setToast((prev) => ({ ...prev, open: false })), 3000); // auto-close
+        } finally {
+            setLoadingId(null); // stop loader
+        }
+    };
+
 
     const handleInputChange = (field: string, value: string) => {
         setFormData((prev) => ({
             ...prev,
             [field]: value,
         }));
+    };
+
+    const isFormComplete = Object.values(formData).every((val) => val !== "");
+
+    const handleGetQuote = () => {
+        if (isFormComplete) {
+            setQuoteRequested(true);
+        }
     };
 
     return (
@@ -246,7 +301,12 @@ const InsuranceComparisonPage: React.FC<InsuranceComparisonPageProps> = ({ data 
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             transition={{ type: "spring", stiffness: 300 }}
-                            className="w-full bg-navy-blue text-white px-6 py-2.5 rounded text-sm font-medium hover:bg-navy-blue-600 transition-colors tracking-[0.46px]"
+                            className={`w-full px-6 py-2.5 rounded text-sm font-medium transition-colors tracking-[0.46px] ${isFormComplete
+                                    ? "bg-navy-blue text-white hover:bg-navy-blue-600"
+                                    : "bg-neutrals-200 text-neutrals-500 cursor-not-allowed"
+                                }`}
+                            onClick={handleGetQuote}
+                            disabled={!isFormComplete}
                         >
                             Get Quote
                         </motion.button>
@@ -255,7 +315,13 @@ const InsuranceComparisonPage: React.FC<InsuranceComparisonPageProps> = ({ data 
             </motion.div>
 
             {/* Comparison Table */}
-            <ComparisonTable data={data} />
+            {quoteRequested && <ComparisonTable data={data} onPurchase={handlePurchase} loadingId={loadingId} />}
+            <Toast
+                message={toast.message}
+                type={toast.type}
+                isOpen={toast.open}
+                onClose={() => setToast({ ...toast, open: false })}
+            />
         </div>
     );
 };

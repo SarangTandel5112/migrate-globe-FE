@@ -1,6 +1,8 @@
-import { useState } from "react";
 import DeleteIcon from "@/components/icons/DeleteIcon";
 import { motion } from "framer-motion";
+import EmptyState from "@/ui/EmptyState";
+import Link from "next/link";
+
 
 interface CartItem {
     id: string;
@@ -9,47 +11,15 @@ interface CartItem {
     price: number;
     selected: boolean;
 }
+interface CartSummaryProps {
+  items: CartItem[];
+  loading: boolean;
+  error: string;
+  onSelect: (id: string) => void;
+  onRemove: (id: string) => void;
+}
 
-export default function CartSummary() {
-    const [cartItems, setCartItems] = useState<CartItem[]>([
-        {
-            id: "1",
-            title: "Global Talent visa (subclass 858)",
-            description:
-                "Apply for the Global Talent visa (subclass 858) if you have an internationally recognised record of exceptional and outstanding achievement in an eligible field. To be eligible for this visa, you must demonstrate that you will be of benefit to the Australian community, be able to establish yourself in Australia, and have a record of achievement in a profession, sport, the arts, or academia and research.",
-            price: 1999,
-            selected: true,
-        },
-        {
-            id: "2",
-            title: "Global Talent visa (subclass 858)",
-            description:
-                "Apply for the Global Talent visa (subclass 858) if you have an internationally recognised record of exceptional and outstanding achievement in an eligible field. To be eligible for this visa, you must demonstrate that you will be of benefit to the Australian community, be able to establish yourself in Australia, and have a record of achievement in a profession, sport, the arts, or academia and research.",
-            price: 1999,
-            selected: false,
-        },
-        {
-            id: "3",
-            title: "Global Talent visa (subclass 858)",
-            description:
-                "Apply for the Global Talent visa (subclass 858) if you have an internationally recognised record of exceptional and outstanding achievement in an eligible field. To be eligible for this visa, you must demonstrate that you will be of benefit to the Australian community, be able to establish yourself in Australia, and have a record of achievement in a profession, sport, the arts, or academia and research.",
-            price: 1999,
-            selected: false,
-        },
-    ]);
-
-    const handleItemSelect = (id: string) => {
-        setCartItems((items) =>
-            items.map((item) =>
-                item.id === id ? { ...item, selected: !item.selected } : item
-            )
-        );
-    };
-
-    const handleRemoveItem = (id: string) => {
-        setCartItems((items) => items.filter((item) => item.id !== id));
-    };
-
+export default function CartSummary({ items, loading, error, onSelect, onRemove }: CartSummaryProps) {
     return (
         <div className="flex-1 space-y-4">
             <motion.div
@@ -57,7 +27,21 @@ export default function CartSummary() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: "easeInOut" }}
             >
-                {cartItems.map((item, index) => (
+                {(error || !items || (!loading && items?.length === 0)) &&
+                    <EmptyState
+                        title="No items in your cart"
+                        subtitle="Explore services and add them to your cart."
+                        cta={
+                            <Link
+                                href="/services"
+                                className="inline-flex items-center rounded-lg bg-navy-blue px-4 py-2 text-sm font-semibold text-white hover:opacity-90"
+                            >
+                                Browse services
+                            </Link>
+                        }
+                    />
+                }
+                {items && items?.length > 0 && items.map((item, index) => (
                     <motion.div
                         key={index}
                         initial={{ opacity: 0, y: 30 }}
@@ -67,7 +51,7 @@ export default function CartSummary() {
                             delay: index * 0.1,
                             ease: "easeOut",
                         }}
-                        className={`rounded-lg p-4 flex items-start gap-3 ${
+                        className={`rounded-lg p-4 my-1 flex items-start gap-3 ${
                             item.selected
                                 ? "bg-neutrals-0 border-2 border-neutrals-100"
                                 : "border border-neutrals-100"
@@ -75,12 +59,12 @@ export default function CartSummary() {
                     >
                         {/* Checkbox */}
                         <button
-                            onClick={() => handleItemSelect(item.id)}
+                            onClick={() => onSelect(item.id)}
                             className="mt-1 w-6 h-6 flex-shrink-0"
                         >
                             {item.selected ? (
                                 <motion.div
-                                    layoutId={`checkbox-${item.id}`}
+                                    // layoutId={`checkbox-${item.id}`}
                                     className="w-6 h-6 bg-[#6FAC96] rounded flex items-center justify-center"
                                 >
                                     {" "}
@@ -139,7 +123,7 @@ export default function CartSummary() {
                                 </span>
 
                                 <button
-                                    onClick={() => handleRemoveItem(item.id)}
+                                    onClick={() => onRemove(item.id)}
                                     className="flex items-center gap-2 py-2 px-2 border border-neutrals-200 bg-background rounded hover:bg-[#EDEDED] transition-colors"
                                 >
                                     <DeleteIcon />

@@ -3,14 +3,16 @@ import Image from "next/image";
 import React from "react";
 import { motion } from "framer-motion";
 import { Insurance } from "@/utils/interface";
+import SpinnerLoadingIcon from "@/components/icons/SpinnerLoading";
 
-const ComparisonTable: React.FC<{ data: Insurance[] }> = ({ data }) => {
+const ComparisonTable: React.FC<{ data: Insurance[]; onPurchase: (id: string) => void; loadingId: number | null; }> = ({ data, onPurchase, loadingId }) => {
     if (!Array.isArray(data) || data.length === 0) {
         return <div>No insurance data available.</div>;
     }
 
 
     const insuranceProviders = data.map((item) => ({
+        id: item.id,
         name: item.name,
         price: `$${item.price.toFixed(2)}`,
 logo: `https://admin.migrateglobe.com${item.image?.url || ""}` ,
@@ -110,8 +112,12 @@ logo: `https://admin.migrateglobe.com${item.image?.url || ""}` ,
                                     ({provider.price})
                                 </span>
                             </div>
-                            <button className="w-full bg-navy-blue text-white px-4 py-2 rounded-full text-xs font-medium hover:bg-navy-blue-600 transition-colors tracking-[0.608px] capitalize">
-                                Purchase
+                            <button onClick={() => onPurchase(provider?.id?.toString())} className="w-full bg-navy-blue text-white px-4 py-2 rounded-full text-xs font-medium hover:bg-navy-blue-600 transition-colors tracking-[0.608px] capitalize">
+                                {loadingId === provider?.id ? (
+                                    <span className="w-4 h-4 text-center flex justify-center"><SpinnerLoadingIcon /></span>
+                                ) : (
+                                    "Purchase"
+                                )}
                             </button>
                         </div>
                     </motion.div>

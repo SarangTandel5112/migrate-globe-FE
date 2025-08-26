@@ -1,18 +1,98 @@
-import React from "react";
+'use client'
+import React, { useEffect, useState } from "react";
 import CouponIcon from "../icons/CouponIcon";
 import { motion } from "framer-motion";
+import { API_URL } from "@/constants";
+import Toast from "@/ui/toast";
+import SpinnerLoadingIcon from "../icons/SpinnerLoading";
 
-function OrderSummary({
-    subtotal,
-    consultation,
-    discount,
-    finalTotal,
-}: {
-    subtotal: number;
-    consultation: number;
-    discount: number;
-    finalTotal: number;
-}) {
+interface CartItem {
+    id: string;
+    title: string;
+    description?: string;
+    price: number;
+    selected: boolean;
+}
+
+interface OrderSummaryProps {
+    items: CartItem[];
+    consultationCharge?: number;
+    discount?: number;
+}
+
+const OrderSummary: React.FC<OrderSummaryProps> = ({
+    items,
+    consultationCharge = 0,
+    discount = 0
+}) => {
+    const [loading, setLoading] = useState(false);
+    const [toast, setToast] = useState({ message: "", type: "success" as "success" | "error", open: false });
+    const [token, setToken] = useState(null);
+    
+    useEffect(() => {
+    if (typeof window !== 'undefined') {
+        const storedData = localStorage?.getItem('token');
+        if (storedData) setToken(JSON.parse(storedData));
+    }
+    }, []);
+
+    const selectedItems = items.filter((item) => item.selected);
+
+    const subtotal = selectedItems.reduce(
+        (sum, item) => sum + (item.price || 0),
+        0
+    );
+
+    const finalTotal = subtotal + consultationCharge - discount;
+
+    const handlePayment = async () => {
+        // const token = localStorage.getItem("token");
+
+        if (!token) {
+            setToast({ message: "Please login first", type: "error", open: true });
+            return;
+        }
+
+        if (selectedItems.length === 0) {
+            setToast({ message: "Please select at least one item", type: "error", open: true });
+            return;
+        }
+        setLoading(true);
+
+        // Extract selected checklist and insurance item IDs
+        try {
+            const checklistIds = selectedItems
+                .filter((item) => item.id.startsWith("checklist-"))
+                .map((item) => Number(item.id.replace("checklist-", "")));
+
+            const cartInsuranceItemIds = selectedItems
+                .filter((item) => item.id.startsWith("insurance-"))
+                .map((item) => Number(item.id.replace("insurance-", "")));
+
+            const payload = { checklistIds, cartInsuranceItemIds };
+            const response = await fetch(`${API_URL}orders/initiate-payment`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify(payload),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) throw new Error(data.message || "Payment failed");
+
+            setToast({ message: "Payment initiated successfully!", type: "success", open: true });
+
+        } catch (err: any) {
+            setToast({ message: err.message || "Something went wrong", type: "error", open: true });
+        } finally {
+            setLoading(false); // hide loader
+        }
+    };
+
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -20,14 +100,14 @@ function OrderSummary({
             transition={{ duration: 0.6, ease: "easeInOut" }}
             className="md:w-72 lg:w-96"
         >
-            <div className="md:sticky md:top-8 bg-neutrals-0 rounded-xl p-6 space-y-4">
+            <div className="md:sticky md:top-24 bg-neutrals-0 rounded-xl p-6 space-y-4">
                 <h2 className="font-bold text-base text-neutrals-700 leading-6 tracking-[0.2px] capitalize">
                     Order Summary
                 </h2>
 
                 <div className="flex justify-between items-center">
                     <span className="text-sm text-neutrals tracking-[0.608px]">
-                        Buy Documents Checklist
+                        Selected Items
                     </span>
                     <span className="font-bold text-base text-neutrals leading-6 tracking-[0.2px] capitalize">
                         ₹{subtotal.toLocaleString()}.00
@@ -39,7 +119,7 @@ function OrderSummary({
                         Consultation
                     </span>
                     <span className="font-bold text-base text-neutrals leading-6 tracking-[0.2px] capitalize">
-                        ₹{consultation.toLocaleString()}.00
+                        ₹{consultationCharge.toLocaleString()}.00
                     </span>
                 </div>
 
@@ -48,7 +128,7 @@ function OrderSummary({
                         Discount:
                     </span>
                     <span className="text-base text-neutrals-700 leading-6 tracking-[0.2px] capitalize">
-                        -₹{discount}
+                        -₹{discount.toLocaleString()}.00
                     </span>
                 </div>
 
@@ -57,7 +137,7 @@ function OrderSummary({
                         Final Total:
                     </span>
                     <span className="font-bold text-xl text-neutrals-700 leading-6 tracking-[0.2px] capitalize">
-                        ₹{finalTotal.toLocaleString()}
+                        ₹{finalTotal.toLocaleString()}.00
                     </span>
                 </div>
 
@@ -72,12 +152,19 @@ function OrderSummary({
                 </div>
 
                 {/* Make Payment Button */}
-                <button className="w-full py-2 px-6 bg-navy-blue text-white rounded-md text-sm tracking-[0.46px] hover:bg-navy-blue/90 transition-colors">
-                    Make Payment
+                <button
+                    className={`w-full py-2 px-6 rounded-md text-sm tracking-[0.46px] flex justify-center items-center gap-2 ${loading ? "bg-gray-400 cursor-not-allowed" : "bg-navy-blue text-white hover:bg-navy-blue/90"
+                        }`}
+                    onClick={handlePayment}
+                    disabled={loading || selectedItems.length === 0}
+                >
+                    {loading && <span className="w-4 h-4 text-center flex justify-center"><SpinnerLoadingIcon /></span>}
+                    {loading ? "Processing..." : "Make Payment"}
                 </button>
             </div>
+            <Toast message={toast.message} type={toast.type} isOpen={toast.open} onClose={() => setToast({ ...toast, open: false })} />
         </motion.div>
     );
-}
+};
 
 export default OrderSummary;

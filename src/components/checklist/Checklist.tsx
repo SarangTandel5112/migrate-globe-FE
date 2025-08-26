@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useMemo, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
@@ -12,6 +11,8 @@ import ArrowDownIcon from "@/components/icons/ArrowDown";
 import TitleDescription from "@/components/common/TitleDescription";
 import { fadeUpVariants } from "@/utils/animation-variant";
 import { ApplicationType, CheckListDetails } from "@/utils/interface";
+import Toast from "@/ui/toast";
+import { addChecklistToCart } from "@/api/cart";
 
 interface Options {
   label: string;
@@ -30,6 +31,35 @@ export default function CheckList({
     null
   );
   const [selectedVisaCategory, setSelectedVisaCategory] = useState<string>("");
+  const [toast, setToast] = useState<{
+    message: string;
+    type: "success" | "error";
+    open: boolean;
+  }>({ message: "", type: "success", open: false });
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+  if (typeof window !== 'undefined') {
+      const storedData = localStorage?.getItem('token');
+      if (storedData) setToken(JSON.parse(storedData));
+  }
+  }, []);
+
+  const handleBuyChecklist = async (checklistId: string | number) => {
+    // const token = localStorage?.getItem("token");
+    if (!token) {
+      setToast({ message: "Please login to buy a checklist", type: "error", open: true });
+      return;
+    }
+
+    try {
+      await addChecklistToCart(token, checklistId.toString());
+      setToast({ message: "Checklist added to cart", type: "success", open: true });
+    } catch (err) {
+      console.log(err);
+      setToast({ message: "Failed to add checklist", type: "error", open: true });
+    }
+  };
 
   // Reset selectedVisaCategory when enquiry type changes
   useEffect(() => {
@@ -259,15 +289,23 @@ export default function CheckList({
                 <VisaOption
                   id={visa.documentId}
                   title={visa.title}
+                  visaId={visa?.id}
                   description={visa.subtitle}
                   isConsultationOnly={visa.isConsultationOnly}
                   handleBookConsltation={handleBookConsltation}
+                  handleBuyChecklist={handleBuyChecklist}
                 />
               </motion.div>
             ))}
           </div>
         </motion.div>
       )}
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        isOpen={toast.open}
+        onClose={() => setToast({ ...toast, open: false })}
+      />
     </div>
   );
 }

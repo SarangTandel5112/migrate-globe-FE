@@ -7,31 +7,63 @@ import ZoomBookForm from "@/components/zoom-book-form";
 import { motion } from "framer-motion";
 import { bookConsultation } from "@/api/zoom-consultation";
 import { useTimeSlots } from "@/hooks/useTimeSlots";
+import { convertSlotToLocal, Country } from "@/utils/helpers";
+import Toast from "@/ui/toast";
 
-const daysInMonth = (month: number, year: number) =>
-    new Date(year, month + 1, 0).getDate();
+const daysInMonth = (month: number, year: number) => new Date(year, month + 1, 0).getDate();
 // const weekDays = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+
+interface FormData {
+  firstName: string;
+  lastName: string;
+  emailId: string;
+  phone: string;
+  country: Country;
+}
 
 export default function ZoomConsultation() {
     const router = useRouter();
     const [selectedTime, setSelectedTime] = useState<string>("");
     const [isBooking, setIsBooking] = useState(false);
     const [bookingError, setBookingError] = useState<string | null>(null);
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<FormData>({
         firstName: "",
         lastName: "",
         emailId: "",
         phone: "",
-        country: "Australia",
+        country: 'Australia',
     });
 
     const today = new Date();
     const [selectedDate, setSelectedDate] = useState<Date | null>(today);
     const [currentMonth, setCurrentMonth] = useState(today.getMonth());
     const [currentYear, setCurrentYear] = useState(today.getFullYear());
+    const [toast, setToast] = useState<{
+        message: string;
+        type: "success" | "error" | "info";
+        isOpen: boolean;
+    }>({
+        message: "",
+        type: "info",
+        isOpen: false,
+    });
+    // const [token, setToken] = useState(null);
+
+    // useEffect(() => {
+    // if (typeof window !== 'undefined') {
+    //     const storedData = localStorage?.getItem('token');
+    //     if (storedData) setToken(JSON.parse(storedData));
+    // }
+    // }, []);
 
     // Use custom hook for time slots
     const { timeSlots, loading: loadingTimeSlots, error: timeSlotsError, refetch } = useTimeSlots(selectedDate);
+
+    // Map slots to display times in local timezone
+    const localTimeSlots = timeSlots?.slots?.map((slot) => ({
+        original: slot, // keep raw time string
+        local: convertSlotToLocal(selectedDate!, slot), // display in user TZ
+    }));
 
     const dates: Date[] = [];
     const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
@@ -69,24 +101,9 @@ export default function ZoomConsultation() {
         }
     };
 
-    // const generateCalendarDays = () => {
-    //     // Generate calendar days for September 2025
-    //     const daysInMonth = 30;
-    //     const startDay = 1; // Monday = 1, Sunday = 0
-    //     const days = [];
-
-    //     // Add empty cells for days before month starts
-    //     for (let i = 0; i < startDay; i++) {
-    //         days.push(null);
-    //     }
-
-    //     // Add days of the month
-    //     for (let day = 1; day <= daysInMonth; day++) {
-    //         days.push(day);
-    //     }
-
-    //     return days;
-    // };
+    const showToast = (message: string, type: "success" | "error" | "info") => {
+        setToast({ message, type, isOpen: true });
+    };
 
     // const calendarDays = generateCalendarDays();
     const weekDays = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
@@ -113,7 +130,6 @@ export default function ZoomConsultation() {
 
                 // Format the date as YYYY-MM-DD
                 const formattedDate = selectedDate.toISOString().split('T')[0];
-                
                 // Format time to HH:MM:SS.000 format
                 const timeParts = selectedTime.split(' ');
                 const time = timeParts[0];
@@ -121,18 +137,8 @@ export default function ZoomConsultation() {
                 // let [hours, minutes] = time.split(':').map(Number);
                 const [rawHours, minutes] = time.split(':').map(Number);
                 let hours = rawHours;
-
-                if (period === 'PM' && hours !== 12) {
-                hours += 12;
-                } else if (period === 'AM' && hours === 12) {
-                hours = 0;
-                }
-                
-                if (period === 'PM' && hours !== 12) {
-                    hours += 12;
-                } else if (period === 'AM' && hours === 12) {
-                    hours = 0;
-                }
+                if (period === "PM" && hours < 12) hours += 12;
+                if (period === "AM" && hours === 12) hours = 0;
                 
                 const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:00.000`;
 
@@ -147,7 +153,8 @@ export default function ZoomConsultation() {
                     email: formData.emailId,
                 };
 
-                const result = await bookConsultation(bookingData);
+                const token = localStorage?.getItem('token')
+                const result = await bookConsultation(bookingData, token || '');
                 
                 // Handle successful booking - redirect to checkout URL
                 if (result?.checkout_url) {
@@ -155,12 +162,17 @@ export default function ZoomConsultation() {
                     window.location.href = result.checkout_url;
                 } else {
                     console.error("No checkout URL received from API");
+                    showToast("Booking successful but no payment link received", "info");
                     setBookingError("Booking successful but no payment link received");
                 }
                 
             } catch (error) {
                 console.error("Booking failed:", error);
                 setBookingError(error instanceof Error ? error.message : "Failed to book consultation");
+                showToast(
+                    error instanceof Error ? error.message : "Failed to book consultation",
+                    "error"
+                );
             } finally {
                 setIsBooking(false);
             }
@@ -370,7 +382,8 @@ export default function ZoomConsultation() {
                                             <p className="text-sm text-gray-500">No time slots available for this date</p>
                                         </div>
                                     ) : (
-                                        timeSlots?.slots?.map((time, i) => (
+                                        // timeSlots?.slots?.map((time, i) => (
+                                        localTimeSlots?.map((time, i) => (
                                         <motion.div
                                             key={i}
                                             className="flex items-center gap-1.5 group"
@@ -382,16 +395,15 @@ export default function ZoomConsultation() {
                                                 ease: "easeOut",
                                             }}
                                         >
-                                                                                    <button
-                                            onClick={() => setSelectedTime(time)}
-                                            className={`flex-1 py-4 px-2 rounded-xl border text-base font-urbanist leading-6 transition-all bg-[#F7F8FD] text-[#333] border-[#D3D3D3] group-hover:bg-navy-blue group-hover:text-white group-hover:border-navy-blue ${
-                                                selectedTime === time ? "bg-navy-blue text-white border-navy-blue" : ""
-                                            }`}
-                                        >
-                                            {time}
-                                        </button>
-
-                                            <button className="py-4 px-5 bg-[#333] text-white text-base font-lexend leading-6 rounded-xl hidden group-hover:block">
+                                            <button
+                                                // onClick={() => setSelectedTime(time?.original)}
+                                                className={`flex-1 py-4 px-2 rounded-xl border text-base font-urbanist leading-6 transition-all bg-[#F7F8FD] text-[#333] border-[#D3D3D3] group-hover:bg-navy-blue group-hover:text-white group-hover:border-navy-blue ${
+                                                    selectedTime === time?.original ? "bg-navy-blue text-white border-navy-blue" : ""
+                                                }`}
+                                            >
+                                                {time?.local}
+                                            </button>
+                                            <button onClick={() => setSelectedTime(time?.original)} className="py-4 px-5 bg-[#333] text-white text-base font-lexend leading-6 rounded-xl hidden group-hover:block">
                                                 Weiter
                                             </button>
                                         </motion.div>
@@ -414,6 +426,12 @@ export default function ZoomConsultation() {
                     key={"book-form"}
                 />
             </motion.div>
+            <Toast
+                message={toast.message}
+                type={toast.type}
+                isOpen={toast.isOpen}
+                onClose={() => setToast({ ...toast, isOpen: false })}
+            />
         </div>
     );
 }

@@ -12,11 +12,14 @@ import { VisaCategoriesGrid } from "../visa/VisaCategoriesGrid";
 import { VisaType } from "@/utils/interface";
 import { fetchInsights } from "@/api/insights";
 import SignupModal from "../signup";
+import Toast from "@/ui/toast";
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [showSignupModal, setShowSignupModal] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [userProfile, setUserProfile] = useState<any>(null);
     const pathname = usePathname();
     const segments = pathname.split("/").filter(Boolean);
     const last = segments.at(-1);
@@ -26,6 +29,29 @@ const Navbar = () => {
     const [insights, setInsights] = useState<VisaType[]>([]);
     const [loadingInsights, setLoadingInsights] = useState(true);
     const [insightsError, setInsightsError] = useState<string | null>(null);
+    const profileMenuRef = useRef<HTMLDivElement>(null);
+    const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+    const [toast, setToast] = useState<{
+        message: string;
+        type: "success" | "error" | "info";
+        isOpen: boolean;
+    }>({
+        message: "",
+        type: "success",
+        isOpen: false,
+    });
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            setIsLoggedIn(true);
+            // Optionally fetch the user's profile data
+            const storedUserProfile = JSON.parse(localStorage.getItem("user") || "{}");
+            setUserProfile(storedUserProfile);
+        } else {
+            setIsLoggedIn(false);
+        }
+    }, []);
 
     useEffect(() => {
         const getInsights = async () => {
@@ -102,6 +128,19 @@ const Navbar = () => {
         setShowSignupModal(!showSignupModal);
     };
 
+    const handleLoginSuccess = (user: object, token: string) => {
+        // Save user and token
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(user));
+
+        // Update state
+        setIsLoggedIn(true);
+        setUserProfile(user);
+
+        // Close login modal
+        setShowLoginModal(false);
+        document.body.classList.remove("no-scroll");
+    };
     const handleSignUp = () => {
         toggleSignup();
         toggleLogin();
@@ -110,6 +149,36 @@ const Navbar = () => {
         toggleLogin();
         toggleSignup();
     }
+
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        setIsLoggedIn(false);
+        setUserProfile(null);
+    };
+
+    const toggleProfileMenu = () => setIsProfileMenuOpen(!isProfileMenuOpen);
+
+    useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+            if (
+                profileMenuRef.current &&
+                !profileMenuRef.current.contains(event.target as Node)
+            ) {
+                setIsProfileMenuOpen(false);
+            }
+        }
+
+        if (isProfileMenuOpen) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isProfileMenuOpen]);
 
     return (
         <div className="sticky top-0 w-full z-40 bg-white container-padding shadow-custom-combined">
@@ -200,7 +269,7 @@ const Navbar = () => {
                     </div> */}
                     {/* Desktop Action Buttons */}
                     <div className="hidden lg:flex gap-6 items-center self-stretch my-auto min-w-60">
-                        <Link href='/services/zoom-consultation' className="gap-2.5 self-stretch px-6 py-2 my-auto text-sm font-medium text-center text-white bg-navy-blue rounded-md">
+                        <Link href='/services/zoom-consultation' className="gap-2.5 self-stretch px-3 xl:px-6 py-2 my-auto text-sm font-medium text-center text-white bg-navy-blue rounded-md">
                             Book a Consultation
                         </Link>
                         <Link
@@ -209,12 +278,51 @@ const Navbar = () => {
                         >
                             <CartIcon />
                         </Link>
-                        <button
+                        {isLoggedIn ? (
+                            <div className="relative">
+                                {/* Profile Picture or Placeholder */}
+                                <button onClick={toggleProfileMenu} className="relative w-10 h-10 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center">
+                                    {userProfile?.avatar ? (
+                                        <Image
+                                            src={userProfile.avatar}
+                                            alt="Profile"
+                                            width={40}
+                                            height={40}
+                                            className="object-cover w-full h-full"
+                                        />
+                                    ) : (
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40" className="w-full h-full">
+                                            <circle cx="50" cy="50" r="45" fill="#E0E0E0" />
+                                            <circle cx="50" cy="40" r="18" fill="#9E9E9E" />
+                                            <rect x="30" y="58" width="40" height="20" rx="5" ry="5" fill="#BDBDBD" />
+                                        </svg>
+                                    )}
+                                </button>
+                                {isProfileMenuOpen && (
+                                    <div ref={profileMenuRef} className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg py-2 w-40">
+                                        <button
+                                            onClick={handleLogout}
+                                            className="w-full text-left px-4 py-2 text-sm text-red hover:bg-gray-100"
+                                        >
+                                            Logout
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        ) : (
+                            <button
+                                onClick={toggleLogin}
+                                className="gap-2.5 self-stretch px-6 py-2 my-auto text-sm font-medium text-center whitespace-nowrap rounded-md border border-solid border-neutrals-300 text-neutrals-700"
+                            >
+                                Login
+                            </button>
+                        )}
+                        {/* <button
                             onClick={toggleLogin}
                             className="gap-2.5 self-stretch px-6 py-2 my-auto text-sm font-medium text-center whitespace-nowrap rounded-md border border-solid border-neutrals-300 text-neutrals-700"
                         >
                             Login
-                        </button>
+                        </button> */}
                     </div>
                     {/* Mobile Hamburger Menu */}
                     <button
@@ -247,13 +355,14 @@ const Navbar = () => {
                 {/* Mobile Menu */}
                 <MobileMenu
                     isOpen={isMobileMenuOpen}
+                    toggleLogin={toggleLogin}
                     onClose={() => setIsMobileMenuOpen(false)}
                 />
 
                 {showLoginModal && (
                     <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
                         <div ref={modalRef}>
-                            <LoginModal showModal={showLoginModal} handleSignUp={handleSignUp} />
+                            <LoginModal showModal={showLoginModal} toggleLogin={toggleLogin} handleSignUp={handleSignUp} handleLoginSuccess={handleLoginSuccess} setToast={setToast} />
                         </div>
                     </div>
                 )}
@@ -265,6 +374,12 @@ const Navbar = () => {
                     </div>
                 )}
             </div>
+            <Toast
+                message={toast.message}
+                type={toast.type}
+                isOpen={toast.isOpen}
+                onClose={() => setToast({ ...toast, isOpen: false })}
+            />
         </div>
     );
 }

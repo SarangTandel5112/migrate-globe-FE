@@ -4,14 +4,18 @@ const VisaOption = ({
   id,
   title,
   description,
+  visaId,
   isConsultationOnly,
-  handleBookConsltation
+  handleBookConsltation,
+  handleBuyChecklist
 }: {
   id: string;
   title: string;
+  visaId: string | number;
   description: string;
   isConsultationOnly: boolean | null;
   handleBookConsltation: () => void;
+  handleBuyChecklist: (id: string | number) => void;
 }) => (
   <div className="bg-background-1 rounded-lg p-4 md:p-6 flex flex-col gap-6">
     <div className="flex flex-col gap-2">
@@ -31,7 +35,7 @@ const VisaOption = ({
           >
             More info
           </Link>
-          <button className="flex-1 sm:flex-none px-6 py-2 bg-navy-blue text-white rounded text-sm font-medium tracking-[0.46px] hover:bg-navy-blue-600 transition-colors">
+          <button onClick={() => handleBuyChecklist(visaId)} className="flex-1 sm:flex-none px-6 py-2 bg-navy-blue text-white rounded text-sm font-medium tracking-[0.46px] hover:bg-navy-blue-600 transition-colors">
             Buy checklist
           </button>
         </>

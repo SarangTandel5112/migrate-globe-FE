@@ -12,12 +12,10 @@ function PricingSidebar({
     const router = useRouter();
 
     const handleBuyChecklist = () => {
-        console.log("Buy checklist clicked");
         router.push("/cart");
     };
 
     const handleBookConsultation = () => {
-        console.log("Book consultation clicked");
         router.push("/services/zoom-consultation");
     };
 

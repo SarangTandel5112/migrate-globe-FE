@@ -1,5 +1,7 @@
+'use client'
+import React, { useEffect, useState } from 'react'
 import { usePlatformInput } from '@/hooks/usePlatformInput';
-import React from 'react'
+import Toast from '@/ui/toast';
 
 type FormDataType = {
   firstName: string;
@@ -27,6 +29,29 @@ const ZoomBookForm: React.FC<ZoomBookFormProps> = ({
   bookingError = null,
 }) => {
     const { inputType } = usePlatformInput();
+    const [showToast, setShowToast] = useState(false);
+    const [token, setToken] = useState(null);
+    const [user, setUser] = useState(null);
+        
+    useEffect(() => {
+    if (typeof window !== 'undefined') {
+        const storedData = localStorage?.getItem('token');
+        const storedUserData = localStorage?.getItem('user');
+        if (storedData) setToken(JSON.parse(storedData));
+        if (storedUserData) setUser(JSON.parse(storedUserData));
+    }
+    }, []);
+
+    const userProfile = user || token;
+
+    const handleBookingClick = () => {
+        if (!userProfile) {
+            setShowToast(true);
+            setTimeout(() => setShowToast(false), 3000);
+            return;
+        }
+        handleBookSlot();
+    };
     return (
         <div className="lg:w-80 h-full">
             <div className="bg-white rounded-xl p-4 space-y-6">
@@ -199,7 +224,8 @@ const ZoomBookForm: React.FC<ZoomBookFormProps> = ({
 
                 {/* Book Slot Button */}
                 <button
-                    onClick={handleBookSlot}
+                    // onClick={handleBookSlot}
+                    onClick={handleBookingClick}
                     disabled={!isFormValid || isBooking}
                     className={`w-full h-10 rounded-md font-urbanist text-sm tracking-[0.46px] transition-all ${
                         isFormValid && !isBooking
@@ -210,6 +236,12 @@ const ZoomBookForm: React.FC<ZoomBookFormProps> = ({
                     {isBooking ? "Booking..." : "Book slot"}
                 </button>
             </div>
+            <Toast
+                message="Please login to book a slot"
+                type="error"
+                isOpen={showToast}
+                onClose={() => setShowToast(false)}
+            />
         </div>
     )
 }

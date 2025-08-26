@@ -1,15 +1,17 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ErrorIcon from "@/components/icons/ErrorIcon";
 import Google from "@assets/images/Google.png";
-import Apple from "@assets/images/Apple.png";
-import Facebook from "@assets/images/Facebook.png";
+// import Apple from "@assets/images/Apple.png";
+// import Facebook from "@assets/images/Facebook.png";
 import MyImage from "@/ui/myImage";
 import type { StaticImageData } from "next/image";
 import Image from "next/image";
 import { API_URL } from "@/constants";
 import CheckFillIcon from "@/components/icons/CheckFillIcon";
 import BackIcon from "../icons/BackIcon";
+// import Loading from "@/ui/loading";
+import SpinnerLoadingIcon from "../icons/SpinnerLoading";
 
 function SocialButton({ icon, text, handleClick }: { icon: StaticImageData; text: string; handleClick?: () => void }) {
     return (
@@ -26,35 +28,51 @@ function SocialButton({ icon, text, handleClick }: { icon: StaticImageData; text
     );
 }
 
+type ToastState = {
+  message: string;
+  type: "success" | "error" | "info";
+  isOpen: boolean;
+};
+
 type LoginPageProps = {
     showModal?: boolean;
     handleSignUp?: () => void;
+    toggleLogin?: () => void;
+    handleLoginSuccess?: (user: object, token: string) => void;
+    setToast?: React.Dispatch<React.SetStateAction<ToastState>>;
 };
 
-export default function LoginModal({ showModal, handleSignUp }: LoginPageProps) {
+export default function LoginModal({ showModal, handleSignUp, handleLoginSuccess, setToast }: LoginPageProps) {
     const [step, setStep] = useState<"email" | "password" | "forgot" | "forgotSuccess">("email");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+    const emailInputRef = useRef<HTMLInputElement>(null);
+    const passwordInputRef = useRef<HTMLInputElement>(null);
+    const [forgotLoading, setForgotLoading] = useState(false);
 
     const validateEmail = (value: string) =>
         /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
     const handleNext = async () => {
-        if (step === "email") {
-            if (!validateEmail(email)) {
-                setError("Please enter correct email");
-                return;
-            }
-            setError("");
-            setStep("password");
-        } else if (step === "password") {
-            if (password.length < 6) {
-                setError("Please enter correct password");
-                return;
-            }
-            setError("");
-            try {
+        if (loading || forgotLoading) return; // Prevent multiple clicks while loading
+        setLoading(true);
+
+        try {
+            if (step === "email") {
+                if (!validateEmail(email)) {
+                    setError("Please enter correct email");
+                    return;
+                }
+                setError("");
+                setStep("password");
+            } else if (step === "password") {
+                if (password.length < 6) {
+                    setError("Please enter correct password");
+                    return;
+                }
+                setError("");
                 const response = await fetch(`${API_URL}auth/local`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -63,30 +81,27 @@ export default function LoginModal({ showModal, handleSignUp }: LoginPageProps) 
 
                 if (!response.ok) {
                     const errData = await response.json();
-                    setError(errData.message || "Login failed");
+                    setError(errData?.error?.message || "Login failed");
                     return;
                 }
 
                 const data = await response.json();
-                console.log("Login success:", data);
-
-                if (data.token) {
-                    localStorage.setItem("token", data.token);
+                if (data?.user) localStorage.setItem('user', JSON.stringify(data?.user));
+                if (data?.jwt) localStorage.setItem("token", data?.jwt);
+                if (data?.user && data?.jwt) {
+                    handleLoginSuccess?.(data.user, data.jwt);
+                    setToast?.({ message: "Login successful", type: "success", isOpen: true });
                 }
 
-                // redirect or close modal
-            } catch (err) {
-                console.error("Login error:", err);
-                setError("Something went wrong. Please try again.");
-            }
-        } else if (step === "forgot") {
-            if (!validateEmail(email)) {
-                setError("Please enter a valid email");
-                return;
-            }
-            setError("");
+                // if (toggleLogin) toggleLogin();
+            } else if (step === "forgot") {
+                if (!validateEmail(email)) {
+                    setError("Please enter a valid email");
+                    return;
+                }
+                setError("");
+                setForgotLoading(true);
 
-            try {
                 const res = await fetch(`${API_URL}auth/forgot-password`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -95,16 +110,31 @@ export default function LoginModal({ showModal, handleSignUp }: LoginPageProps) 
 
                 if (!res.ok) {
                     const errData = await res.json();
+                    const msg = errData?.message || "Failed to send reset link";
+                    setToast?.({ message: msg, type: "error", isOpen: true });
                     return setError(errData.message || "Failed to send reset link");
                 }
 
                 setStep("forgotSuccess");
-            } catch (err) {
-                console.error("Forgot password error:", err);
-                setError("Something went wrong. Please try again.");
+                setToast?.({ message: "Reset link sent", type: "success", isOpen: true });
             }
+        } catch (err) {
+            console.error("API error:", err);
+            setError("Something went wrong. Please try again.");
+            setToast?.({ message: "Something went wrong", type: "error", isOpen: true });
+        } finally {
+            setLoading(false);
+            setForgotLoading(false);
         }
     };
+
+    useEffect(() => {
+        if (step === "email" && emailInputRef.current) {
+            emailInputRef.current.focus();
+        } else if (step === "password" && passwordInputRef.current) {
+            passwordInputRef.current.focus();
+        }
+    }, [step]);
 
     return (
         <div
@@ -151,6 +181,7 @@ export default function LoginModal({ showModal, handleSignUp }: LoginPageProps) 
                                 className={`w-full px-4 py-2 text-sm border text-grayish rounded-lg ${
                                     error ? "border-red" : "border-gray-300"
                                 } focus:outline-none`}
+                                ref={step === "email" ? emailInputRef : passwordInputRef}
                             />
                             {error && <ErrorIcon className="absolute right-3 top-2.5 text-red-500 text-xl" />}
                         </div>
@@ -165,9 +196,14 @@ export default function LoginModal({ showModal, handleSignUp }: LoginPageProps) 
 
                     <button
                         onClick={handleNext}
-                        className="w-full bg-navy-blue text-white py-2 rounded font-semibold text-sm mb-4"
+                        className="w-full bg-navy-blue disabled:bg-neutral-500 text-white py-2 rounded font-semibold text-sm mb-4"
+                        disabled={loading}
                     >
-                        {step === "email" ? "Next" : "Confirm"}
+                        {loading ? (
+                            <div className="flex justify-center items-center space-x-2">
+                                <SpinnerLoadingIcon />
+                            </div>
+                        ) : step === "email" ? "Next" : "Confirm"}
                     </button>
                 </>
             ) : step === "forgot" ? (
@@ -195,6 +231,7 @@ export default function LoginModal({ showModal, handleSignUp }: LoginPageProps) 
                             className={`w-full px-4 py-2 text-sm border rounded-lg ${
                                 error ? "border-red" : "border-gray-300"
                             } focus:outline-none text-grayish`}
+                            ref={emailInputRef}
                         />
                         {error && <p className="text-xs text-red mt-1">{error}</p>}
                     </div>
@@ -206,8 +243,15 @@ export default function LoginModal({ showModal, handleSignUp }: LoginPageProps) 
                         <button
                             onClick={handleNext}
                             className="bg-navy-blue text-white py-2 px-4 rounded font-semibold text-sm"
+                            disabled={forgotLoading}
                         >
-                            Send Reset Link
+                            {forgotLoading ? (
+                                <div className="flex justify-center items-center space-x-2">
+                                    <SpinnerLoadingIcon />
+                                </div>
+                            ) : (
+                                "Send Reset Link"
+                            )}
                         </button>
                     </div>
                 </>
@@ -243,8 +287,8 @@ export default function LoginModal({ showModal, handleSignUp }: LoginPageProps) 
                     {/* Social Logins */}
                     <div className="space-y-2">
                         <SocialButton icon={Google} text="Sign up with Google" handleClick={() => { window.location.href = `${API_URL}connect/google`; }} />
-                        <SocialButton icon={Facebook} text="Sign up with Facebook" />
-                        <SocialButton icon={Apple} text="Sign up with Apple" />
+                        {/* <SocialButton icon={Facebook} text="Sign up with Facebook" />
+                        <SocialButton icon={Apple} text="Sign up with Apple" /> */}
                     </div>
 
                     <p className="text-sm text-center text-grayish-600 mt-4">

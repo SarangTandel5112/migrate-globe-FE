@@ -10,9 +10,10 @@ import { usePathname, useRouter } from "next/navigation";
 interface MobileMenuProps {
     isOpen: boolean;
     onClose: () => void;
+    toggleLogin: () => void;
 }
 
-function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+function MobileMenu({ isOpen, onClose, toggleLogin }: MobileMenuProps) {
     const [openMega, setOpenMega] = useState<string | null>(null);
     const menuRef = useOutsideClick<HTMLDivElement>(onClose);
     const pathname = usePathname();
@@ -202,7 +203,7 @@ function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                         >
                             <CartIcon />
                         </Link>
-                        <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-center rounded-md border border-solid border-[color:var(--Neutrals-300,#C0C0C0)] text-zinc-800">
+                        <button onClick={toggleLogin} className="w-full px-6 py-3 text-sm font-medium tracking-wide text-center rounded-md border border-solid border-[color:var(--Neutrals-300,#C0C0C0)] text-zinc-800">
                             LogIn
                         </button>
                     </div>

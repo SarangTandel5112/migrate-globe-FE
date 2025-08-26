@@ -1,10 +1,12 @@
 "use client";
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CartSummary from "@/components/cart/CartSummary";
 import OrderSummary from "@/components/cart/OrderSummary";
 import { motion } from "framer-motion";
 import ServiceCard from "@/components/common/ServiceCard";
+import { getUserCart, removeChecklistFromCart, removeInsuranceFromCart } from "@/api/cart";
+import Toast from "@/ui/toast";
+import { useRouter } from "next/navigation";
 
 interface CartItem {
     id: string;
@@ -15,39 +17,105 @@ interface CartItem {
 }
 
 export default function Cart() {
-    const [cartItems] = useState<CartItem[]>([
-        {
-            id: "1",
-            title: "Global Talent visa (subclass 858)",
-            description:
-                "Apply for the Global Talent visa (subclass 858) if you have an internationally recognised record of exceptional and outstanding achievement in an eligible field. To be eligible for this visa, you must demonstrate that you will be of benefit to the Australian community, be able to establish yourself in Australia, and have a record of achievement in a profession, sport, the arts, or academia and research.",
-            price: 1999,
-            selected: true,
-        },
-        {
-            id: "2",
-            title: "Global Talent visa (subclass 858)",
-            description:
-                "Apply for the Global Talent visa (subclass 858) if you have an internationally recognised record of exceptional and outstanding achievement in an eligible field. To be eligible for this visa, you must demonstrate that you will be of benefit to the Australian community, be able to establish yourself in Australia, and have a record of achievement in a profession, sport, the arts, or academia and research.",
-            price: 1999,
-            selected: false,
-        },
-        {
-            id: "3",
-            title: "Global Talent visa (subclass 858)",
-            description:
-                "Apply for the Global Talent visa (subclass 858) if you have an internationally recognised record of exceptional and outstanding achievement in an eligible field. To be eligible for this visa, you must demonstrate that you will be of benefit to the Australian community, be able to establish yourself in Australia, and have a record of achievement in a profession, sport, the arts, or academia and research.",
-            price: 1999,
-            selected: false,
-        },
-    ]);
+    const [cartItems, setCartItems] = useState<CartItem[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
+    const [token, setToken] = useState<string | null>(null);
+    const [toast, setToast] = useState({
+        message: "",
+        type: "success" as "success" | "error",
+        open: false,
+    });
+    const router = useRouter()
 
-    const selectedItems = cartItems.filter((item) => item.selected);
-    const subtotal = selectedItems.reduce((sum, item) => sum + item.price, 0);
-    const consultation = 999;
-    const discount = 500;
-    const finalTotal = subtotal + consultation - discount;
+    useEffect(() => {
+    const t = localStorage.getItem("token");
+    if (!t) {
+      setError("Please login to view your cart");
+      setToast({ message: "Please login to view your cart", type: "error", open: true });
+      setLoading(false);
+      router.push("/"); // redirect
+      return;
+    }
+    setToken(t);
 
+    (async () => {
+      try {
+        const cart = await getUserCart(t);
+
+        const insuranceItems = cart?.cartInsuranceItems?.map((ci: any) => ({
+          id: `insurance-${ci.id}`,
+          title: ci.insurance?.name || "Insurance Plan",
+          description: ci.notes || "Insurance policy",
+          price: ci.totalPrice || 0,
+          selected: true,
+        })) || [];
+
+        const checklistItems = cart?.checklists?.map((cl: any) => ({
+          id: `checklist-${cl.id}`,
+          title: cl.title,
+          description: cl.subtitle || cl.description?.[0]?.children?.[0]?.text || "",
+          price: cl.price || 0,
+          selected: true,
+        })) || [];
+
+        setCartItems([...insuranceItems, ...checklistItems]);
+      } catch (err: any) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [router]);
+
+    const handleItemSelect = (id: string) => {
+        setCartItems((items) =>
+            items.map((item) =>
+                item.id === id ? { ...item, selected: !item.selected } : item
+            )
+        );
+    };
+
+    const handleRemoveItem = async (id: string) => {
+        try {
+            let type: "insurance" | "checklist" = "checklist";
+            let actualId: string | number = id;
+
+            if (id.startsWith("insurance-")) {
+                type = "insurance";
+                actualId = id.replace("insurance-", "");
+            } else if (id.startsWith("checklist-")) {
+                type = "checklist";
+                actualId = id.replace("checklist-", "");
+            }
+
+            if (type === "insurance") {
+                await removeInsuranceFromCart(token || '', actualId);
+            } else {
+                await removeChecklistFromCart(token || '', actualId);
+            }
+
+            setCartItems((items) => items.filter((item) => item.id !== id));
+
+            setToast({
+                message: `${type === "insurance" ? "Insurance" : "Checklist"} removed successfully`,
+                type: "success",
+                open: true,
+            });
+        } catch (err: any) {
+            console.error(err);
+
+            setToast({
+                message: "Failed to remove item. Please try again.",
+                type: "error",
+                open: true,
+            });
+        }
+    };
+
+
+    const consultation = 0;
+    const discount = 0;
     const services = [
         {
             id: "insurance",
@@ -81,14 +149,19 @@ export default function Cart() {
 
                 <div className="flex flex-col md:flex-row gap-4 md:gap-6 mb-10">
                     {/* Cart Items */}
-                    <CartSummary />
+                    <CartSummary
+                        items={cartItems}
+                        loading={loading}
+                        error={error}
+                        onSelect={handleItemSelect}
+                        onRemove={handleRemoveItem}
+                    />
 
                     {/* Order Summary */}
                     <OrderSummary
-                        subtotal={subtotal}
-                        consultation={consultation}
+                        items={cartItems}
+                        consultationCharge={consultation}
                         discount={discount}
-                        finalTotal={finalTotal}
                     />
                 </div>
             </div>
@@ -128,6 +201,12 @@ export default function Cart() {
                     </motion.div>
                 ))}
             </motion.div>
+            <Toast
+                message={toast.message}
+                type={toast.type}
+                isOpen={toast.open}
+                onClose={() => setToast({ ...toast, open: false })}
+            />
         </div>
     );
 }

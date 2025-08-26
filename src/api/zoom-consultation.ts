@@ -1,5 +1,5 @@
 import { API_URL } from "@/constants";
-import { formatDate } from "@/utils/helpers";
+import { formatDate, getAuthHeaders } from "@/utils/helpers";
 
 export interface TimeSlot {
     id: string;
@@ -67,13 +67,11 @@ export async function getTimeSlots(date: string): Promise<{ slots: string[] }> {
     }
 }
 
-export async function bookConsultation(bookingData: BookConsultationRequest): Promise<BookConsultationResponse> {
+export async function bookConsultation(bookingData: BookConsultationRequest, token: string): Promise<BookConsultationResponse> {
     try {
         const response = await fetch(`${API_URL}consultations/initiate-payment`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: getAuthHeaders(token?.toString()),
             body: JSON.stringify(bookingData),
         });
 
