@@ -24,12 +24,12 @@ const InsuranceComparisonPage: React.FC<InsuranceComparisonPageProps> = ({ data 
     const policyEndDateRef = useRef<HTMLInputElement>(null);
     const [loadingId, setLoadingId] = useState<number | null>(null);
     const [toast, setToast] = useState({ message: "", type: "success" as "success" | "error", open: false });
-    const [token, setToken] = useState(null);
+    const [token, setToken] = useState<string | null>(null);
     
     useEffect(() => {
     if (typeof window !== 'undefined') {
         const storedData = localStorage?.getItem('token');
-        if (storedData) setToken(JSON.parse(storedData));
+        if (storedData) setToken(storedData);
     }
     }, []);
 

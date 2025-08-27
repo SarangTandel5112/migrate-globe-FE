@@ -30,14 +30,14 @@ const ZoomBookForm: React.FC<ZoomBookFormProps> = ({
 }) => {
     const { inputType } = usePlatformInput();
     const [showToast, setShowToast] = useState(false);
-    const [token, setToken] = useState(null);
-    const [user, setUser] = useState(null);
+    const [token, setToken] = useState<string | null>(null);
+    const [user, setUser] = useState<object | null>(null);
         
     useEffect(() => {
     if (typeof window !== 'undefined') {
         const storedData = localStorage?.getItem('token');
         const storedUserData = localStorage?.getItem('user');
-        if (storedData) setToken(JSON.parse(storedData));
+        if (storedData) setToken(storedData);
         if (storedUserData) setUser(JSON.parse(storedUserData));
     }
     }, []);

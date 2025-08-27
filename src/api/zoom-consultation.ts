@@ -42,11 +42,10 @@ export interface BookConsultationResponse {
 
 export async function getTimeSlots(date: string): Promise<{ slots: string[] }> {
     try {
+        const token = localStorage?.getItem('token')
         const response = await fetch(`${API_URL}setmore/schedule`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: getAuthHeaders(token || ''),
             body: JSON.stringify({ selected_date: formatDate(new Date(date), 'dd/mm/yyyy') }),
         });
 

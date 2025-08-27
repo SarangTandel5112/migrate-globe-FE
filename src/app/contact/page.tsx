@@ -25,12 +25,25 @@ export default async function Contact() {
         faqs: contact.faqs || [],
     };
 
+    const mapWidth = 600;
+    const mapHeight = 320;
+
+    const locationsWithXY = contact?.location?.map((loc: Location, index : number) => {
+        const xPositions = [0.83, 0.70, 0.67, 0.69, 0.68];
+        const yPositions = [0.73, 0.37, 0.40, 0.38, 0.38];
+        const x = xPositions[index] * mapWidth;
+        const y = yPositions[index] * mapHeight;
+        return { ...loc, x, y };
+    });
+    
+
     return (
         <div className="container-1200">
             {/* Contact Section */}
             <div className="flex flex-col lg:flex-row gap-10">
                 {/* Left Section - Map and Locations */}
-                <MapSection locations={contactUs.location} phones={contactUs.phone} emails={contactUs.email} />
+                {/* <MapSection locations={contactUs.location} phones={contactUs.phone} emails={contactUs.email} /> */}
+                <MapSection locations={locationsWithXY} phones={contactUs.phone} emails={contactUs.email} />
 
                 {/* Right Section - Contact Form */}
                 <ContactForm />

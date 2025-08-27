@@ -36,12 +36,12 @@ export default function CheckList({
     type: "success" | "error";
     open: boolean;
   }>({ message: "", type: "success", open: false });
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
   if (typeof window !== 'undefined') {
-      const storedData = localStorage?.getItem('token');
-      if (storedData) setToken(JSON.parse(storedData));
+    const storedData = localStorage?.getItem('token');
+    if (storedData) setToken(storedData);
   }
   }, []);
 

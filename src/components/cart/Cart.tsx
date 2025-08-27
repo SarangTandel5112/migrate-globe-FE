@@ -29,14 +29,14 @@ export default function Cart() {
     const router = useRouter()
 
     useEffect(() => {
-    const t = localStorage.getItem("token");
-    if (!t) {
-      setError("Please login to view your cart");
-      setToast({ message: "Please login to view your cart", type: "error", open: true });
-      setLoading(false);
-      router.push("/"); // redirect
-      return;
-    }
+        const t = localStorage?.getItem("token");
+        if (!t) {
+            setError("Please login to view your cart");
+            setToast({ message: "Please login to view your cart", type: "error", open: true });
+            setLoading(false);
+            router.push("/"); // redirect
+            return;
+        }
     setToken(t);
 
     (async () => {

@@ -1,9 +1,10 @@
 "use client";
-
 import { motion } from "framer-motion";
 import CallIcon from "../icons/CallIcon";
 import LocationCard from "./LocationCard";
 import { fadeUpVariants } from "@/utils/animation-variant";
+import IconMap from "../icons/map";
+import { useState } from "react";
 
 interface Location {
     id: number;
@@ -11,6 +12,8 @@ interface Location {
     address: string;
     lat: number;
     lon: number;
+    x: number;
+    y: number;
 }
 interface Phone {
     id: number;
@@ -30,6 +33,7 @@ interface MapSectionProps {
 }
 
 function MapSection({ locations, phones, emails }: MapSectionProps) {
+    const [selectedLocation, setSelectedLocation] = useState<Location | null>(locations?.[0] || null);
     return (
         <div className="lg:w-3/5 bg-navy-blue relative">
             <div className="p-10">
@@ -78,43 +82,52 @@ function MapSection({ locations, phones, emails }: MapSectionProps) {
                     viewport={{ once: true, amount: 0.2 }}
                 >
                     {/* Simplified world map with dot pattern */}
-                    <div className="absolute inset-0 opacity-30">
-                        <svg
-                            width="100%"
-                            height="100%"
-                            viewBox="0 0 600 300"
-                            className="w-full h-full"
-                        >
-                            {/* Create dot pattern for world map effect */}
-                            <defs>
-                                <pattern
-                                    id="dots"
-                                    patternUnits="userSpaceOnUse"
-                                    width="8"
-                                    height="8"
+                    <div className="relative w-full overflow-y-auto inset-0 opacity-30">
+                        <IconMap />
+                        {locations?.map((loc: Location) => (
+                            <div
+                                key={loc.id}
+                                className="absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer group"
+                                style={{ left: loc.x, top: loc.y }}
+                                onClick={() => setSelectedLocation(loc)}
+                            >
+                                {/* Marker Circle with Location Icon */}
+                                {selectedLocation?.id === loc.id && <div
+                                    className={`relative w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all duration-200 ${selectedLocation?.id === loc.id
+                                            ? "border-green-400 scale-110 shadow-lg"
+                                            : ""
+                                        }`}
                                 >
-                                    <circle
-                                        cx="4"
-                                        cy="4"
-                                        r="1"
-                                        fill="#7D87AB"
-                                    />
-                                </pattern>
-                            </defs>
-                            {/* Continental shapes using dot pattern */}
-                            <path
-                                d="M50 80 Q100 60 150 80 Q200 100 250 90 Q300 70 350 90 L350 140 Q300 120 250 130 Q200 150 150 130 Q100 110 50 130 Z"
-                                fill="url(#dots)"
-                            />
-                            <path
-                                d="M100 160 Q150 140 200 160 Q250 180 300 170 L300 220 Q250 230 200 210 Q150 190 100 210 Z"
-                                fill="url(#dots)"
-                            />
-                            <path
-                                d="M350 100 Q400 80 450 100 Q500 120 550 110 L550 160 Q500 170 450 150 Q400 130 350 150 Z"
-                                fill="url(#dots)"
-                            />
-                        </svg>
+                                    {/* Location Pin Icon */}
+                                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                                </div>}
+
+                                {/* Label Bubble for selected marker */}
+                                {selectedLocation?.id === loc.id && (
+                                    <div className="absolute -top-12 left-1/2 -translate-x-1/2 animate-fade-in">
+                                        <div className="relative px-3 py-1 bg-green-400 text-black rounded-full flex items-center gap-2 shadow-lg whitespace-nowrap border border-green-500">
+                                            {/* Location Icon in bubble */}
+                                            <svg className="w-4 h-4 text-black flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                                            </svg>
+                                            <span className="font-medium">{loc.name}</span>
+
+                                            {/* Triangular pointer */}
+                                            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-3 h-3 bg-green-400 rotate-45"></div>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Subtle hover effect for non-selected markers */}
+                                {/* {selectedLocation?.id !== loc.id && (
+                                    <div className="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                        <div className="px-2 py-1 bg-gray-800 text-white text-xs rounded whitespace-nowrap">
+                                            {loc.name}
+                                        </div>
+                                    </div>
+                                )} */}
+                            </div>
+                        ))}
                     </div>
                 </motion.div>
 
@@ -148,10 +161,10 @@ function MapSection({ locations, phones, emails }: MapSectionProps) {
                                 key={office.id}
                                 variants={fadeUpVariants}
                                 custom={index}
-                                className="w-full lg:w-1/3 flex"
+                                className="w-full lg:w-1/3 flex cursor-pointer"
                             >
-                                <div className="h-full w-full">
-                                    <LocationCard {...office} />
+                                <div className="h-full w-full" onClick={() => setSelectedLocation(office)}>
+                                    <LocationCard {...office} selectedLocation={selectedLocation} />
                                 </div>
                             </motion.div>
                         ))}
@@ -164,10 +177,10 @@ function MapSection({ locations, phones, emails }: MapSectionProps) {
                                 key={office.id}
                                 variants={fadeUpVariants}
                                 custom={index + 3}
-                                className="w-full lg:w-1/2 flex"
+                                className="w-full lg:w-1/2 flex cursor-pointer"
                             >
-                                <div className="h-full w-full">
-                                    <LocationCard {...office} />
+                                <div className="h-full w-full" onClick={() => setSelectedLocation(office)}>
+                                    <LocationCard {...office} selectedLocation={selectedLocation} />
                                 </div>
                             </motion.div>
                         ))}

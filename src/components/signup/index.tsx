@@ -82,8 +82,7 @@ export default function SignupModal({ showModal, handleLogin }: SignupPageProps)
                     return;
                 }
 
-                const data = await res.json();
-                console.log("Register success:", data);
+                // const data = await res.json();
 
                 setToast({
                     message: "Registration successful!",

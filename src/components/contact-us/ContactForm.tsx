@@ -1,10 +1,10 @@
 "use client";
-
 import { useState } from "react";
 import { motion } from "framer-motion";
 import ArrowDownIcon from "../icons/ArrowDown";
 import { usePlatformInput } from "@/hooks/usePlatformInput";
 import { API_URL, countriesList } from "@/constants";
+import { getAuthHeaders } from "@/utils/helpers";
 
 function ContactForm() {
     const { inputType } = usePlatformInput();
@@ -89,12 +89,11 @@ function ContactForm() {
                 countryCode: formData?.country.dialCode,
                 question: formData?.message,
             }
+            const token = localStorage?.getItem('token')
             const response = await fetch(`${API_URL}contacts`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(payload),
+                headers: getAuthHeaders(token || ''),
+                body: JSON.stringify({ data: payload }),
             });
 
             if (!response.ok) {
