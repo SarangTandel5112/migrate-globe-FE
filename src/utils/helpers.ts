@@ -156,6 +156,69 @@ export function convertSlotToLocal(selectedDate: Date, slot: string) {
   }).format(auDate);
 }
 
+export function convertSlotToLocalReliable(selectedDate: Date, slot: string) {
+  const [time, modifier] = slot.split(" ");
+  const timeParts = time.split(":").map(Number);
+  let hours = timeParts[0];
+  const minutes = timeParts[1];
+
+  // Handle 12-hour format
+  if (modifier) {
+    if (modifier === "PM" && hours < 12) hours += 12;
+    if (modifier === "AM" && hours === 12) hours = 0;
+  }
+
+  // Create the exact date and time
+  const year = selectedDate.getFullYear();
+  const month = selectedDate.getMonth();
+  const day = selectedDate.getDate();
+  
+  // Create date in Sydney timezone conceptually
+  // We'll use Date.UTC to create a proper UTC timestamp, then adjust
+  const utcDate = new Date(Date.UTC(year, month, day, hours, minutes, 0));
+  
+  // Get Sydney's offset from UTC at this date
+  const tempDate = new Date(year, month, day);
+  const sydneyFormatter = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Australia/Sydney',
+    year: 'numeric',
+    month: '2-digit', 
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  });
+  
+  const utcFormatter = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'UTC',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit', 
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  });
+  
+  // Calculate offset by comparing formatted times
+  const sydneyStr = sydneyFormatter.format(tempDate);
+  const utcStr = utcFormatter.format(tempDate);
+  
+  const sydneyTime = new Date(sydneyStr);
+  const utcTime = new Date(utcStr);
+  const offsetMs = sydneyTime.getTime() - utcTime.getTime();
+  
+  // Adjust our UTC date by Sydney's offset to get the correct UTC time
+  const correctUtcTime = new Date(utcDate.getTime() - offsetMs);
+  
+  // Format in user's local timezone
+  return new Intl.DateTimeFormat("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+  }).format(correctUtcTime);
+}
+
 export const getAuthHeaders = (token: string) => ({
   Authorization: `Bearer ${token}`,
   "Content-Type": "application/json",

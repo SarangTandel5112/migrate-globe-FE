@@ -7,7 +7,7 @@ import ZoomBookForm from "@/components/zoom-book-form";
 import { motion } from "framer-motion";
 import { bookConsultation } from "@/api/zoom-consultation";
 import { useTimeSlots } from "@/hooks/useTimeSlots";
-import { convertSlotToLocal, Country } from "@/utils/helpers";
+import { convertSlotToLocalReliable, Country } from "@/utils/helpers";
 import Toast from "@/ui/toast";
 
 const daysInMonth = (month: number, year: number) => new Date(year, month + 1, 0).getDate();
@@ -62,7 +62,7 @@ export default function ZoomConsultation() {
     // Map slots to display times in local timezone
     const localTimeSlots = timeSlots?.slots?.map((slot) => ({
         original: slot, // keep raw time string
-        local: convertSlotToLocal(selectedDate!, slot), // display in user TZ
+        local: convertSlotToLocalReliable(selectedDate!, slot), // display in user TZ
     }));
 
     const dates: Date[] = [];
@@ -129,7 +129,11 @@ export default function ZoomConsultation() {
                 setBookingError(null);
 
                 // Format the date as YYYY-MM-DD
-                const formattedDate = selectedDate.toISOString().split('T')[0];
+                // const formattedDate = selectedDate.toISOString().split('T')[0];
+                const year = selectedDate.getFullYear();
+                const month = String(selectedDate.getMonth() + 1).padStart(2, '0');
+                const day = String(selectedDate.getDate()).padStart(2, '0');
+                const formattedDate = `${year}-${month}-${day}`;
                 // Format time to HH:MM:SS.000 format
                 const timeParts = selectedTime.split(' ');
                 const time = timeParts[0];
