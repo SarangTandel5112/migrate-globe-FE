@@ -69,7 +69,7 @@ export const removeInsuranceFromCart = async (token: string, cartInsuranceItemId
     const response = await fetch(`${API_URL}carts/remove-insurance`, {
       method: 'POST',
       headers: getAuthHeaders(token),
-      body: JSON.stringify({ cartInsuranceItemId: Number(cartInsuranceItemId) })
+      body: JSON.stringify({ id: Number(cartInsuranceItemId) })
     });
     
     const result = await response.json();
