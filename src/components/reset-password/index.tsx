@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { API_URL } from "@/constants";
 
 interface ResetPasswordProps {
   idToken: string | null;
@@ -36,7 +37,7 @@ const ResetPassword = ({ idToken }: ResetPasswordProps) => {
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/reset-password`,
+        `${API_URL}auth/reset-password`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
