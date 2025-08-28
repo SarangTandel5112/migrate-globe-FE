@@ -35,7 +35,7 @@ const VisaOption = ({
           >
             More info
           </Link>
-          <button onClick={() => handleBuyChecklist(visaId)} className="flex-1 sm:flex-none px-6 py-2 bg-navy-blue text-white rounded text-sm font-medium tracking-[0.46px] hover:bg-navy-blue-600 transition-colors">
+          <button onClick={() => handleBuyChecklist(id)} className="flex-1 sm:flex-none px-6 py-2 bg-navy-blue text-white rounded text-sm font-medium tracking-[0.46px] hover:bg-navy-blue-600 transition-colors">
             Buy checklist
           </button>
         </>
