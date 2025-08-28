@@ -4,7 +4,8 @@ const VisaOption = ({
   id,
   title,
   description,
-  visaId,
+  // visaId,
+  loading,
   isConsultationOnly,
   handleBookConsltation,
   handleBuyChecklist
@@ -14,6 +15,7 @@ const VisaOption = ({
   visaId: string | number;
   description: string;
   isConsultationOnly: boolean | null;
+  loading: boolean | null;
   handleBookConsltation: () => void;
   handleBuyChecklist: (id: string | number) => void;
 }) => (
@@ -35,8 +37,12 @@ const VisaOption = ({
           >
             More info
           </Link>
-          <button onClick={() => handleBuyChecklist(visaId)} className="flex-1 sm:flex-none px-6 py-2 bg-navy-blue text-white rounded text-sm font-medium tracking-[0.46px] hover:bg-navy-blue-600 transition-colors">
-            Buy checklist
+          <button
+            onClick={() => !loading && handleBuyChecklist(id)}
+            className={`flex-1 sm:flex-none px-6 py-2 ${loading ? 'bg-neutral-600 cursor-not-allowed' : 'bg-navy-blue hover:bg-navy-blue-600'} text-white rounded text-sm font-medium tracking-[0.46px] transition-colors`}
+            disabled={loading || false}
+          >
+            {loading ? 'Processing...' : 'Buy checklist'}
           </button>
         </>
       ) : (

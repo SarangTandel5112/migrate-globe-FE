@@ -65,7 +65,8 @@ module.exports = {
           900: 'var(--navy-blue-900)',
         },
         boxShadow: {
-          navigation: '0 4px 8px 0 rgb(0 0 0 / 24%)'
+          navigation: '0 4px 8px 0 rgb(0 0 0 / 24%)',
+          'custom-shade': '0 0 8px 10px red'
         },
       },
       backgroundImage: {

@@ -6,13 +6,51 @@ import ConsultationTab from "@/components/profile/ConsultationTab";
 import ProfileTab from "@/components/profile/ProfileTab";
 import PurchaseTab from "@/components/profile/PurchaseTab";
 import TabButton from "@/components/profile/TabButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import PurchaseIcon from "@/components/icons/PurchaseIcon";
+import { API_URL } from "@/constants";
+import { getAuthHeaders } from "@/utils/helpers";
 
 export default function Profile() {
     const [activeTab, setActiveTab] = useState("profile");
+    const [profileData, setProfileData] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+    console.log(loading, error);
+
+    useEffect(() => {
+        const fetchProfile = async () => {
+            setLoading(true);
+            setError("");
+            try {
+                const token = localStorage?.getItem("token");
+                const response = await fetch(
+                    `${API_URL}user-profile/me`,
+                    {
+                        method: "GET",
+                        headers: getAuthHeaders(token || ''),
+                    }
+                );
+                const data = await response.json();
+                if (!response.ok) {
+                    setError(data?.message || "Failed to fetch profile.");
+                } else {
+                    setProfileData(data);
+                }
+            } catch (err) {
+                console.log(err);
+                setError("Server error. Please try again later.");
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchProfile();
+    }, []);
+
+    console.log(profileData);
+    
 
     const fadeVariants = {
         initial: { opacity: 0, y: 20 },

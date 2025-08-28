@@ -47,7 +47,7 @@ export const removeChecklistFromCart = async (token: string, checklistId: string
     const response = await fetch(`${API_URL}carts/remove-checklist`, {
       method: 'POST',
       headers: getAuthHeaders(token),
-      body: JSON.stringify({ checklist: Number(checklistId) })
+      body: JSON.stringify({ checklist: checklistId })
     });
     
     const result = await response.json();
@@ -69,7 +69,7 @@ export const removeInsuranceFromCart = async (token: string, cartInsuranceItemId
     const response = await fetch(`${API_URL}carts/remove-insurance`, {
       method: 'POST',
       headers: getAuthHeaders(token),
-      body: JSON.stringify({ id: Number(cartInsuranceItemId) })
+      body: JSON.stringify({ id: cartInsuranceItemId })
     });
     
     const result = await response.json();

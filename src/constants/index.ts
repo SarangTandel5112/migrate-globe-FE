@@ -13,6 +13,9 @@ export const countriesList: Country[] = [
   { name: "Canada", dialCode: "+1" },
 ];
 
+// export const RUPEE_SYMBOL = "₹";
+export const RUPEE_SYMBOL = "$";
+
 
 // Afghanistan AF / AFG 93
 // Albania AL / ALB 355

@@ -6,14 +6,16 @@ import CartIcon from "../icons/CartIcon";
 import { useEffect, useState } from "react";
 import ArrowDownIcon from "../icons/ArrowDown";
 import { usePathname, useRouter } from "next/navigation";
+import UserIcon from "../icons/UserIcon";
 
 interface MobileMenuProps {
     isOpen: boolean;
+    isLoggedIn: boolean;
     onClose: () => void;
     toggleLogin: () => void;
 }
 
-function MobileMenu({ isOpen, onClose, toggleLogin }: MobileMenuProps) {
+function MobileMenu({ isOpen, onClose, toggleLogin, isLoggedIn }: MobileMenuProps) {
     const [openMega, setOpenMega] = useState<string | null>(null);
     const menuRef = useOutsideClick<HTMLDivElement>(onClose);
     const pathname = usePathname();
@@ -197,15 +199,32 @@ function MobileMenu({ isOpen, onClose, toggleLogin }: MobileMenuProps) {
                         <Link href='/services/zoom-consultation' className="w-full px-6 py-3 text-sm font-medium tracking-wide text-center text-white bg-navy-blue rounded-md">
                             Book a Consultation
                         </Link>
-                        <Link
-                            href="/cart"
-                            className="flex items-center justify-center gap-2 py-2"
-                        >
-                            <CartIcon />
-                        </Link>
-                        <button onClick={toggleLogin} className="w-full px-6 py-3 text-sm font-medium tracking-wide text-center rounded-md border border-solid border-[color:var(--Neutrals-300,#C0C0C0)] text-zinc-800">
+                        {isLoggedIn && (
+                            <div className="flex flex-col gap-2">
+                                {/* Cart */}
+                                <Link
+                                    href="/cart"
+                                    onClick={onClose}
+                                    className="flex items-center gap-3 px-4 py-3 rounded-md bg-gray-50 hover:bg-gray-100 transition-colors text-sm text-gray-800"
+                                >
+                                    <CartIcon  />
+                                    <span>Cart</span>
+                                </Link>
+
+                                {/* Profile */}
+                                <Link
+                                    href="/profile"
+                                    onClick={onClose}
+                                    className="flex items-center gap-3 px-4 py-3 rounded-md bg-gray-50 hover:bg-gray-100 transition-colors text-sm text-gray-800"
+                                >
+                                    <UserIcon />
+                                    <span>Profile</span>
+                                </Link>
+                            </div>
+                        )}
+                        {!isLoggedIn && <button onClick={toggleLogin} className="w-full px-6 py-3 text-sm font-medium tracking-wide text-center rounded-md border border-solid border-[color:var(--Neutrals-300,#C0C0C0)] text-zinc-800">
                             LogIn
-                        </button>
+                        </button>}
                     </div>
                 </div>
             </div>

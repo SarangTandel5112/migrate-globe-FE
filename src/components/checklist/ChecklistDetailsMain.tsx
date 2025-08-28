@@ -37,7 +37,7 @@ export default function ChecklistDetailsMain({
         </div>
 
         {/* Right Column - Pricing Sidebar */}
-        <PricingSidebar price={checklist.price} processingTime={checklist.processingTime} />
+        <PricingSidebar id={checklist?.documentId} price={checklist.price} processingTime={checklist.processingTime} />
       </div>
     </div>
   );

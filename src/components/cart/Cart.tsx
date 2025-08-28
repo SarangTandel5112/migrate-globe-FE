@@ -44,7 +44,7 @@ export default function Cart() {
         const cart = await getUserCart(t);
 
         const insuranceItems = cart?.cartInsuranceItems?.map((ci: any) => ({
-          id: `insurance-${ci.id}`,
+          id: `insurance-${ci.documentId}`,
           title: ci.insurance?.name || "Insurance Plan",
           description: ci.notes || "Insurance policy",
           price: ci.totalPrice || 0,
@@ -52,7 +52,7 @@ export default function Cart() {
         })) || [];
 
         const checklistItems = cart?.checklists?.map((cl: any) => ({
-          id: `checklist-${cl.id}`,
+          id: `checklist-${cl.documentId}`,
           title: cl.title,
           description: cl.subtitle || cl.description?.[0]?.children?.[0]?.text || "",
           price: cl.price || 0,

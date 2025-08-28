@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import CouponIcon from "../icons/CouponIcon";
 import { motion } from "framer-motion";
-import { API_URL } from "@/constants";
+import { API_URL, RUPEE_SYMBOL } from "@/constants";
 import Toast from "@/ui/toast";
 import SpinnerLoadingIcon from "../icons/SpinnerLoading";
 
@@ -63,11 +63,11 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
         try {
             const checklistIds = selectedItems
                 .filter((item) => item.id.startsWith("checklist-"))
-                .map((item) => Number(item.id.replace("checklist-", "")));
+                .map((item) => item.id.replace("checklist-", ""));
 
             const cartInsuranceItemIds = selectedItems
                 .filter((item) => item.id.startsWith("insurance-"))
-                .map((item) => Number(item.id.replace("insurance-", "")));
+                .map((item) => item.id.replace("insurance-", ""));
 
             const payload = { checklistIds, cartInsuranceItemIds };
             const response = await fetch(`${API_URL}orders/initiate-payment`, {
@@ -80,8 +80,10 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
             });
 
             const data = await response.json();
+            if (data?.checkout_url) window.location.href = data.checkout_url;
+            else setToast({ message: "Payment initiation failed", type: "error", open: true });
 
-            if (!response.ok) throw new Error(data.message || "Payment failed");
+            if (!response.ok) setToast({ message: data.message || "Payment failed", type: "error", open: true });
 
             setToast({ message: "Payment initiated successfully!", type: "success", open: true });
 
@@ -110,7 +112,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
                         Selected Items
                     </span>
                     <span className="font-bold text-base text-neutrals leading-6 tracking-[0.2px] capitalize">
-                        ₹{subtotal.toLocaleString()}.00
+                        {RUPEE_SYMBOL}{subtotal.toLocaleString()}.00
                     </span>
                 </div>
 
@@ -119,7 +121,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
                         Consultation
                     </span>
                     <span className="font-bold text-base text-neutrals leading-6 tracking-[0.2px] capitalize">
-                        ₹{consultationCharge.toLocaleString()}.00
+                        {RUPEE_SYMBOL}{consultationCharge.toLocaleString()}.00
                     </span>
                 </div>
 
@@ -128,7 +130,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
                         Discount:
                     </span>
                     <span className="text-base text-neutrals-700 leading-6 tracking-[0.2px] capitalize">
-                        -₹{discount.toLocaleString()}.00
+                        -{RUPEE_SYMBOL}{discount.toLocaleString()}.00
                     </span>
                 </div>
 
@@ -137,7 +139,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
                         Final Total:
                     </span>
                     <span className="font-bold text-xl text-neutrals-700 leading-6 tracking-[0.2px] capitalize">
-                        ₹{finalTotal.toLocaleString()}.00
+                        {RUPEE_SYMBOL}{finalTotal.toLocaleString()}.00
                     </span>
                 </div>
 

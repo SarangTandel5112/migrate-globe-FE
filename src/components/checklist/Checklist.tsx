@@ -37,6 +37,7 @@ export default function CheckList({
     open: boolean;
   }>({ message: "", type: "success", open: false });
   const [token, setToken] = useState<string | null>(null);
+  const [loadingId, setLoadingId] = useState<string | number | null>(null);
 
   useEffect(() => {
   if (typeof window !== 'undefined') {
@@ -53,11 +54,14 @@ export default function CheckList({
     }
 
     try {
+      setLoadingId(checklistId);
       await addChecklistToCart(token, checklistId.toString());
       setToast({ message: "Checklist added to cart", type: "success", open: true });
     } catch (err) {
       console.log(err);
       setToast({ message: "Failed to add checklist", type: "error", open: true });
+    } finally {
+      setLoadingId(null);
     }
   };
 
@@ -290,6 +294,7 @@ export default function CheckList({
                   id={visa.documentId}
                   title={visa.title}
                   visaId={visa?.id}
+                  loading={loadingId === visa?.id}
                   description={visa.subtitle}
                   isConsultationOnly={visa.isConsultationOnly}
                   handleBookConsltation={handleBookConsltation}

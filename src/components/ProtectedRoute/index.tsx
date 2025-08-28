@@ -20,18 +20,17 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
     type: "error",
     isOpen: false,
   });
-  const [token, setToken] = useState<string | null>(null);
+  // const [token, setToken] = useState<string | null>(null);
       
-    useEffect(() => {
-    if (typeof window !== 'undefined') {
-        const storedData = localStorage?.getItem('token');
-        if (storedData) setToken(storedData);
-    }
-    }, []);
-
+  //   useEffect(() => {
+  //   if (typeof window !== 'undefined') {
+  //       const storedData = localStorage?.getItem('token');
+  //       if (storedData) setToken(storedData);
+  //   }
+  //   }, []);
 
   useEffect(() => {
-    // const token = localStorage.getItem("token");
+    const token = localStorage?.getItem("token");
 
     if (token) {
       setIsAuthenticated(true);
@@ -46,7 +45,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
         router.push("/"); // redirect to homepage or login page
       }, 2000);
     }
-  }, [router, token]);
+  }, [router]);
 
   if (!isAuthenticated) {
     return (

@@ -2,6 +2,7 @@ import DeleteIcon from "@/components/icons/DeleteIcon";
 import { motion } from "framer-motion";
 import EmptyState from "@/ui/EmptyState";
 import Link from "next/link";
+import { RUPEE_SYMBOL } from "@/constants";
 
 
 interface CartItem {
@@ -118,7 +119,7 @@ export default function CartSummary({ items, loading, error, onSelect, onRemove 
 
                             <div className="flex justify-between items-center">
                                 <span className="font-bold text-xl text-neutrals-700 leading-6 tracking-[0.2px] capitalize">
-                                    ₹{item.price.toLocaleString()}
+                                    {RUPEE_SYMBOL}{item.price.toLocaleString()}
                                     .00
                                 </span>
 

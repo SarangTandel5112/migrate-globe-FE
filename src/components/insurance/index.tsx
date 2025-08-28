@@ -13,13 +13,18 @@ interface InsuranceComparisonPageProps {
 }
 
 const InsuranceComparisonPage: React.FC<InsuranceComparisonPageProps> = ({ data }) => {
+    const today = new Date();
+    const todayStr = today?.toISOString()?.split("T")[0];
+    const defaultEnd = new Date(today);
+    defaultEnd.setDate(defaultEnd?.getDate() + 30);
+    const defaultEndStr = defaultEnd?.toISOString()?.split("T")[0];
     const [formData, setFormData] = useState({
-        adults: "",
-        dependants: "",
-        policyStart: "",
-        policyEnd: "",
+        adults: "1",
+        dependants: "1",
+        policyStart: todayStr,
+        policyEnd: defaultEndStr,
     });
-    const [quoteRequested, setQuoteRequested] = useState(false);
+    // const [quoteRequested, setQuoteRequested] = useState(false);
     const policyStartDateRef = useRef<HTMLInputElement>(null);
     const policyEndDateRef = useRef<HTMLInputElement>(null);
     const [loadingId, setLoadingId] = useState<number | null>(null);
@@ -42,7 +47,7 @@ const InsuranceComparisonPage: React.FC<InsuranceComparisonPageProps> = ({ data 
         try {
             setLoadingId(Number(insuranceId)); // start loader for this insurance
             // const token = localStorage.getItem("token");
-            if (!token) throw new Error("Please login first");
+            if (!token) setToast({ message: "Please login first", type: "error", open: true });
 
             const payload = {
                 insurance: insuranceId,
@@ -54,7 +59,7 @@ const InsuranceComparisonPage: React.FC<InsuranceComparisonPageProps> = ({ data 
                 notes: "",
             };
 
-            await addInsuranceToCart(token, payload);
+            await addInsuranceToCart(token || '', payload);
 
             setToast({ message: "Insurance added to cart successfully", type: "success", open: true });
             setTimeout(() => setToast((prev) => ({ ...prev, open: false })), 3000); // auto-close after 3s
@@ -68,18 +73,25 @@ const InsuranceComparisonPage: React.FC<InsuranceComparisonPageProps> = ({ data 
 
 
     const handleInputChange = (field: string, value: string) => {
-        setFormData((prev) => ({
-            ...prev,
-            [field]: value,
-        }));
+        setFormData((prev) => {
+            const updated = { ...prev, [field]: value };
+            if (field === "policyStart") {
+                const newStart = new Date(value);
+                const newEnd = new Date(newStart);
+                newEnd.setDate(newEnd.getDate() + 1);
+                updated.policyEnd = "";
+                // updated.policyEnd = newEnd.toISOString().split("T")[0]; // Uncomment this if you prefer auto-setting
+            }
+            return updated;
+        });
     };
 
     const isFormComplete = Object.values(formData).every((val) => val !== "");
 
     const handleGetQuote = () => {
-        if (isFormComplete) {
-            setQuoteRequested(true);
-        }
+        // if (isFormComplete) {
+        //     setQuoteRequested(true);
+        // }
     };
 
     return (
@@ -211,6 +223,7 @@ const InsuranceComparisonPage: React.FC<InsuranceComparisonPageProps> = ({ data 
                         <div className="relative">
                             <input
                                 type="date"
+                                min={todayStr}
                                 value={formData.policyStart}
                                 onChange={(e) =>
                                     handleInputChange(
@@ -257,6 +270,7 @@ const InsuranceComparisonPage: React.FC<InsuranceComparisonPageProps> = ({ data 
                         <div className="relative">
                             <input
                                 type="date"
+                                min={formData?.policyStart}
                                 value={formData.policyEnd}
                                 onChange={(e) =>
                                     handleInputChange(
@@ -315,7 +329,8 @@ const InsuranceComparisonPage: React.FC<InsuranceComparisonPageProps> = ({ data 
             </motion.div>
 
             {/* Comparison Table */}
-            {quoteRequested && <ComparisonTable data={data} onPurchase={handlePurchase} loadingId={loadingId} />}
+            {/* {quoteRequested && <ComparisonTable data={data} onPurchase={handlePurchase} loadingId={loadingId} />} */}
+            <ComparisonTable data={data} onPurchase={handlePurchase} loadingId={loadingId} />
             <Toast
                 message={toast.message}
                 type={toast.type}

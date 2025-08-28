@@ -5,7 +5,7 @@ import Link from "next/link";
 import MobileMenu from "./MobileMenu";
 import { navigationItems } from "@/constants/navigation";
 import CartIcon from "../icons/CartIcon";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import LoginModal from "../login";
 import { VisaCategoriesGrid } from "../visa/VisaCategoriesGrid";
@@ -15,6 +15,7 @@ import SignupModal from "../signup";
 import Toast from "@/ui/toast";
 
 const Navbar = () => {
+    const router = useRouter();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [showSignupModal, setShowSignupModal] = useState(false);
@@ -299,10 +300,16 @@ const Navbar = () => {
                                     )}
                                 </button>
                                 {isProfileMenuOpen && (
-                                    <div ref={profileMenuRef} className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg py-2 w-40">
+                                    <div ref={profileMenuRef} className="absolute right-0 mt-2 bg-gray-100 shadow-lg rounded-lg py-2 w-40">
+                                        <button
+                                            onClick={() => router.push("/profile")}
+                                            className="w-full text-left px-4 py-2 text-sm text-neutral-900 hover:bg-gray-200"
+                                        >
+                                            Profile
+                                        </button>
                                         <button
                                             onClick={handleLogout}
-                                            className="w-full text-left px-4 py-2 text-sm text-red hover:bg-gray-100"
+                                            className="w-full text-left px-4 py-2 text-sm text-red hover:bg-gray-200"
                                         >
                                             Logout
                                         </button>
@@ -356,6 +363,7 @@ const Navbar = () => {
                 <MobileMenu
                     isOpen={isMobileMenuOpen}
                     toggleLogin={toggleLogin}
+                    isLoggedIn={isLoggedIn}
                     onClose={() => setIsMobileMenuOpen(false)}
                 />
 

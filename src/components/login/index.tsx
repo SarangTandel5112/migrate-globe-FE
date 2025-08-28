@@ -12,6 +12,8 @@ import CheckFillIcon from "@/components/icons/CheckFillIcon";
 import BackIcon from "../icons/BackIcon";
 // import Loading from "@/ui/loading";
 import SpinnerLoadingIcon from "../icons/SpinnerLoading";
+import EyeOffIcon from "../icons/EyeoffIcon";
+import EyePassIcon from "../icons/EyePassIcon";
 
 function SocialButton({ icon, text, handleClick }: { icon: StaticImageData; text: string; handleClick?: () => void }) {
     return (
@@ -51,6 +53,7 @@ export default function LoginModal({ showModal, handleSignUp, handleLoginSuccess
     const emailInputRef = useRef<HTMLInputElement>(null);
     const passwordInputRef = useRef<HTMLInputElement>(null);
     const [forgotLoading, setForgotLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
     const validateEmail = (value: string) =>
         /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -158,6 +161,9 @@ export default function LoginModal({ showModal, handleSignUp, handleLoginSuccess
                         Login your account
                     </h2>
 
+                    {step === 'password' && <button onClick={() => setStep("email")} className="flex items-center text-sm mb-5 text-grayish-700">
+                        <BackIcon width={12} height={13} /><p className="mx-1">Back</p>
+                    </button>}
                     {/* Email or Password Input */}
                     <div className="mb-4">
                         <label className="text-sm mb-1 block text-grayish-700">
@@ -165,7 +171,8 @@ export default function LoginModal({ showModal, handleSignUp, handleLoginSuccess
                         </label>
                         <div className="relative">
                             <input
-                                type={step === "email" ? "email" : "password"}
+                                // type={step === "email" ? "email" : "password"}
+                                type={step === "email" ? "email" : (showPassword ? "text" : "password")}
                                 placeholder={step === "email" ? "Enter your email" : "Enter your password"}
                                 value={step === "email" ? email : password}
                                 onChange={(e) => {
@@ -184,6 +191,15 @@ export default function LoginModal({ showModal, handleSignUp, handleLoginSuccess
                                 ref={step === "email" ? emailInputRef : passwordInputRef}
                             />
                             {error && <ErrorIcon className="absolute right-3 top-2.5 text-red-500 text-xl" />}
+                            {step === "password" && (
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword((prev) => !prev)}
+                                    className="absolute right-3 top-2.5 text-grayish-600 focus:outline-none"
+                                >
+                                    {!showPassword ? <EyeOffIcon /> : <EyePassIcon />}
+                                </button>
+                            )}
                         </div>
                         {error && <p className="text-xs text-red mt-1">{error}</p>}
                     </div>

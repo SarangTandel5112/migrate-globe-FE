@@ -83,6 +83,7 @@ export interface Question {
 export interface Insurance {
   id: number;
   name: string;
+  documentId: string;
   price: number;
   publicHospital: boolean;
   privateHospital: boolean;
