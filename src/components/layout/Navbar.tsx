@@ -364,6 +364,7 @@ const Navbar = () => {
                     isOpen={isMobileMenuOpen}
                     toggleLogin={toggleLogin}
                     isLoggedIn={isLoggedIn}
+                    handleLogout={handleLogout}
                     onClose={() => setIsMobileMenuOpen(false)}
                 />
 

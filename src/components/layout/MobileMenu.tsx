@@ -13,9 +13,10 @@ interface MobileMenuProps {
     isLoggedIn: boolean;
     onClose: () => void;
     toggleLogin: () => void;
+    handleLogout: () => void;
 }
 
-function MobileMenu({ isOpen, onClose, toggleLogin, isLoggedIn }: MobileMenuProps) {
+function MobileMenu({ isOpen, onClose, toggleLogin, isLoggedIn, handleLogout }: MobileMenuProps) {
     const [openMega, setOpenMega] = useState<string | null>(null);
     const menuRef = useOutsideClick<HTMLDivElement>(onClose);
     const pathname = usePathname();
@@ -220,6 +221,12 @@ function MobileMenu({ isOpen, onClose, toggleLogin, isLoggedIn }: MobileMenuProp
                                     <UserIcon />
                                     <span>Profile</span>
                                 </Link>
+                                <button
+                                    onClick={handleLogout}
+                                    className="flex items-center justify-center gap-3 px-4 py-3 rounded-md bg-gray-50 hover:bg-gray-100 transition-colors text-sm text-red"
+                                >
+                                    Logout
+                                </button>
                             </div>
                         )}
                         {!isLoggedIn && <button onClick={toggleLogin} className="w-full px-6 py-3 text-sm font-medium tracking-wide text-center rounded-md border border-solid border-[color:var(--Neutrals-300,#C0C0C0)] text-zinc-800">
