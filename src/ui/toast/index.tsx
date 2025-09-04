@@ -27,7 +27,7 @@ const Toast: React.FC<ToastProps> = ({ message, type, isOpen, onClose, duration 
         type === "success"
           ? "bg-green-500"
           : type === "error"
-          ? "bg-red-500"
+          ? "bg-red"
           : "bg-blue-500"
       } shadow-lg`}
     >
