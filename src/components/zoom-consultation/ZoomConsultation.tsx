@@ -211,8 +211,7 @@ export default function ZoomConsultation() {
                         Zoom consultation
                     </h1>
                     <p className="font-urbanist text-sm md:text-base text-[#515F8F] leading-6 tracking-[0.2px] capitalize max-w-2xl">
-                        Lorem ipsum dolor sit amet consectetur. Nunc proin sed
-                        dis arcu nulla eget lacus.
+                        Choose your preferred date and time to book a consultation with ease. Streamline your appointment with secure, flexible, and efficient scheduling.
                     </p>
                 </div>
             </div>
