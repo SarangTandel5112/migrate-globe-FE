@@ -36,7 +36,6 @@ export default function ConnectedPage() {
             if (authResult.data?.user) {
               localStorage.setItem("user", JSON.stringify(authResult.data.user));
             }
-            router.push("/");
           }
 
           // Clean up URL and redirect
@@ -44,6 +43,13 @@ export default function ConnectedPage() {
           
           // Redirect to home page after successful authentication
           // Keep loading state until redirect completes
+          setTimeout(() => {
+            router.push("/");
+            // Fallback redirect if router.push doesn't work
+            setTimeout(() => {
+              window.location.href = "/";
+            }, 500);
+          }, 1000);
         } else {
           setError("No authentication token found in URL");
           setLoading(false);
