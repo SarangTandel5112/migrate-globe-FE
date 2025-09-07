@@ -4,10 +4,16 @@ import { useRouter } from "next/navigation";
 
 export default function ConnectedPage() {
   const router = useRouter();
+  console.log("========connected==============");
+  
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
+    console.log(urlParams,'-----urlParams-----');
+    
     const token = urlParams.get("id_token");
+    console.log(token,'-----token-----');
+
 
       if (token) {
         if (typeof window !== 'undefined') {
