@@ -399,16 +399,16 @@ export default function ZoomConsultation() {
                                             }}
                                         >
                                             <button
-                                                // onClick={() => setSelectedTime(time?.original)}
+                                                onClick={() => setSelectedTime(time?.original)}
                                                 className={`flex-1 py-4 px-2 rounded-xl border text-base font-urbanist leading-6 transition-all bg-[#F7F8FD] text-[#333] border-[#D3D3D3] group-hover:bg-navy-blue group-hover:text-white group-hover:border-navy-blue ${
                                                     selectedTime === time?.original ? "bg-navy-blue text-white border-navy-blue" : ""
                                                 }`}
                                             >
                                                 {time?.local}
                                             </button>
-                                            <button onClick={() => setSelectedTime(time?.original)} className="py-4 px-5 bg-[#333] text-white text-base font-lexend leading-6 rounded-xl hidden group-hover:block">
+                                            {/* <button onClick={() => setSelectedTime(time?.original)} className="py-4 px-5 bg-[#333] text-white text-base font-lexend leading-6 rounded-xl hidden group-hover:block">
                                                 Weiter
-                                            </button>
+                                            </button> */}
                                         </motion.div>
                                     ))
                                     )}

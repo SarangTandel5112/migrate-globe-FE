@@ -13,9 +13,12 @@ import { VisaType } from "@/utils/interface";
 import { fetchInsights } from "@/api/insights";
 import SignupModal from "../signup";
 import Toast from "@/ui/toast";
+// import { getUserCart } from "@/api/cart";
+import { useCart } from "@/context/CartContext";
 
 const Navbar = () => {
     const router = useRouter();
+    const { cartCount, fetchCartCount } = useCart();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [showSignupModal, setShowSignupModal] = useState(false);
@@ -30,6 +33,9 @@ const Navbar = () => {
     const [insights, setInsights] = useState<VisaType[]>([]);
     const [loadingInsights, setLoadingInsights] = useState(true);
     const [insightsError, setInsightsError] = useState<string | null>(null);
+    // const [cartCount, setCartCount] = useState<number>(0);
+    // const [loadingCart, setLoadingCart] = useState<boolean>(false);
+    // const [cartError, setCartError] = useState<string | null>(null);
     const profileMenuRef = useRef<HTMLDivElement>(null);
     const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
     const [toast, setToast] = useState<{
@@ -49,10 +55,24 @@ const Navbar = () => {
             // Optionally fetch the user's profile data
             const storedUserProfile = JSON.parse(localStorage.getItem("user") || "{}");
             setUserProfile(storedUserProfile);
+            if (fetchCartCount) fetchCartCount(token);
         } else {
             setIsLoggedIn(false);
         }
-    }, []);
+    }, [fetchCartCount]);
+
+    // const fetchCartCount = async (token: string) => {
+    //     setLoadingCart(true);
+    //     try {
+    //         const cart = await getUserCart(token);
+    //         const totalCount = cart?.cartInsuranceItems?.length + cart?.checklists?.length || 0;
+    //         setCartCount(totalCount);
+    //     } catch (error: any) {
+    //         setCartError("Failed to fetch cart items.");
+    //     } finally {
+    //         setLoadingCart(false);
+    //     }
+    // };
 
     useEffect(() => {
         const getInsights = async () => {
@@ -137,6 +157,7 @@ const Navbar = () => {
         // Update state
         setIsLoggedIn(true);
         setUserProfile(user);
+        if (fetchCartCount) fetchCartCount(token);
 
         // Close login modal
         setShowLoginModal(false);
@@ -273,11 +294,19 @@ const Navbar = () => {
                         <Link href='/services/zoom-consultation' className="gap-2.5 self-stretch px-3 xl:px-6 py-2 my-auto text-sm font-medium text-center text-white bg-navy-blue rounded-md">
                             Book a Consultation
                         </Link>
-                        <Link
+                        {/* <Link
                             href="/cart"
                             className="flex gap-2 items-center self-stretch my-auto w-6"
                         >
                             <CartIcon />
+                        </Link> */}
+                        <Link href="/cart" className="flex gap-2 items-center self-stretch my-auto relative"> {/* Add relative positioning here */}
+                            <CartIcon />
+                            {(cartCount && (Number(cartCount) > 0)) ? (
+                                <span className="bg-red text-white text-xs rounded-full w-4 h-4 flex items-center justify-center absolute -top-1 -right-1">
+                                    {cartCount}
+                                </span>
+                            ) : null}
                         </Link>
                         {isLoggedIn ? (
                             <div className="relative">
@@ -365,6 +394,7 @@ const Navbar = () => {
                     toggleLogin={toggleLogin}
                     isLoggedIn={isLoggedIn}
                     handleLogout={handleLogout}
+                    cartCount={cartCount}
                     onClose={() => setIsMobileMenuOpen(false)}
                 />
 

@@ -13,6 +13,7 @@ import { fadeUpVariants } from "@/utils/animation-variant";
 import { ApplicationType, CheckListDetails } from "@/utils/interface";
 import Toast from "@/ui/toast";
 import { addChecklistToCart } from "@/api/cart";
+import { useCart } from "@/context/CartContext";
 
 interface Options {
   label: string;
@@ -27,6 +28,7 @@ export default function CheckList({
   applicationTypes: ApplicationType[];
 }) {
   const router = useRouter();
+  const { fetchCartCount } = useCart();
   const [selectedEnquiryType, setSelectedEnquiryType] = useState<string | null>(
     null
   );
@@ -57,6 +59,7 @@ export default function CheckList({
       setLoadingId(checklistId);
       await addChecklistToCart(token, checklistId.toString());
       setToast({ message: "Checklist added to cart", type: "success", open: true });
+      fetchCartCount(token);
     } catch (err) {
       console.log(err);
       setToast({ message: "Failed to add checklist", type: "error", open: true });

@@ -191,7 +191,7 @@ export default function LoginModal({ showModal, handleSignUp, handleLoginSuccess
                                 ref={step === "email" ? emailInputRef : passwordInputRef}
                             />
                             {error && <ErrorIcon className="absolute right-3 top-2.5 text-red-500 text-xl" />}
-                            {step === "password" && (
+                            {!error && step === "password" && (
                                 <button
                                     type="button"
                                     onClick={() => setShowPassword((prev) => !prev)}

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { addChecklistToCart } from "@/api/cart";
 import { useState } from "react";
 import Toast from "@/ui/toast";
+import { useCart } from "@/context/CartContext";
 
 function PricingSidebar({
     id,
@@ -15,6 +16,7 @@ function PricingSidebar({
     processingTime: string | null;
 }) {
     const router = useRouter();
+    const { fetchCartCount } = useCart();
     const [toast, setToast] = useState<{
         message: string;
         type: "success" | "error";
@@ -33,6 +35,7 @@ function PricingSidebar({
             setLoading(true);
             await addChecklistToCart(token, id?.toString() || '');
             setToast({ message: "Checklist added to cart", type: "success", open: true });
+            fetchCartCount(token);
         } catch (err) {
             console.log(err);
             setToast({ message: "Failed to add checklist", type: "error", open: true });

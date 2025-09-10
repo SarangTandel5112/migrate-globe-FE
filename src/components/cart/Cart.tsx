@@ -7,6 +7,7 @@ import ServiceCard from "@/components/common/ServiceCard";
 import { getUserCart, removeChecklistFromCart, removeInsuranceFromCart } from "@/api/cart";
 import Toast from "@/ui/toast";
 import { useRouter } from "next/navigation";
+import { useCart } from "@/context/CartContext";
 
 interface CartItem {
     id: string;
@@ -26,6 +27,7 @@ export default function Cart() {
         type: "success" as "success" | "error",
         open: false,
     });
+    const { fetchCartCount } = useCart();
     const router = useRouter()
 
     useEffect(() => {
@@ -102,6 +104,7 @@ export default function Cart() {
                 type: "success",
                 open: true,
             });
+            fetchCartCount(token || '');
         } catch (err: any) {
             console.error(err);
 

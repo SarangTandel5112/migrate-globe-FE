@@ -11,12 +11,13 @@ import UserIcon from "../icons/UserIcon";
 interface MobileMenuProps {
     isOpen: boolean;
     isLoggedIn: boolean;
+    cartCount?: number;
     onClose: () => void;
     toggleLogin: () => void;
     handleLogout: () => void;
 }
 
-function MobileMenu({ isOpen, onClose, toggleLogin, isLoggedIn, handleLogout }: MobileMenuProps) {
+function MobileMenu({ isOpen, onClose, toggleLogin, isLoggedIn, handleLogout, cartCount }: MobileMenuProps) {
     const [openMega, setOpenMega] = useState<string | null>(null);
     const menuRef = useOutsideClick<HTMLDivElement>(onClose);
     const pathname = usePathname();
@@ -203,12 +204,27 @@ function MobileMenu({ isOpen, onClose, toggleLogin, isLoggedIn, handleLogout }: 
                         {isLoggedIn && (
                             <div className="flex flex-col gap-2">
                                 {/* Cart */}
-                                <Link
+                                {/* <Link
                                     href="/cart"
                                     onClick={onClose}
                                     className="flex items-center gap-3 px-4 py-3 rounded-md bg-gray-50 hover:bg-gray-100 transition-colors text-sm text-gray-800"
                                 >
                                     <CartIcon  />
+                                    <span>Cart</span>
+                                </Link> */}
+                                <Link
+                                    href="/cart"
+                                    onClick={onClose}
+                                    className="flex items-center gap-3 px-4 py-3 rounded-md bg-gray-50 hover:bg-gray-100 transition-colors text-sm text-gray-800"
+                                >
+                                    <div className="relative flex items-center">
+                                        <CartIcon />
+                                        {(cartCount && cartCount > 0) ? (
+                                            <span className="absolute -top-2 -right-2 flex justify-center items-center w-5 h-5 text-xs text-white bg-red rounded-full">
+                                                {cartCount}
+                                            </span>
+                                        ): null}
+                                    </div>
                                     <span>Cart</span>
                                 </Link>
 

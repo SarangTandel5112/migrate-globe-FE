@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { Insurance } from "@/utils/interface";
 import { addInsuranceToCart } from "@/api/cart";
 import Toast from "@/ui/toast";
+import { useCart } from "@/context/CartContext";
 
 interface InsuranceComparisonPageProps {
     data: Insurance[];
@@ -18,6 +19,7 @@ const InsuranceComparisonPage: React.FC<InsuranceComparisonPageProps> = ({ data 
     const defaultEnd = new Date(today);
     defaultEnd.setDate(defaultEnd?.getDate() + 30);
     const defaultEndStr = defaultEnd?.toISOString()?.split("T")[0];
+    const { fetchCartCount } = useCart();
     const [formData, setFormData] = useState({
         adults: "1",
         dependants: "1",
@@ -68,6 +70,7 @@ const InsuranceComparisonPage: React.FC<InsuranceComparisonPageProps> = ({ data 
             setTimeout(() => setToast((prev) => ({ ...prev, open: false })), 3000); // auto-close
         } finally {
             setLoadingId(null); // stop loader
+            fetchCartCount(token || '');
         }
     };
 
