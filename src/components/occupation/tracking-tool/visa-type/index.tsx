@@ -2,14 +2,31 @@
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
 
+// interface VisaTypeProps {
+//     subclass: string;
+//     eligible: boolean;
+//     list: string;
+// }
 interface VisaTypeProps {
-    subclass: string;
+    link: string;
     eligible: boolean;
-    list: string;
+    listLink: string;
+    listType: string;
+    subclass: string;
 }
 
 const VisaType = ({ visaTypes }: { visaTypes: VisaTypeProps[] }) => {
     const [showAllVisaTypes, setShowAllVisaTypes] = useState(true);
+    const filteredVisaTypes = visaTypes
+        ?.filter(visa => visa.subclass && visa.subclass.trim() !== "")
+        ?.sort((a, b) => {
+            // Show eligible visas first
+            if (a.eligible && !b.eligible) return -1;
+            if (!a.eligible && b.eligible) return 1;
+            return 0;
+        }) || [];
+    const eligibleCount = filteredVisaTypes.filter(visa => visa.eligible).length;
+    const totalCount = filteredVisaTypes.length;
     return (
         <div className="bg-white rounded-xl border border-neutrals-100 overflow-hidden">
             {/* Toggle Header */}
@@ -17,9 +34,16 @@ const VisaType = ({ visaTypes }: { visaTypes: VisaTypeProps[] }) => {
                 className="flex justify-between items-center p-4 border-b border-neutrals-100 cursor-pointer"
                 onClick={() => setShowAllVisaTypes(!showAllVisaTypes)}
             >
-                <h2 className="text-neutrals-700 text-base font-semibold">
-                    All Visa Type
-                </h2>
+                 <div className="flex items-center gap-2">
+                    <h2 className="text-neutrals-700 text-base font-semibold">
+                        All Visa Type
+                    </h2>
+                    {totalCount > 0 && (
+                        <span className="text-xs text-neutrals bg-neutrals-100 px-2 py-1 rounded-full">
+                            {eligibleCount}/{totalCount} eligible
+                        </span>
+                    )}
+                </div>
                 <svg
                     width="14"
                     height="8"
@@ -63,7 +87,7 @@ const VisaType = ({ visaTypes }: { visaTypes: VisaTypeProps[] }) => {
 
                         {/* Desktop Table Rows */}
                         <div className="hidden md:block">
-                            {visaTypes?.map(
+                            {filteredVisaTypes?.map(
                                 (visa: VisaTypeProps, index: number) => (
                                     <div
                                         key={index}
@@ -73,42 +97,70 @@ const VisaType = ({ visaTypes }: { visaTypes: VisaTypeProps[] }) => {
                                             {visa.subclass}
                                         </div>
                                         <div className="flex justify-center w-16">
-                                            <div className="w-6 h-6 bg-mint-green-600 rounded-full flex items-center justify-center">
-                                                <svg
-                                                    width="8"
-                                                    height="6"
-                                                    viewBox="0 0 8 6"
-                                                    fill="none"
-                                                >
-                                                    <path
-                                                        d="M1 3L3 5L7 1"
-                                                        stroke="white"
-                                                        strokeWidth="2"
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                    />
-                                                </svg>
+                                            <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
+                                                visa.eligible 
+                                                    ? 'bg-mint-green-600' 
+                                                    : 'bg-red'
+                                            }`}>
+                                                {visa.eligible ? (
+                                                    <svg
+                                                        width="8"
+                                                        height="6"
+                                                        viewBox="0 0 8 6"
+                                                        fill="none"
+                                                    >
+                                                        <path
+                                                            d="M1 3L3 5L7 1"
+                                                            stroke="white"
+                                                            strokeWidth="2"
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                        />
+                                                    </svg>
+                                                ) : (
+                                                    <svg
+                                                        width="8"
+                                                        height="8"
+                                                        viewBox="0 0 8 8"
+                                                        fill="none"
+                                                    >
+                                                        <path
+                                                            d="M2 2L6 6M6 2L2 6"
+                                                            stroke="white"
+                                                            strokeWidth="1.5"
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                        />
+                                                    </svg>
+                                                )}
                                             </div>
                                         </div>
-                                        <div className="flex items-center gap-2 bg-background-1 border border-neutrals-200 rounded-full px-3 py-2 w-24">
+                                        <div className="flex items-center justify-center gap-2 bg-background-1 border border-neutrals-200 rounded-full px-3 py-2 w-24">
                                             <span className="text-navy-blue text-sm font-semibold">
-                                                {visa.list}
+                                                {visa?.listType === 'Not Available' ? 'N/A' : visa?.listType}
                                             </span>
-                                            <div className="bg-mint-green-50 rounded-full p-1">
-                                                <svg
-                                                    width="8"
-                                                    height="8"
-                                                    viewBox="0 0 8 8"
-                                                    fill="none"
+                                            {visa?.listLink && (
+                                                <a 
+                                                    href={visa.listLink} 
+                                                    target="_blank" 
+                                                    rel="noopener noreferrer"
+                                                    className="bg-mint-green-50 rounded-full p-1 hover:bg-mint-green-100 transition-colors"
                                                 >
-                                                    <path
-                                                        d="M0.666504 0.666687H7.33317V7.33335M0.666504 7.33335L7.33317 0.666687"
-                                                        stroke="#263773"
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                    />
-                                                </svg>
-                                            </div>
+                                                    <svg
+                                                        width="8"
+                                                        height="8"
+                                                        viewBox="0 0 8 8"
+                                                        fill="none"
+                                                    >
+                                                        <path
+                                                            d="M0.666504 0.666687H7.33317V7.33335M0.666504 7.33335L7.33317 0.666687"
+                                                            stroke="#263773"
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                        />
+                                                    </svg>
+                                                </a>
+                                            )}
                                         </div>
                                     </div>
                                 )
@@ -117,7 +169,7 @@ const VisaType = ({ visaTypes }: { visaTypes: VisaTypeProps[] }) => {
 
                         {/* Mobile View */}
                         <div className="block md:hidden">
-                            {visaTypes.map(
+                            {filteredVisaTypes?.map(
                                 (visa: VisaTypeProps, index: number) => (
                                     <div
                                         key={index}
@@ -136,43 +188,71 @@ const VisaType = ({ visaTypes }: { visaTypes: VisaTypeProps[] }) => {
                                         {/* Eligibility and List */}
                                         <div className="flex items-center gap-2 mt-2">
                                             <div className="flex items-center gap-2 text-neutrals-600 text-sm">
-                                                <div className="w-5 h-5 bg-mint-green-600 rounded-full flex items-center justify-center">
-                                                    <svg
-                                                        width="8"
-                                                        height="6"
-                                                        viewBox="0 0 8 6"
-                                                        fill="none"
-                                                    >
-                                                        <path
-                                                            d="M1 3L3 5L7 1"
-                                                            stroke="white"
-                                                            strokeWidth="2"
-                                                            strokeLinecap="round"
-                                                            strokeLinejoin="round"
-                                                        />
-                                                    </svg>
+                                                <div className={`w-5 h-5 rounded-full flex items-center justify-center ${
+                                                    visa.eligible 
+                                                        ? 'bg-mint-green-600' 
+                                                        : 'bg-red'
+                                                }`}>
+                                                    {visa.eligible ? (
+                                                        <svg
+                                                            width="8"
+                                                            height="6"
+                                                            viewBox="0 0 8 6"
+                                                            fill="none"
+                                                        >
+                                                            <path
+                                                                d="M1 3L3 5L7 1"
+                                                                stroke="white"
+                                                                strokeWidth="2"
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                            />
+                                                        </svg>
+                                                    ) : (
+                                                        <svg
+                                                            width="8"
+                                                            height="8"
+                                                            viewBox="0 0 8 8"
+                                                            fill="none"
+                                                        >
+                                                            <path
+                                                                d="M2 2L6 6M6 2L2 6"
+                                                                stroke="white"
+                                                                strokeWidth="1.5"
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                            />
+                                                        </svg>
+                                                    )}
                                                 </div>
                                                 <span>Eligibility</span>
                                             </div>
-                                            <div className="flex items-center gap-2 bg-background-1 border border-neutrals-200 rounded-full px-3 py-2 ml-auto">
+                                            <div className="flex items-center justify-center gap-2 bg-background-1 border border-neutrals-200 rounded-full px-3 py-2 ml-auto">
                                                 <span className="text-navy-blue text-sm font-semibold">
-                                                    {visa.list}
+                                                    {visa?.listType === 'Not Available' ? 'N/A' : visa?.listType}
                                                 </span>
-                                                <div className="bg-mint-green-50 rounded-full p-1">
-                                                    <svg
-                                                        width="8"
-                                                        height="8"
-                                                        viewBox="0 0 8 8"
-                                                        fill="none"
+                                                {visa?.listLink && (
+                                                    <a 
+                                                        href={visa.listLink} 
+                                                        target="_blank" 
+                                                        rel="noopener noreferrer"
+                                                        className="bg-mint-green-50 rounded-full p-1 hover:bg-mint-green-100 transition-colors"
                                                     >
-                                                        <path
-                                                            d="M0.666504 0.666687H7.33317V7.33335M0.666504 7.33335L7.33317 0.666687"
-                                                            stroke="#263773"
-                                                            strokeLinecap="round"
-                                                            strokeLinejoin="round"
-                                                        />
-                                                    </svg>
-                                                </div>
+                                                        <svg
+                                                            width="8"
+                                                            height="8"
+                                                            viewBox="0 0 8 8"
+                                                            fill="none"
+                                                        >
+                                                            <path
+                                                                d="M0.666504 0.666687H7.33317V7.33335M0.666504 7.33335L7.33317 0.666687"
+                                                                stroke="#263773"
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                            />
+                                                        </svg>
+                                                    </a>
+                                                )}
                                             </div>
                                         </div>
                                     </div>

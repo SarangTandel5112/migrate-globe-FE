@@ -7,12 +7,20 @@ import Frame from "@assets/images/Frame.svg";
 import none from "@assets/images/none.svg";
 import { motion, AnimatePresence } from "framer-motion";
 
-type EligibilityStatus = "eligible" | "not_eligible" | string;
+type EligibilityStatus = "Eligible" | "Not Eligible" | string;
 
-type StateMap = Record<string, EligibilityStatus>;
+interface StateData {
+    links?: string[];
+    state: string;
+    status: EligibilityStatus;
+    subcategories?: {
+        link: string;
+        name: string;
+    }[];
+}
 
 interface StateEligibilityProps {
-    stateEligibility: Record<string, StateMap>;
+    stateEligibility: Record<string, StateData[]>;
 }
 
 const StatusIcon = ({
@@ -25,13 +33,15 @@ const StatusIcon = ({
     const commonClasses =
         "w-6 h-6 rounded-full border-2 flex items-center justify-center";
 
+    const isEligible = status === "Eligible";
+
     return (
         <div
             className={`${commonClasses} ${
-                status === "eligible" ? "border-green-500" : "border-red"
+                isEligible ? "border-green-500" : "border-red"
             } ${classname}`}
         >
-            {status === "eligible" ? (
+            {isEligible ? (
                 <svg width="8" height="6" viewBox="0 0 8 6" fill="none">
                     <path
                         d="M1 3L3 5L7 1"
@@ -44,9 +54,9 @@ const StatusIcon = ({
             ) : (
                 <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
                     <path
-                        d="M7 1L1 7M1 1L7 7"
+                        d="M2 2L6 6M6 2L2 6"
                         stroke="#ED1D24"
-                        strokeWidth="2"
+                        strokeWidth="1.5"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                     />
@@ -133,7 +143,8 @@ const StateEligibility = ({ stateEligibility }: StateEligibilityProps) => {
                         <div className="border-t border-neutrals-100 pt-6">
                             {Object.entries(stateEligibility).map(
                                 ([visaCode, states], index, arr) => {
-                                    const stateEntries = Object.entries(states);
+                                    // Filter out entries with empty state names
+                                    const validStates = states.filter(state => state.state && state.state.trim() !== "");
 
                                     return (
                                         <div key={visaCode}>
@@ -145,21 +156,37 @@ const StateEligibility = ({ stateEligibility }: StateEligibilityProps) => {
                                                     </span>
                                                 </div>
                                                 <div className="columns-4 gap-2 space-y-2">
-                                                    {stateEntries.map(
-                                                        ([state, status]) => (
+                                                    {validStates.map(
+                                                        (stateData, stateIndex) => (
                                                             <div
-                                                                key={state}
+                                                                key={`${stateData.state}-${stateIndex}`}
                                                                 className="flex items-center gap-2 px-3 py-1 bg-background-1 border border-neutrals-100 rounded-full whitespace-nowrap"
                                                             >
                                                                 <StatusIcon
-                                                                    status={
-                                                                        status
-                                                                    }
+                                                                    status={stateData.status}
                                                                     classname="!w-5 !h-5 shrink-0"
                                                                 />
                                                                 <span className="text-neutrals-600 text-sm font-normal">
-                                                                    {state}
+                                                                    {stateData.state}
                                                                 </span>
+                                                                {stateData.links && stateData.links.length > 0 && (
+                                                                    <a
+                                                                        href={stateData.links[0]}
+                                                                        target="_blank"
+                                                                        rel="noopener noreferrer"
+                                                                        className="ml-1 text-blue-600 hover:text-blue-800"
+                                                                    >
+                                                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                                                            <path
+                                                                                d="M10 2L2 10M2 2L10 10"
+                                                                                stroke="currentColor"
+                                                                                strokeWidth="1.5"
+                                                                                strokeLinecap="round"
+                                                                                strokeLinejoin="round"
+                                                                            />
+                                                                        </svg>
+                                                                    </a>
+                                                                )}
                                                             </div>
                                                         )
                                                     )}
@@ -183,26 +210,70 @@ const StateEligibility = ({ stateEligibility }: StateEligibilityProps) => {
                                                             "repeat(4, max-content)",
                                                     }}
                                                 >
-                                                    {stateEntries.map(
-                                                        ([state, status]) => (
+                                                    {validStates.map(
+                                                        (stateData, stateIndex) => (
                                                             <div
-                                                                key={state}
+                                                                key={`${stateData.state}-${stateIndex}`}
                                                                 className="flex items-center gap-1 px-3 py-1 bg-background-1 border border-neutrals-100 rounded-full w-fit"
                                                             >
                                                                 <StatusIcon
-                                                                    status={
-                                                                        status
-                                                                    }
+                                                                    status={stateData.status}
                                                                     classname="!w-3 !h-3 shrink-0"
                                                                 />
                                                                 <span className="text-neutrals-600 text-xs leading-tight text-left">
-                                                                    {state}
+                                                                    {stateData.state}
                                                                 </span>
+                                                                {stateData.links && stateData.links.length > 0 && (
+                                                                    <a
+                                                                        href={stateData.links[0]}
+                                                                        target="_blank"
+                                                                        rel="noopener noreferrer"
+                                                                        className="ml-1 text-blue-600 hover:text-blue-800"
+                                                                    >
+                                                                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                                                                            <path
+                                                                                d="M8 2L2 8M2 2L8 8"
+                                                                                stroke="currentColor"
+                                                                                strokeWidth="1.5"
+                                                                                strokeLinecap="round"
+                                                                                strokeLinejoin="round"
+                                                                            />
+                                                                        </svg>
+                                                                    </a>
+                                                                )}
                                                             </div>
                                                         )
                                                     )}
                                                 </div>
                                             </div>
+
+                                            {/* Subcategories for states with special conditions */}
+                                            {validStates.some(state => state.subcategories && state.subcategories.length > 0) && (
+                                                <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+                                                    <h4 className="text-sm font-semibold text-gray-700 mb-3">Special Conditions:</h4>
+                                                    {validStates.map((stateData, stateIndex) => 
+                                                        stateData.subcategories && stateData.subcategories.length > 0 && (
+                                                            <div key={`subcategories-${stateIndex}`} className="mb-3">
+                                                                <h5 className="text-xs font-medium text-gray-600 mb-2">{stateData.state}:</h5>
+                                                                <ul className="space-y-1">
+                                                                    {stateData.subcategories.map((subcategory, subIndex) => (
+                                                                        <li key={subIndex} className="text-xs text-gray-600">
+                                                                            <a
+                                                                                href={subcategory.link}
+                                                                                target="_blank"
+                                                                                rel="noopener noreferrer"
+                                                                                className="text-blue-600 hover:text-blue-800 underline"
+                                                                            >
+                                                                                {subcategory.name}
+                                                                            </a>
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
+                                                            </div>
+                                                        )
+                                                    )}
+                                                </div>
+                                            )}
 
                                             {/* Divider */}
                                             {index !== arr.length - 1 && (
