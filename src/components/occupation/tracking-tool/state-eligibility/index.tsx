@@ -176,11 +176,15 @@ const StateEligibility = ({ stateEligibility }: StateEligibilityProps) => {
                                                                         rel="noopener noreferrer"
                                                                         className="ml-1 text-blue-600 hover:text-blue-800"
                                                                     >
-                                                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                                                        <svg
+                                                                            width="8"
+                                                                            height="8"
+                                                                            viewBox="0 0 8 8"
+                                                                            fill="none"
+                                                                        >
                                                                             <path
-                                                                                d="M10 2L2 10M2 2L10 10"
-                                                                                stroke="currentColor"
-                                                                                strokeWidth="1.5"
+                                                                                d="M0.666504 0.666687H7.33317V7.33335M0.666504 7.33335L7.33317 0.666687"
+                                                                                stroke="#263773"
                                                                                 strokeLinecap="round"
                                                                                 strokeLinejoin="round"
                                                                             />

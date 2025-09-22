@@ -38,19 +38,21 @@ const OccupationTracking: React.FC = () => {
     const [searchResults, setSearchResults] = useState<OccupationSearchResult[]>([]);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [isSearched, setIsSearched] = useState(false);
     const [selectedOccupation, setSelectedOccupation] = useState<OccupationSearchResult | null>(null);
     const [occupationDetails, setOccupationDetails] = useState<OccupationDocument | null>(null);
     const { visaEligibility, stateEligibility } = occupationDetails?.data || {};
     const [selectedIndex, setSelectedIndex] = useState(-1);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
+    const skipSearchRef = useRef(false);
 
     const handleBack = () => router.back();
 
     // API functions
     const searchOccupations = async (query: string): Promise<OccupationSearchResult[]> => {
         if (!query.trim()) return [];
-        
+
         try {
             const response = await fetch(
                 `https://admin.migrateglobe.com/api/occupation-trackings/search?query=${encodeURIComponent(query)}`
@@ -78,72 +80,98 @@ const OccupationTracking: React.FC = () => {
 
     // Search handler with debouncing
     useEffect(() => {
-        const timeoutId = setTimeout(async () => {
-            if (searchQuery.trim()) {
-                setIsLoading(true);
-                const results = await searchOccupations(searchQuery);
-                setSearchResults(results);
-                setIsDropdownOpen(results.length > 0);
-                setSelectedIndex(-1);
-                setIsLoading(false);
-            } else {
+        const id = setTimeout(async () => {
+            // If we flagged to skip (because we just set searchQuery programmatically), skip it
+            if (skipSearchRef.current) {
+                skipSearchRef.current = false;
+                return;
+            }
+
+            if (!searchQuery.trim()) {
                 setSearchResults([]);
                 setIsDropdownOpen(false);
+                return;
             }
-        }, 300);
 
-        return () => clearTimeout(timeoutId);
-    }, [searchQuery]);
-
-    // Handle occupation selection
-    const handleOccupationSelect = async (occupation: OccupationSearchResult) => {
-        setSelectedOccupation(occupation);
-        setSearchQuery(occupation.title);
-        setIsDropdownOpen(false);
-        setSelectedIndex(-1);
-        
-        // Fetch detailed occupation data
-        setIsLoading(true);
-        const details = await fetchOccupationDetails(occupation.documentId);
-        setOccupationDetails(details);
-        setIsLoading(false);
-    };
-
-    // Handle search button click or Enter key
-    const handleSearch = async () => {
-        if (searchQuery.trim()) {
+            // Live suggestion search
             setIsLoading(true);
             const results = await searchOccupations(searchQuery);
             setSearchResults(results);
+            // Open dropdown only when we have results
             setIsDropdownOpen(results.length > 0);
             setSelectedIndex(-1);
             setIsLoading(false);
+        }, 300);
+
+        return () => clearTimeout(id);
+    }, [searchQuery]);
+
+    // Handle occupation selection (click on dropdown item or Enter when highlighted)
+    const handleOccupationSelect = async (occupation: OccupationSearchResult) => {
+        // set selected in UI
+        setSelectedOccupation(occupation);
+
+        // set input text to selected title (but prevent the debounced search from rerunning)
+        skipSearchRef.current = true;
+        setSearchQuery(occupation.title);
+
+        // close dropdown right away to prevent flicker / re-open
+        setIsDropdownOpen(false);
+        setSelectedIndex(-1);
+
+        // mark that user has performed a search/select attempt (used to show "No details found")
+        setIsSearched(true);
+
+        // Fetch details
+        setIsLoading(true);
+        const details = await fetchOccupationDetails(occupation.documentId);
+        setIsLoading(false);
+
+        if (details && details.data) {
+            setOccupationDetails(details);
+            // keep dropdown closed
+        } else {
+            // No details found — keep dropdown closed and show the no-data UI below
+            setOccupationDetails(null);
         }
     };
 
-    // Handle keyboard navigation
-    const handleKeyDown = (e: React.KeyboardEvent) => {
+    // Explicit search invocation (button or Enter when not choosing from dropdown)
+    const handleSearch = async () => {
+        if (!searchQuery.trim()) return;
+
+        setIsLoading(true);
+        setIsSearched(true);
+        const results = await searchOccupations(searchQuery);
+        setSearchResults(results);
+        setIsDropdownOpen(results.length > 0);
+        setSelectedIndex(-1);
+        setIsLoading(false);
+        // Clear previous details, because user started a new search
+        setOccupationDetails(null);
+        setSelectedOccupation(null);
+    };
+
+    // Keyboard navigation & Enter handling
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (!isDropdownOpen || searchResults.length === 0) {
-            if (e.key === 'Enter') {
+            if (e.key === "Enter") {
+                e.preventDefault();
                 handleSearch();
             }
             return;
         }
 
         switch (e.key) {
-            case 'ArrowDown':
+            case "ArrowDown":
                 e.preventDefault();
-                setSelectedIndex(prev => 
-                    prev < searchResults.length - 1 ? prev + 1 : 0
-                );
+                setSelectedIndex((prev) => (prev < searchResults.length - 1 ? prev + 1 : 0));
                 break;
-            case 'ArrowUp':
+            case "ArrowUp":
                 e.preventDefault();
-                setSelectedIndex(prev => 
-                    prev > 0 ? prev - 1 : searchResults.length - 1
-                );
+                setSelectedIndex((prev) => (prev > 0 ? prev - 1 : searchResults.length - 1));
                 break;
-            case 'Enter':
+            case "Enter":
                 e.preventDefault();
                 if (selectedIndex >= 0 && selectedIndex < searchResults.length) {
                     handleOccupationSelect(searchResults[selectedIndex]);
@@ -151,7 +179,7 @@ const OccupationTracking: React.FC = () => {
                     handleSearch();
                 }
                 break;
-            case 'Escape':
+            case "Escape":
                 setIsDropdownOpen(false);
                 setSelectedIndex(-1);
                 break;
@@ -160,15 +188,14 @@ const OccupationTracking: React.FC = () => {
 
     // Close dropdown when clicking outside
     useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        const onDocClick = (ev: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(ev.target as Node)) {
                 setIsDropdownOpen(false);
                 setSelectedIndex(-1);
             }
         };
-
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
+        document.addEventListener("mousedown", onDocClick);
+        return () => document.removeEventListener("mousedown", onDocClick);
     }, []);
 
     // const recentSearches = [
@@ -293,7 +320,7 @@ const OccupationTracking: React.FC = () => {
                         {isLoading && (
                             <div className="w-5 h-5 border-2 border-navy-blue border-t-transparent rounded-full animate-spin"></div>
                         )}
-                        <button 
+                        <button
                             onClick={handleSearch}
                             className="hidden md:block bg-navy-blue text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-navy-blue-600 transition-colors"
                         >
@@ -308,9 +335,8 @@ const OccupationTracking: React.FC = () => {
                                 <div
                                     key={result.id}
                                     onClick={() => handleOccupationSelect(result)}
-                                    className={`px-4 py-3 cursor-pointer border-b border-gray-100 last:border-b-0 hover:bg-gray-50 transition-colors ${
-                                        index === selectedIndex ? 'bg-gray-50' : ''
-                                    }`}
+                                    className={`px-4 py-3 cursor-pointer border-b border-gray-100 last:border-b-0 hover:bg-gray-50 transition-colors ${index === selectedIndex ? 'bg-gray-50' : ''
+                                        }`}
                                 >
                                     <div className="flex items-center justify-between">
                                         <div>
@@ -396,6 +422,7 @@ const OccupationTracking: React.FC = () => {
                 </motion.div>
             )}
 
+            {(!occupationDetails && searchQuery && isSearched) && <div className="flex items-center justify-center my-20 text-lg text-neutrals">No Details Found</div>}
             {occupationDetails && <div className="flex flex-col-reverse lg:flex-row gap-8 pt-4">
                 {/* Main Content */}
                 <motion.div
