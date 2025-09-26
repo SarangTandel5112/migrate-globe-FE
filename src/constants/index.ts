@@ -1,4 +1,6 @@
-export const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL
+// API Base URL with fallback and proper trailing slash
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://admin.migrateglobe.com/api/';
+export const API_URL = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
 
 type Country = {
   name: string;

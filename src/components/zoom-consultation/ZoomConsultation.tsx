@@ -9,19 +9,25 @@ import { bookConsultation } from "@/api/zoom-consultation";
 import { useTimeSlots } from "@/hooks/useTimeSlots";
 import { convertSlotToLocalReliable, Country } from "@/utils/helpers";
 import Toast from "@/ui/toast";
+import { Country as CountryType } from "@/utils/countries";
 
-const daysInMonth = (month: number, year: number) => new Date(year, month + 1, 0).getDate();
+const daysInMonth = (month: number, year: number) =>
+    new Date(year, month + 1, 0).getDate();
 // const weekDays = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 
 interface FormData {
-  firstName: string;
-  lastName: string;
-  emailId: string;
-  phone: string;
-  country: Country;
+    firstName: string;
+    lastName: string;
+    emailId: string;
+    phone: string;
+    country: Country;
 }
 
-export default function ZoomConsultation() {
+export default function ZoomConsultation({
+    countries,
+}: {
+    countries: CountryType[];
+}) {
     const router = useRouter();
     const [selectedTime, setSelectedTime] = useState<string>("");
     const [isBooking, setIsBooking] = useState(false);
@@ -31,7 +37,7 @@ export default function ZoomConsultation() {
         lastName: "",
         emailId: "",
         phone: "",
-        country: 'Australia',
+        country: "Australia",
     });
 
     const today = new Date();
@@ -57,7 +63,12 @@ export default function ZoomConsultation() {
     // }, []);
 
     // Use custom hook for time slots
-    const { timeSlots, loading: loadingTimeSlots, error: timeSlotsError, refetch } = useTimeSlots(selectedDate);
+    const {
+        timeSlots,
+        loading: loadingTimeSlots,
+        error: timeSlotsError,
+        refetch,
+    } = useTimeSlots(selectedDate);
 
     // Map slots to display times in local timezone
     const localTimeSlots = timeSlots?.slots?.map((slot) => ({
@@ -131,20 +142,27 @@ export default function ZoomConsultation() {
                 // Format the date as YYYY-MM-DD
                 // const formattedDate = selectedDate.toISOString().split('T')[0];
                 const year = selectedDate.getFullYear();
-                const month = String(selectedDate.getMonth() + 1).padStart(2, '0');
-                const day = String(selectedDate.getDate()).padStart(2, '0');
+                const month = String(selectedDate.getMonth() + 1).padStart(
+                    2,
+                    "0"
+                );
+                const day = String(selectedDate.getDate()).padStart(2, "0");
                 const formattedDate = `${year}-${month}-${day}`;
                 // Format time to HH:MM:SS.000 format
-                const timeParts = selectedTime.split(' ');
+                const timeParts = selectedTime.split(" ");
                 const time = timeParts[0];
                 const period = timeParts[1];
                 // let [hours, minutes] = time.split(':').map(Number);
-                const [rawHours, minutes] = time.split(':').map(Number);
+                const [rawHours, minutes] = time.split(":").map(Number);
                 let hours = rawHours;
                 if (period === "PM" && hours < 12) hours += 12;
                 if (period === "AM" && hours === 12) hours = 0;
-                
-                const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:00.000`;
+
+                const formattedTime = `${hours
+                    .toString()
+                    .padStart(2, "0")}:${minutes
+                    .toString()
+                    .padStart(2, "0")}:00.000`;
 
                 const bookingData = {
                     firstName: formData.firstName,
@@ -157,24 +175,34 @@ export default function ZoomConsultation() {
                     email: formData.emailId,
                 };
 
-                const token = localStorage?.getItem('token')
-                const result = await bookConsultation(bookingData, token || '');
-                
+                const token = localStorage?.getItem("token");
+                const result = await bookConsultation(bookingData, token || "");
+
                 // Handle successful booking - redirect to checkout URL
                 if (result?.checkout_url) {
                     // Redirect to the checkout URL
                     window.location.href = result.checkout_url;
                 } else {
                     console.error("No checkout URL received from API");
-                    showToast("Booking successful but no payment link received", "info");
-                    setBookingError("Booking successful but no payment link received");
+                    showToast(
+                        "Booking successful but no payment link received",
+                        "info"
+                    );
+                    setBookingError(
+                        "Booking successful but no payment link received"
+                    );
                 }
-                
             } catch (error) {
                 console.error("Booking failed:", error);
-                setBookingError(error instanceof Error ? error.message : "Failed to book consultation");
+                setBookingError(
+                    error instanceof Error
+                        ? error.message
+                        : "Failed to book consultation"
+                );
                 showToast(
-                    error instanceof Error ? error.message : "Failed to book consultation",
+                    error instanceof Error
+                        ? error.message
+                        : "Failed to book consultation",
                     "error"
                 );
             } finally {
@@ -211,7 +239,9 @@ export default function ZoomConsultation() {
                         Zoom consultation
                     </h1>
                     <p className="font-urbanist text-sm md:text-base text-[#515F8F] leading-6 tracking-[0.2px] capitalize max-w-2xl">
-                        Choose your preferred date and time to book a consultation with ease. Streamline your appointment with secure, flexible, and efficient scheduling.
+                        Choose your preferred date and time to book a
+                        consultation with ease. Streamline your appointment with
+                        secure, flexible, and efficient scheduling.
                     </p>
                 </div>
             </div>
@@ -368,12 +398,16 @@ export default function ZoomConsultation() {
                                     {loadingTimeSlots ? (
                                         <div className="text-center py-4">
                                             <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-navy-blue mx-auto"></div>
-                                            <p className="text-sm text-gray-500 mt-2">Loading time slots...</p>
+                                            <p className="text-sm text-gray-500 mt-2">
+                                                Loading time slots...
+                                            </p>
                                         </div>
                                     ) : timeSlotsError ? (
                                         <div className="text-center py-4">
-                                            <p className="text-sm text-red-500">{timeSlotsError}</p>
-                                            <button 
+                                            <p className="text-sm text-red-500">
+                                                {timeSlotsError}
+                                            </p>
+                                            <button
                                                 onClick={refetch}
                                                 className="text-sm text-navy-blue underline mt-2"
                                             >
@@ -382,35 +416,45 @@ export default function ZoomConsultation() {
                                         </div>
                                     ) : timeSlots?.slots?.length === 0 ? (
                                         <div className="text-center py-4">
-                                            <p className="text-sm text-gray-500">No time slots available for this date</p>
+                                            <p className="text-sm text-gray-500">
+                                                No time slots available for this
+                                                date
+                                            </p>
                                         </div>
                                     ) : (
                                         // timeSlots?.slots?.map((time, i) => (
                                         localTimeSlots?.map((time, i) => (
-                                        <motion.div
-                                            key={i}
-                                            className="flex items-center gap-1.5 group"
-                                            initial={{ opacity: 0, y: 20 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            transition={{
-                                                duration: 0.4,
-                                                delay: 0.1,
-                                                ease: "easeOut",
-                                            }}
-                                        >
-                                            <button
-                                                onClick={() => setSelectedTime(time?.original)}
-                                                className={`flex-1 py-4 px-2 rounded-xl border text-base font-urbanist leading-6 transition-all bg-[#F7F8FD] text-[#333] border-[#D3D3D3] group-hover:bg-navy-blue group-hover:text-white group-hover:border-navy-blue ${
-                                                    selectedTime === time?.original ? "bg-navy-blue text-white border-navy-blue" : ""
-                                                }`}
+                                            <motion.div
+                                                key={i}
+                                                className="flex items-center gap-1.5 group"
+                                                initial={{ opacity: 0, y: 20 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                transition={{
+                                                    duration: 0.4,
+                                                    delay: 0.1,
+                                                    ease: "easeOut",
+                                                }}
                                             >
-                                                {time?.local}
-                                            </button>
-                                            {/* <button onClick={() => setSelectedTime(time?.original)} className="py-4 px-5 bg-[#333] text-white text-base font-lexend leading-6 rounded-xl hidden group-hover:block">
+                                                <button
+                                                    onClick={() =>
+                                                        setSelectedTime(
+                                                            time?.original
+                                                        )
+                                                    }
+                                                    className={`flex-1 py-4 px-2 rounded-xl border text-base font-urbanist leading-6 transition-all bg-[#F7F8FD] text-[#333] border-[#D3D3D3] group-hover:bg-navy-blue group-hover:text-white group-hover:border-navy-blue ${
+                                                        selectedTime ===
+                                                        time?.original
+                                                            ? "bg-navy-blue text-white border-navy-blue"
+                                                            : ""
+                                                    }`}
+                                                >
+                                                    {time?.local}
+                                                </button>
+                                                {/* <button onClick={() => setSelectedTime(time?.original)} className="py-4 px-5 bg-[#333] text-white text-base font-lexend leading-6 rounded-xl hidden group-hover:block">
                                                 Weiter
                                             </button> */}
-                                        </motion.div>
-                                    ))
+                                            </motion.div>
+                                        ))
                                     )}
                                 </div>
                             </div>
@@ -426,6 +470,7 @@ export default function ZoomConsultation() {
                     isFormValid={isFormValid}
                     isBooking={isBooking}
                     bookingError={bookingError}
+                    countries={countries}
                     key={"book-form"}
                 />
             </motion.div>

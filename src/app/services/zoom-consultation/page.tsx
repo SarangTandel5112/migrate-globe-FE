@@ -1,9 +1,12 @@
 import ZoomConsultation from "@/components/zoom-consultation/ZoomConsultation";
+import { fetchCountries } from "@/utils/countries";
 
-export default function Page() {
+export default async function Page() {
+    const countries = await fetchCountries();
+
     return (
         <div className="container-1200">
-            <ZoomConsultation />
+            <ZoomConsultation countries={countries} />
         </div>
     );
 }

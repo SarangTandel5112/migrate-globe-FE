@@ -6,9 +6,12 @@ import planeAnmiation from "@assets/animations/plane.json";
 import { motion } from "framer-motion";
 import { HeroSectionProps } from "@/utils/interface";
 import { parseMarkdownTitle } from "@/utils/richTextParser";
+import { Country } from "@/utils/countries";
 
-export default function HeroSection({ heroSection }: HeroSectionProps) {
-
+export default function HeroSection({
+    heroSection,
+    countries,
+}: HeroSectionProps & { countries: Country[] }) {
     return (
         <div className="-mx-5 md:-mx-6 lg:-mx-8">
             <div className="bg-[url('/hero_sm.png')] md:bg-[url('/hero_md.png')] lg:bg-[url('/hero_main.png')] bg-cover bg-center w-full  -mt-20 lg:-mt-24 mx-auto relative">
@@ -36,7 +39,10 @@ export default function HeroSection({ heroSection }: HeroSectionProps) {
                             {heroSection.intro.description}
                         </motion.p>
                     </div>
-                    <GetStartedForm services={heroSection.services}/>
+                    <GetStartedForm
+                        services={heroSection.services}
+                        countries={countries}
+                    />
                     <FeatureGrid services={heroSection.services} />
                 </div>
                 <div className="absolute top-0 z-[1]">

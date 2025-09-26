@@ -53,7 +53,9 @@ const Navbar = () => {
         if (token) {
             setIsLoggedIn(true);
             // Optionally fetch the user's profile data
-            const storedUserProfile = JSON.parse(localStorage.getItem("user") || "{}");
+            const storedUserProfile = JSON.parse(
+                localStorage.getItem("user") || "{}"
+            );
             setUserProfile(storedUserProfile);
             if (fetchCartCount) fetchCartCount(token);
         } else {
@@ -166,11 +168,11 @@ const Navbar = () => {
     const handleSignUp = () => {
         toggleSignup();
         toggleLogin();
-    }
+    };
     const handleLogin = () => {
         toggleLogin();
         toggleSignup();
-    }
+    };
 
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -291,7 +293,10 @@ const Navbar = () => {
                     </div> */}
                     {/* Desktop Action Buttons */}
                     <div className="hidden lg:flex gap-6 items-center self-stretch my-auto min-w-60">
-                        <Link href='/services/zoom-consultation' className="gap-2.5 self-stretch px-3 xl:px-6 py-2 my-auto text-sm font-medium text-center text-white bg-navy-blue rounded-md">
+                        <Link
+                            href="/services/zoom-consultation"
+                            className="gap-2.5 self-stretch px-3 xl:px-6 py-2 my-auto text-sm font-medium text-center text-white bg-navy-blue rounded-md"
+                        >
                             Book a Consultation
                         </Link>
                         {/* <Link
@@ -300,9 +305,14 @@ const Navbar = () => {
                         >
                             <CartIcon />
                         </Link> */}
-                        <Link href="/cart" className="flex gap-2 items-center self-stretch my-auto relative"> {/* Add relative positioning here */}
+                        <Link
+                            href="/cart"
+                            className="flex gap-2 items-center self-stretch my-auto relative"
+                        >
+                            {" "}
+                            {/* Add relative positioning here */}
                             <CartIcon />
-                            {(cartCount && (Number(cartCount) > 0)) ? (
+                            {cartCount && Number(cartCount) > 0 ? (
                                 <span className="bg-red text-white text-xs rounded-full w-4 h-4 flex items-center justify-center absolute -top-1 -right-1">
                                     {cartCount}
                                 </span>
@@ -311,7 +321,10 @@ const Navbar = () => {
                         {isLoggedIn ? (
                             <div className="relative">
                                 {/* Profile Picture or Placeholder */}
-                                <button onClick={toggleProfileMenu} className="relative w-10 h-10 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center">
+                                <button
+                                    onClick={toggleProfileMenu}
+                                    className="relative w-10 h-10 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center"
+                                >
                                     {userProfile?.avatar ? (
                                         <Image
                                             src={userProfile.avatar}
@@ -321,17 +334,46 @@ const Navbar = () => {
                                             className="object-cover w-full h-full"
                                         />
                                     ) : (
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40" className="w-full h-full">
-                                            <circle cx="50" cy="50" r="45" fill="#E0E0E0" />
-                                            <circle cx="50" cy="40" r="18" fill="#9E9E9E" />
-                                            <rect x="30" y="58" width="40" height="20" rx="5" ry="5" fill="#BDBDBD" />
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 100 100"
+                                            width="40"
+                                            height="40"
+                                            className="w-full h-full"
+                                        >
+                                            <circle
+                                                cx="50"
+                                                cy="50"
+                                                r="45"
+                                                fill="#E0E0E0"
+                                            />
+                                            <circle
+                                                cx="50"
+                                                cy="40"
+                                                r="18"
+                                                fill="#9E9E9E"
+                                            />
+                                            <rect
+                                                x="30"
+                                                y="58"
+                                                width="40"
+                                                height="20"
+                                                rx="5"
+                                                ry="5"
+                                                fill="#BDBDBD"
+                                            />
                                         </svg>
                                     )}
                                 </button>
                                 {isProfileMenuOpen && (
-                                    <div ref={profileMenuRef} className="absolute right-0 mt-2 bg-gray-100 shadow-lg rounded-lg py-2 w-40">
+                                    <div
+                                        ref={profileMenuRef}
+                                        className="absolute right-0 mt-2 bg-gray-100 shadow-lg rounded-lg py-2 w-40"
+                                    >
                                         <button
-                                            onClick={() => router.push("/profile")}
+                                            onClick={() =>
+                                                router.push("/profile")
+                                            }
                                             className="w-full text-left px-4 py-2 text-sm text-neutral-900 hover:bg-gray-200"
                                         >
                                             Profile
@@ -401,14 +443,23 @@ const Navbar = () => {
                 {showLoginModal && (
                     <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
                         <div ref={modalRef}>
-                            <LoginModal showModal={showLoginModal} toggleLogin={toggleLogin} handleSignUp={handleSignUp} handleLoginSuccess={handleLoginSuccess} setToast={setToast} />
+                            <LoginModal
+                                showModal={showLoginModal}
+                                toggleLogin={toggleLogin}
+                                handleSignUp={handleSignUp}
+                                handleLoginSuccess={handleLoginSuccess}
+                                setToast={setToast}
+                            />
                         </div>
                     </div>
                 )}
                 {showSignupModal && (
                     <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
                         <div ref={signupModalRef}>
-                            <SignupModal showModal={showSignupModal} handleLogin={handleLogin} />
+                            <SignupModal
+                                showModal={showSignupModal}
+                                handleLogin={handleLogin}
+                            />
                         </div>
                     </div>
                 )}
@@ -421,6 +472,6 @@ const Navbar = () => {
             />
         </div>
     );
-}
+};
 
 export default Navbar;

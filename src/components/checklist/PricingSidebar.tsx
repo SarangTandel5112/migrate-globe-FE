@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { addChecklistToCart } from "@/api/cart";
@@ -10,7 +10,7 @@ function PricingSidebar({
     id,
     price,
     processingTime,
-    }: {
+}: {
     id: string | null;
     price: number | null;
     processingTime: string | null;
@@ -27,18 +27,28 @@ function PricingSidebar({
     const handleBuyChecklist = async () => {
         const token = localStorage?.getItem("token");
         if (!token) {
-          setToast({ message: "Please login to buy a checklist", type: "error", open: true });
-          return;
+            setToast({
+                message: "Please login to buy a checklist",
+                type: "error",
+                open: true,
+            });
+            return;
         }
-    
+
         try {
             setLoading(true);
-            await addChecklistToCart(token, id?.toString() || '');
-            setToast({ message: "Checklist added to cart", type: "success", open: true });
+            await addChecklistToCart(token, id?.toString() || "");
+            setToast({
+                message: "Checklist added to cart",
+                type: "success",
+                open: true,
+            });
             fetchCartCount(token);
-        } catch (err) {
+        } catch (err: any) {
             console.log(err);
-            setToast({ message: "Failed to add checklist", type: "error", open: true });
+            // Show the specific error message from the API
+            const errorMessage = err.message || "Failed to add checklist";
+            setToast({ message: errorMessage, type: "error", open: true });
         } finally {
             setLoading(false);
         }
@@ -65,7 +75,7 @@ function PricingSidebar({
 
                         {/* Price */}
                         <div className="font-semibold text-2xl text-neutrals-700 leading-6 tracking-[0.2px] capitalize">
-                            {price ? `₹${price.toLocaleString()}`: "N/A"}
+                            {price ? `₹${price.toLocaleString()}` : "N/A"}
                         </div>
 
                         {/* Description */}
@@ -93,7 +103,11 @@ function PricingSidebar({
                                 onClick={handleBuyChecklist}
                                 // className="w-full py-2 px-6 bg-navy-blue text-white rounded-md text-sm tracking-[0.46px]"
                                 className={`w-full py-2 px-6 rounded-md text-sm tracking-[0.46px] transition-colors 
-                                    ${loading ? "bg-neutral cursor-not-allowed" : "bg-navy-blue hover:bg-navy-blue-600"}
+                                    ${
+                                        loading
+                                            ? "bg-neutral cursor-not-allowed"
+                                            : "bg-navy-blue hover:bg-navy-blue-600"
+                                    }
                                     text-white`}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}

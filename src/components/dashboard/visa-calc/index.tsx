@@ -27,7 +27,9 @@ const itemVariants = {
     },
 };
 
-const VisaCalculatorSection = ({ visaCalculator }: VisaCalculatorSectionProps) => {
+const VisaCalculatorSection = ({
+    visaCalculator,
+}: VisaCalculatorSectionProps) => {
     const router = useRouter();
 
     return (
@@ -88,7 +90,7 @@ const VisaCalculatorSection = ({ visaCalculator }: VisaCalculatorSectionProps) =
                     {/* Card 1 */}
                     <motion.div
                         variants={itemVariants}
-                        className="bg-white p-6 rounded-xl shadow-md text-navy-blue text-sm"
+                        className="bg-white p-6 rounded-xl shadow-md text-navy-blue text-base"
                     >
                         {parseRichText(visaCalculator.step1)}
                     </motion.div>
@@ -96,7 +98,7 @@ const VisaCalculatorSection = ({ visaCalculator }: VisaCalculatorSectionProps) =
                     {/* Card 2 */}
                     <motion.div
                         variants={itemVariants}
-                        className="bg-white p-6 rounded-xl shadow-md text-navy-blue text-sm"
+                        className="bg-white p-6 rounded-xl shadow-md text-navy-blue text-base"
                     >
                         {parseRichText(visaCalculator.step2)}
                     </motion.div>
@@ -104,7 +106,7 @@ const VisaCalculatorSection = ({ visaCalculator }: VisaCalculatorSectionProps) =
                     {/* Card 3 */}
                     <motion.div
                         variants={itemVariants}
-                        className="bg-white p-4 rounded-xl shadow-md text-xs col-span-2 text-navy-blue text-center"
+                        className="bg-white p-4 rounded-xl shadow-md text-base col-span-2 text-navy-blue text-center"
                     >
                         {visaCalculator.step3}
                     </motion.div>

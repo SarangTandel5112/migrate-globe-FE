@@ -16,11 +16,11 @@ function ContactForm() {
         message: "",
     });
 
-    const [errors, setErrors] = useState<{[key: string]: string}>({});
+    const [errors, setErrors] = useState<{ [key: string]: string }>({});
     const [isSubmitted, setIsSubmitted] = useState(false);
 
     const validateForm = () => {
-        const newErrors: {[key: string]: string} = {};
+        const newErrors: { [key: string]: string } = {};
 
         // Validate First Name
         if (!formData.firstName.trim()) {
@@ -39,7 +39,7 @@ function ContactForm() {
         // Validate Phone Number
         if (!formData.phone.trim()) {
             newErrors.phone = "Phone number is required";
-        } else if (!/^\d{10}$/.test(formData.phone.replace(/\s/g, ''))) {
+        } else if (!/^\d{10}$/.test(formData.phone.replace(/\s/g, ""))) {
             newErrors.phone = "Please enter a valid 10-digit phone number";
         }
 
@@ -88,16 +88,16 @@ function ContactForm() {
                 country: formData?.country.name,
                 countryCode: formData?.country.dialCode,
                 question: formData?.message,
-            }
-            const token = localStorage?.getItem('token')
+            };
+            const token = localStorage?.getItem("token");
             const response = await fetch(`${API_URL}contacts`, {
-                method: 'POST',
-                headers: getAuthHeaders(token || ''),
+                method: "POST",
+                headers: getAuthHeaders(token || ""),
                 body: JSON.stringify({ data: payload }),
             });
 
             if (!response.ok) {
-                throw new Error('Failed to submit form');
+                throw new Error("Failed to submit form");
             }
 
             const data = await response.json();
@@ -117,8 +117,7 @@ function ContactForm() {
         } finally {
             setIsSubmitted(false);
         }
-        };
-
+    };
 
     // const handleSubmit = (e: React.FormEvent) => {
     //     e.preventDefault();
@@ -176,11 +175,15 @@ function ContactForm() {
                                 }
                                 placeholder="Enter First Name"
                                 className={`w-full py-2.5 px-3 rounded border text-neutral-700 bg-background-1 text-base tracking-[0.24px] placeholder:text-[#D3D3D3] focus:outline-none focus:border-navy-blue ${
-                                    errors.firstName ? 'border-red-500' : 'border-neutrals-200'
+                                    errors.firstName
+                                        ? "border-red-500"
+                                        : "border-neutrals-200"
                                 }`}
                             />
                             {isSubmitted && errors.firstName && (
-                                <p className="text-red text-xs mt-1">{errors.firstName}</p>
+                                <p className="text-red text-xs mt-1">
+                                    {errors.firstName}
+                                </p>
                             )}
                         </div>
 
@@ -199,11 +202,15 @@ function ContactForm() {
                                 }
                                 placeholder="Enter Last Name"
                                 className={`w-full py-2.5 px-3 rounded border text-neutral-700 bg-background-1 text-base tracking-[0.24px] placeholder:text-[#D3D3D3] focus:outline-none focus:border-navy-blue ${
-                                    errors.lastName ? 'border-red-500' : 'border-neutrals-200'
+                                    errors.lastName
+                                        ? "border-red-500"
+                                        : "border-neutrals-200"
                                 }`}
                             />
                             {isSubmitted && errors.lastName && (
-                                <p className="text-red text-xs mt-1">{errors.lastName}</p>
+                                <p className="text-red text-xs mt-1">
+                                    {errors.lastName}
+                                </p>
                             )}
                         </div>
                     </div>
@@ -239,12 +246,16 @@ function ContactForm() {
                                 }
                                 placeholder="123 456 7890"
                                 className={`flex-1 py-2.5 px-4 border !text-neutral-700 bg-background-1 rounded font-semibold text-base text-neutrals-300 leading-6 focus:outline-none focus:border-navy-blue ${
-                                    errors.phone ? 'border-red-500' : 'border-neutrals-200'
+                                    errors.phone
+                                        ? "border-red-500"
+                                        : "border-neutrals-200"
                                 }`}
                             />
                         </div>
                         {isSubmitted && errors.phone && (
-                            <p className="text-red text-xs mt-1">{errors.phone}</p>
+                            <p className="text-red text-xs mt-1">
+                                {errors.phone}
+                            </p>
                         )}
                     </div>
 
@@ -258,21 +269,26 @@ function ContactForm() {
                                 value={formData.country.name}
                                 onChange={(e) => {
                                     const selected = countriesList.find(
-                                    (c) => c.name === e.target.value
+                                        (c) => c.name === e.target.value
                                     );
                                     if (selected) {
-                                    setFormData((prev) => ({
-                                        ...prev,
-                                        country: selected, // store the full object
-                                    }));
+                                        setFormData((prev) => ({
+                                            ...prev,
+                                            country: selected, // store the full object
+                                        }));
                                     }
                                 }}
                                 className={`w-full py-2.5 px-3 rounded border bg-background-1 text-base tracking-[0.24px] text-neutrals-700 focus:outline-none focus:border-navy-blue appearance-none ${
-                                    errors.country ? 'border-red-500' : 'border-neutrals-200'
+                                    errors.country
+                                        ? "border-red-500"
+                                        : "border-neutrals-200"
                                 }`}
                             >
                                 {countriesList.map((country) => (
-                                    <option key={country.name} value={country.name}>
+                                    <option
+                                        key={country.name}
+                                        value={country.name}
+                                    >
                                         {country.name}
                                     </option>
                                 ))}
@@ -282,7 +298,9 @@ function ContactForm() {
                             </div>
                         </div>
                         {isSubmitted && errors.country && (
-                            <p className="text-red text-xs mt-1">{errors.country}</p>
+                            <p className="text-red text-xs mt-1">
+                                {errors.country}
+                            </p>
                         )}
                     </div>
 
@@ -299,11 +317,15 @@ function ContactForm() {
                             placeholder="Type your message"
                             rows={4}
                             className={`w-full py-2.5 px-3 rounded border text-neutrals-700 bg-background-1 text-base tracking-[0.24px] placeholder:text-neutrals-200 focus:outline-none focus:border-navy-blue resize-none ${
-                                errors.message ? 'border-red-500' : 'border-neutrals-200'
+                                errors.message
+                                    ? "border-red-500"
+                                    : "border-neutrals-200"
                             }`}
                         />
                         {isSubmitted && errors.message && (
-                            <p className="text-red text-xs mt-1">{errors.message}</p>
+                            <p className="text-red text-xs mt-1">
+                                {errors.message}
+                            </p>
                         )}
                     </div>
 

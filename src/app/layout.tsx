@@ -4,6 +4,7 @@ import "@assets/css/globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { CartProvider } from "@/context/CartContext";
+import PageTracker from "@/components/PageTracker";
 
 const urbanist = Urbanist({
     variable: "--font-urbanist",
@@ -28,6 +29,7 @@ export default function RootLayout({
                 className={`${urbanist.variable} antialiased bg-gradient-top10`}
             >
                 <CartProvider>
+                    <PageTracker />
                     <Navbar />
                     <div className="relative container-1440 container-padding py-12">
                         {children}
