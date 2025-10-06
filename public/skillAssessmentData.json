@@ -1,0 +1,408 @@
+{
+  "skills": [
+    {
+      "id": "1",
+      "anzscoCode": "261313",
+      "title": "Software Engineer",
+      "field": "ICT",
+      "assessingAuthority": {
+        "name": "ACS (Australian Computer Society)",
+        "website": "https://www.acs.org.au/msa/information-for-applicants.html",
+        "description": "Authorised to assess IT, Data Science and Cyber Security professionals"
+      },
+      "minEducation": ["bachelors", "masters"],
+      "minExperience": 2,
+      "minEnglishLevel": "none",
+      "preferredCountries": ["australia", "newzealand", "uk-usa-canada", "other"],
+      "description": "Designs, develops, modifies, documents, tests, implements, installs and supports software applications and systems."
+    },
+    {
+      "id": "2",
+      "anzscoCode": "261312",
+      "title": "Developer Programmer",
+      "field": "ICT",
+      "assessingAuthority": {
+        "name": "ACS (Australian Computer Society)",
+        "website": "https://www.acs.org.au/msa/information-for-applicants.html",
+        "description": "Authorised to assess IT, Data Science and Cyber Security professionals"
+      },
+      "minEducation": ["bachelors", "masters"],
+      "minExperience": 2,
+      "minEnglishLevel": "none",
+      "preferredCountries": ["australia", "newzealand", "uk-usa-canada", "other"],
+      "description": "Interprets specifications, technical designs and flow charts, builds, maintains and modifies the code for software applications."
+    },
+    {
+      "id": "3",
+      "anzscoCode": "262112",
+      "title": "ICT Security Specialist",
+      "field": "ICT",
+      "assessingAuthority": {
+        "name": "ACS (Australian Computer Society)",
+        "website": "https://www.acs.org.au/msa/information-for-applicants.html",
+        "description": "Authorised to assess IT, Data Science and Cyber Security professionals"
+      },
+      "minEducation": ["bachelors", "masters"],
+      "minExperience": 3,
+      "minEnglishLevel": "none",
+      "preferredCountries": ["australia", "newzealand", "uk-usa-canada", "other"],
+      "description": "Establishes, manages and administers an organisation's ICT security policy and procedures to ensure preventive and recovery strategies are in place."
+    },
+    {
+      "id": "4",
+      "anzscoCode": "261111",
+      "title": "ICT Business Analyst",
+      "field": "ICT",
+      "assessingAuthority": {
+        "name": "ACS (Australian Computer Society)",
+        "website": "https://www.acs.org.au/msa/information-for-applicants.html",
+        "description": "Authorised to assess IT, Data Science and Cyber Security professionals"
+      },
+      "minEducation": ["bachelors", "masters"],
+      "minExperience": 2,
+      "minEnglishLevel": "none",
+      "preferredCountries": ["australia", "newzealand", "uk-usa-canada", "other"],
+      "description": "Identifies and communicates with users to formulate and document business requirements."
+    },
+    {
+      "id": "5",
+      "anzscoCode": "233211",
+      "title": "Civil Engineer",
+      "field": "Engineering",
+      "assessingAuthority": {
+        "name": "Engineers Australia",
+        "website": "https://www.engineersaustralia.org.au/migrants/migration-skills-assessment",
+        "description": "Authorised to assess engineering occupations for migration to Australia"
+      },
+      "minEducation": ["bachelors", "masters"],
+      "minExperience": 3,
+      "minEnglishLevel": "competent",
+      "preferredCountries": ["australia", "newzealand", "uk-usa-canada", "other"],
+      "requiresAustralianQualification": false,
+      "description": "Plans, designs, organises and oversees construction and maintenance of structures and facilities such as roads, railways, airports, bridges, harbours, dams, irrigation projects, pipelines, power plants, water and sewerage systems, and waste disposal units."
+    },
+    {
+      "id": "6",
+      "anzscoCode": "233311",
+      "title": "Electrical Engineer",
+      "field": "Engineering",
+      "assessingAuthority": {
+        "name": "Engineers Australia",
+        "website": "https://www.engineersaustralia.org.au/migrants/migration-skills-assessment",
+        "description": "Authorised to assess engineering occupations for migration to Australia"
+      },
+      "minEducation": ["bachelors", "masters"],
+      "minExperience": 3,
+      "minEnglishLevel": "competent",
+      "preferredCountries": ["australia", "newzealand", "uk-usa-canada", "other"],
+      "requiresAustralianQualification": false,
+      "description": "Designs, develops and supervises the manufacture, installation, operation and modification of electrical components, equipment and systems."
+    },
+    {
+      "id": "7",
+      "anzscoCode": "233512",
+      "title": "Mechanical Engineer",
+      "field": "Engineering",
+      "assessingAuthority": {
+        "name": "Engineers Australia",
+        "website": "https://www.engineersaustralia.org.au/migrants/migration-skills-assessment",
+        "description": "Authorised to assess engineering occupations for migration to Australia"
+      },
+      "minEducation": ["bachelors", "masters"],
+      "minExperience": 3,
+      "minEnglishLevel": "competent",
+      "preferredCountries": ["australia", "newzealand", "uk-usa-canada", "other"],
+      "requiresAustralianQualification": false,
+      "description": "Designs, develops, and tests machinery and mechanical equipment for heating, ventilation, air conditioning, power generation, transportation, processing, and manufacturing."
+    },
+    {
+      "id": "8",
+      "anzscoCode": "233914",
+      "title": "Engineering Technologist",
+      "field": "Engineering",
+      "assessingAuthority": {
+        "name": "Engineers Australia",
+        "website": "https://www.engineersaustralia.org.au/migrants/migration-skills-assessment",
+        "description": "Authorised to assess engineering occupations for migration to Australia"
+      },
+      "minEducation": ["diploma", "bachelors"],
+      "minExperience": 2,
+      "minEnglishLevel": "competent",
+      "preferredCountries": ["australia", "newzealand", "uk-usa-canada", "other"],
+      "requiresAustralianQualification": false,
+      "description": "Applies broad-based technical and scientific knowledge to solve practical engineering problems and ensure the efficient construction, operation and maintenance of engineering plant and systems."
+    },
+    {
+      "id": "9",
+      "anzscoCode": "254111",
+      "title": "Midwife",
+      "field": "Healthcare",
+      "assessingAuthority": {
+        "name": "Australian Nursing and Midwifery Accreditation Council (ANMAC)",
+        "website": "https://www.anmac.org.au/skilled-migration",
+        "description": "Authorised to assess nursing and midwifery occupations"
+      },
+      "minEducation": ["bachelors", "masters"],
+      "minExperience": 1,
+      "minEnglishLevel": "proficient",
+      "preferredCountries": ["australia", "newzealand", "uk-usa-canada", "other"],
+      "description": "Provides antenatal, intrapartum and postnatal care to women and their babies in a range of maternity care settings."
+    },
+    {
+      "id": "10",
+      "anzscoCode": "254411",
+      "title": "Nurse Practitioner",
+      "field": "Healthcare",
+      "assessingAuthority": {
+        "name": "Australian Nursing and Midwifery Accreditation Council (ANMAC)",
+        "website": "https://www.anmac.org.au/skilled-migration",
+        "description": "Authorised to assess nursing and midwifery occupations"
+      },
+      "minEducation": ["masters"],
+      "minExperience": 5,
+      "minEnglishLevel": "proficient",
+      "preferredCountries": ["australia", "newzealand", "uk-usa-canada", "other"],
+      "description": "Provides advanced practice nursing care, assesses clients, diagnoses health problems and implements health care plans."
+    },
+    {
+      "id": "11",
+      "anzscoCode": "252311",
+      "title": "Dental Specialist",
+      "field": "Healthcare",
+      "assessingAuthority": {
+        "name": "Australian Dental Council (ADC)",
+        "website": "https://www.adc.org.au/migration",
+        "description": "Authorised to assess dental occupations"
+      },
+      "minEducation": ["masters"],
+      "minExperience": 3,
+      "minEnglishLevel": "proficient",
+      "preferredCountries": ["australia", "newzealand", "uk-usa-canada", "other"],
+      "description": "Diagnoses, treats and prevents diseases, injuries and abnormalities of the teeth, mouth, jaws and associated tissues by applying specialist knowledge."
+    },
+    {
+      "id": "12",
+      "anzscoCode": "321211",
+      "title": "Motor Mechanic (General)",
+      "field": "Trades",
+      "assessingAuthority": {
+        "name": "VETASSESS",
+        "website": "https://www.vetassess.com.au/skills-assessment-for-migration",
+        "description": "Australia's largest skills assessment service for migration"
+      },
+      "minEducation": ["diploma", "bachelors"],
+      "minExperience": 3,
+      "minEnglishLevel": "competent",
+      "preferredCountries": ["australia", "newzealand", "uk-usa-canada", "other"],
+      "description": "Inspects, maintains, repairs and tests the mechanical parts and systems of petrol, diesel and alternative fuelled motor vehicles."
+    },
+    {
+      "id": "13",
+      "anzscoCode": "331212",
+      "title": "Carpenter",
+      "field": "Trades",
+      "assessingAuthority": {
+        "name": "Trades Recognition Australia (TRA)",
+        "website": "https://www.tradesrecognitionaustralia.gov.au/",
+        "description": "Authorised to assess trade occupations"
+      },
+      "minEducation": ["diploma", "bachelors"],
+      "minExperience": 3,
+      "minEnglishLevel": "competent",
+      "preferredCountries": ["australia", "newzealand", "uk-usa-canada", "other"],
+      "description": "Assembles and erects wood components and structures, fits assembled components and structures in position, and repairs and maintains timber and wood products."
+    },
+    {
+      "id": "14",
+      "anzscoCode": "341111",
+      "title": "Electrician (General)",
+      "field": "Trades",
+      "assessingAuthority": {
+        "name": "Trades Recognition Australia (TRA)",
+        "website": "https://www.tradesrecognitionaustralia.gov.au/",
+        "description": "Authorised to assess trade occupations"
+      },
+      "minEducation": ["diploma", "bachelors"],
+      "minExperience": 3,
+      "minEnglishLevel": "competent",
+      "preferredCountries": ["australia", "newzealand", "uk-usa-canada", "other"],
+      "description": "Plans, installs, maintains and repairs electrical wiring, fixtures and equipment in a variety of electrical installations."
+    },
+    {
+      "id": "15",
+      "anzscoCode": "241111",
+      "title": "Early Childhood (Pre-primary School) Teacher",
+      "field": "Education",
+      "assessingAuthority": {
+        "name": "Australian Institute for Teaching and School Leadership (AITSL)",
+        "website": "https://www.aitsl.edu.au/migrate-to-australia",
+        "description": "Authorised to assess teaching occupations"
+      },
+      "minEducation": ["bachelors", "masters"],
+      "minExperience": 1,
+      "minEnglishLevel": "proficient",
+      "preferredCountries": ["australia", "newzealand", "uk-usa-canada", "other"],
+      "description": "Teaches foundational numeracy, literacy, music and art to children in pre-schools and kindergartens."
+    },
+    {
+      "id": "16",
+      "anzscoCode": "241411",
+      "title": "Secondary School Teacher",
+      "field": "Education",
+      "assessingAuthority": {
+        "name": "Australian Institute for Teaching and School Leadership (AITSL)",
+        "website": "https://www.aitsl.edu.au/migrate-to-australia",
+        "description": "Authorised to assess teaching occupations"
+      },
+      "minEducation": ["bachelors", "masters"],
+      "minExperience": 1,
+      "minEnglishLevel": "proficient",
+      "preferredCountries": ["australia", "newzealand", "uk-usa-canada", "other"],
+      "description": "Teaches one or more subjects within a prescribed curriculum to secondary school students."
+    },
+    {
+      "id": "17",
+      "anzscoCode": "121211",
+      "title": "Cotton Grower",
+      "field": "Business",
+      "assessingAuthority": {
+        "name": "VETASSESS",
+        "website": "https://www.vetassess.com.au/skills-assessment-for-migration",
+        "description": "Australia's largest skills assessment service for migration"
+      },
+      "minEducation": ["diploma", "bachelors"],
+      "minExperience": 5,
+      "minEnglishLevel": "competent",
+      "preferredCountries": ["australia", "newzealand", "uk-usa-canada", "other"],
+      "description": "Plans, organises, controls, coordinates and performs farming operations to grow cotton."
+    },
+    {
+      "id": "18",
+      "anzscoCode": "131112",
+      "title": "Sales and Marketing Manager",
+      "field": "Business",
+      "assessingAuthority": {
+        "name": "VETASSESS",
+        "website": "https://www.vetassess.com.au/skills-assessment-for-migration",
+        "description": "Australia's largest skills assessment service for migration"
+      },
+      "minEducation": ["bachelors", "masters"],
+      "minExperience": 5,
+      "minEnglishLevel": "competent",
+      "preferredCountries": ["australia", "newzealand", "uk-usa-canada", "other"],
+      "description": "Plans, organises, directs, controls and coordinates the sales and marketing activities of an organisation."
+    },
+    {
+      "id": "19",
+      "anzscoCode": "132111",
+      "title": "Corporate Services Manager",
+      "field": "Business",
+      "assessingAuthority": {
+        "name": "VETASSESS",
+        "website": "https://www.vetassess.com.au/skills-assessment-for-migration",
+        "description": "Australia's largest skills assessment service for migration"
+      },
+      "minEducation": ["bachelors", "masters"],
+      "minExperience": 5,
+      "minEnglishLevel": "competent",
+      "preferredCountries": ["australia", "newzealand", "uk-usa-canada", "other"],
+      "description": "Plans, organises, directs, controls and coordinates the strategic and operational human resource, financial, public relations, information and communication technology, legal and administrative services of an organisation."
+    },
+    {
+      "id": "20",
+      "anzscoCode": "221111",
+      "title": "Accountant (General)",
+      "field": "Accounting",
+      "assessingAuthority": {
+        "name": "CPA Australia / CAANZ / IPA",
+        "website": "https://www.cpaaustralia.com.au/become-a-cpa/migration-assessment",
+        "description": "Authorised to assess accounting occupations"
+      },
+      "minEducation": ["bachelors", "masters"],
+      "minExperience": 1,
+      "minEnglishLevel": "competent",
+      "preferredCountries": ["australia", "newzealand", "uk-usa-canada", "other"],
+      "description": "Prepares and audits accounts and financial statements, prepares taxation returns, and provides management advice on financial matters."
+    },
+    {
+      "id": "21",
+      "anzscoCode": "221213",
+      "title": "External Auditor",
+      "field": "Accounting",
+      "assessingAuthority": {
+        "name": "CPA Australia / CAANZ / IPA",
+        "website": "https://www.cpaaustralia.com.au/become-a-cpa/migration-assessment",
+        "description": "Authorised to assess accounting occupations"
+      },
+      "minEducation": ["bachelors", "masters"],
+      "minExperience": 3,
+      "minEnglishLevel": "competent",
+      "preferredCountries": ["australia", "newzealand", "uk-usa-canada", "other"],
+      "description": "Examines and analyses the accounting and financial records of organisations to ensure accuracy and compliance with established accounting standards and procedures."
+    },
+    {
+      "id": "22",
+      "anzscoCode": "224711",
+      "title": "Management Consultant",
+      "field": "Business",
+      "assessingAuthority": {
+        "name": "VETASSESS",
+        "website": "https://www.vetassess.com.au/skills-assessment-for-migration",
+        "description": "Australia's largest skills assessment service for migration"
+      },
+      "minEducation": ["bachelors", "masters"],
+      "minExperience": 5,
+      "minEnglishLevel": "proficient",
+      "preferredCountries": ["australia", "newzealand", "uk-usa-canada", "other"],
+      "description": "Collects and analyses information about organisations and related work areas to provide advice on the efficient management and operation of organisations and their programs."
+    },
+    {
+      "id": "23",
+      "anzscoCode": "224999",
+      "title": "Information and Organisation Professionals nec",
+      "field": "Other",
+      "assessingAuthority": {
+        "name": "VETASSESS",
+        "website": "https://www.vetassess.com.au/skills-assessment-for-migration",
+        "description": "Australia's largest skills assessment service for migration"
+      },
+      "minEducation": ["bachelors", "masters"],
+      "minExperience": 3,
+      "minEnglishLevel": "competent",
+      "preferredCountries": ["australia", "newzealand", "uk-usa-canada", "other"],
+      "description": "This group includes Information and Organisation Professionals not elsewhere classified."
+    },
+    {
+      "id": "24",
+      "anzscoCode": "263111",
+      "title": "Computer Network and Systems Engineer",
+      "field": "ICT",
+      "assessingAuthority": {
+        "name": "ACS (Australian Computer Society)",
+        "website": "https://www.acs.org.au/msa/information-for-applicants.html",
+        "description": "Authorised to assess IT, Data Science and Cyber Security professionals"
+      },
+      "minEducation": ["bachelors", "masters"],
+      "minExperience": 2,
+      "minEnglishLevel": "none",
+      "preferredCountries": ["australia", "newzealand", "uk-usa-canada", "other"],
+      "description": "Researches, analyses and recommends strategies for network architecture and development, implements, manages, maintains and configures network hardware and software."
+    },
+    {
+      "id": "25",
+      "anzscoCode": "261314",
+      "title": "Software Tester",
+      "field": "ICT",
+      "assessingAuthority": {
+        "name": "ACS (Australian Computer Society)",
+        "website": "https://www.acs.org.au/msa/information-for-applicants.html",
+        "description": "Authorised to assess IT, Data Science and Cyber Security professionals"
+      },
+      "minEducation": ["bachelors", "masters"],
+      "minExperience": 2,
+      "minEnglishLevel": "none",
+      "preferredCountries": ["australia", "newzealand", "uk-usa-canada", "other"],
+      "description": "Plans, designs and administers software tests to identify defects in computer software."
+    }
+  ]
+}
