@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { SkillResult } from "@/types/skillAssessment";
 import CheckFillIcon from "@/components/icons/CheckFillIcon";
@@ -11,6 +12,7 @@ interface SkillResultsProps {
 }
 
 const SkillResults: React.FC<SkillResultsProps> = ({ results, onReset }) => {
+    const router = useRouter();
     console.log("SkillResults received data:", results);
 
     return (
@@ -193,10 +195,10 @@ const SkillResults: React.FC<SkillResultsProps> = ({ results, onReset }) => {
                         >
                             Start New Assessment
                         </button>
-                        <button className="flex-1 py-3 px-6 bg-navy-blue text-white rounded text-sm font-medium hover:bg-navy-blue/90 transition-colors">
-                            Get Full Assessment Report
-                        </button>
-                        <button className="flex-1 py-3 px-6 bg-mint-green text-navy-blue rounded text-sm font-medium hover:bg-mint-green/90 transition-colors">
+                        <button
+                            onClick={() => router.push("/services/zoom-consultation")}
+                            className="flex-1 py-3 px-6 bg-mint-green text-navy-blue rounded text-sm font-medium hover:bg-mint-green/90 transition-colors"
+                        >
                             Book Consultation
                         </button>
                     </div>
