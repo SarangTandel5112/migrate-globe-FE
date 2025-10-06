@@ -41,7 +41,7 @@ const OccupationTracking: React.FC = () => {
     const [isSearched, setIsSearched] = useState(false);
     const [selectedOccupation, setSelectedOccupation] = useState<OccupationSearchResult | null>(null);
     const [occupationDetails, setOccupationDetails] = useState<OccupationDocument | null>(null);
-    const { visaEligibility, stateEligibility } = occupationDetails?.data || {};
+    const { visaEligibility, stateEligibility, eoiStatistics } = occupationDetails?.data || {};
     const [selectedIndex, setSelectedIndex] = useState(-1);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -433,7 +433,7 @@ const OccupationTracking: React.FC = () => {
                 >
                     <VisaType visaTypes={visaEligibility || []} />
                     <StateEligibility stateEligibility={stateEligibility || {}} />
-                    <EOIStatistics chartColors={chartColors} />
+                    <EOIStatistics chartColors={chartColors} eoiStatistics={eoiStatistics} />
                 </motion.div>
 
                 {/* Sidebar */}
