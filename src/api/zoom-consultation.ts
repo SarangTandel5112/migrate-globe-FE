@@ -74,12 +74,15 @@ export async function bookConsultation(bookingData: BookConsultationRequest, tok
             body: JSON.stringify(bookingData),
         });
 
+        const result: BookConsultationResponse = await response.json();
+
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            if (response.status === 401) {
+                throw new Error('UNAUTHORIZED');
+            }
+            throw new Error(result.message || `HTTP error! status: ${response.status}`);
         }
 
-        const result: BookConsultationResponse = await response.json();
-        
         // if (!result.success) {
         //     throw new Error(result.message || 'Failed to book consultation');
         // }

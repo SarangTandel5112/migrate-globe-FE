@@ -63,6 +63,36 @@ const Navbar = () => {
         }
     }, [fetchCartCount]);
 
+    // Listen for token expiration event
+    useEffect(() => {
+        const handleTokenExpired = () => {
+            setIsLoggedIn(false);
+            setUserProfile(null);
+        };
+
+        window.addEventListener("auth-token-expired", handleTokenExpired);
+
+        return () => {
+            window.removeEventListener("auth-token-expired", handleTokenExpired);
+        };
+    }, []);
+
+    // Listen for open login modal event
+    useEffect(() => {
+        const handleOpenLoginModal = () => {
+            setIsLoggedIn(false);
+            setUserProfile(null);
+            setShowLoginModal(true);
+            document.body.classList.add("no-scroll");
+        };
+
+        window.addEventListener("open-login-modal", handleOpenLoginModal);
+
+        return () => {
+            window.removeEventListener("open-login-modal", handleOpenLoginModal);
+        };
+    }, []);
+
     // const fetchCartCount = async (token: string) => {
     //     setLoadingCart(true);
     //     try {

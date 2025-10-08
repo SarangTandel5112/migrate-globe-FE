@@ -29,7 +29,7 @@ export default function CommonCard({
 }: CommonCardProps) {
     return (
         <div
-            className={`bg-white rounded-xl overflow-hidden border border-[#E0E4F3] shadow-bottom-blue transition-transform cursor-pointer flex flex-col ${wrapperClassName}`}
+            className={`bg-white rounded-xl overflow-hidden border border-[#E0E4F3] shadow-bottom-blue transition-transform cursor-pointer flex flex-col h-full ${wrapperClassName}`}
         >
             <Image
                 src={image.src}
@@ -42,10 +42,10 @@ export default function CommonCard({
             {/* Content block with flex-grow for spacing */}
             <div className={`p-4 flex flex-col flex-1 ${contentClassName}`}>
                 <div className="flex-1 flex flex-col gap-2">
-                    <h3 className="text-heading2 font-semibold text-left text-navy-blue">
+                    <h3 className="text-heading2 font-semibold text-left text-navy-blue truncate overflow-hidden whitespace-nowrap min-h-[2rem]">
                         {title}
                     </h3>
-                    <p className="text-sm md:text-base text-navy-blue-400 line-clamp-2 min-h-[calc(1.5rem*2)]">
+                    <p className="text-sm md:text-base text-navy-blue-400 line-clamp-2 min-h-[3rem]">
                         {description}
                     </p>
                 </div>

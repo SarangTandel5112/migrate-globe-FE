@@ -135,6 +135,18 @@ export default function ZoomConsultation({
             formData.emailId &&
             formData.phone
         ) {
+            // Check if user is logged in
+            const token = localStorage?.getItem("token");
+            if (!token) {
+                showToast(
+                    "Please login to book a consultation.",
+                    "error"
+                );
+                // Dispatch event to open login modal
+                window.dispatchEvent(new Event("open-login-modal"));
+                return;
+            }
+
             try {
                 setIsBooking(true);
                 setBookingError(null);
@@ -175,8 +187,7 @@ export default function ZoomConsultation({
                     email: formData.emailId,
                 };
 
-                const token = localStorage?.getItem("token");
-                const result = await bookConsultation(bookingData, token || "");
+                const result = await bookConsultation(bookingData, token);
 
                 // Handle successful booking - redirect to checkout URL
                 if (result?.checkout_url) {
@@ -194,17 +205,31 @@ export default function ZoomConsultation({
                 }
             } catch (error) {
                 console.error("Booking failed:", error);
-                setBookingError(
-                    error instanceof Error
+
+                // Handle 401 Unauthorized error
+                if (error instanceof Error && error.message === "UNAUTHORIZED") {
+                    // Clear token from localStorage
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("user");
+
+                    // Show toast with proper message
+                    showToast(
+                        "Your session has expired. Please login to continue.",
+                        "error"
+                    );
+
+                    // Dispatch event to open login modal
+                    window.dispatchEvent(new Event("open-login-modal"));
+
+                    setBookingError("Session expired. Please login again.");
+                } else {
+                    const errorMessage = error instanceof Error
                         ? error.message
-                        : "Failed to book consultation"
-                );
-                showToast(
-                    error instanceof Error
-                        ? error.message
-                        : "Failed to book consultation",
-                    "error"
-                );
+                        : "Failed to book consultation";
+
+                    setBookingError(errorMessage);
+                    showToast(errorMessage, "error");
+                }
             } finally {
                 setIsBooking(false);
             }

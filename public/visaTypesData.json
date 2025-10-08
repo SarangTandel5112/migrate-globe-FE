@@ -1,0 +1,331 @@
+{
+  "visaTypes": [
+    {
+      "subclass": "Subclass 189 (Skilled Independent)",
+      "fullName": "Skilled Independent visa (subclass 189)",
+      "link": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skilled-independent-189",
+      "eligible": true,
+      "listType": "MLTSSL",
+      "listLink": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skill-occupation-list",
+      "description": "A points-tested permanent visa for invited skilled workers to live and work permanently anywhere in Australia. Does not require sponsorship by an employer, state, or family member.",
+      "visaType": "Permanent",
+      "processingTime": "10-14 months",
+      "cost": "AUD $4,640",
+      "keyFeatures": [
+        "Live and work permanently anywhere in Australia",
+        "Study in Australia",
+        "Enroll in Medicare",
+        "Sponsor eligible relatives",
+        "Travel to and from Australia for 5 years",
+        "Apply for citizenship (if eligible)"
+      ],
+      "requirements": [
+        "Be invited to apply",
+        "Have an occupation on the MLTSSL",
+        "Score at least 65 points on the points test",
+        "Be under 45 years old",
+        "Have competent English",
+        "Have a positive skills assessment"
+      ]
+    },
+    {
+      "subclass": "Subclass 190 (Skilled Nominated)",
+      "fullName": "Skilled Nominated visa (subclass 190)",
+      "link": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skilled-nominated-190",
+      "eligible": true,
+      "listType": "MLTSSL/STSOL",
+      "listLink": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skill-occupation-list",
+      "description": "A points-tested permanent visa for invited skilled workers nominated by an Australian state or territory government. Provides an additional 5 points for state nomination.",
+      "visaType": "Permanent",
+      "processingTime": "18-19 months",
+      "cost": "AUD $4,640",
+      "keyFeatures": [
+        "Live and work permanently in nominating state/territory",
+        "Study in Australia",
+        "Enroll in Medicare",
+        "Sponsor eligible relatives",
+        "Travel to and from Australia for 5 years",
+        "Apply for citizenship (if eligible)"
+      ],
+      "requirements": [
+        "Be invited to apply",
+        "Be nominated by an Australian state or territory",
+        "Have an occupation on the MLTSSL or STSOL",
+        "Score at least 65 points (including 5 state nomination points)",
+        "Be under 45 years old",
+        "Have competent English",
+        "Have a positive skills assessment"
+      ]
+    },
+    {
+      "subclass": "Subclass 491 (State/Territory nominated)",
+      "fullName": "Skilled Work Regional (Provisional) visa (subclass 491) - State/Territory nominated",
+      "link": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skilled-work-regional-provisional-491",
+      "eligible": true,
+      "listType": "MLTSSL/STSOL/ROL",
+      "listLink": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skill-occupation-list",
+      "description": "A 5-year provisional visa for points-tested skilled workers nominated by an Australian state or territory government to live and work in regional Australia. Provides pathway to permanent residence through subclass 191. Adds 15 points for state nomination.",
+      "visaType": "Provisional (5 years)",
+      "processingTime": "18-22 months",
+      "cost": "AUD $4,640",
+      "keyFeatures": [
+        "Live, work and study in regional Australia for up to 5 years",
+        "Travel to and from Australia",
+        "Include family members",
+        "Pathway to permanent residence (subclass 191)"
+      ],
+      "requirements": [
+        "Be invited to apply",
+        "Be nominated by an Australian state or territory",
+        "Have an occupation on MLTSSL, STSOL or ROL",
+        "Score at least 65 points (including 15 regional nomination points)",
+        "Be under 45 years old",
+        "Have competent English",
+        "Have a positive skills assessment"
+      ]
+    },
+    {
+      "subclass": "Subclass 491 (Family Sponsored)",
+      "fullName": "Skilled Work Regional (Provisional) visa (subclass 491) - Family Sponsored",
+      "link": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skilled-work-regional-provisional-491",
+      "eligible": true,
+      "listType": "MLTSSL/STSOL/ROL",
+      "listLink": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skill-occupation-list",
+      "description": "A 5-year provisional visa for points-tested skilled workers sponsored by an eligible family member living in regional Australia. Provides pathway to permanent residence through subclass 191. Adds 15 points for family sponsorship.",
+      "visaType": "Provisional (5 years)",
+      "processingTime": "20-24 months",
+      "cost": "AUD $4,640",
+      "keyFeatures": [
+        "Live, work and study in regional Australia for up to 5 years",
+        "Travel to and from Australia",
+        "Include family members",
+        "Pathway to permanent residence (subclass 191)"
+      ],
+      "requirements": [
+        "Be invited to apply",
+        "Be sponsored by an eligible family member in regional Australia",
+        "Have an occupation on MLTSSL, STSOL or ROL",
+        "Score at least 65 points (including 15 family sponsorship points)",
+        "Be under 45 years old",
+        "Have competent English",
+        "Have a positive skills assessment"
+      ]
+    },
+    {
+      "subclass": "Subclass 485 (Graduate)",
+      "fullName": "Temporary Graduate visa (subclass 485)",
+      "link": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/temporary-graduate-485",
+      "eligible": true,
+      "listType": "MLTSSL",
+      "listLink": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skill-occupation-list",
+      "description": "A temporary visa for international students who have recently graduated from an Australian educational institution. Allows students to live, work, and study in Australia temporarily after completing their studies.",
+      "visaType": "Temporary (1.5 to 4 years)",
+      "processingTime": "6-8 months",
+      "cost": "AUD $1,895",
+      "keyFeatures": [
+        "Live, work and study in Australia temporarily",
+        "Travel to and from Australia",
+        "Two streams: Graduate Work stream and Post-Study Work stream",
+        "Gain Australian work experience"
+      ],
+      "requirements": [
+        "Have recently graduated from an Australian institution",
+        "Have completed at least 2 years of study in Australia",
+        "Have adequate health insurance",
+        "Meet English language requirements",
+        "Meet health and character requirements"
+      ]
+    },
+    {
+      "subclass": "Subclass 482 (Skills in Demand - SID)",
+      "fullName": "Skills in Demand visa (subclass 482)",
+      "link": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skills-in-demand-visa-subclass-482",
+      "eligible": true,
+      "listType": "Core Skills List",
+      "listLink": "https://www.legislation.gov.au/F2024L01620/latest/text",
+      "description": "A temporary employer-sponsored visa (formerly TSS visa) that lets employers sponsor skilled workers when they cannot find an appropriately skilled Australian worker. Replaced the old 482 TSS visa in December 2024.",
+      "visaType": "Temporary (up to 4 years)",
+      "processingTime": "3-6 months",
+      "cost": "AUD $1,455 to $3,035",
+      "keyFeatures": [
+        "Work for approved sponsor in nominated occupation",
+        "Study in Australia",
+        "Travel to and from Australia",
+        "Include family members",
+        "Pathway to permanent residence"
+      ],
+      "requirements": [
+        "Be sponsored by an approved employer",
+        "Have occupation on Core Skills List",
+        "Have at least 2 years work experience",
+        "Meet English language requirements",
+        "Meet health and character requirements"
+      ]
+    },
+    {
+      "subclass": "Subclass 482 (DAMA)",
+      "fullName": "Temporary Skill Shortage visa (subclass 482) - DAMA",
+      "link": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/temporary-skill-shortage-482",
+      "eligible": false,
+      "listType": "DAMA",
+      "listLink": "https://immi.homeaffairs.gov.au/visas/working-in-australia/designated-area-migration-agreements",
+      "description": "A Designated Area Migration Agreement (DAMA) stream of the TSS visa for occupations in specific regional areas where there are skill shortages. Only available in certain designated areas with active DAMAs.",
+      "visaType": "Temporary (up to 4 years)",
+      "processingTime": "4-6 months",
+      "cost": "AUD $1,455 to $3,035",
+      "keyFeatures": [
+        "Work in designated regional area",
+        "Include family members",
+        "Travel to and from Australia",
+        "Access to regional occupations"
+      ],
+      "requirements": [
+        "Be sponsored by employer in DAMA region",
+        "Meet DAMA-specific requirements",
+        "Have relevant work experience",
+        "Meet English language requirements (may be concession)",
+        "Meet health and character requirements"
+      ]
+    },
+    {
+      "subclass": "Subclass 186 (ENS)",
+      "fullName": "Employer Nomination Scheme visa (subclass 186)",
+      "link": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/employer-nomination-scheme-186",
+      "eligible": true,
+      "listType": "Core Skills List",
+      "listLink": "https://www.legislation.gov.au/F2024L01618/latest/text",
+      "description": "A permanent employer-sponsored visa for skilled workers nominated by their Australian employer. Three streams available: Direct Entry, Temporary Residence Transition, and Labour Agreement.",
+      "visaType": "Permanent",
+      "processingTime": "8-12 months",
+      "cost": "AUD $4,640",
+      "keyFeatures": [
+        "Live and work permanently in Australia",
+        "Study in Australia",
+        "Enroll in Medicare",
+        "Sponsor eligible relatives",
+        "Travel to and from Australia for 5 years",
+        "Apply for citizenship (if eligible)"
+      ],
+      "requirements": [
+        "Be nominated by approved Australian employer",
+        "Have occupation on Core Skills List",
+        "Have at least 3 years work experience",
+        "Be under 45 years old (some exemptions)",
+        "Have competent English",
+        "Have a positive skills assessment (Direct Entry stream)",
+        "Meet health and character requirements"
+      ]
+    },
+    {
+      "subclass": "Subclass 187 (RSMS)",
+      "fullName": "Regional Sponsored Migration Scheme visa (subclass 187)",
+      "link": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/regional-sponsor-migration-scheme-187",
+      "eligible": true,
+      "listType": "Legacy",
+      "listLink": "",
+      "description": "A permanent employer-sponsored visa for skilled workers to live and work in regional Australia. This visa is closed to new applicants (replaced by subclass 494), but Temporary Residence Transition stream still available for existing 457/482 visa holders.",
+      "visaType": "Permanent",
+      "processingTime": "10-14 months",
+      "cost": "AUD $4,640",
+      "keyFeatures": [
+        "Live and work permanently in regional Australia",
+        "Study in Australia",
+        "Enroll in Medicare",
+        "Sponsor eligible relatives",
+        "Travel to and from Australia for 5 years",
+        "Apply for citizenship (if eligible)"
+      ],
+      "requirements": [
+        "Only available for Temporary Residence Transition stream",
+        "Must hold 457/482 visa with same employer",
+        "Have worked for at least 3 years",
+        "Be nominated by regional employer",
+        "Meet English language requirements",
+        "Meet health and character requirements"
+      ]
+    },
+    {
+      "subclass": "Subclass 494 (SESR)",
+      "fullName": "Skilled Employer Sponsored Regional (Provisional) visa (subclass 494)",
+      "link": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skilled-employer-sponsored-regional-494",
+      "eligible": true,
+      "listType": "MLTSSL",
+      "listLink": "https://www.legislation.gov.au/Series/F2019L01403",
+      "description": "A 5-year provisional employer-sponsored visa for skilled workers to live and work in regional Australia. Provides pathway to permanent residence through subclass 191 after 3 years.",
+      "visaType": "Provisional (5 years)",
+      "processingTime": "8-12 months",
+      "cost": "AUD $4,640",
+      "keyFeatures": [
+        "Live and work in regional Australia for up to 5 years",
+        "Travel to and from Australia",
+        "Study in Australia",
+        "Include family members",
+        "Pathway to permanent residence (subclass 191)"
+      ],
+      "requirements": [
+        "Be nominated by approved regional employer",
+        "Have occupation on MLTSSL",
+        "Have at least 3 years work experience",
+        "Be under 45 years old",
+        "Have competent English",
+        "Have a positive skills assessment",
+        "Meet health and character requirements"
+      ]
+    },
+    {
+      "subclass": "Subclass 407 (Training)",
+      "fullName": "Training visa (subclass 407)",
+      "link": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/training-407",
+      "eligible": true,
+      "listType": "MLTSSL",
+      "listLink": "https://www.legislation.gov.au/Details/F2019L00277",
+      "description": "A temporary visa for occupational training in Australia. Allows participants to take part in workplace-based training to improve skills for their job, area of tertiary study, field of expertise or in a professional development training program in Australia.",
+      "visaType": "Temporary (up to 2 years)",
+      "processingTime": "4-6 months",
+      "cost": "AUD $325",
+      "keyFeatures": [
+        "Participate in workplace-based occupational training",
+        "Travel to and from Australia",
+        "Include family members",
+        "Access to structured training program"
+      ],
+      "requirements": [
+        "Be sponsored for occupational training",
+        "Have relevant qualifications or employment background",
+        "Meet English language requirements (functional)",
+        "Meet health and character requirements",
+        "Have adequate health insurance"
+      ]
+    }
+  ],
+  "occupationLists": {
+    "MLTSSL": {
+      "fullName": "Medium and Long-term Strategic Skills List",
+      "description": "List of occupations in demand for medium to long-term needs",
+      "totalOccupations": 212,
+      "eligibleVisas": ["189", "190", "491", "485", "494", "407"],
+      "link": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skill-occupation-list"
+    },
+    "STSOL": {
+      "fullName": "Short-term Skilled Occupation List",
+      "description": "List of occupations in demand for short-term needs",
+      "totalOccupations": 215,
+      "eligibleVisas": ["190", "491"],
+      "link": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skill-occupation-list"
+    },
+    "ROL": {
+      "fullName": "Regional Occupation List",
+      "description": "List of occupations specifically for regional areas",
+      "totalOccupations": 77,
+      "eligibleVisas": ["491"],
+      "link": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skill-occupation-list"
+    },
+    "CoreSkillsList": {
+      "fullName": "Core Skills List",
+      "description": "List for Skills in Demand visa (subclass 482) and ENS (subclass 186)",
+      "totalOccupations": 400,
+      "eligibleVisas": ["482", "186"],
+      "link": "https://www.legislation.gov.au/F2024L01620/latest/text"
+    }
+  }
+}

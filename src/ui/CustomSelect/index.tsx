@@ -26,7 +26,9 @@ export default function CustomSelect({
       <Listbox value={selected} onChange={onChange}>
         <div className="relative">
           <ListboxButton className="w-full rounded border-2 border-navy-blue bg-background-1 py-3 pl-4 pr-10 text-left text-base font-semibold text-neutrals-700 tracking-[0.24px] focus:outline-none">
-            {selected.label}
+            <span className="block truncate overflow-hidden whitespace-nowrap text-ellipsis pr-2">
+              {selected.label}
+            </span>
             <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
               <ArrowDownIcon className="text-navy-blue" />
             </span>

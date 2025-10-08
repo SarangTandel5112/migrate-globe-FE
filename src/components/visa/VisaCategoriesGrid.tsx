@@ -18,6 +18,13 @@ export const VisaCategoriesGrid: React.FC<VisaCategoriesGridProps> = ({ isActive
     const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
+    // Sort categories by number of visas (subtypes) in ascending order
+    const sortedCategories = [...categories].sort((a, b) => {
+        const aVisasCount = Array.isArray(a.visas) ? a.visas.length : 0;
+        const bVisasCount = Array.isArray(b.visas) ? b.visas.length : 0;
+        return aVisasCount - bVisasCount;
+    });
+
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (
@@ -67,9 +74,9 @@ export const VisaCategoriesGrid: React.FC<VisaCategoriesGridProps> = ({ isActive
             </button>
 
             {open && (
-                <div className="absolute -left-52 top-full mt-2 max-w-[95vw] sm:w-[80vw] md:w-[70vw] lg:w-[75vw] 2xl:w-[55vw] bg-white border border-gray-200 shadow-xl rounded-xl z-50">
+                <div className="absolute -left-52 top-full mt-2 max-w-[95vw] sm:w-[80vw] md:w-[70vw] lg:w-[75vw] 2xl:w-[55vw] bg-white border border-gray-200 shadow-xl rounded-xl z-50 max-h-[70vh] overflow-y-auto">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-                    {categories.map((category) => (
+                    {sortedCategories.map((category) => (
                         <div key={category.id} className="space-y-4">
                             <div>
                             <h4 className="text-lg font-semibold text-navy-blue mb-3">

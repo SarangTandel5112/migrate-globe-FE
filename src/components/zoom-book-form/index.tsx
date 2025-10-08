@@ -152,6 +152,8 @@ const ZoomBookForm: React.FC<ZoomBookFormProps> = ({
         if (!userProfile) {
             setShowToast(true);
             setTimeout(() => setShowToast(false), 3000);
+            // Dispatch event to open login modal
+            window.dispatchEvent(new Event("open-login-modal"));
             return;
         }
         handleBookSlot();
@@ -486,7 +488,6 @@ const ZoomBookForm: React.FC<ZoomBookFormProps> = ({
 
                 {/* Book Slot Button */}
                 <button
-                    // onClick={handleBookSlot}
                     onClick={handleBookingClick}
                     disabled={!isFormValid || isBooking}
                     className={`w-full h-10 rounded-md font-urbanist text-sm tracking-[0.46px] transition-all ${
